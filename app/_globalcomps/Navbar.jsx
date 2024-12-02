@@ -1,16 +1,47 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { PiMoon } from "react-icons/pi";
 import { LuSearch } from "react-icons/lu";
+import Underlineeffect from "./Underlineeffect";
 
 function Navbar() {
+  const [shownav, setshownav] = useState(true);
+  const [transparentnav, settransparentnav] = useState(true);
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      // set transparency
+      settransparentnav(window.scrollY > 50 ? false : true);
+      //
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY) {
+        setshownav(false);
+      } else if (currentScrollY < lastScrollY) {
+        setshownav(true);
+      }
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="test flex items-center md: px-10 h-20 bg-white tracking-wider text-xs ">
-      <img
-        src="https://loopsbylj.com/cdn/shop/files/LOOPS_LOGO_White_90x@2x.png?v=1699016384"
-        alt=""
-        className="h-10 mr-2 invert"
-      />
+    <nav
+      className={`fixed navhover top-0 left-0 w-full flex items-center px-10 h-20  hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
+        ${transparentnav ? "text-white" : "bg-white text-inherit"} ${
+        shownav ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
+      <Link href={"/"}>
+        <img
+          src="https://loopsbylj.com/cdn/shop/files/LOOPS_LOGO_White_90x@2x.png?v=1699016384"
+          alt=""
+          className={`navhoverlogo h-10 mr-2 ${!transparentnav && "invert"}`}
+        />
+      </Link>
       <div className="flex items-center h-full">
         {[
           "HOME",
@@ -25,7 +56,7 @@ function Navbar() {
             href={"/"}
             className="group flex items-center justify-center px-[14px] h-full"
           >
-            <Effectlink title={item} />
+            <Underlineeffect title={item} />
           </Link>
         ))}
       </div>
@@ -35,25 +66,18 @@ function Navbar() {
         </button>
         <button className="group flex items-center gap-2">
           <LuSearch className="text-base" />
-          <Effectlink title={"SEARCH"} />
+          <Underlineeffect title={"SEARCH"} />
         </button>
         <Link href={"/"} className="group">
-          <Effectlink title={"ACCOUNT"} />
+          <Underlineeffect title={"ACCOUNT"} />
         </Link>
         <Link href={"/cart"} className="group flex items-center ">
-          <Effectlink title={"CART"} />
+          <Underlineeffect title={"CART"} />
           (0)
         </Link>
       </div>
     </nav>
   );
 }
-
-const Effectlink = ({ title }) => (
-  <span className="relative ">
-    {title}
-    <span className="absolute bottom-0 right-0 h-[1px] w-0 bg-theme lg:group-hover:w-full lg:group-hover:left-0 duration-300"></span>
-  </span>
-);
 
 export default Navbar;

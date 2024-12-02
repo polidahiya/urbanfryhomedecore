@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");                     
+@import url("https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap");                     
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,14 +24,35 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-  }
-} */
+    }
+    } */
 .test {
   border: 1px solid red;
 }
+.hidescroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: #56473e;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.navhover:hover .navhoverlogo {
+  filter: invert();
+}
+
+.marquee-content {
+  /* width: max-content;  */
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0); /* Start from the original position */
+  }
+  100% {
+    transform: translateX(-50%); /* Move by half the total content width */
+  }
 }

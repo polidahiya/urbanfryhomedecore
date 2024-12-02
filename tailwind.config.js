@@ -10,7 +10,10 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        theme: "#000000",
+        theme: "#8e766e",
+      },
+      fontFamily: {
+        tenor: ['"Tenor Sans"', "sans-serif"], // Add Tenor Sans
       },
     },
   },

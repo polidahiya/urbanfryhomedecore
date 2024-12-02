@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "./_globalcomps/Navbar";
+import Footer from "./_globalcomps/Footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
       <body className={`antialiased`}>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
