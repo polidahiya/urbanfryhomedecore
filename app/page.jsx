@@ -25,7 +25,7 @@ function page() {
         />
       </section>
       <div className="flex flex-col items-center py-8 ">
-        <p className="text-5xl font-tenor rotate-180 italic">"</p>
+        <p className="text-5xl font-tenor rotate-180 italic">&quot;</p>
         <p className="max-w-[900px] text-center text-3xl font-tenor">
           Loops by Latika are by far one of the most explorative Indian brands
           that are giving a makeover to our rather drab home carpets.
