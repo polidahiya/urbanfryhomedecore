@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");                     
-@import url("https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap");                     
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -39,6 +39,33 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* inuput fields */
+.forminput:focus + label {
+  -webkit-transform: translateY(-30%);
+  -ms-transform: translateY(-30%);
+  transform: translateY(-30%);
+  font-size: 12px;
+}
+.forminput:valid + label {
+  opacity: 0;
+}
+
+.forminput:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.forminput:-moz-autofill {
+  -moz-box-shadow: 0 0 0px 1000px white inset;
+  -moz-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.forminput:-moz-focusring {
+  outline: 1px dotted transparent;
+}
+
 .navhover:hover .navhoverlogo {
   filter: invert();
 }
@@ -55,4 +82,19 @@ body {
   100% {
     transform: translateX(-50%); /* Move by half the total content width */
   }
+}
+
+/* underline effect */
+.underlineff:hover > span > span {
+  width: 100%;
+  left: 0;
+}
+
+/* navbar classes */
+.shophover:hover > .shopcategoriesblock {
+  display: block;
+}
+
+.shopcategories:hover > .shopsubcat {
+  display: flex;
 }

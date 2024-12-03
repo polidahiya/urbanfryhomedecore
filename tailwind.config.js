@@ -11,6 +11,7 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         theme: "#8e766e",
+        footercolor: "#e7e2de",
       },
       fontFamily: {
         tenor: ['"Tenor Sans"', "sans-serif"], // Add Tenor Sans

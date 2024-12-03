@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 function Faqs() {
   const faqlist = [
@@ -79,7 +80,10 @@ const Faq = ({ faq }) => {
         setopen((pre) => !pre);
       }}
     >
-      <p className="font-tenor text-2xl">{faq.question}</p>
+      <p className="flex items-start text-2xl">
+        <span className="font-tenor">{faq.question}</span>
+        <MdKeyboardArrowDown className={`ml-auto duration-300 ${open && "rotate-180"}`} />
+      </p>
       <p
         className={`font-tenor mt-5 ${
           open ? "max-h-screen duration-1000" : "max-h-0 duration-500"

@@ -24,24 +24,24 @@ function Footer() {
   ];
 
   return (
-    <footer className=" bg-[#e7e2de] px-8 py-10">
+    <footer className=" bg-footercolor px-8 py-10">
       <div className="flex gap-24">
         <div className="flex-1">
           <p className="text-3xl font-tenor">Never Miss a Loop!</p>
         </div>
         <div className="flex-1 text-sm ">
           <h3 className="mb-4 tracking-wider">QUICK LINKS</h3>
-          <div className="flex flex-col gap-[10px]">
+          <div className="flex flex-col gap-3">
             {quicklink1.map((item, i) => (
-              <Link key={i} href={item.link} className="group">
+              <Link key={i} href={item.link} className="underlineff">
                 <Underlineeffect title={item?.title} />
               </Link>
             ))}
           </div>
         </div>
         <div className="flex-1 text-sm">
-          <h3 className="mb-4 tracking-wider">QUICK LINKS</h3>
-          <div className="flex flex-col gap-[10px]">
+          <h3 className="mb-4 tracking-wider">WHAT WE DO?</h3>
+          <div className="flex flex-col gap-3">
             {whatwedolinks.map((item, i) => (
               <p key={i}>{item?.title}</p>
             ))}
@@ -56,12 +56,12 @@ function Footer() {
           </div>
         </div>
       </div>
-      <hr className="w-full h-px bg-theme" />
+      <hr className="w-full h-px bg-theme mt-10" />
       <div className="flex items-center gap-10 mt-10 text-theme">
-        <Link href={"/"} className="group">
+        <Link href={"/"} className="underlineff">
           <Underlineeffect title={mobile} />
         </Link>
-        <Link href={"/"} className="group">
+        <Link href={"/"} className="underlineff">
           <Underlineeffect title={mail} />
         </Link>
         <p className="ml-auto">© Copyright, Loops by LJ, 2024</p>

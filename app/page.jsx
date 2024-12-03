@@ -14,7 +14,7 @@ function page() {
   return (
     <div>
       <Herosection />
-      <section className="w-full bg-[#e7e2de] text-[#56473e] overflow-hidden relative flex items-center">
+      <section className="w-full bg-footercolor text-[#56473e] overflow-hidden relative flex items-center">
         <Marquebanner
           list={[
             "this is a para this is a para this is a para",
@@ -25,7 +25,7 @@ function page() {
         />
       </section>
       <div className="flex flex-col items-center py-8 ">
-        <p className="text-5xl font-tenor rotate-180 italic">&quot;</p>
+        <p className="text-5xl font-tenor rotate-180 italic">&quot; </p>
         <p className="max-w-[900px] text-center text-3xl font-tenor">
           Loops by Latika are by far one of the most explorative Indian brands
           that are giving a makeover to our rather drab home carpets.
