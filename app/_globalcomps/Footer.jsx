@@ -4,18 +4,9 @@ import Underlineeffect from "./Underlineeffect";
 import { mobile, mail } from "../commondata";
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
+import Quicklinks from "./_footerclientcomps/Quicklinks";
 
 function Footer() {
-  const quicklink1 = [
-    { title: "Terms & Conditions", link: "/" },
-    { title: "Privacy Policy", link: "/" },
-    { title: "Shipping Policy", link: "/" },
-    { title: "Return & Exchange Policy", link: "/" },
-    { title: "Rug Guide", link: "/" },
-    { title: "FAQs", link: "/" },
-    { title: "Become a Retailer", link: "/" },
-    { title: "Contact Us", link: "/" },
-  ];
   const whatwedolinks = [
     { title: "Unorthodox Design", link: "/" },
     { title: "Amalgamation of the old and new", link: "/" },
@@ -25,20 +16,13 @@ function Footer() {
 
   return (
     <footer className=" bg-footercolor px-8 py-10">
-      <div className="flex gap-24">
+      <div className="flex flex-col lg:flex-row  lg:gap-24">
         <div className="flex-1">
           <p className="text-3xl font-tenor">Never Miss a Loop!</p>
         </div>
-        <div className="flex-1 text-sm ">
-          <h3 className="mb-4 tracking-wider">QUICK LINKS</h3>
-          <div className="flex flex-col gap-3">
-            {quicklink1.map((item, i) => (
-              <Link key={i} href={item.link} className="underlineff">
-                <Underlineeffect title={item?.title} />
-              </Link>
-            ))}
-          </div>
-        </div>
+        <div className="w-full h-px bg-theme opacity-50 my-5 lg:hidden" />
+        <Quicklinks />
+        <div className="w-full h-px bg-theme opacity-50 my-5 lg:hidden" />
         <div className="flex-1 text-sm">
           <h3 className="mb-4 tracking-wider">WHAT WE DO?</h3>
           <div className="flex flex-col gap-3">
@@ -56,15 +40,15 @@ function Footer() {
           </div>
         </div>
       </div>
-      <hr className="w-full h-px bg-theme mt-10" />
-      <div className="flex items-center gap-10 mt-10 text-theme">
+      <div className="w-full h-px bg-theme opacity-50 my-10" />
+      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-10 mt-10 text-theme">
         <Link href={"/"} className="underlineff">
           <Underlineeffect title={mobile} />
         </Link>
         <Link href={"/"} className="underlineff">
           <Underlineeffect title={mail} />
         </Link>
-        <p className="ml-auto">© Copyright, Loops by LJ, 2024</p>
+        <p className="lg:ml-auto">© Copyright, Loops by LJ, 2024</p>
       </div>
     </footer>
   );

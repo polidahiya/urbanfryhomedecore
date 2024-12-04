@@ -1,5 +1,4 @@
 import "./globals.css";
-import Navbar from "./_globalcomps/Navbar";
 import Footer from "./_globalcomps/Footer";
 import { Appwrapper } from "./Context";
 import Searchbarsection from "./_globalcomps/_navbarcomps/Searchbarsection";
@@ -14,8 +13,6 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <Appwrapper>
         <body className={`antialiased`}>
-          <Navbar />
-          {/* searchbox */}
           <Searchbarsection />
           {children}
           <Footer />

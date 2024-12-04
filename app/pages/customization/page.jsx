@@ -4,11 +4,9 @@ import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
 import Customizationform from "../_comps/Customizationform";
 import { mobile } from "@/app/commondata";
 
-async function page({ params }) {
-  const allparams = await params;
-
+async function page() {
   return (
-    <div className="min-h-screen mt-48">
+    <div className="min-h-screen mt-36">
       {/* top section */}
       <div className="px-8">
         {/* navigations */}
@@ -16,25 +14,24 @@ async function page({ params }) {
           <Link href={"/"} className="underlineff">
             <Underlineeffect title={"Home"} />
           </Link>{" "}
-          / <p className="capitalize text-theme">{allparams.pagename}</p>
+          / <p className="capitalize text-theme">Customization</p>
         </div>
-        <h1 className="font-tenor text-7xl capitalize py-6">
-          {allparams.pagename}
-        </h1>
+        <h1 className="font-tenor text-7xl capitalize py-6">Customization</h1>
         <div>
           <p>
             At Loops by LJ, we understand that each rug is a reflection of its
-            owner&rsquo;s unique taste, style and preferences. As a result, we are
-            thrilled to let you customize our products and help you add a touch
-            of your identity to your spaces.
+            owner&rsquo;s unique taste, style and preferences. As a result, we
+            are thrilled to let you customize our products and help you add a
+            touch of your identity to your spaces.
           </p>
           <p>
-            Have you ever fallen for a rug only to bring it home and find it&rsquo;s
-            the wrong size? With our custom rugs, that issue becomes a thing of
-            the past. Customisation ensures that this accent piece fits in the
-            room seamlessly. Be it a challenging space with unconventional
-            dimensions or a room that doesn&rsquo;t conform to standard rug sizes, our
-            custom solution caters to all these unique requirements.
+            Have you ever fallen for a rug only to bring it home and find
+            it&rsquo;s the wrong size? With our custom rugs, that issue becomes
+            a thing of the past. Customisation ensures that this accent piece
+            fits in the room seamlessly. Be it a challenging space with
+            unconventional dimensions or a room that doesn&rsquo;t conform to
+            standard rug sizes, our custom solution caters to all these unique
+            requirements.
           </p>
         </div>
       </div>
@@ -55,27 +52,27 @@ async function page({ params }) {
           <p className="mb-2">
             Choose from adapting an existing Loops rug design or creating
             something entirely new. Find the perfect match for your room&rsquo;s
-            theme, colors, or patterns. Once your ideal design is chosen, you&rsquo;re
-            ready for the next step.
+            theme, colors, or patterns. Once your ideal design is chosen,
+            you&rsquo;re ready for the next step.
           </p>
           <h3 className="text-lg font-bold mt-2">
             Step 2 - Material and Texture Choices:
           </h3>
           <p className="mb-2">
-            Material and texture is just as important as a rug&rsquo;s design. Our
-            primary material is new zealand wool. You can also add touches of
-            viscose or tencel to add that extra sheen to the piece. Consider
+            Material and texture is just as important as a rug&rsquo;s design.
+            Our primary material is new zealand wool. You can also add touches
+            of viscose or tencel to add that extra sheen to the piece. Consider
             whether you prefer cut pile or loop pile rugs. We’ll assist you with
             images to make an informed decision. Pile height is another
             consideration to make when designing a custom rug. Pile height
-            refers to the length of the yarn on a rug&rsquo;s surface. Low pile rugs
-            are shorter in length than high pile rugs. Low pile rugs, because of
-            their shorter length, are often very durable and offer reasonably
-            even wear over time. High pile rugs are softer and more fluffy, but
-            are less ideal in high-traffic areas. Cuts and loops, along with
-            variations in pile height, can be combined to create a uniquely
-            textured rug that meets your specific needs and desires. We are
-            confident that we have something to suit every taste.
+            refers to the length of the yarn on a rug&rsquo;s surface. Low pile
+            rugs are shorter in length than high pile rugs. Low pile rugs,
+            because of their shorter length, are often very durable and offer
+            reasonably even wear over time. High pile rugs are softer and more
+            fluffy, but are less ideal in high-traffic areas. Cuts and loops,
+            along with variations in pile height, can be combined to create a
+            uniquely textured rug that meets your specific needs and desires. We
+            are confident that we have something to suit every taste.
           </p>
 
           <h3 className="text-lg font-bold mt-2">
@@ -92,10 +89,10 @@ async function page({ params }) {
           <h3 className="text-lg font-bold mt-2">Step 4 - The Shape:</h3>
           <p className="mb-2">
             At Loops we understand that a rectangular rug just won&rsquo;t fit
-            everyone&rsquo;s furnishing needs. Therefore, we offer all our rugs in
-            various geometric shapes as well as abstract shapes. As abstract as
-            you’d want it to be. Custom rugs in unorthodox shapes are a fun way
-            to tie the entire space together, just like colors and textures.
+            everyone&rsquo;s furnishing needs. Therefore, we offer all our rugs
+            in various geometric shapes as well as abstract shapes. As abstract
+            as you’d want it to be. Custom rugs in unorthodox shapes are a fun
+            way to tie the entire space together, just like colors and textures.
           </p>
           <Link
             href={`https://wa.me/${mobile}`}

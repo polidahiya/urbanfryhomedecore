@@ -28,8 +28,8 @@ function Productcard() {
         </div>
       </div>
       {/* details */}
-      <div className="px-4">
-        <p className="text-sm text-theme mt-[6px]">LOOPSBYLJ</p>
+      <div className="px-4 pt-4">
+        <p className="text-sm text-theme mt-[6px] hidden lg:block">LOOPSBYLJ</p>
         <p className="flex items-center justify-between flex-wrap mt-[6px]">
           <span>Product name</span>
           <span>From ₹{parseInt(25000, 10).toLocaleString("en-IN")}</span>

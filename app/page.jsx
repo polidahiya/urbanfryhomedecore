@@ -9,10 +9,12 @@ import Collections from "./_comps/Collections";
 import Customerreviews from "./_comps/Customerreviews";
 import Aboutus from "./_comps/Aboutus";
 import Faqs from "./_comps/Faqs";
+import Navbar from "./_globalcomps/Navbar";
 
 function page() {
   return (
     <div>
+      <Navbar navtype={true} />
       <Herosection />
       <section className="w-full bg-footercolor text-[#56473e] overflow-hidden relative flex items-center">
         <Marquebanner
