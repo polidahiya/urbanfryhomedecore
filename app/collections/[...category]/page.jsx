@@ -13,7 +13,7 @@ async function page({ params }) {
         <div className="py-36 text-white tracking-wider">
           {/* routes */}
           <div className="flex items-center gap-2 text-sm">
-            <Link href={"/"} className="underlineff">
+            <Link href={"/"} className="">
               <Underlineeffect title={"Home"} />
             </Link>{" "}
             /{" "}

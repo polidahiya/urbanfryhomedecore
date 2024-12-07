@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { PiMoon } from "react-icons/pi";
+import { LuMoon } from "react-icons/lu";
 import { LuSearch } from "react-icons/lu";
 import Underlineeffect from "./Underlineeffect";
 import { AppContextfn } from "../Context";
@@ -9,6 +9,10 @@ import { staticdata } from "../commondata";
 import { IoMenuOutline } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import Accountbutton from "./_navbarcomps/Accountbutton";
+import { FaFacebook } from "react-icons/fa";
+import { RiInstagramFill } from "react-icons/ri";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { RiShoppingCartLine } from "react-icons/ri";
 
 function Navbar({ navtype }) {
   const { setshowsearchbar } = AppContextfn();
@@ -68,14 +72,8 @@ const Menubutton = ({ sidemenutoggle, setsidemenutoggle }) => (
     onClick={() => {
       setsidemenutoggle((pre) => !pre);
       if (sidemenutoggle) {
-        hidescroll(false);
-        document.body.classList.remove(
-          "overflow-hidden",
-          "h-screen",
-          "lg:overflow-auto"
-        );
+        scrollable();
       } else {
-        hidescroll(true);
         document.body.classList.add(
           "overflow-hidden",
           "h-screen",
@@ -85,12 +83,12 @@ const Menubutton = ({ sidemenutoggle, setsidemenutoggle }) => (
     }}
   >
     <IoMenuOutline
-      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 duration-300  ${
+      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 duration-300 ${
         sidemenutoggle ? "opacity-0 rotate-180" : "opacity-100 delay-300"
       }`}
     />
     <RxCross1
-      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 duration-300  ${
+      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 duration-300 ${
         sidemenutoggle ? "opacity-100 delay-300" : "opacity-0 -rotate-180"
       }`}
     />
@@ -98,68 +96,184 @@ const Menubutton = ({ sidemenutoggle, setsidemenutoggle }) => (
 );
 
 const Sidemenu = ({ sidemenutoggle }) => {
-  const links = [
-    { title: "LAST CHANCE", link: "/pages/test1" },
-    { title: "NEW!", link: "/pages/test2" },
-    { title: "SHOP", link: "/pages/test3" },
-    { title: "READY TO SHIP", link: "/pages/test4" },
-    { title: "CUSTOMISATION", link: "/pages/customization" },
-  ];
+  const [open, setopen] = useState(false);
 
   return (
     <div
-      className={`absolute lg:static top-full left-0 w-full lg:w-fit flex flex-col lg:flex-row items-center lg:h-full bg-white lg:bg-transparent px-4 lg:px-0 duration-300 transition-transform lg:duration-0 ${
+      className={`absolute lg:static top-full left-0 w-full lg:w-fit flex flex-col lg:flex-row items-center h-[calc(100dvh-80px)] max-h-[calc(100dvh-80px)] overflow-y-scroll lg:overflow-y-visible lg:h-full bg-white lg:bg-transparent px-4 lg:px-0 duration-300 transition-transform lg:duration-0 ${
         sidemenutoggle
           ? "translate-x-0 opacity-100"
           : "-translate-x-full lg:translate-x-0 opacity-0 lg:opacity-100"
       }`}
     >
-      {links.map((item, i) => (
-        <div
-          key={i}
-          className="shophover relative flex items-center justify-start lg:justify-center h-full border-t border-theme border-opacity-50 lg:border-none py-4 lg:py-0 w-full lg:w-fit"
+      <div
+        className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"
+        onClick={scrollable}
+      >
+        <Link
+          href={"/"}
+          className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
         >
-          <Link
-            href={item?.link}
-            className="underlineff h-full flex items-center px-3"
-          >
-            <Underlineeffect title={item.title} />
-          </Link>
-          {item?.title == "SHOP" && <Categories />}
+          <Underlineeffect title={"LAST CHANCE"} />
+        </Link>
+      </div>
+      <div
+        className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"
+        onClick={scrollable}
+      >
+        <Link
+          href={"/"}
+          className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
+        >
+          <Underlineeffect title={"NEW!"} />
+        </Link>
+      </div>
+      <div className="shophover py-4 lg:py-0 px-3 cursor-pointer relative flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
+        <div
+          className="underlineff h-full w-full flex items-center"
+          onClick={() => setopen((pre) => !pre)}
+        >
+          <Underlineeffect title={"SHOP"} />
+          <MdKeyboardArrowDown
+            className={`ml-5 duration-300 text-lg lg:hidden ${
+              open && "rotate-180"
+            }`}
+          />
         </div>
-      ))}
+        <Categories open={open} />
+      </div>
+      <div
+        className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"
+        onClick={scrollable}
+      >
+        <Link
+          href={"/"}
+          className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
+        >
+          <Underlineeffect title={"READY TO SHIP"} />
+        </Link>
+      </div>
+      <div
+        className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"
+        onClick={scrollable}
+      >
+        <Link
+          href={"/pages/customization"}
+          className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
+        >
+          <Underlineeffect title={"CUSTOMISATION"} />
+        </Link>
+      </div>
+      {/* mobile only div */}
+      <div className="lg:hidden mt-auto pb-10 w-full">
+        <Link
+          href={"/"}
+          className="block px-10 py-3 bg-theme text-white text-center duration-300"
+        >
+          LOG IN
+        </Link>
+        <p className="mt-5 whitespace-nowrap w-full  text-center">
+          No account yet?{" "}
+          <Link href={"/"} className="relative inline-block underline">
+            Create Account
+          </Link>
+        </p>
+        {/* socials */}
+        <div className="flex justify-center items-center gap-5 text-3xl text-theme mt-5 ">
+          <Link href={"/"}>
+            <FaFacebook />
+          </Link>
+          <Link href={"/"}>
+            <RiInstagramFill />
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
 
-const Categories = () => {
+const Categories = ({ open }) => {
+  const [togglecategories, settogglecategories] = useState({
+    rooms: false,
+    categories: false,
+  });
   return (
-    <div className="shopcategoriesblock absolute top-full left-0  w-fit min-w-52 py-2 bg-white border border-slate-200 hidden">
-      <div className="underlineff shopcategories w-full  relative px-5 py-3 whitespace-nowrap cursor-pointer">
-        <Underlineeffect title={"Shop By Rooms"} />
+    <div
+      className={`lg:absolute top-full left-0 w-full lg:w-fit lg:min-w-52 py-2 bg-white lg:border lg:border-slate-200 shopcategoriesblock ${
+        open ? "block lg:hidden" : "hidden"
+      }`}
+    >
+      <div className="underlineff shopcategories relative px-5 py-3 whitespace-nowrap cursor-pointer">
+        <div
+          className="underlineff h-full w-full flex items-center"
+          onClick={() =>
+            settogglecategories((pre) => ({
+              categories: false,
+              rooms: !pre.rooms,
+            }))
+          }
+        >
+          <Underlineeffect title={"Shop By Rooms"} />
+          <MdKeyboardArrowDown
+            className={`ml-5 duration-300 text-lg lg:hidden ${
+              togglecategories.rooms && "rotate-180"
+            }`}
+          />
+        </div>
         {/* subcat */}
-        <Subcats item={staticdata.rooms} type="rooms" />
+        <Subcats
+          item={staticdata.rooms}
+          type="rooms"
+          togglecategories={togglecategories.rooms}
+        />
       </div>
       {/*  */}
       <div className="underlineff shopcategories w-full relative px-5 py-3 whitespace-nowrap cursor-pointer">
-        <Underlineeffect title={"Shop By Categories"} />
+        <div
+          className="underlineff h-full w-full flex items-center"
+          onClick={() =>
+            settogglecategories((pre) => ({
+              rooms: false,
+              categories: !pre.categories,
+            }))
+          }
+        >
+          <Underlineeffect title={"Shop By Categories"} />
+          <MdKeyboardArrowDown
+            className={`ml-5 duration-300 text-lg lg:hidden ${
+              togglecategories.categories && "rotate-180"
+            }`}
+          />
+        </div>
         {/* subcat */}
-        <Subcats item={staticdata.categories} type="categories" />
+        <Subcats
+          item={staticdata.categories}
+          type="categories"
+          togglecategories={togglecategories.categories}
+        />
       </div>
-      <div className="underlineff shopcategories w-full relative px-5 py-3 whitespace-nowrap cursor-pointer">
+      <div
+        className="underlineff shopcategories w-full relative px-5 py-3 whitespace-nowrap cursor-pointer"
+        onClick={scrollable}
+      >
         <Underlineeffect title={"All Products"} />
       </div>
     </div>
   );
 };
 
-const Subcats = ({ item, type }) => (
-  <div className="shopsubcat flex-col absolute top-0 left-full w-fit min-w-52 py-2 bg-white border border-slate-200 hidden">
+const Subcats = ({ item, type, togglecategories }) => (
+  <div
+    className={`shopsubcat flex-col lg:absolute top-0 left-full w-fit min-w-52 py-2 bg-white lg:border lg:border-slate-200 ${
+      togglecategories ? "flex lg:hidden" : "hidden"
+    }`}
+  >
     {Object.keys(item).map((keys, i) => (
       <Link
         href={`/collections/${type}/${keys}`}
         key={i}
         className="underlineff relative px-5 py-3 whitespace-nowrap"
+        onClick={scrollable}
       >
         <Underlineeffect title={keys.replace(/_/g, " ")} />
       </Link>
@@ -169,23 +283,36 @@ const Subcats = ({ item, type }) => (
 
 const Moreoptions = ({ setshowsearchbar }) => {
   return (
-    <div className="h-full ml-auto flex items-center gap-6">
+    <div className="h-full ml-auto flex items-center gap-4 lg:gap-6">
       <button>
-        <PiMoon className="text-xl" />
+        <LuMoon className="text-2xl" />
       </button>
       <button
-        className="underlineff flex items-center gap-2"
+        className=" flex items-center gap-2"
         onClick={() => setshowsearchbar(true)}
       >
-        <LuSearch className="text-base" />
-        <Underlineeffect title={"SEARCH"} />
+        <LuSearch className="text-2xl lg:text-base" />
+        <span className="hidden lg:block underlineff">
+          <Underlineeffect title={"SEARCH"} />
+        </span>
       </button>
       <Accountbutton />
-      <Link href={"/cart"} className="underlineff flex items-center ">
-        <Underlineeffect title={"CART"} />
+      <Link href={"/cart"} className=" flex items-center ">
+        <span className="hidden lg:block underlineff">
+          <Underlineeffect title={"CART"} />
+        </span>
+        <RiShoppingCartLine className="text-2xl lg:hidden" />
         (0)
       </Link>
     </div>
+  );
+};
+
+const scrollable = () => {
+  document.body.classList.remove(
+    "overflow-hidden",
+    "h-screen",
+    "lg:overflow-auto"
   );
 };
 

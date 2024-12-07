@@ -14,7 +14,7 @@ module.exports = {
         footercolor: "#e7e2de",
       },
       fontFamily: {
-        tenor: ['"Tenor Sans"', "sans-serif"], // Add Tenor Sans
+        tenor: ['"Tenor Sans"', "sans-serif"],
       },
     },
   },

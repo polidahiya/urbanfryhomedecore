@@ -8,7 +8,7 @@ function Searchbarsection() {
   const [searchtext, setsearchtext] = useState("");
   if (showsearchbar)
     return (
-      <div className="fixed top-0 left-0 h-[100dvh]  bg-white  w-full z-20 px-10">
+      <div className="fixed top-0 left-0 h-[100dvh]  bg-white  w-full z-30 px-10">
         <div
           className={`w-full flex items-center justify-between  h-20 text-inherit text-xs`}
         >
@@ -31,9 +31,10 @@ function Searchbarsection() {
               type="text"
               className="forminput h-full w-full px-4 border border-theme outline-none"
               value={searchtext}
+              required
               onChange={(e) => setsearchtext(e.target.value)}
             />
-            <label className="absolute top-0 left-0 flex items-center h-full w-full pointer-events-none z-10  px-4  duration-300">
+            <label className="absolute top-0 left-0 text-theme flex items-center h-full w-full pointer-events-none z-50  px-4  duration-300">
               What are you looking for?
             </label>
           </div>

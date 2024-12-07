@@ -11,7 +11,7 @@ async function page() {
       <div className="px-8">
         {/* navigations */}
         <div className="flex items-center gap-2 text-sm">
-          <Link href={"/"} className="underlineff">
+          <Link href={"/"} className="">
             <Underlineeffect title={"Home"} />
           </Link>{" "}
           / <p className="capitalize text-theme">Customization</p>

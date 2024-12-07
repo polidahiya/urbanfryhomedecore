@@ -64,6 +64,7 @@ body {
 
 .forminput:-moz-focusring {
   outline: 1px dotted transparent;
+  transition: color 0;
 }
 
 .navhover:hover .navhoverlogo {
@@ -84,17 +85,19 @@ body {
   }
 }
 
-/* underline effect */
-.underlineff:hover > span > span {
-  width: 100%;
-  left: 0;
-}
+@media (width>1024) {
+  /* underline effect */
+  .underlineff:hover > span > span {
+    width: 100%;
+    left: 0;
+  }
+  
+  /* navbar classes */
+  .shophover:hover > .shopcategoriesblock {
+    display: block;
+  }
 
-/* navbar classes */
-.shophover:hover > .shopcategoriesblock {
-  display: block;
-}
-
-.shopcategories:hover > .shopsubcat {
-  display: flex;
+  .shopcategories:hover > .shopsubcat {
+    display: flex;
+  }
 }
