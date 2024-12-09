@@ -42,10 +42,10 @@ function Herosection() {
           </div>
         </div>
         {/* buttons */}
-        <button className="flex items-center justify-center absolute top-1/2 left-5 -translate-y-1/2 text-3xl text-white">
+        <button className="flex items-center justify-center absolute top-1/2 left-5 -translate-y-1/2 text-3xl lg:hover:-translate-x-1 duration-300 text-white">
           <IoIosArrowBack />
         </button>
-        <button className="flex items-center justify-center absolute top-1/2 right-5 -translate-y-1/2 text-3xl text-white rotate-180">
+        <button className="flex items-center justify-center absolute top-1/2 right-5 -translate-y-1/2 text-3xl lg:hover:translate-x-1 duration-300 text-white rotate-180">
           <IoIosArrowBack />
         </button>
       </section>

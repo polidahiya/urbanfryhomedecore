@@ -5,7 +5,7 @@ import Link from "next/link";
 import Underlineeffect from "../../_globalcomps/Underlineeffect";
 import Closeeffectlink from "@/app/_globalcomps/Closeeffectlink";
 
-function page() {
+function Page() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -118,4 +118,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
