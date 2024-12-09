@@ -4,6 +4,7 @@ import Navbar from "../../_globalcomps/Navbar";
 import Link from "next/link";
 import Underlineeffect from "../../_globalcomps/Underlineeffect";
 import Closeeffectlink from "@/app/_globalcomps/Closeeffectlink";
+import signup from "@/app/_serveractions/signup";
 
 function Page() {
   const [formData, setFormData] = useState({
@@ -20,6 +21,11 @@ function Page() {
     }));
   };
 
+  const submitform = async () => {
+    const res = await signup();
+    console.log(res);
+  };
+
   return (
     <div className="min-h-screen mt-36">
       <Navbar navtype={false} />
@@ -33,11 +39,7 @@ function Page() {
             / <p className="capitalize text-theme">Account</p>
           </div>
           <h1 className="font-tenor text-7xl capitalize py-6">Sign Up</h1>
-          <form
-            action=""
-            method="POST"
-            className="max-w-[450px] flex flex-col gap-5 mt-3"
-          >
+          <div className="max-w-[450px] flex flex-col gap-5 mt-3">
             <div className=" relative border border-theme">
               <input
                 type="name"
@@ -91,13 +93,13 @@ function Page() {
             </div>
             <div className="flex gap-5 mt-3">
               <button
-                type="submit"
                 className="px-10 py-3 w-fit mt-auto bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 duration-300"
+                onClick={submitform}
               >
                 Create Account
               </button>
             </div>
-          </form>
+          </div>
           <p className="mt-3 flex items-center">
             Already have an account?
             <span className="ml-2">

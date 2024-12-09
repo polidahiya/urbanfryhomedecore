@@ -8,12 +8,12 @@ function Searchbarsection() {
   const [searchtext, setsearchtext] = useState("");
   if (showsearchbar)
     return (
-      <div className="fixed top-0 left-0 h-[100dvh]  bg-white  w-full z-30 px-10">
+      <div className="fixed top-0 left-0 h-[100dvh]  bg-white  w-full z-30 px-5 md:px-10">
         <div
           className={`w-full flex items-center justify-between  h-20 text-inherit text-xs`}
         >
           <img
-            src="https://loopsbylj.com/cdn/shop/files/LOOPS_LOGO_White_90x@2x.png?v=1699016384"
+            src="https://www.tinderpressroom.com/download/Wordmark-R-white-RGB-new.png"
             alt=""
             className={`h-10 mr-2 invert`}
           />
@@ -25,7 +25,7 @@ function Searchbarsection() {
           </button>
         </div>
         {/* searchbox */}
-        <div className="h-16 flex items-stretch justify-between gap-5">
+        <div className="h-16 flex items-stretch justify-between gap-1 md:gap-5">
           <div className="relative h-full w-full">
             <input
               type="text"
@@ -38,7 +38,7 @@ function Searchbarsection() {
               What are you looking for?
             </label>
           </div>
-          <button className="h-full px-11 bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 duration-300">
+          <button className="h-full px-5 md:px-11 bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 duration-300">
             Search
           </button>
         </div>

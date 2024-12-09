@@ -59,7 +59,7 @@ function Faqs() {
 
   return (
     <div className="py-24 px-8">
-      <h2 className="font-tenor text-6xl text-center">
+      <h2 className="font-tenor text-4xl md:text-6xl text-center">
         Frequently asked Questions
       </h2>
       <div className="mt-10">

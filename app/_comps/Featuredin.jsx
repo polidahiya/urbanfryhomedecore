@@ -11,12 +11,12 @@ function Featuredin() {
   ];
   return (
     <div className="bg-theme">
-      <h2 className="text-6xl text-center text-white pt-16 font-tenor">
+      <h2 className="text-5xl md:text-6xl text-center text-white pt-16 font-tenor">
         Featured In
       </h2>
-      <div className="grid grid-cols-4 gap-1 py-16 mx-auto w-fit">
+      <div className="flex flex-wrap justify-center gap-1 py-16 mx-auto w-full px-5 md:px-10">
         {list.map((item, i) => (
-          <img key={i} src={item} alt="test" className="w-64 aspect-square" />
+          <img key={i} src={item} alt="test" className="w-32 aspect-square" />
         ))}
       </div>
     </div>

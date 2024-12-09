@@ -10,12 +10,12 @@ function Productcard() {
           href={"/"}
         >
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-EFscwqb1Mclk_LZVGWI-uoFnfxDb7KU25w&s"
+            src="https://e0.pxfuel.com/wallpapers/344/864/desktop-wallpaper-abstract-shine-light-grid-form-immersion.jpg"
             alt=""
             className="h-full w-full absolute  object-cover lg:group-hover:scale-105 duration-300"
           />
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrqeb8WcPLsIuM-ZlNZRrbMrQoxyQUkUJrlA&s"
+            src="https://t4.ftcdn.net/jpg/06/43/02/37/360_F_643023776_0oYsYRRcooTNy7olrYmnrNMUiBBSqcRf.jpg"
             alt=""
             className="h-full w-full absolute  object-cover opacity-0 lg:group-hover:scale-110 lg:group-hover:opacity-100 duration-300"
           />

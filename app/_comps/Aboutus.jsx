@@ -4,8 +4,8 @@ import Link from "next/link";
 function Aboutus() {
   return (
     <div>
-      <h2 className="font-tenor text-6xl text-center py-10">About Us</h2>
-      <p className="text-center max-w-[900px] mx-auto mt-5">
+      <h2 className="font-tenor text-4xl md:text-6xl text-center pt-10">About Us</h2>
+      <p className="text-justify md:text-center max-w-[900px] mx-auto px-5 mt-5">
         Loops by LJ is a brand based in India, focusing on creating
         contemporary, handmade rugs and textile art for you and your space. The
         brand follows- handcrafted, local and responsible production. Loops has

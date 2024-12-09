@@ -42,7 +42,7 @@ function Navbar({ navtype }) {
 
   return (
     <nav
-      className={`fixed navhover top-0 left-0 w-full flex items-center px-10 h-20  hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
+      className={`fixed navhover top-0 left-0 w-full flex items-center px-5 md:px-10 h-20  hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
         ${navtype && transparentnav ? "text-white" : "bg-white text-inherit"} 
         ${shownav ? "translate-y-0" : "-translate-y-full"}`}
     >
@@ -52,7 +52,7 @@ function Navbar({ navtype }) {
       />
       <Link href={"/"}>
         <img
-          src="https://loopsbylj.com/cdn/shop/files/LOOPS_LOGO_White_90x@2x.png?v=1699016384"
+          src="https://www.tinderpressroom.com/download/Wordmark-R-white-RGB-new.png"
           alt=""
           className={`navhoverlogo h-10 mr-2 ${!navtype && "invert"} ${
             !transparentnav && "invert"
@@ -68,7 +68,7 @@ function Navbar({ navtype }) {
 
 const Menubutton = ({ sidemenutoggle, setsidemenutoggle }) => (
   <button
-    className="relative h-full text-2xl mr-5 lg:hidden"
+    className="relative h-full w-5 text-2xl mr-5 lg:hidden"
     onClick={() => {
       setsidemenutoggle((pre) => !pre);
       if (sidemenutoggle) {
@@ -167,14 +167,19 @@ const Sidemenu = ({ sidemenutoggle }) => {
       {/* mobile only div */}
       <div className="lg:hidden mt-auto pb-10 w-full">
         <Link
-          href={"/"}
+          href={"/account/login"}
           className="block px-10 py-3 bg-theme text-white text-center duration-300"
+          onClick={scrollable}
         >
           LOG IN
         </Link>
         <p className="mt-5 whitespace-nowrap w-full  text-center">
           No account yet?{" "}
-          <Link href={"/"} className="relative inline-block underline">
+          <Link
+            href={"/account/signup"}
+            className="relative inline-block underline"
+            onClick={scrollable}
+          >
             Create Account
           </Link>
         </p>
@@ -284,9 +289,9 @@ const Subcats = ({ item, type, togglecategories }) => (
 const Moreoptions = ({ setshowsearchbar }) => {
   return (
     <div className="h-full ml-auto flex items-center gap-4 lg:gap-6">
-      <button>
+      {/* <button>
         <LuMoon className="text-2xl" />
-      </button>
+      </button> */}
       <button
         className=" flex items-center gap-2"
         onClick={() => setshowsearchbar(true)}

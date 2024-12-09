@@ -23,28 +23,22 @@ function Blogs() {
   ];
 
   return (
-    <div className="flex items-stretch py-5 px-8 space-x-5">
+    <div className="w-full flex lg:justify-center items-stretch gap-5 py-5 px-8 snap-x scroll-smooth snap-mandatory overflow-x-scroll md:overflow-x-visible hidescroll">
       {blogs.map((blog, i) => (
-        <React.Fragment key={i}>
-          <div className="">
-            <img src={blog.img} alt="" className="aspect-[2/3] py-8" />
-            <div className="flex flex-col items-center gap-8">
-              <p className="font-tenor text-center text-3xl">
-                Actor Jaaved Jaaferi.
-              </p>
-              <p className="text-center">
-                Jaaved Jaaferi succumbs to nostalgia as he takes AD through his
-                over 7,000-square-foot apartment in Bandra, designed by Kush
-                Bhayani of KULx Studio.
-              </p>
-              <Closeeffectlink title="Read more" link={"/"} />
-            </div>
+        <div key={i} className="min-w-full md:min-w-0 w-full md:w-64 snap-center">
+          <img src={blog.img} alt="" className="aspect-[2/3] py-8" />
+          <div className="flex flex-col items-center gap-8">
+            <p className="font-tenor text-center text-3xl">
+              Actor Jaaved Jaaferi.
+            </p>
+            <p className="text-center">
+              Jaaved Jaaferi succumbs to nostalgia as he takes AD through his
+              over 7,000-square-foot apartment in Bandra, designed by Kush
+              Bhayani of KULx Studio.
+            </p>
+            <Closeeffectlink title="Read more" link={"/"} />
           </div>
-          {/* Only show the divider if it's not the last item */}
-          {i < blogs.length - 1 && (
-            <div className="bg-[#56473e] min-w-[1px] opacity-40 min-h-full mx-5"></div>
-          )}
-        </React.Fragment>
+        </div>
       ))}
     </div>
   );

@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 function Customerreviews() {
   return (
     <div className="my-12">
-      <h2 className="text-6xl font-tenor text-center">
+      <h2 className="text-4xl md:text-6xl font-tenor text-center">
         Let customers speak for us
       </h2>
       <p className="flex items-center justify-center mt-2">
