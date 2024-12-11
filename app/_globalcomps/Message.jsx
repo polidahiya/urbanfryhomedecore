@@ -53,12 +53,12 @@ function Notif({ item }) {
       <span
         className={`transition-opacity duration-300 ${
           isVisible ? "opacity-100" : "opacity-0"
-        } font-semibold`}
+        }`}
       >
         {item.message}
       </span>
       <button
-        className="absolute right-1 top-1 w-7 h-7 bg-theme text-white rounded-full flex items-center justify-center"
+        className="absolute right-[6px] top-1/2 -translate-y-1/2 w-7 h-7 bg-theme text-white rounded-full flex items-center justify-center"
         onClick={removemessage}
       >
         X

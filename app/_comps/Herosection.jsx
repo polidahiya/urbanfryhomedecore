@@ -7,11 +7,51 @@ function Herosection() {
   const [slidenumber, setslidenumber] = useState(0);
   const sliderRef = useRef(null);
   const [isLocked, setIsLocked] = useState(false);
+  const timerref = useRef(null);
+  const autoscrolltime = 5000;
+
+  const slides = [
+    {
+      heading: "Test heading test heading1",
+      para: "test para test this is a para this is a para this is a para para1",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-5Ji2hus-Az7tBv90olflynKz9CFQp-HcSA&s",
+      link: "/",
+    },
+    {
+      heading: "Test heading test heading this is a heading this is a heading2",
+      para: "test para test this is a para this is a para this is a para para2",
+      image:
+        "https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      link: "/",
+    },
+    {
+      heading: "Test heading test heading3",
+      para: "test para test this is a para this is a para this is a para para3",
+      image:
+        "https://imgmedia.lbb.in/media/2022/01/61daa11cd966c63a4d39fd17_1641718044595.jpg",
+      link: "/",
+    },
+    {
+      heading: "Test heading test heading4",
+      para: "test para test this is a para this is a para this is a para para4",
+      image:
+        "https://www.jiomart.com/images/product/original/rvxl0fngu9/overspread-interior-hub-stylish-flower-design-metal-wall-art-decor-for-living-room-bedroom-kids-room-kitchen-office-wall-hanging-decoration-items-for-home-decor-size-45-x-38-cm-black-medium-product-images-orvxl0fngu9-p604578094-2-202309221750.png?im=Resize=(420,420)",
+      link: "/",
+    },
+    {
+      heading: "Test heading test heading5",
+      para: "test para test this is a para this is a para this is a para para5",
+      image:
+        "https://images.jdmagicbox.com/rep/b2b/wall-paper/wall-paper-11.jpg",
+      link: "/",
+    },
+  ];
 
   const handleSlide = (direction) => {
     if (isLocked) return;
     setIsLocked(true);
     setTimeout(() => setIsLocked(false), 1300);
+    starttimer();
 
     let newIndex = (slidenumber + direction + slides.length) % slides.length;
     setslidenumber(newIndex);
@@ -27,53 +67,17 @@ function Herosection() {
     }
   };
 
+  const starttimer = () => {
+    clearInterval(timerref.current);
+    timerref.current = setInterval(() => {
+      setslidenumber((pre) => (pre == slides.length - 1 ? 0 : pre + 1));
+    }, autoscrolltime);
+  };
+
   useEffect(() => {
-    console.log("test1");
-
-    const interval = setInterval(() => {
-      console.log("test2");
-      handleSlide(1);
-    }, 5000);
-
-    return () => clearInterval(interval);
+    starttimer();
+    return () => clearInterval(timerref.current);
   }, []);
-
-  const slides = [
-    {
-      heading: "Test heading test heading1",
-      para: "test para test this is a para this is a para this is a para para1",
-      image: "https://m.media-amazon.com/images/I/71rAjZmm3eL.jpg",
-      link: "/",
-    },
-    {
-      heading: "Test heading test heading this is a heading this is a heading2",
-      para: "test para test this is a para this is a para this is a para para2",
-      image:
-        "https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      link: "/",
-    },
-    {
-      heading: "Test heading test heading3",
-      para: "test para test this is a para this is a para this is a para para3",
-      image:
-        "https://images.unsplash.com/photo-1559583985-c80d8ad9b29f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3",
-      link: "/",
-    },
-    {
-      heading: "Test heading test heading4",
-      para: "test para test this is a para this is a para this is a para para4",
-      image:
-        "https://i.pinimg.com/236x/76/d0/26/76d0264c93a41f4a018309406ecd7050.jpg",
-      link: "/",
-    },
-    {
-      heading: "Test heading test heading5",
-      para: "test para test this is a para this is a para this is a para para5",
-      image:
-        "https://images.jdmagicbox.com/rep/b2b/wall-paper/wall-paper-11.jpg",
-      link: "/",
-    },
-  ];
 
   return (
     <div className="flex flex-col lg:flex-row items-stretch w-full h-screen lg:max-h-[550px] min-h-[550px] overflow-hidden">

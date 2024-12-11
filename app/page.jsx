@@ -10,11 +10,15 @@ import Customerreviews from "./_comps/Customerreviews";
 import Aboutus from "./_comps/Aboutus";
 import Faqs from "./_comps/Faqs";
 import Navbar from "./_globalcomps/Navbar";
+import { cookies } from "next/headers";
 
-function page() {
+async function page() {
+  const allcookes = await cookies();
+  const token = allcookes.get("token");
+
   return (
     <div>
-      <Navbar navtype={true} />
+      <Navbar navtype={true} token={token}/>
       <Herosection />
       {/* marque section */}
       <section className="w-full bg-footercolor text-[#56473e] overflow-hidden relative flex items-center">

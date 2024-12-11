@@ -5,6 +5,7 @@ const AppContext = createContext({});
 
 export function Appwrapper({ children }) {
   const [showsearchbar, setshowsearchbar] = useState(false);
+  const [messagearray, setmessagearray] = useState([]);
 
   const setmessagefn = (message) => {
     setmessagearray([
@@ -27,6 +28,8 @@ export function Appwrapper({ children }) {
         showsearchbar,
         setshowsearchbar,
         setmessagefn,
+        messagearray,
+        setmessagearray,
       }}
     >
       {children}

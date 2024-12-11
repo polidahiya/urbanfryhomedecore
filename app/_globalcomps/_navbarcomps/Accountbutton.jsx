@@ -1,26 +1,41 @@
 import Underlineeffect from "../Underlineeffect";
 import Link from "next/link";
 
-function Accountbutton() {
+function Accountbutton({ token }) {
   return (
     <div className="relative hidden lg:block">
       <button className="underlineff peer">
         <Underlineeffect title={"ACCOUNT"} />
       </button>
       <div className="hidden peer-hover:block lg:hover:block absolute top-full left-1/2 -translate-x-1/2 w-52 pt-5">
-        <div className=" p-5 border border-slate-300 bg-white">
-          <Link
-            href={"/account/login"}
-            className="block px-10 py-3 bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 text-center duration-300"
-          >
-            LOG IN
-          </Link>
-          <Link
-            href={"/account/signup"}
-            className="block text-theme text-sm mt-2 text-center"
-          >
-            Create Account
-          </Link>
+        <div className="flex flex-col gap-3 p-5 border border-slate-300 bg-white">
+          {token ? (
+            <>
+              <p>name</p>
+              <hr />
+              <Link href={"/"} className="block underlineff">
+                <Underlineeffect title={"MY ACCOUNT"} />
+              </Link>
+              <button className="block px-10 py-3 bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 text-center duration-300">
+                LOG OUT
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href={"/account/login"}
+                className="block px-10 py-3 bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 text-center duration-300"
+              >
+                LOG IN
+              </Link>
+              <Link
+                href={"/account/signup"}
+                className="block text-theme text-sm text-center"
+              >
+                Create Account
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

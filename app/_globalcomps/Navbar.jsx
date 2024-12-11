@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { LuMoon } from "react-icons/lu";
+// import { LuMoon } from "react-icons/lu";
 import { LuSearch } from "react-icons/lu";
 import Underlineeffect from "./Underlineeffect";
 import { AppContextfn } from "../Context";
@@ -14,7 +14,7 @@ import { RiInstagramFill } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { RiShoppingCartLine } from "react-icons/ri";
 
-function Navbar({ navtype }) {
+function Navbar({ navtype, token }) {
   const { setshowsearchbar } = AppContextfn();
   const [shownav, setshownav] = useState(true);
   const [transparentnav, settransparentnav] = useState(true);
@@ -52,7 +52,7 @@ function Navbar({ navtype }) {
       />
       <Link href={"/"}>
         <img
-          src="https://www.tinderpressroom.com/download/Wordmark-R-white-RGB-new.png"
+          src="/logo.png"
           alt=""
           className={`navhoverlogo h-10 mr-2 ${!navtype && "invert"} ${
             !transparentnav && "invert"
@@ -60,8 +60,8 @@ function Navbar({ navtype }) {
         />
       </Link>
       {/* side menu */}
-      <Sidemenu sidemenutoggle={sidemenutoggle} />
-      <Moreoptions setshowsearchbar={setshowsearchbar} />
+      <Sidemenu sidemenutoggle={sidemenutoggle} token={token} />
+      <Moreoptions setshowsearchbar={setshowsearchbar} token={token} />
     </nav>
   );
 }
@@ -95,7 +95,7 @@ const Menubutton = ({ sidemenutoggle, setsidemenutoggle }) => (
   </button>
 );
 
-const Sidemenu = ({ sidemenutoggle }) => {
+const Sidemenu = ({ sidemenutoggle, token }) => {
   const [open, setopen] = useState(false);
 
   return (
@@ -166,25 +166,44 @@ const Sidemenu = ({ sidemenutoggle }) => {
       </div>
       {/* mobile only div */}
       <div className="lg:hidden mt-auto pb-10 w-full">
-        <Link
-          href={"/account/login"}
-          className="block px-10 py-3 bg-theme text-white text-center duration-300"
-          onClick={scrollable}
-        >
-          LOG IN
-        </Link>
-        <p className="mt-5 whitespace-nowrap w-full  text-center">
-          No account yet?{" "}
-          <Link
-            href={"/account/signup"}
-            className="relative inline-block underline"
-            onClick={scrollable}
-          >
-            Create Account
-          </Link>
-        </p>
+        {token ? (
+          <div className="flex flex-col gap-5 px-3">
+            <div className="flex justify-between">
+              <p>User - name</p>
+              <button className="underline">Log Out</button>
+            </div>
+            <Link href={"/"} className="flex justify-between">
+              <span className="underline">Shopping cart</span>
+              <span className="px-5">1</span>
+            </Link>
+            <Link href={"/"} className="underline">
+              My account
+            </Link>
+          </div>
+        ) : (
+          <>
+            <Link
+              href={"/account/login"}
+              className="block px-10 py-3 bg-theme text-white text-center duration-300"
+              onClick={scrollable}
+            >
+              LOG IN
+            </Link>
+            <p className="mt-5 whitespace-nowrap w-full  text-center">
+              No account yet?{" "}
+              <Link
+                href={"/account/signup"}
+                className="relative inline-block underline"
+                onClick={scrollable}
+              >
+                Create Account
+              </Link>
+            </p>
+          </>
+        )}
+
         {/* socials */}
-        <div className="flex justify-center items-center gap-5 text-3xl text-theme mt-5 ">
+        <div className="flex justify-center items-center gap-5 text-3xl text-theme mt-5">
           <Link href={"/"}>
             <FaFacebook />
           </Link>
@@ -286,7 +305,7 @@ const Subcats = ({ item, type, togglecategories }) => (
   </div>
 );
 
-const Moreoptions = ({ setshowsearchbar }) => {
+const Moreoptions = ({ setshowsearchbar, token }) => {
   return (
     <div className="h-full ml-auto flex items-center gap-4 lg:gap-6">
       {/* <button>
@@ -301,7 +320,7 @@ const Moreoptions = ({ setshowsearchbar }) => {
           <Underlineeffect title={"SEARCH"} />
         </span>
       </button>
-      <Accountbutton />
+      <Accountbutton token={token} />
       <Link href={"/cart"} className=" flex items-center ">
         <span className="hidden lg:block underlineff">
           <Underlineeffect title={"CART"} />
