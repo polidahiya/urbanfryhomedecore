@@ -1,5 +1,6 @@
 import Navbar from "@/app/_globalcomps/Navbar";
 import Searchbarsection from "@/app/_globalcomps/_navbarcomps/Searchbarsection";
+import Footer from "@/app/_globalcomps/Footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,6 +13,7 @@ export default async function RootLayout({ children }) {
       <Navbar navtype={true} />
       <Searchbarsection />
       {children}
+      <Footer />
     </div>
   );
 }

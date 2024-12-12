@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
-import Customizationform from "../_comps/Customizationform";
+import Customizationform from "./_comps/Customizationform";
 import { mobile } from "@/app/commondata";
 
 async function page() {

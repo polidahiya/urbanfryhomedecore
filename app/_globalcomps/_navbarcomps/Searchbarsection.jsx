@@ -13,7 +13,7 @@ function Searchbarsection() {
           className={`w-full flex items-center justify-between  h-20 text-inherit text-xs`}
         >
           <img
-            src="https://www.tinderpressroom.com/download/Wordmark-R-white-RGB-new.png"
+            src="/logo.png"
             alt=""
             className={`h-10 mr-2 invert`}
           />

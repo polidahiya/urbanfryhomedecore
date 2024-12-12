@@ -1,17 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import Navbar from "../../_globalcomps/Navbar";
+import Navbar from "../../../_globalcomps/Navbar";
 import Link from "next/link";
-import Underlineeffect from "../../_globalcomps/Underlineeffect";
+import Underlineeffect from "../../../_globalcomps/Underlineeffect";
 import Closeeffectlink from "@/app/_globalcomps/Closeeffectlink";
-import { signup } from "@/app/_serveractions/signup";
+import { login } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
 
 function Publicpage({ token }) {
   const { setmessagefn } = AppContextfn();
-
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   });
@@ -25,10 +23,8 @@ function Publicpage({ token }) {
   };
 
   const submitform = async () => {
-    const res = await signup(formData);
+    const res = await login(formData);
     setmessagefn(res?.message);
-    if (res?.status == 200) {
-    }
   };
 
   return (
@@ -43,25 +39,10 @@ function Publicpage({ token }) {
             </Link>{" "}
             / <p className="capitalize text-theme">Account</p>
           </div>
-          <h1 className="font-tenor text-7xl capitalize py-6">Sign Up</h1>
+          <h1 className="font-tenor text-7xl capitalize py-6">LOGIN</h1>
+
+          {/* form */}
           <div className="max-w-[450px] flex flex-col gap-5 mt-3">
-            <div className=" relative border border-theme">
-              <input
-                type="name"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="forminput w-full  py-4 px-4 text-gray-700 outline-none"
-                required
-              />
-              <label
-                htmlFor="name"
-                className="absolute top-0 left-0 py-4 flex items-center px-4 text-sm duration-300 text-theme pointer-events-none"
-              >
-                Name <span className="text-red-500">*</span>
-              </label>
-            </div>
             <div className=" relative border border-theme">
               <input
                 type="email"
@@ -101,15 +82,18 @@ function Publicpage({ token }) {
                 className="px-10 py-3 w-fit mt-auto bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 duration-300"
                 onClick={submitform}
               >
-                Create Account
+                Login
               </button>
+              <Link
+                href={"/account/signup"}
+                className="px-10 py-3 w-fit mt-auto border border-theme text-theme lg:hover:bg-theme lg:hover:text-white duration-300"
+              >
+                Create Account
+              </Link>
             </div>
           </div>
-          <p className="mt-3 flex items-center">
-            Already have an account?
-            <span className="ml-2">
-              <Closeeffectlink title={"Login"} link={"/account/login"} />
-            </span>
+          <p className="mt-3">
+            <Closeeffectlink title={"Forgot password?"} link={"/"} />
           </p>
         </div>
         {/* image */}

@@ -7,7 +7,7 @@ function Productcard() {
       <div className="relative">
         <Link
           className="w-full aspect-[4/5] relative block overflow-hidden"
-          href={"/"}
+          href={"/product"}
         >
           <img
             src="https://e0.pxfuel.com/wallpapers/344/864/desktop-wallpaper-abstract-shine-light-grid-form-immersion.jpg"

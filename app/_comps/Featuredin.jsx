@@ -14,9 +14,9 @@ function Featuredin() {
       <h2 className="text-5xl md:text-6xl text-center text-white pt-16 font-tenor">
         Featured In
       </h2>
-      <div className="flex flex-wrap justify-center gap-1 py-16 mx-auto w-full px-5 md:px-10">
+      <div className="flex flex-wrap place-content-center gap-1 py-16 mx-auto w-full px-5 md:px-10">
         {list.map((item, i) => (
-          <img key={i} src={item} alt="test" className="w-32 aspect-square" />
+          <img key={i} src={item} alt="test" className="w-24 md:w-44 aspect-square" />
         ))}
       </div>
     </div>

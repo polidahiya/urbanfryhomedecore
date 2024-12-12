@@ -31,49 +31,6 @@ function Imagegallery() {
       img: "https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-33d65a4/www.decorilla.com/online-decorating/wp-content/uploads/2019/06/modern-interior-design-grey-living-room2-2048x1365.jpeg",
       link: "/",
     },
-    {
-      heading: "Homes of Loops",
-      para: "This is a test para",
-      img: "https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-33d65a4/www.decorilla.com/online-decorating/wp-content/uploads/2019/06/modern-interior-design-grey-living-room2-2048x1365.jpeg",
-      link: "/",
-    },
-    {
-      heading: "Homes of Loops",
-      para: "This is a test para",
-      img: "https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-33d65a4/www.decorilla.com/online-decorating/wp-content/uploads/2019/06/modern-interior-design-grey-living-room2-2048x1365.jpeg",
-      link: "/",
-    },
-    {
-      heading: "Homes of Loops",
-      para: "This is a test para",
-      img: "https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-33d65a4/www.decorilla.com/online-decorating/wp-content/uploads/2019/06/modern-interior-design-grey-living-room2-2048x1365.jpeg",
-      link: "/",
-    },
-    {
-      heading: "Homes of Loops",
-      para: "This is a test para",
-      img: "https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-33d65a4/www.decorilla.com/online-decorating/wp-content/uploads/2019/06/modern-interior-design-grey-living-room2-2048x1365.jpeg",
-      link: "/",
-    },
-    {
-      heading: "Homes of Loops",
-      para: "This is a test para",
-      img: "https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-33d65a4/www.decorilla.com/online-decorating/wp-content/uploads/2019/06/modern-interior-design-grey-living-room2-2048x1365.jpeg",
-      link: "/",
-    },
-    {
-      heading: "Homes of Loops",
-      para: "This is a test para",
-      img: "https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-33d65a4/www.decorilla.com/online-decorating/wp-content/uploads/2019/06/modern-interior-design-grey-living-room2-2048x1365.jpeg",
-      link: "/",
-    },
-    {
-      heading: "Homes of Loops",
-      para: "This is a test para",
-      img: "https://cdn-bnokp.nitrocdn.com/QNoeDwCprhACHQcnEmHgXDhDpbEOlRHH/assets/images/optimized/rev-33d65a4/www.decorilla.com/online-decorating/wp-content/uploads/2019/06/modern-interior-design-grey-living-room2-2048x1365.jpeg",
-      link: "/",
-    },
-    // Repeat or add more items as needed
   ];
 
   const handleImageScroll = (e) => {
@@ -90,7 +47,7 @@ function Imagegallery() {
         left: scrollPosition,
         behavior: "smooth",
       });
-      setActiveImageIndex(index); // Update active image index for the dots
+      setActiveImageIndex(index);
     }
   };
 
@@ -121,23 +78,26 @@ function Imagegallery() {
             <img
               src={item?.img}
               alt=""
-              className={`duration-1000 ease-out ${
+              className={`aspect-[3/4] md:aspect-[4/3] duration-1000 ease-out object-cover ${
                 activeImageIndex == i ? "scale-100" : "scale-125"
               }`}
             />
           </div>
         ))}
       </div>
+      {/* dotss */}
       <div className="absolute bottom-5 left-0 w-full flex items-center justify-center gap-4">
         {list.map((_, i) => (
           <div
             key={i}
             className="group w-6 aspect-square cursor-pointer flex items-center justify-center"
-            onClick={() => moveToSlide(i)} // Call moveToSlide function here
+            onClick={() => moveToSlide(i)}
           >
             <div
               className={`aspect-square rounded-full bg-white grid place-content-center duration-500 lg:group-hover:h-full lg:group-hover:bg-opacity-50 ${
-                activeImageIndex == i ? "bg-opacity-50 h-full" : "bg-opacity-0 h-2"
+                activeImageIndex == i
+                  ? "bg-opacity-50 h-full"
+                  : "bg-opacity-0 h-2"
               }`}
             >
               <div className="h-2 aspect-square bg-white rounded-full"></div>

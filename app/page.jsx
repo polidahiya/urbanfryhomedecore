@@ -11,6 +11,8 @@ import Aboutus from "./_comps/Aboutus";
 import Faqs from "./_comps/Faqs";
 import Navbar from "./_globalcomps/Navbar";
 import { cookies } from "next/headers";
+import Footer from "./_globalcomps/Footer";
+import Searchbarsection from "./_globalcomps/_navbarcomps/Searchbarsection";
 
 async function page() {
   const allcookes = await cookies();
@@ -18,7 +20,7 @@ async function page() {
 
   return (
     <div>
-      <Navbar navtype={true} token={token}/>
+      <Navbar navtype={true} token={token} />
       <Herosection />
       {/* marque section */}
       <section className="w-full bg-footercolor text-[#56473e] overflow-hidden relative flex items-center">
@@ -58,6 +60,8 @@ async function page() {
       <Customerreviews />
       <Aboutus />
       <Faqs />
+      <Footer />
+      <Searchbarsection />
     </div>
   );
 }

@@ -80,7 +80,7 @@ function Herosection() {
   }, []);
 
   return (
-    <div className="flex flex-col lg:flex-row items-stretch w-full h-screen lg:max-h-[550px] min-h-[550px] overflow-hidden">
+    <div className="flex flex-col lg:flex-row items-stretch w-full h-screen lg:max-h-screen min-h-[550px] overflow-hidden">
       {/* Image Section */}
       <section className="flex-1 lg:h-full overflow-hidden">
         <div

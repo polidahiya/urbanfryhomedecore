@@ -86,12 +86,6 @@ body {
 }
 
 @media (width>1024) {
-  /* underline effect */
-  .underlineff:hover > span > span {
-    width: 100%;
-    left: 0;
-  }
-  
   /* navbar classes */
   .shophover:hover > .shopcategoriesblock {
     display: block;

@@ -158,7 +158,7 @@ const Sidemenu = ({ sidemenutoggle, token }) => {
         onClick={scrollable}
       >
         <Link
-          href={"/pages/customization"}
+          href={"/customization"}
           className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
         >
           <Underlineeffect title={"CUSTOMISATION"} />
