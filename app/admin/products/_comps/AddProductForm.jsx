@@ -1,41 +1,26 @@
 import React, { useState } from "react";
+import Standardinputfield from "./_comps/Standardinputfield";
+import Multiplevaluesfield from "./_comps/Multiplevaluesfield";
+import Dropdownmenu from "./_comps/Dropdownmenu";
+import ProductVariants from "./_comps/Varients";
 
 const AddProductForm = () => {
   const [productName, setProductName] = useState("");
-  const [dimensions, setDimensions] = useState([]);
-  const [currentDimension, setCurrentDimension] = useState("");
-  const [descriptions, setDescriptions] = useState([]);
-  const [currentDescription, setCurrentDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [discount, setDiscount] = useState("");
+  const [sku, setsku] = useState("");
+  const [handlingtime, sethandlingtime] = useState("");
+  const [mrp, setmrp] = useState("");
+  const [sellingprice, setsellingprice] = useState("");
+  const [Material, setMaterial] = useState("");
+  const [Warranty, setWarranty] = useState("");
+  const [finishes, setfinishes] = useState("");
+  const [dimensions, setDimensions] = useState([""]);
+  const [descriptions, setDescriptions] = useState([""]);
   const [colors, setColors] = useState([]);
   const [currentColor, setCurrentColor] = useState({
     name: "",
     hex: "",
     images: [],
   });
-
-  const handleAddDimension = () => {
-    if (currentDimension.trim()) {
-      setDimensions([...dimensions, currentDimension.trim()]);
-      setCurrentDimension("");
-    }
-  };
-
-  const handleRemoveDimension = (index) => {
-    setDimensions(dimensions.filter((_, i) => i !== index));
-  };
-
-  const handleAddDescription = () => {
-    if (currentDescription.trim()) {
-      setDescriptions([...descriptions, currentDescription.trim()]);
-      setCurrentDescription("");
-    }
-  };
-
-  const handleRemoveDescription = (index) => {
-    setDescriptions(descriptions.filter((_, i) => i !== index));
-  };
 
   const handleAddColor = () => {
     if (currentColor.name && currentColor.hex) {
@@ -73,32 +58,40 @@ const AddProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("name", productName);
-    formData.append("price", price);
-    formData.append("discount", discount);
-    formData.append("dimensions", JSON.stringify(dimensions));
-    formData.append("descriptions", JSON.stringify(descriptions));
-    formData.append(
-      "colors",
-      JSON.stringify(
-        colors.map((color) => ({
-          name: color.name,
-          hex: color.hex,
-        }))
-      )
+    console.log(
+      productName,
+      sku,
+      handlingtime,
+      mrp,
+      sellingprice,
+      Material,
+      Warranty,
+      finishes,
+      dimensions,
+      descriptions
     );
 
-    colors.forEach((color, index) => {
-      color.images.forEach((image, imageIndex) => {
-        formData.append(`colorImages_${index}_${imageIndex}`, image.file);
-      });
-    });
+    // const formData = new FormData();
+    // formData.append("name", productName);
+    // formData.append("price", price);
+    // formData.append("discount", discount);
+    // formData.append("dimensions", JSON.stringify(dimensions));
+    // formData.append("descriptions", JSON.stringify(descriptions));
+    // formData.append(
+    //   "colors",
+    //   JSON.stringify(
+    //     colors.map((color) => ({
+    //       name: color.name,
+    //       hex: color.hex,
+    //     }))
+    //   )
+    // );
 
-    formData.forEach((data) => {
-      console.log(data);
-    });
+    // colors.forEach((color, index) => {
+    //   color.images.forEach((image, imageIndex) => {
+    //     formData.append(`colorImages_${index}_${imageIndex}`, image.file);
+    //   });
+    // });
 
     // try {
     //   const response = await fetch("/api/products", {
@@ -125,200 +118,81 @@ const AddProductForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-6 max-w-2xl mx-auto bg-white shadow-lg rounded-md space-y-6"
+      className="p-6 bg-white shadow-lg rounded-md space-y-6 mt-10"
     >
       <h2 className="text-2xl font-semibold text-gray-800">Add New Product</h2>
-
       {/* Product Name */}
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
-          Product Name
-        </label>
-        <input
-          type="text"
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-          required
-          className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-        />
-      </div>
-
+      <Standardinputfield
+        titlename="Product Name"
+        value={productName}
+        onchange={(e) => setProductName(e.target.value)}
+      />
+      {/* sku id */}
+      <Standardinputfield
+        titlename="SKU ID"
+        value={sku}
+        onchange={(e) => setsku(e.target.value)}
+      />
+      {/* handling time */}
+      <Standardinputfield
+        titlename="Handling Time"
+        value={handlingtime}
+        onchange={(e) => sethandlingtime(e.target.value)}
+      />
+      {/* mrp */}
+      <Standardinputfield
+        titlename="MRP"
+        value={mrp}
+        onchange={(e) => setmrp(e.target.value)}
+      />
+      {/* selling price */}
+      <Standardinputfield
+        titlename="Selling Price"
+        value={sellingprice}
+        onchange={(e) => setsellingprice(e.target.value)}
+      />
+      {/* Material  */}
+      <Standardinputfield
+        titlename="Material"
+        value={Material}
+        onchange={(e) => setMaterial(e.target.value)}
+      />
+      {/* Warranty  */}
+      <Standardinputfield
+        titlename="Warranty"
+        value={Warranty}
+        onchange={(e) => setWarranty(e.target.value)}
+      />
       {/* Dimensions */}
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
-          Dimensions
-        </label>
-        <div className="flex items-center gap-2 mt-1">
-          <input
-            type="text"
-            value={currentDimension}
-            onChange={(e) => setCurrentDimension(e.target.value)}
-            placeholder="e.g., 12x8x6"
-            className="flex-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-          <button
-            type="button"
-            onClick={handleAddDimension}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            Add
-          </button>
-        </div>
-        <ul className="mt-2 space-y-1">
-          {dimensions.map((dimension, index) => (
-            <li
-              key={index}
-              className="flex justify-between items-center p-2 bg-gray-100 rounded-md"
-            >
-              <span>{dimension}</span>
-              <button
-                type="button"
-                onClick={() => handleRemoveDimension(index)}
-                className="text-red-500 hover:underline"
-              >
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Multiplevaluesfield
+        state={dimensions}
+        setState={setDimensions}
+        placeholder={"e.g., 12x8x6 (Inches)"}
+        title={"Dimensions"}
+      />
       {/* Descriptions */}
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
-          Descriptions
-        </label>
-        <div className="flex items-center gap-2 mt-1">
-          <input
-            type="text"
-            value={currentDescription}
-            onChange={(e) => setCurrentDescription(e.target.value)}
-            placeholder="Enter description"
-            className="flex-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-          <button
-            type="button"
-            onClick={handleAddDescription}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            Add
-          </button>
-        </div>
-        <ul className="mt-2 space-y-1">
-          {descriptions.map((description, index) => (
-            <li
-              key={index}
-              className="flex justify-between items-center p-2 bg-gray-100 rounded-md"
-            >
-              <span>{description}</span>
-              <button
-                type="button"
-                onClick={() => handleRemoveDescription(index)}
-                className="text-red-500 hover:underline"
-              >
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Multiplevaluesfield
+        state={descriptions}
+        setState={setDescriptions}
+        placeholder={"Lorem ipsum"}
+        title={"Descriptions"}
+      />
+      {/* finishes */}
+      {/* <Dropdownmenu
+        title={"Finishes"}
+        state={finishes}
+        setState={setfinishes}
+        options={[
+          "Honey Oak",
+          "Walnut",
+          "Teak",
+          "Natural",
+          "Color",
+          "Unavailable",
+        ]}
+      /> */}
 
-      {/* Colors */}
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
-          Colors
-        </label>
-        <div className="space-y-2 mt-2">
-          <div className="flex gap-2">
-            <input
-              type="text"
-              placeholder="Color name"
-              value={currentColor.name}
-              onChange={(e) =>
-                setCurrentColor({ ...currentColor, name: e.target.value })
-              }
-              className="flex-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-            />
-            <input
-              type="color"
-              value={currentColor.hex}
-              onChange={(e) =>
-                setCurrentColor({ ...currentColor, hex: e.target.value })
-              }
-              className="w-12 h-12 border rounded-md"
-            />
-          </div>
-          <input
-            type="file"
-            multiple
-            onChange={(e) => handleColorImagesUpload(e.target.files)}
-            className="block w-full p-2 border rounded-md focus:ring focus:ring-blue-300"
-          />
-          {/* Image Previews for Current Color */}
-          <div className="flex flex-wrap gap-4 mt-2">
-            {currentColor.images.map((image, index) => (
-              <div key={index} className="relative">
-                <img
-                  src={image.preview}
-                  alt="Preview"
-                  className="w-16 h-16 object-cover rounded-md"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleRemoveCurrentImage(index)}
-                  className="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 text-xs"
-                >
-                  ✕
-                </button>
-              </div>
-            ))}
-          </div>
-          <button
-            type="button"
-            onClick={handleAddColor}
-            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-          >
-            Add Color
-          </button>
-        </div>
-        {/* Added Colors with Previews */}
-        <ul className="mt-4 space-y-4">
-          {colors.map((color, colorIndex) => (
-            <li key={colorIndex} className="p-4 bg-gray-100 rounded-md">
-              <div className="flex justify-between items-center mb-2">
-                <span style={{ color: color.hex }}>
-                  {color.name} ({color.hex})
-                </span>
-                <button
-                  type="button"
-                  onClick={() => handleRemoveColor(colorIndex)}
-                  className="text-red-500 hover:underline"
-                >
-                  Remove
-                </button>
-              </div>
-              {/* Preview of Uploaded Images */}
-              <div className="flex flex-wrap gap-4">
-                {color.images.map((image, imageIndex) => (
-                  <div key={imageIndex} className="relative">
-                    <img
-                      src={image.preview}
-                      alt="Preview"
-                      className="w-16 h-16 object-cover rounded-md"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveImage(colorIndex, imageIndex)}
-                      className="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 text-xs"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ProductVariants />
 
       <button
         type="submit"
@@ -330,19 +204,103 @@ const AddProductForm = () => {
   );
 };
 
-const Standardinputfield = (Title, inputtype) => {
-  return (
-    <div>
-      <label className="block text-sm font-medium text-gray-600">{Title}</label>
-      <input
-        type="text"
-        value={productName}
-        onChange={(e) => setProductName(e.target.value)}
-        required
-        className="w-full mt-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-      />
-    </div>
-  );
-};
-
 export default AddProductForm;
+
+{
+  /* Colors */
+}
+{
+  /* <div>
+<label className="block text-sm font-medium text-gray-600">
+  Colors
+</label>
+<div className="space-y-2 mt-2">
+  <div className="flex gap-2">
+    <input
+      type="text"
+      placeholder="Color name"
+      value={currentColor.name}
+      onChange={(e) =>
+        setCurrentColor({ ...currentColor, name: e.target.value })
+      }
+      className="flex-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
+    />
+    <input
+      type="color"
+      value={currentColor.hex}
+      onChange={(e) =>
+        setCurrentColor({ ...currentColor, hex: e.target.value })
+      }
+      className="w-12 h-12 border rounded-md"
+    />
+  </div>
+  <input
+    type="file"
+    multiple
+    onChange={(e) => handleColorImagesUpload(e.target.files)}
+    className="block w-full p-2 border rounded-md focus:ring focus:ring-blue-300"
+  />
+  <div className="flex flex-wrap gap-4 mt-2">
+    {currentColor.images.map((image, index) => (
+      <div key={index} className="relative">
+        <img
+          src={image.preview}
+          alt="Preview"
+          className="w-16 h-16 object-cover rounded-md"
+        />
+        <button
+          type="button"
+          onClick={() => handleRemoveCurrentImage(index)}
+          className="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 text-xs"
+        >
+          ✕
+        </button>
+      </div>
+    ))}
+  </div>
+  <button
+    type="button"
+    onClick={handleAddColor}
+    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+  >
+    Add Color
+  </button>
+</div>
+<ul className="mt-4 space-y-4">
+  {colors.map((color, colorIndex) => (
+    <li key={colorIndex} className="p-4 bg-gray-100 rounded-md">
+      <div className="flex justify-between items-center mb-2">
+        <span style={{ color: color.hex }}>
+          {color.name} ({color.hex})
+        </span>
+        <button
+          type="button"
+          onClick={() => handleRemoveColor(colorIndex)}
+          className="text-red-500 hover:underline"
+        >
+          Remove
+        </button>
+      </div>
+      <div className="flex flex-wrap gap-4">
+        {color.images.map((image, imageIndex) => (
+          <div key={imageIndex} className="relative">
+            <img
+              src={image.preview}
+              alt="Preview"
+              className="w-16 h-16 object-cover rounded-md"
+            />
+            <button
+              type="button"
+              onClick={() => handleRemoveImage(colorIndex, imageIndex)}
+              className="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 text-xs"
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+      </div>
+    </li>
+  ))}
+</ul>
+</div> */
+}
