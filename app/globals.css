@@ -78,14 +78,25 @@ body {
 
 @keyframes marquee {
   0% {
-    transform: translateX(0); /* Start from the original position */
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%); /* Move by half the total content width */
+    transform: translateX(-50%);
   }
 }
 
-@media (width>1024) {
+/* @media (width>1024) { */
+/* navbar classes */
+/* .shophover:hover > .shopcategoriesblock {
+  display: block;
+}
+
+.shopcategories:hover > .shopsubcat {
+  display: flex;
+} */
+/* } */
+
+@media (min-width: 1024px) {
   /* navbar classes */
   .shophover:hover > .shopcategoriesblock {
     display: block;

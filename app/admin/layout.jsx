@@ -11,7 +11,7 @@ import { IoSettingsSharp } from "react-icons/io5";
 const navLinks = [
   { href: "/admin/", label: "Orders", logo: <FaDollyFlatbed /> },
   { href: "/admin/Blogs", label: "Add Blogs", logo: <RiBloggerFill /> },
-  { href: "/admin/addproducts", label: "Add Products", logo: <IoBagAdd /> },
+  { href: "/admin/products", label: "Add Products", logo: <IoBagAdd /> },
   {
     href: "/admin/contactmessages",
     label: "Messages",
@@ -29,7 +29,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <div>
-      <nav className="sticky top-0 flex items-center gap-[5px] md:gap-[10px] h-[50px] shadow-md p-[7px] px-[10px] lg:px-[40px] z-20 bg-graygradient">
+      <nav className="sticky top-0 flex items-center gap-[5px] md:gap-[10px] h-[50px] shadow-md p-[7px] px-[10px] lg:px-[40px] z-20 bg-white">
         <Link href="/">
           <Image
             src="/logo.png"
@@ -53,7 +53,7 @@ export default async function RootLayout({ children }) {
 
 const NavLink = ({ href, children, isFirst }) => (
   <Link
-    className={`flex items-center gap-[10px] h-full rounded-[5px] px-[10px] bg-white ${
+    className={`flex items-center gap-[10px] h-full px-[10px] ${
       isFirst && "ml-auto"
     }`}
     href={href}
