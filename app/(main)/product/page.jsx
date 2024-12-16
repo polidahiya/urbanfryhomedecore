@@ -27,7 +27,7 @@ async function page() {
               <Underlineeffect title={"Category"} />
             </Link>{" "}
             /{" "}
-            <p className="capitalize text-[#a7a5a2]">{"yin and yang".replace(/_/g, " ")}</p>
+            <p className="capitalize text-[#a7a5a2]">{"yin and yang".replace(/-/g, " ")}</p>
           </div>
         </div>
         <Details />

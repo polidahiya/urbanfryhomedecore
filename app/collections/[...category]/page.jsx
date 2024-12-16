@@ -19,12 +19,12 @@ async function page({ params }) {
             </Link>{" "}
             /{" "}
             <p className="capitalize text-[#a7a5a2]">
-              {category.replace(/_/g, " ")}
+              {category.replace(/-/g, " ")}
             </p>
           </div>
           {/*  */}
           <h1 className="text-white mt-10 text-6xl font-tenor">
-            {category.replace(/_/g, " ")}
+            {category.replace(/-/g, " ")}
           </h1>
           <p className="mt-6 w-full max-w-[500px] text-sm">
             {staticdata[type][category]?.desc}

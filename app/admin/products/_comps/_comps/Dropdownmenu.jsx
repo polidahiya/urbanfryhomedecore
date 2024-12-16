@@ -1,6 +1,6 @@
 import React from "react";
 
-function Dropdownmenu({ title, state, setState, options }) {
+function Dropdownmenu({ title, state, onchange, options }) {
   return (
     <div>
       <label className="block text-sm font-medium text-gray-600 outline-none">
@@ -8,7 +8,7 @@ function Dropdownmenu({ title, state, setState, options }) {
       </label>
       <select
         value={state}
-        onChange={(e) => setState(e.target.value)}
+        onChange={(e) => onchange(e.target.value)}
         className="mt-1 block w-full p-2 border rounded-md"
       >
         {options.map((item, i) => (

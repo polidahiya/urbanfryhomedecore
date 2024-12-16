@@ -299,7 +299,7 @@ const Subcats = ({ item, type, togglecategories }) => (
         className="underlineff relative px-5 py-3 whitespace-nowrap"
         onClick={scrollable}
       >
-        <Underlineeffect title={keys.replace(/_/g, " ")} />
+        <Underlineeffect title={keys.replace(/-/g, " ")} />
       </Link>
     ))}
   </div>

@@ -1,37 +1,59 @@
-import React, { useState } from "react";
+import React from "react";
 import Dropdownmenu from "./Dropdownmenu";
 import { TiArrowUp } from "react-icons/ti";
 import { BiSolidImageAdd } from "react-icons/bi";
+import { MdAddToPhotos } from "react-icons/md";
 
-const ProductVariants = () => {
-  const varientstructure = { color: "Honey Oak", images: [] };
-  const [variants, setVariants] = useState([varientstructure]);
-
-  console.log(variants);
-
+const ProductVariants = ({
+  varientstructure,
+  variants,
+  setstate,
+  deletedimages,
+  setdeletedimages,
+}) => {
   const handleAddVariant = () => {
-    setVariants([...variants, varientstructure]);
+    setstate((pre) => {
+      const updatedstate = { ...pre };
+      updatedstate.variants = [...updatedstate.variants, ...varientstructure];
+      return updatedstate;
+    });
   };
 
   const handleDeleteVariant = (index) => {
-    setVariants(variants.filter((_, i) => i !== index));
+    // store deleted images
+    variants[index].images.forEach((image) => {
+      if (!(image instanceof File)) setdeletedimages((pre) => [...pre, image]);
+    });
+    
+    // delete variant
+    setstate((pre) => {
+      const updatedstate = { ...pre };
+      updatedstate.variants = updatedstate.variants.filter(
+        (_, i) => i !== index
+      );
+      return updatedstate;
+    });
   };
 
   const handleAddImage = (variantIndex, file) => {
     const updatedVariants = [...variants];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      updatedVariants[variantIndex].images.push(imageUrl);
-      setVariants(updatedVariants);
+      updatedVariants[variantIndex].images.push(file);
+      setstate((pre) => ({ ...pre, variants: updatedVariants }));
     }
   };
 
   const handleDeleteImage = (variantIndex, imageIndex) => {
+    // Store deleted images
+    const image = variants[variantIndex].images[imageIndex];
+    if (!(image instanceof File)) setdeletedimages((pre) => [...pre, image]);
+
+    // remove image
     const updatedVariants = [...variants];
     updatedVariants[variantIndex].images = updatedVariants[
       variantIndex
     ].images.filter((_, i) => i !== imageIndex);
-    setVariants(updatedVariants);
+    setstate((pre) => ({ ...pre, variants: updatedVariants }));
   };
 
   const handleMoveImage = (variantIndex, imageIndex, direction) => {
@@ -43,21 +65,24 @@ const ProductVariants = () => {
         images[newIndex],
         images[imageIndex],
       ];
-      setVariants(updatedVariants);
+      setstate((pre) => ({ ...pre, variants: updatedVariants }));
     }
   };
 
   return (
     <div>
-      {variants.map((variant, index) => (
+      {variants?.map((variant, index) => (
         <div key={index} className="mt-4 p-4 border rounded-md">
+          <h2 className="py-5 font-bold text-center">Variant - {index + 1}</h2>
           <Dropdownmenu
             title={"Finishes"}
-            state={variants.color}
-            setState={(e) => {
-              const updatedvariant = [...variants];
-              updatedvariant[index].color = e;
-              setVariants(updatedvariant);
+            state={variants[index].finish}
+            onchange={(value) => {
+              setstate((pre) => {
+                const updatedvariant = { ...pre };
+                updatedvariant.variants[index].finish = value;
+                return updatedvariant;
+              });
             }}
             options={[
               "Honey Oak",
@@ -74,9 +99,11 @@ const ProductVariants = () => {
             {variant.images.map((image, imgIndex) => (
               <div key={imgIndex} className="flex gap-2 items-center mb-2">
                 <img
-                  src={image}
+                  src={
+                    image instanceof File ? URL.createObjectURL(image) : image
+                  }
                   alt={`Variant ${index} Image ${imgIndex}`}
-                  className="w-32 aspect-square object-cover border rounded-md"
+                  className="w-32 aspect-square object-cover border"
                 />
                 <div className="flex gap-1">
                   <button
@@ -84,14 +111,16 @@ const ProductVariants = () => {
                     onClick={() => handleMoveImage(index, imgIndex, -1)}
                     className="px-2 py-1 text-gray-800 border border-slate-300 rounded-md"
                   >
-                    <TiArrowUp className="inline-block" /> Up
+                    <TiArrowUp className="inline-block" />
+                    Move Up
                   </button>
                   <button
                     type="button"
                     onClick={() => handleMoveImage(index, imgIndex, 1)}
                     className="px-2 py-1 text-gray-800 border border-slate-300 rounded-md"
                   >
-                    <TiArrowUp className="inline-block rotate-180" /> Down
+                    <TiArrowUp className="inline-block rotate-180" />
+                    Move Down
                   </button>
                 </div>
                 <button
@@ -124,6 +153,7 @@ const ProductVariants = () => {
           </div>
           <div className="flex justify-end">
             <button
+              type="button"
               onClick={() => handleDeleteVariant(index)}
               className="bg-red-500 text-white px-4 py-2 rounded-md mt-4 float-right"
             >
@@ -137,7 +167,7 @@ const ProductVariants = () => {
         type="button"
         className="bg-green-500 text-white px-4 py-2 rounded-md mt-5"
       >
-        + Add Variant
+        <MdAddToPhotos className="inline" /> Add Variant
       </button>
     </div>
   );

@@ -1,306 +1,234 @@
 import React, { useState } from "react";
 import Standardinputfield from "./_comps/Standardinputfield";
 import Multiplevaluesfield from "./_comps/Multiplevaluesfield";
-import Dropdownmenu from "./_comps/Dropdownmenu";
 import ProductVariants from "./_comps/Varients";
+import { Addproduct } from "@/app/_serveractions/_admin/adminAddproduct";
+import { staticdata } from "@/app/commondata";
+import Dropdownmenu from "./_comps/Dropdownmenu";
 
-const AddProductForm = () => {
-  const [productName, setProductName] = useState("");
-  const [sku, setsku] = useState("");
-  const [handlingtime, sethandlingtime] = useState("");
-  const [mrp, setmrp] = useState("");
-  const [sellingprice, setsellingprice] = useState("");
-  const [Material, setMaterial] = useState("");
-  const [Warranty, setWarranty] = useState("");
-  const [finishes, setfinishes] = useState("");
-  const [dimensions, setDimensions] = useState([""]);
-  const [descriptions, setDescriptions] = useState([""]);
-  const [colors, setColors] = useState([]);
-  const [currentColor, setCurrentColor] = useState({
-    name: "",
-    hex: "",
-    images: [],
-  });
-
-  const handleAddColor = () => {
-    if (currentColor.name && currentColor.hex) {
-      setColors([...colors, currentColor]);
-      setCurrentColor({ name: "", hex: "", images: [] });
-    }
-  };
-
-  const handleRemoveColor = (index) => {
-    setColors(colors.filter((_, i) => i !== index));
-  };
-
-  const handleColorImagesUpload = (files) => {
-    const images = Array.from(files).map((file) => ({
-      file,
-      preview: URL.createObjectURL(file), // Create a preview URL for the image
-    }));
-    setCurrentColor({
-      ...currentColor,
-      images: [...currentColor.images, ...images],
-    });
-  };
-
-  const handleRemoveImage = (colorIndex, imageIndex) => {
-    const updatedColors = [...colors];
-    updatedColors[colorIndex].images.splice(imageIndex, 1);
-    setColors(updatedColors);
-  };
-
-  const handleRemoveCurrentImage = (imageIndex) => {
-    const updatedImages = [...currentColor.images];
-    updatedImages.splice(imageIndex, 1);
-    setCurrentColor({ ...currentColor, images: updatedImages });
-  };
+const AddProductForm = ({
+  data,
+  setdata,
+  initialState,
+  resetState,
+  deletedimages,
+  setdeletedimages,
+}) => {
+  const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(
-      productName,
-      sku,
-      handlingtime,
-      mrp,
-      sellingprice,
-      Material,
-      Warranty,
-      finishes,
-      dimensions,
-      descriptions
-    );
+    setloading(true);
+    console.log(data);
 
-    // const formData = new FormData();
-    // formData.append("name", productName);
-    // formData.append("price", price);
-    // formData.append("discount", discount);
-    // formData.append("dimensions", JSON.stringify(dimensions));
-    // formData.append("descriptions", JSON.stringify(descriptions));
-    // formData.append(
-    //   "colors",
-    //   JSON.stringify(
-    //     colors.map((color) => ({
-    //       name: color.name,
-    //       hex: color.hex,
-    //     }))
-    //   )
-    // );
+    const formData = new FormData();
 
-    // colors.forEach((color, index) => {
-    //   color.images.forEach((image, imageIndex) => {
-    //     formData.append(`colorImages_${index}_${imageIndex}`, image.file);
-    //   });
-    // });
+    // images
+    data?.variants?.forEach((variant, i) => {
+      variant.images.forEach((image, j) => {
+        if (image instanceof File) {
+          const imagename = "image" + i + j;
+          formData.append(imagename, image);
+          data.variants[i].images[j] = imagename;
+        }
+      });
+    });
 
-    // try {
-    //   const response = await fetch("/api/products", {
-    //     method: "POST",
-    //     body: formData,
-    //   });
-
-    //   if (response.ok) {
-    //     alert("Product added successfully!");
-    //     setProductName("");
-    //     setDimensions([]);
-    //     setDescriptions([]);
-    //     setPrice("");
-    //     setDiscount("");
-    //     setColors([]);
-    //   } else {
-    //     alert("Failed to add product.");
-    //   }
-    // } catch (error) {
-    //   console.error("Error:", error);
-    // }
+    try {
+      const res = await Addproduct(data, formData, deletedimages);
+      console.log(res);
+      resetState();
+      setloading(false);
+      setdeletedimages([]);
+    } catch (error) {
+      resetState();
+      setloading(false);
+      console.error("Error:", error);
+    }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-6 bg-white shadow-lg rounded-md space-y-6 mt-10"
-    >
+    <div className="p-6 bg-white shadow-lg rounded-md space-y-6 mt-10">
       <h2 className="text-2xl font-semibold text-gray-800">Add New Product</h2>
       {/* Product Name */}
       <Standardinputfield
         titlename="Product Name"
-        value={productName}
-        onchange={(e) => setProductName(e.target.value)}
+        value={data.productName}
+        onchange={(e) =>
+          setdata((pre) => ({ ...pre, productName: e.target.value }))
+        }
+        clear={() => setdata((pre) => ({ ...pre, productName: "" }))}
+      />
+      {/* rooms */}
+      <Dropdownmenu
+        title={"Rooms"}
+        state={data.rooms}
+        onchange={(value) => setdata((pre) => ({ ...pre, rooms: value }))}
+        options={Object.keys(staticdata.rooms)}
+      />
+      {/* categories */}
+      <Dropdownmenu
+        title={"Category"}
+        state={data.categories}
+        onchange={(value) => setdata((pre) => ({ ...pre, categories: value }))}
+        options={Object.keys(staticdata.categories)}
       />
       {/* sku id */}
       <Standardinputfield
         titlename="SKU ID"
-        value={sku}
-        onchange={(e) => setsku(e.target.value)}
-      />
-      {/* handling time */}
-      <Standardinputfield
-        titlename="Handling Time"
-        value={handlingtime}
-        onchange={(e) => sethandlingtime(e.target.value)}
+        value={data.sku}
+        onchange={(e) => setdata((pre) => ({ ...pre, sku: e.target.value }))}
+        clear={() => setdata((pre) => ({ ...pre, sku: "" }))}
       />
       {/* mrp */}
       <Standardinputfield
         titlename="MRP"
-        value={mrp}
-        onchange={(e) => setmrp(e.target.value)}
+        value={data.mrp}
+        onchange={(e) => setdata((pre) => ({ ...pre, mrp: e.target.value }))}
+        clear={() => setdata((pre) => ({ ...pre, mrp: "" }))}
       />
       {/* selling price */}
       <Standardinputfield
         titlename="Selling Price"
-        value={sellingprice}
-        onchange={(e) => setsellingprice(e.target.value)}
+        value={data.sellingprice}
+        onchange={(e) =>
+          setdata((pre) => ({ ...pre, sellingprice: e.target.value }))
+        }
+        clear={() => setdata((pre) => ({ ...pre, sellingprice: "" }))}
       />
       {/* Material  */}
       <Standardinputfield
         titlename="Material"
-        value={Material}
-        onchange={(e) => setMaterial(e.target.value)}
+        value={data.Material}
+        onchange={(e) =>
+          setdata((pre) => ({ ...pre, Material: e.target.value }))
+        }
+        clear={() => setdata((pre) => ({ ...pre, Material: "" }))}
       />
       {/* Warranty  */}
       <Standardinputfield
         titlename="Warranty"
-        value={Warranty}
-        onchange={(e) => setWarranty(e.target.value)}
+        value={data.Warranty}
+        onchange={(e) =>
+          setdata((pre) => ({ ...pre, Warranty: e.target.value }))
+        }
+        clear={() => setdata((pre) => ({ ...pre, Warranty: "" }))}
+      />
+      {/* theme  */}
+      <Standardinputfield
+        titlename="Theme"
+        value={data.theme}
+        onchange={(e) => setdata((pre) => ({ ...pre, theme: e.target.value }))}
+        clear={() => setdata((pre) => ({ ...pre, theme: "" }))}
       />
       {/* Dimensions */}
       <Multiplevaluesfield
-        state={dimensions}
-        setState={setDimensions}
+        state={data.dimensions}
+        statename="dimensions"
+        setState={setdata}
         placeholder={"e.g., 12x8x6 (Inches)"}
         title={"Dimensions"}
       />
+      {/* Key features */}
+      <Multiplevaluesfield
+        state={data.keyfeatures}
+        setState={setdata}
+        statename="keyfeatures"
+        placeholder={"key feature"}
+        title={"Key Features"}
+      />
+      {/* handling time */}
+      <Standardinputfield
+        titlename="Handling Time"
+        value={data.handlingtime}
+        onchange={(e) =>
+          setdata((pre) => ({ ...pre, handlingtime: e.target.value }))
+        }
+        clear={() => setdata((pre) => ({ ...pre, handlingtime: "" }))}
+      />
+      {/* Product weight */}
+      <Standardinputfield
+        titlename="Product Weight"
+        value={data.weight}
+        onchange={(e) => setdata((pre) => ({ ...pre, weight: e.target.value }))}
+        clear={() => setdata((pre) => ({ ...pre, weight: "" }))}
+      />
       {/* Descriptions */}
       <Multiplevaluesfield
-        state={descriptions}
-        setState={setDescriptions}
+        state={data.descriptions}
+        statename="descriptions"
+        setState={setdata}
         placeholder={"Lorem ipsum"}
         title={"Descriptions"}
       />
-      {/* finishes */}
-      {/* <Dropdownmenu
-        title={"Finishes"}
-        state={finishes}
-        setState={setfinishes}
-        options={[
-          "Honey Oak",
-          "Walnut",
-          "Teak",
-          "Natural",
-          "Color",
-          "Unavailable",
-        ]}
-      /> */}
+      {/* variants */}
+      <ProductVariants
+        data={data}
+        varientstructure={initialState.variants}
+        variants={data.variants}
+        setstate={setdata}
+        deletedimages={deletedimages}
+        setdeletedimages={setdeletedimages}
+      />
+      {/* seo */}
+      <h2 className="my-2 font-bold text-lg">SEO</h2>
+      {/* title */}
+      <Standardinputfield
+        titlename="Title"
+        value={data.seotitle}
+        onchange={(e) =>
+          setdata((pre) => ({ ...pre, seotitle: e.target.value }))
+        }
+        clear={() => setdata((pre) => ({ ...pre, seotitle: "" }))}
+      />
 
-      <ProductVariants />
+      {/* Description */}
+      <Standardinputfield
+        titlename="Description"
+        value={data.seodescription}
+        setState={setdata}
+        onchange={(e) =>
+          setdata((pre) => ({ ...pre, seodescription: e.target.value }))
+        }
+        clear={() => setdata((pre) => ({ ...pre, seodescription: "" }))}
+      />
 
-      <button
-        type="submit"
-        className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-      >
-        Submit
-      </button>
-    </form>
+      {/* keywords */}
+      <Standardinputfield
+        titlename="Keywords"
+        value={data.seokeywords}
+        onchange={(e) =>
+          setdata((pre) => ({ ...pre, seokeywords: e.target.value }))
+        }
+        clear={() => setdata((pre) => ({ ...pre, seokeywords: "" }))}
+      />
+
+      <div className="flex items-center justify-center gap-5">
+        <button
+          onClick={handleSubmit}
+          className="flex items-center justify-center gap-2  px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+        >
+          {loading && (
+            <span
+              className={`block h-5 aspect-square border-t-2 border-b-2 border-white rounded-full animate-spin`}
+            ></span>
+          )}
+          {data._id ? "Update Product" : "Add Product"}
+        </button>
+        {data._id && (
+          <button
+            className="flex items-center justify-center gap-2  px-4 py-2  border  rounded-md"
+            onClick={() => {
+              resetState();
+              setdeletedimages([]);
+            }}
+          >
+            Cancle Update
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 
 export default AddProductForm;
-
-{
-  /* Colors */
-}
-{
-  /* <div>
-<label className="block text-sm font-medium text-gray-600">
-  Colors
-</label>
-<div className="space-y-2 mt-2">
-  <div className="flex gap-2">
-    <input
-      type="text"
-      placeholder="Color name"
-      value={currentColor.name}
-      onChange={(e) =>
-        setCurrentColor({ ...currentColor, name: e.target.value })
-      }
-      className="flex-1 p-2 border rounded-md focus:ring focus:ring-blue-300"
-    />
-    <input
-      type="color"
-      value={currentColor.hex}
-      onChange={(e) =>
-        setCurrentColor({ ...currentColor, hex: e.target.value })
-      }
-      className="w-12 h-12 border rounded-md"
-    />
-  </div>
-  <input
-    type="file"
-    multiple
-    onChange={(e) => handleColorImagesUpload(e.target.files)}
-    className="block w-full p-2 border rounded-md focus:ring focus:ring-blue-300"
-  />
-  <div className="flex flex-wrap gap-4 mt-2">
-    {currentColor.images.map((image, index) => (
-      <div key={index} className="relative">
-        <img
-          src={image.preview}
-          alt="Preview"
-          className="w-16 h-16 object-cover rounded-md"
-        />
-        <button
-          type="button"
-          onClick={() => handleRemoveCurrentImage(index)}
-          className="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 text-xs"
-        >
-          ✕
-        </button>
-      </div>
-    ))}
-  </div>
-  <button
-    type="button"
-    onClick={handleAddColor}
-    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-  >
-    Add Color
-  </button>
-</div>
-<ul className="mt-4 space-y-4">
-  {colors.map((color, colorIndex) => (
-    <li key={colorIndex} className="p-4 bg-gray-100 rounded-md">
-      <div className="flex justify-between items-center mb-2">
-        <span style={{ color: color.hex }}>
-          {color.name} ({color.hex})
-        </span>
-        <button
-          type="button"
-          onClick={() => handleRemoveColor(colorIndex)}
-          className="text-red-500 hover:underline"
-        >
-          Remove
-        </button>
-      </div>
-      <div className="flex flex-wrap gap-4">
-        {color.images.map((image, imageIndex) => (
-          <div key={imageIndex} className="relative">
-            <img
-              src={image.preview}
-              alt="Preview"
-              className="w-16 h-16 object-cover rounded-md"
-            />
-            <button
-              type="button"
-              onClick={() => handleRemoveImage(colorIndex, imageIndex)}
-              className="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 text-xs"
-            >
-              ✕
-            </button>
-          </div>
-        ))}
-      </div>
-    </li>
-  ))}
-</ul>
-</div> */
-}

@@ -1,18 +1,38 @@
 import React from "react";
+import { MdDeleteOutline } from "react-icons/md";
+import { MdAddToPhotos } from "react-icons/md";
 
-function Multiplevaluesfield({ title, placeholder, state, setState }) {
+function Multiplevaluesfield({
+  title,
+  placeholder,
+  state,
+  setState,
+  statename,
+}) {
   const handleAdd = () => {
-    setState([...state, ""]);
+    setState((pre) => {
+      const updatedstate = { ...pre };
+      updatedstate[statename] = [...updatedstate[statename], ""];
+      return updatedstate;
+    });
   };
 
   const handleDelete = (index) => {
-    setState(state.filter((_, i) => i !== index));
+    setState((pre) => {
+      const updatedstate = { ...pre };
+      updatedstate[statename] = updatedstate[statename].filter(
+        (_, i) => i !== index
+      );
+      return updatedstate;
+    });
   };
 
   const handleStateChange = (index, value) => {
-    const updatedState = [...state];
-    updatedState[index] = value;
-    setState(updatedState);
+    setState((pre) => {
+      const updatedstate = { ...pre };
+      updatedstate[statename][index] = value;
+      return updatedstate;
+    });
   };
 
   return (
@@ -20,7 +40,7 @@ function Multiplevaluesfield({ title, placeholder, state, setState }) {
       <label className="block text-sm font-medium text-gray-600">{title}</label>
       <ul className="mt-2 space-y-1">
         {state.map((dimension, index) => (
-          <div key={index} className="flex items-center gap-2 mt-1">
+          <div key={index} className="flex items-stretch gap-2 mt-1">
             <input
               type="text"
               value={dimension}
@@ -30,10 +50,10 @@ function Multiplevaluesfield({ title, placeholder, state, setState }) {
             />
             <button
               type="button"
-              className="px-4 py-2 bg-red-500 text-white rounded-md"
+              className="px-4 py-2 bg-red-500 text-white rounded-md "
               onClick={() => handleDelete(index)}
             >
-              -
+              <MdDeleteOutline className="h-full w-full" />
             </button>
           </div>
         ))}
@@ -43,7 +63,7 @@ function Multiplevaluesfield({ title, placeholder, state, setState }) {
         className="border border-gray-300 px-5 py-2 rounded-md text-sm mt-2"
         onClick={handleAdd}
       >
-        + Add more
+        <MdAddToPhotos className="inline" /> Add more
       </button>
     </div>
   );

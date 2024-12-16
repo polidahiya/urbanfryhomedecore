@@ -7,6 +7,7 @@ import { RiBloggerFill } from "react-icons/ri";
 import { IoBagAdd } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
 import { IoSettingsSharp } from "react-icons/io5";
+import Confirmdialogbox from "./_comps/Confirmdialogbox";
 
 const navLinks = [
   { href: "/admin/", label: "Orders", logo: <FaDollyFlatbed /> },
@@ -31,13 +32,7 @@ export default async function RootLayout({ children }) {
     <div>
       <nav className="sticky top-0 flex items-center gap-[5px] md:gap-[10px] h-[50px] shadow-md p-[7px] px-[10px] lg:px-[40px] z-20 bg-white">
         <Link href="/">
-          <Image
-            src="/logo.png"
-            alt="logo"
-            height={40}
-            width={150}
-            
-          />
+          <Image src="/logo.png" alt="logo" height={40} width={150} />
         </Link>
         {navLinks.map(({ href, label, logo }, index) => (
           <NavLink key={href} href={href} isFirst={index === 0}>
@@ -47,6 +42,7 @@ export default async function RootLayout({ children }) {
         ))}
       </nav>
       {children}
+      <Confirmdialogbox />
     </div>
   );
 }

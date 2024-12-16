@@ -51,7 +51,7 @@ function Collections() {
               className="h-full w-full object-cover lg:group-hover:scale-110 duration-500"
             />
             <p className="absolute bottom-0 left-0 w-full text-3xl font-tenor text-white p-2">
-              {key.replace(/_/g, " ")}
+              {key.replace(/-/g, " ")}
             </p>
           </Link>
         ))}

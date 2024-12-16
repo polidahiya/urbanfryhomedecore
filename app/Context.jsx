@@ -6,6 +6,14 @@ const AppContext = createContext({});
 export function Appwrapper({ children }) {
   const [showsearchbar, setshowsearchbar] = useState(false);
   const [messagearray, setmessagearray] = useState([]);
+  const showdialoginitialvalues = {
+    show: false,
+    title: "",
+    continue: null,
+    type: true,
+  };
+  const [showdialog, setshowdialog] = useState(showdialoginitialvalues);
+  //admin states
 
   const setmessagefn = (message) => {
     setmessagearray([
@@ -30,6 +38,9 @@ export function Appwrapper({ children }) {
         setmessagefn,
         messagearray,
         setmessagearray,
+        showdialog,
+        setshowdialog,
+        showdialoginitialvalues,
       }}
     >
       {children}
