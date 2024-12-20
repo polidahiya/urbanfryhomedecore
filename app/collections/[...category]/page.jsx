@@ -4,12 +4,16 @@ import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
 import Productcard from "@/app/_globalcomps/Productcard";
 import { staticdata } from "@/app/commondata";
 import SortSelector from "./_comps/Sorting";
+import { Cachedproducts } from "@/app/_connections/Getcachedata";
 
 async function page({ params }) {
   const [type, category] = (await params).category;
+  const products = await Cachedproducts();
+  console.log(products);
 
   return (
     <div>
+      {/* theme */}
       <div className="relative px-5 md:px-8 overflow-hidden">
         <div className="py-36 text-white tracking-wider">
           {/* routes */}
@@ -37,7 +41,7 @@ async function page({ params }) {
           className="absolute top-0 left-0 w-full min-h-full brightness-[0.35] object-cover max-h-screen -z-10"
         />
       </div>
-      {/*  */}
+      {/* body */}
       <div className="px-2 md:px-8  py-8">
         {/* sort */}
         <div>

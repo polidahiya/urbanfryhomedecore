@@ -1,7 +1,15 @@
 import React from "react";
 import { RiDeleteBackFill } from "react-icons/ri";
 
-function Standardinputfield({ titlename, value, onchange, clear }) {
+function Standardinputfield({
+  titlename,
+  value,
+  isRequired = true,
+  type = "text",
+  onchange,
+  clear,
+  placeholder = "",
+}) {
   return (
     <div>
       <label className="block text-sm font-medium text-gray-600">
@@ -9,11 +17,12 @@ function Standardinputfield({ titlename, value, onchange, clear }) {
       </label>
       <div className="flex items-stretch gap-2 mt-1">
         <input
-          type="text"
+          type={type}
           value={value}
           onChange={onchange}
-          // required
+          required={isRequired}
           className="w-full h-full p-2 border rounded-md outline-none"
+          placeholder={placeholder}
         />
         <button
           type="button"

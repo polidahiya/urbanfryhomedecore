@@ -1,20 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import Navbar from "../../../_globalcomps/Navbar";
 import Link from "next/link";
 import Underlineeffect from "../../../_globalcomps/Underlineeffect";
 import Closeeffectlink from "@/app/_globalcomps/Closeeffectlink";
 import { signup } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
 
-function Publicpage({ token }) {
+function Publicpage() {
   const { setmessagefn } = AppContextfn();
-
-  const [formData, setFormData] = useState({
+  const initialformvalues = {
     name: "",
     email: "",
     password: "",
-  });
+  };
+  const [formData, setFormData] = useState(initialformvalues);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,16 +23,17 @@ function Publicpage({ token }) {
     }));
   };
 
-  const submitform = async () => {
+  const submitform = async (e) => {
+    e.preventDefault();
     const res = await signup(formData);
     setmessagefn(res?.message);
     if (res?.status == 200) {
+      setFormData(initialformvalues);
     }
   };
 
   return (
     <div className="min-h-screen mt-36">
-      <Navbar navtype={false} token={token} />
       <div className="flex flex-col lg:flex-row gap-5 px-8">
         <div className="flex-1">
           {/* navigations */}
@@ -44,7 +44,12 @@ function Publicpage({ token }) {
             / <p className="capitalize text-theme">Account</p>
           </div>
           <h1 className="font-tenor text-7xl capitalize py-6">Sign Up</h1>
-          <div className="max-w-[450px] flex flex-col gap-5 mt-3">
+          {/* form */}
+          <form
+            onSubmit={submitform}
+            method="POST"
+            className="max-w-[450px] flex flex-col gap-5 mt-3"
+          >
             <div className=" relative border border-theme">
               <input
                 type="name"
@@ -97,14 +102,11 @@ function Publicpage({ token }) {
               </label>
             </div>
             <div className="flex gap-5 mt-3">
-              <button
-                className="px-10 py-3 w-fit mt-auto bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 duration-300"
-                onClick={submitform}
-              >
+              <button className="px-10 py-3 w-fit mt-auto bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 duration-300">
                 Create Account
               </button>
             </div>
-          </div>
+          </form>
           <p className="mt-3 flex items-center">
             Already have an account?
             <span className="ml-2">

@@ -4,7 +4,7 @@ import React from "react";
 function page() {
   return (
     <div>
-      <button>click</button>
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-72 aspect-[4/1] rounded-[100%]  bg-black bg-opacity-20 blur-xl "></div>
     </div>
   );
 }

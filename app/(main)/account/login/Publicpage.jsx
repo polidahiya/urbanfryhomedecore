@@ -1,13 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import Navbar from "../../../_globalcomps/Navbar";
 import Link from "next/link";
 import Underlineeffect from "../../../_globalcomps/Underlineeffect";
 import Closeeffectlink from "@/app/_globalcomps/Closeeffectlink";
 import { login } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
 
-function Publicpage({ token }) {
+function Publicpage() {
   const { setmessagefn } = AppContextfn();
   const [formData, setFormData] = useState({
     email: "",
@@ -22,14 +21,14 @@ function Publicpage({ token }) {
     }));
   };
 
-  const submitform = async () => {
+  const submitform = async (e) => {
+    e.preventDefault();
     const res = await login(formData);
     setmessagefn(res?.message);
   };
 
   return (
     <div className="min-h-screen mt-36">
-      <Navbar navtype={false} token={token} />
       <div className="flex flex-col lg:flex-row gap-5 px-8">
         <div className="flex-1">
           {/* navigations */}
@@ -42,7 +41,11 @@ function Publicpage({ token }) {
           <h1 className="font-tenor text-7xl capitalize py-6">LOGIN</h1>
 
           {/* form */}
-          <div className="max-w-[450px] flex flex-col gap-5 mt-3">
+          <form
+            onSubmit={submitform}
+            method="POST"
+            className="max-w-[450px] flex flex-col gap-5 mt-3"
+          >
             <div className=" relative border border-theme">
               <input
                 type="email"
@@ -79,8 +82,8 @@ function Publicpage({ token }) {
             </div>
             <div className="flex gap-5 mt-3">
               <button
+                type="submit"
                 className="px-10 py-3 w-fit mt-auto bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 duration-300"
-                onClick={submitform}
               >
                 Login
               </button>
@@ -91,7 +94,7 @@ function Publicpage({ token }) {
                 Create Account
               </Link>
             </div>
-          </div>
+          </form>
           <p className="mt-3">
             <Closeeffectlink title={"Forgot password?"} link={"/"} />
           </p>

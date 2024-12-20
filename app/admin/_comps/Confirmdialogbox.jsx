@@ -13,10 +13,13 @@ function Confirmdialogbox() {
             <button
               className={`px-5 py-1 border rounded-md ${
                 showdialog.type
-                  ? "text-green-500 border-green-500"
-                  : "text-red-500 border-red-500"
+                  ? "text-green-500 border-green-500 lg:hover:text-white lg:hover:bg-green-500"
+                  : "text-red-500 border-red-500 lg:hover:text-white lg:hover:bg-red-500"
               }`}
-              onClick={showdialog.continue}
+              onClick={() => {
+                showdialog.continue();
+                setshowdialog(showdialoginitialvalues);
+              }}
             >
               Ok
             </button>

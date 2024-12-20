@@ -66,3 +66,12 @@ export const staticdata = {
 
 // login time
 export const logintime = 3600 * 24 * 30;
+
+export const CACHE_TIME = 60 * 60 * 1000; // 24 hours
+
+// permisions
+export const permissions = {
+  "customadmin": {
+    "products": ["Add_and_update_products", "Delete_products"],
+  },
+};

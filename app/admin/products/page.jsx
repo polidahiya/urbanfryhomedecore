@@ -23,6 +23,7 @@ function Page() {
     seotitle: "",
     seodescription: "",
     seokeywords: "",
+    available: true,
   };
   const [data, setdata] = useState(initialState);
   const [deletedimages, setdeletedimages] = useState([]);

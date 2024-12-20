@@ -5,6 +5,8 @@ import ProductVariants from "./_comps/Varients";
 import { Addproduct } from "@/app/_serveractions/_admin/adminAddproduct";
 import { staticdata } from "@/app/commondata";
 import Dropdownmenu from "./_comps/Dropdownmenu";
+import { AppContextfn } from "@/app/Context";
+import Togglebuttons from "./_comps/Togglebuttons";
 
 const AddProductForm = ({
   data,
@@ -14,6 +16,7 @@ const AddProductForm = ({
   deletedimages,
   setdeletedimages,
 }) => {
+  const { setmessagefn } = AppContextfn();
   const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -36,20 +39,24 @@ const AddProductForm = ({
 
     try {
       const res = await Addproduct(data, formData, deletedimages);
-      console.log(res);
+      setmessagefn(res?.message);
       resetState();
       setloading(false);
       setdeletedimages([]);
     } catch (error) {
       resetState();
       setloading(false);
+      setmessagefn("Error!");
       console.error("Error:", error);
     }
   };
 
   return (
-    <div className="p-6 bg-white shadow-lg rounded-md space-y-6 mt-10">
-      <h2 className="text-2xl font-semibold text-gray-800">Add New Product</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="p-6 bg-white shadow-lg rounded-md space-y-6 mt-10"
+    >
+      <h2 className="text-2xl text-center font-semibold text-gray-800">Add New Product</h2>
       {/* Product Name */}
       <Standardinputfield
         titlename="Product Name"
@@ -83,6 +90,8 @@ const AddProductForm = ({
       {/* mrp */}
       <Standardinputfield
         titlename="MRP"
+        type="number"
+        isRequired={false}
         value={data.mrp}
         onchange={(e) => setdata((pre) => ({ ...pre, mrp: e.target.value }))}
         clear={() => setdata((pre) => ({ ...pre, mrp: "" }))}
@@ -90,6 +99,7 @@ const AddProductForm = ({
       {/* selling price */}
       <Standardinputfield
         titlename="Selling Price"
+        type="number"
         value={data.sellingprice}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, sellingprice: e.target.value }))
@@ -108,6 +118,9 @@ const AddProductForm = ({
       {/* Warranty  */}
       <Standardinputfield
         titlename="Warranty"
+        type="number"
+        isRequired={false}
+        placeholder="In months"
         value={data.Warranty}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, Warranty: e.target.value }))
@@ -117,6 +130,7 @@ const AddProductForm = ({
       {/* theme  */}
       <Standardinputfield
         titlename="Theme"
+        isRequired={false}
         value={data.theme}
         onchange={(e) => setdata((pre) => ({ ...pre, theme: e.target.value }))}
         clear={() => setdata((pre) => ({ ...pre, theme: "" }))}
@@ -140,6 +154,7 @@ const AddProductForm = ({
       {/* handling time */}
       <Standardinputfield
         titlename="Handling Time"
+        isRequired={false}
         value={data.handlingtime}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, handlingtime: e.target.value }))
@@ -149,6 +164,8 @@ const AddProductForm = ({
       {/* Product weight */}
       <Standardinputfield
         titlename="Product Weight"
+        type="number"
+        isRequired={false}
         value={data.weight}
         onchange={(e) => setdata((pre) => ({ ...pre, weight: e.target.value }))}
         clear={() => setdata((pre) => ({ ...pre, weight: "" }))}
@@ -185,6 +202,7 @@ const AddProductForm = ({
       {/* Description */}
       <Standardinputfield
         titlename="Description"
+        isRequired={false}
         value={data.seodescription}
         setState={setdata}
         onchange={(e) =>
@@ -196,6 +214,7 @@ const AddProductForm = ({
       {/* keywords */}
       <Standardinputfield
         titlename="Keywords"
+        isRequired={false}
         value={data.seokeywords}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, seokeywords: e.target.value }))
@@ -203,9 +222,20 @@ const AddProductForm = ({
         clear={() => setdata((pre) => ({ ...pre, seokeywords: "" }))}
       />
 
+      {/* available */}
+      <Togglebuttons
+        titlename="Available?"
+        value={data.available}
+        positive={() => setdata((prev) => ({ ...prev, available: true }))}
+        negative={() => setdata((prev) => ({ ...prev, available: false }))}
+        positiveText="Yes"
+        negativeText="No"
+      />
+
+
       <div className="flex items-center justify-center gap-5">
         <button
-          onClick={handleSubmit}
+          type="submit"
           className="flex items-center justify-center gap-2  px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
         >
           {loading && (
@@ -218,6 +248,7 @@ const AddProductForm = ({
         {data._id && (
           <button
             className="flex items-center justify-center gap-2  px-4 py-2  border  rounded-md"
+            type="button"
             onClick={() => {
               resetState();
               setdeletedimages([]);
@@ -227,7 +258,7 @@ const AddProductForm = ({
           </button>
         )}
       </div>
-    </div>
+    </form>
   );
 };
 

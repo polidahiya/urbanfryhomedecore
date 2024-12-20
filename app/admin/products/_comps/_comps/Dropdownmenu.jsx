@@ -6,17 +6,19 @@ function Dropdownmenu({ title, state, onchange, options }) {
       <label className="block text-sm font-medium text-gray-600 outline-none">
         {title}
       </label>
-      <select
-        value={state}
-        onChange={(e) => onchange(e.target.value)}
-        className="mt-1 block w-full p-2 border rounded-md"
-      >
-        {options.map((item, i) => (
-          <option key={i} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+      <div className="mt-1 block w-full px-2 border rounded-md">
+        <select
+          value={state}
+          onChange={(e) => onchange(e.target.value)}
+          className="block w-full py-2"
+        >
+          {options.map((item, i) => (
+            <option key={i} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 }

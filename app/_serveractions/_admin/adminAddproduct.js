@@ -1,17 +1,15 @@
 "use server";
 import { uploadImage, Deleteiamgefromurl } from "@/app/_connections/Cloudinary";
-// import { Adminverification } from "@/app/Verifytoken";
+import { Verification } from "@/app/_connections/Verifytoken";
 import { getcollection } from "@/app/_connections/Mongodb";
 
 export const Addproduct = async (data, imagesformdata, deletedimages) => {
-  // console.log(data, images);
   try {
     const { Productscollection, ObjectId } = await getcollection();
-    // const verification = await Adminverification();
-    // if (!verification) {
-    //   return { status: 400, message: "Invalid user" };
-    // }
-    //
+    const res = await Verification("Add_and_update_products");
+    if (!res) {
+      return { status: 400, message: "Invalid user" };
+    }
 
     for (const variant of data.variants) {
       for (let j = 0; j < variant?.images?.length; j++) {
@@ -53,19 +51,18 @@ export const Addproduct = async (data, imagesformdata, deletedimages) => {
   }
 };
 
-export const Deleteproduct = async (colorpalets, id) => {
+export const Deleteproduct = async (variants, id) => {
   const { Productscollection, ObjectId } = await getcollection();
-  // const verification = await Adminverification();
-
-  // if (!verification) {
-  //   return { status: 400, message: "Invalid user" };
-  // }
-  //
   try {
-    for (const item of colorpalets) {
+    const res = await Verification("Delete_products");
+    if (!res) {
+      return { status: 400, message: "Invalid user" };
+    }
+
+    for (const item of variants) {
       for (let j = 0; j < item.images.length; j++) {
         const url = item.images[j];
-        Deleteiamgefromurl(url);
+        Deleteiamgefromurl(url, "Altorganizer/products");
       }
     }
 
