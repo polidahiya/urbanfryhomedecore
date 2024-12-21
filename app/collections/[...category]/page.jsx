@@ -8,8 +8,11 @@ import { Cachedproducts } from "@/app/_connections/Getcachedata";
 
 async function page({ params }) {
   const [type, category] = (await params).category;
+  
   const products = await Cachedproducts();
-  console.log(products);
+  const filteredproducts = products.filter(
+    (product) => product[type] === category
+  );
 
   return (
     <div>
@@ -45,14 +48,25 @@ async function page({ params }) {
       <div className="px-2 md:px-8  py-8">
         {/* sort */}
         <div>
-          <SortSelector />
+          <SortSelector numberofproduct={filteredproducts.length}/>
         </div>
         {/* products  */}
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-2 gap-y-16 my-10">
-          {new Array(20).fill(null).map((item, i) => (
-            <Productcard key={i} />
-          ))}
-        </div>
+        {filteredproducts.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-10 ">
+            <img
+              src="https://api.cuik-lulugroup2-p2-public.model-t.cc.commerce.ondemand.com/_ui/responsive/common/images/theme-lulu-en/images/no-products-found.jpg"
+              alt=""
+              className="w-full md:w-1/2"
+            />
+            <h1 className="text-2xl">No products found</h1>
+          </div>
+        ) : (
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] place-items-center gap-x-2 gap-y-16 my-10">
+            {filteredproducts.map((product, i) => (
+              <Productcard key={i} product={product} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

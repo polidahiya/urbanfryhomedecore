@@ -1,14 +1,7 @@
 import React from "react";
+import Image from "next/image";
 
-function Imagescomp() {
-  const images = [
-    "https://m.media-amazon.com/images/I/71krpsKgcTL._AC_UF894,1000_QL80_.jpg",
-    "https://m.media-amazon.com/images/I/71krpsKgcTL._AC_UF894,1000_QL80_.jpg",
-    "https://m.media-amazon.com/images/I/71krpsKgcTL._AC_UF894,1000_QL80_.jpg",
-    "https://m.media-amazon.com/images/I/71krpsKgcTL._AC_UF894,1000_QL80_.jpg",
-    "https://m.media-amazon.com/images/I/71krpsKgcTL._AC_UF894,1000_QL80_.jpg",
-    "https://m.media-amazon.com/images/I/71krpsKgcTL._AC_UF894,1000_QL80_.jpg",
-  ];
+function Imagescomp({ images, name }) {
   const imageclasses = {
     1: ["col-span-4"],
     2: ["col-span-2", "col-span-2"],
@@ -23,15 +16,29 @@ function Imagescomp() {
       "col-span-1",
       "col-span-1",
     ],
+    7: [
+      "col-span-4",
+      "col-span-2",
+      "col-span-2",
+      "col-span-1",
+      "col-span-1",
+      "col-span-1",
+      "col-span-1",
+    ],
   };
 
   return (
     <div className="grid grid-cols-4 gap-1 w-full">
       {images.map((image, i) => (
-        <img
+        <Image
           src={image}
+          alt={name.replace(/-/g, " ")}
           key={i}
-          className={`${imageclasses[images.length][i]} w-full`}
+          height={800}
+          width={800}
+          className={`${
+            images.length <= 7 ? imageclasses[images.length][i] : " col-span-1"
+          } w-full aspect-square object-cover  border`}
         />
       ))}
     </div>

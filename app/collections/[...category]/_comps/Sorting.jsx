@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const SortSelector = ({ onSortChange }) => {
+const SortSelector = ({ onSortChange,numberofproduct }) => {
   const [selectedSort, setSelectedSort] = useState("popularity");
 
   const handleSortChange = (event) => {
@@ -27,6 +27,9 @@ const SortSelector = ({ onSortChange }) => {
         <option value="newest">Newest First</option>
         <option value="rating">Customer Rating</option>
       </select>
+      <span className="text-theme">
+        {numberofproduct} Items
+      </span>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { IoLogoFacebook, IoLogoPinterest } from "react-icons/io5";
@@ -6,7 +7,10 @@ import { RiTwitterXLine } from "react-icons/ri";
 import { GoShareAndroid } from "react-icons/go";
 import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
 
-function Sharebutton() {
+function Sharebutton({ sku, description, image }) {
+  const domain = typeof window !== "undefined" ? window.location.origin : "";
+  console.log("domain",domain,"fdsf");
+  
   const list = [
     {
       title: "Facebook",

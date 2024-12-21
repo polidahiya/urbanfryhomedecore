@@ -1,24 +1,32 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
-function Productcard() {
+function Productcard({ product }) {
   return (
-    <div className="group relative w-full">
+    <div className="group relative w-full md:max-w-80">
       <div className="relative">
         <Link
           className="w-full aspect-[4/5] relative block overflow-hidden"
-          href={"/product"}
+          href={`/product/${product?.sku}`}
         >
-          <img
-            src="https://e0.pxfuel.com/wallpapers/344/864/desktop-wallpaper-abstract-shine-light-grid-form-immersion.jpg"
-            alt=""
-            className="h-full w-full absolute  object-cover lg:group-hover:scale-105 duration-300"
-          />
-          <img
-            src="https://t4.ftcdn.net/jpg/06/43/02/37/360_F_643023776_0oYsYRRcooTNy7olrYmnrNMUiBBSqcRf.jpg"
-            alt=""
+          <Image
+            src={product?.variants[0]?.images[0] || ""}
+            alt={product.productName}
+            className="h-full w-full absolute  object-cover lg:group-hover:scale-105 lg:group-hover:opacity-0 duration-300"
+            height={500}
+            width={500}
+            loading="lazy"
+          ></Image>
+          {}
+          <Image
+            src={product?.variants[0]?.images[1] || ""}
+            alt={product.productName}
             className="h-full w-full absolute  object-cover opacity-0 lg:group-hover:scale-110 lg:group-hover:opacity-100 duration-300"
-          />
+            height={500}
+            width={500}
+            loading="lazy"
+          ></Image>
         </Link>
         {/* quick view button */}
         <div className="absolute bottom-0 left-0 w-full p-2 hidden lg:group-hover:block z-10">
@@ -31,8 +39,10 @@ function Productcard() {
       <div className="px-4 pt-4">
         <p className="text-sm text-theme mt-[6px] hidden lg:block">LOOPSBYLJ</p>
         <p className="flex items-center justify-between flex-wrap mt-[6px]">
-          <span>Product name</span>
-          <span>From ₹{parseInt(25000, 10).toLocaleString("en-IN")}</span>
+          <span>{product?.productName}</span>
+          <span>
+            From ₹{parseInt(product?.sellingprice, 10).toLocaleString("en-IN")}
+          </span>
         </p>
       </div>
     </div>

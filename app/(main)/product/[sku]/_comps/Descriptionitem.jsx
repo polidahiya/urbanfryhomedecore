@@ -17,13 +17,17 @@ const Descriptionitem = ({ heading, details }) => {
           className={`ml-auto duration-300 ${open && "rotate-180"}`}
         />
       </p>
-      <p
+      <div
         className={`font-tenor mt-5 ${
           open ? "max-h-screen duration-1000" : "max-h-0 duration-500"
         }  overflow-hidden`}
       >
-        {details}
-      </p>
+        {details.map((detail, index) => (
+          <p key={index} className="text-sm">
+            {detail}
+          </p>
+        ))}
+      </div>
     </div>
   );
 };
