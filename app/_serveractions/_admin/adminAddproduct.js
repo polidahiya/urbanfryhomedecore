@@ -31,18 +31,20 @@ export const Addproduct = async (data, imagesformdata, deletedimages) => {
       Deleteiamgefromurl(image, "Altorganizer/products");
     });
 
+    const date = new Date().getTime();
+
     // Add to MongoDB
     if (data._id) {
       // to update a product
       const { _id, ...updateFields } = data;
       await Productscollection.updateOne(
         { _id: new ObjectId(data._id) },
-        { $set: { ...updateFields } }
+        { $set: { ...updateFields, lastupdated: date } }
       );
       return { status: 200, message: "Updated successfully" };
     } else {
       // to add a product
-      await Productscollection.insertOne({ ...data });
+      await Productscollection.insertOne({ ...data, lastupdated: date });
       return { status: 200, message: "Added successfully" };
     }
   } catch (error) {

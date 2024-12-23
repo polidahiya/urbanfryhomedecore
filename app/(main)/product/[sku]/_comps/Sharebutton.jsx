@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoLogoFacebook, IoLogoPinterest } from "react-icons/io5";
 import { TbLink } from "react-icons/tb";
@@ -8,31 +8,38 @@ import { GoShareAndroid } from "react-icons/go";
 import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
 
 function Sharebutton({ sku, description, image }) {
-  const domain = typeof window !== "undefined" ? window.location.origin : "";
-  console.log("domain",domain,"fdsf");
+  console.log(sku, description, image);
   
+  // domain
+  const [origin, setOrigin] = useState("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+    }
+  }, []);
+
   const list = [
     {
       title: "Facebook",
       link: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-        "http://localhost:3000/product"
+        `${origin}/product/${sku}`
       )}`,
       icon: <IoLogoFacebook />,
     },
     {
       title: "Twitter",
       link: `https://twitter.com/share?url=${encodeURIComponent(
-        "http://localhost:3000/product"
-      )}&text=${encodeURIComponent("test description")}`,
+        `${origin}/product/${sku}`
+      )}&text=${encodeURIComponent(description)}`,
       icon: <RiTwitterXLine />,
     },
     {
       title: "Pinterest",
       link: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
-        "http://localhost:3000/product"
-      )}&media=${encodeURIComponent(
-        "https://m.media-amazon.com/images/I/71krpsKgcTL._AC_UF894,1000_QL80_.jpg"
-      )}&description=${encodeURIComponent("test description")}`,
+        `${origin}/product/${sku}`
+      )}&media=${encodeURIComponent(image)}&description=${encodeURIComponent(
+        description
+      )}`,
       icon: <IoLogoPinterest />,
     },
   ];

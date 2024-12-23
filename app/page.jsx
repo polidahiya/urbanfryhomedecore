@@ -13,10 +13,16 @@ import Navbar from "./_globalcomps/Navbar";
 import { cookies } from "next/headers";
 import Footer from "./_globalcomps/Footer";
 import Searchbarsection from "./_globalcomps/_navbarcomps/Searchbarsection";
+import { Cachedproducts } from "./_connections/Getcachedata";
 
 async function page() {
   const allcookes = await cookies();
   const token = allcookes.get("token");
+
+  // new arrivals data
+  const data = await Cachedproducts("newarrivals");
+  const lastweek = new Date().getTime() - 1000 * 60 * 60 * 24 * 7;
+  const newarrivals = data.filter((item) => item.lastupdated > lastweek);
 
   return (
     <div>
@@ -41,7 +47,7 @@ async function page() {
           that are giving a makeover to our rather drab home carpets.
         </p>
       </div>
-      <Newarrivals />
+      <Newarrivals heading="New Arivals" data={newarrivals} />
       <Imagegallery />
       <Featuredin />
       {/* marque section */}

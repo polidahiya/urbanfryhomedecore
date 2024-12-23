@@ -9,11 +9,9 @@ import Underlineeffect from "../../../_globalcomps/Underlineeffect";
 import Link from "next/link";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 
-async function page({ params,searchParams }) {
-  
-  // const color = 1;
+async function page({ params, searchParams }) {
   const sku = (await params).sku;
-  const color = (await searchParams).color;
+  const color = (await searchParams).color || 0;
   const allcookes = await cookies();
   const token = allcookes.get("token");
   const products = await Cachedproducts();

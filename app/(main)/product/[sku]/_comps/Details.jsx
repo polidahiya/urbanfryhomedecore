@@ -16,7 +16,7 @@ function Details({ product, color }) {
         {/* share buttton */}
         <Sharebutton
           sku={product.sku}
-          description={product.keyfeatures}
+          description={product.keyfeatures.join(", ")}
           image={product.variants[color].images[0]}
         />
       </div>
@@ -39,7 +39,7 @@ function Details({ product, color }) {
           { label: "Theme", value: product?.theme },
           { label: "Material", value: product?.Material },
           { label: "Finish", value: product?.variants[color].finish },
-          { label: "Weight", value: product?.weight + " Pounds" },
+          { label: "Weight", value: product?.weight + " Kg" },
           { label: "Handling Time", value: product?.handlingtime },
           { label: "Warranty", value: product?.Warranty + " Months" },
         ]}

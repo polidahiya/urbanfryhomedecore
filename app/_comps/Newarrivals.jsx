@@ -3,7 +3,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import Closeeffectlink from "../_globalcomps/Closeeffectlink";
 import Productcard from "../_globalcomps/Productcard";
 
-function Newarrivals({ heading = "New Arrivals", data }) {
+function Newarrivals({ heading, data }) {
   return (
     <div className="py-14">
       <div className="flex flex-col md:flex-row md:items-center px-8">
