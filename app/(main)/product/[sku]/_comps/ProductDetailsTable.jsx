@@ -3,25 +3,13 @@ import React from "react";
 const ProductDetailsTable = ({ data }) => {
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full border border-gray-200 ">
-        <tbody>
-          {data.map((row, index) => (
-            <tr
-              key={index}
-              className={`${
-                index % 2 === 0 ? "bg-gray-50" : "bg-white"
-              } border-b`}
-            >
-              <td className="w-1/2 font-tenor p-4 text-sm font-medium text-gray-700">
-                {row.label}
-              </td>
-              <td className="w-1/2 font-tenor p-4 text-sm text-gray-600 text-center border-l">
-                {row.value}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="min-w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-x-5">
+        {data.map((row, index) => (
+          <p key={index} className={`flex items-center gap-2 py-2 text-sm  text-gray-700`}>
+            <span className="font-semibold text-theme min-w-32">{row.label}</span> <span>:</span> <span>{row.value}</span>
+          </p>
+        ))}
+      </div>
     </div>
   );
 };

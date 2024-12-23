@@ -1,6 +1,7 @@
 import Navbar from "@/app/_globalcomps/Navbar";
 import Searchbarsection from "@/app/_globalcomps/_navbarcomps/Searchbarsection";
 import Footer from "@/app/_globalcomps/Footer";
+import { cookies } from "next/headers";
 
 export const metadata = {
   title: "Create Next App",
@@ -8,9 +9,14 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const allcookies = await cookies();
+  const token = allcookies.get("token");
+  const parseduserdata = allcookies.get("userdata")?.value;
+  const userdata = parseduserdata ? JSON.parse(parseduserdata) : {};
+
   return (
     <div>
-      <Navbar navtype={true} />
+      <Navbar navtype={true} token={token} userdata={userdata} />
       <Searchbarsection />
       {children}
       <Footer />

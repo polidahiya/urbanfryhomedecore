@@ -16,8 +16,10 @@ import Searchbarsection from "./_globalcomps/_navbarcomps/Searchbarsection";
 import { Cachedproducts } from "./_connections/Getcachedata";
 
 async function page() {
-  const allcookes = await cookies();
-  const token = allcookes.get("token");
+  const allcookies = await cookies();
+  const token = allcookies.get("token");
+  const parseduserdata = allcookies.get("userdata")?.value;
+  const userdata = parseduserdata ? JSON.parse(parseduserdata) : {};
 
   // new arrivals data
   const data = await Cachedproducts("newarrivals");
@@ -26,7 +28,7 @@ async function page() {
 
   return (
     <div>
-      <Navbar navtype={true} token={token} />
+      <Navbar navtype={true} token={token} userdata={userdata} />
       <Herosection />
       {/* marque section */}
       <section className="w-full bg-footercolor text-[#56473e] overflow-hidden relative flex items-center">

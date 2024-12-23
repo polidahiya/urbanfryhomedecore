@@ -14,7 +14,7 @@ import { RiInstagramFill } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { RiShoppingCartLine } from "react-icons/ri";
 
-function Navbar({ navtype, token }) {
+function Navbar({ navtype, token, userdata }) {
   const { setshowsearchbar } = AppContextfn();
   const [shownav, setshownav] = useState(true);
   const [transparentnav, settransparentnav] = useState(true);
@@ -60,8 +60,16 @@ function Navbar({ navtype, token }) {
         />
       </Link>
       {/* side menu */}
-      <Sidemenu sidemenutoggle={sidemenutoggle} token={token} />
-      <Moreoptions setshowsearchbar={setshowsearchbar} token={token} />
+      <Sidemenu
+        sidemenutoggle={sidemenutoggle}
+        token={token}
+        userdata={userdata}
+      />
+      <Moreoptions
+        setshowsearchbar={setshowsearchbar}
+        token={token}
+        userdata={userdata}
+      />
     </nav>
   );
 }
@@ -95,7 +103,7 @@ const Menubutton = ({ sidemenutoggle, setsidemenutoggle }) => (
   </button>
 );
 
-const Sidemenu = ({ sidemenutoggle, token }) => {
+const Sidemenu = ({ sidemenutoggle, token, userdata }) => {
   const [open, setopen] = useState(false);
 
   return (
@@ -169,7 +177,7 @@ const Sidemenu = ({ sidemenutoggle, token }) => {
         {token ? (
           <div className="flex flex-col gap-5 px-3">
             <div className="flex justify-between">
-              <p>User - name</p>
+              <p>User - {userdata?.username}</p>
               <button className="underline">Log Out</button>
             </div>
             <Link href={"/"} className="flex justify-between">
@@ -179,6 +187,11 @@ const Sidemenu = ({ sidemenutoggle, token }) => {
             <Link href={"/"} className="underline">
               My account
             </Link>
+            {userdata?.usertype === "admin" && (
+              <Link href={"/admin"} className="underline">
+                Admin Dashboard
+              </Link>
+            )}
           </div>
         ) : (
           <>
@@ -305,7 +318,7 @@ const Subcats = ({ item, type, togglecategories }) => (
   </div>
 );
 
-const Moreoptions = ({ setshowsearchbar, token }) => {
+const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
   return (
     <div className="h-full ml-auto flex items-center gap-4 lg:gap-6">
       {/* <button>
@@ -320,7 +333,7 @@ const Moreoptions = ({ setshowsearchbar, token }) => {
           <Underlineeffect title={"SEARCH"} />
         </span>
       </button>
-      <Accountbutton token={token} />
+      <Accountbutton token={token} userdata={userdata} />
       <Link href={"/cart"} className=" flex items-center ">
         <span className="hidden lg:block underlineff">
           <Underlineeffect title={"CART"} />

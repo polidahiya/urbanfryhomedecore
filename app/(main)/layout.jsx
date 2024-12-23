@@ -9,12 +9,14 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const allcookes = await cookies();
-  const token = allcookes.get("token");
+   const allcookies = await cookies();
+   const token = allcookies.get("token");
+   const parseduserdata = allcookies.get("userdata")?.value;
+   const userdata = parseduserdata ? JSON.parse(parseduserdata) : {};
 
   return (
     <>
-      <Navbar navtype={false} token={token} />
+      <Navbar navtype={false} token={token} userdata={userdata}/>
       <Searchbarsection />
       {children}
       <Footer />

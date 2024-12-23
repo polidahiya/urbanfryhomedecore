@@ -16,7 +16,7 @@ function Details({ product, color }) {
         {/* share buttton */}
         <Sharebutton
           sku={product.sku}
-          description={product.keyfeatures.join(", ")}
+          description={product.keyfeatures.join("________")}
           image={product.variants[color].images[0]}
         />
       </div>

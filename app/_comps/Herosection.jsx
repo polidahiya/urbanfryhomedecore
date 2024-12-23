@@ -14,7 +14,8 @@ function Herosection() {
     {
       heading: "Test heading test heading1",
       para: "test para test this is a para this is a para this is a para para1",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-5Ji2hus-Az7tBv90olflynKz9CFQp-HcSA&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-5Ji2hus-Az7tBv90olflynKz9CFQp-HcSA&s",
       link: "/",
     },
     {
@@ -171,19 +172,20 @@ function Herosection() {
         </button>
         {/* dots */}
         <div className="absolute bottom-5 left-0 w-full flex items-center justify-center gap-4">
-          {slides.map((slide, i) => (
+          {slides.map((_, i) => (
             <div
               key={i}
-              className={`group w-6 aspect-square cursor-pointer flex items-center justify-center`}
+              className={`relative group w-6 aspect-square cursor-pointer flex items-center justify-center`}
               onClick={() => setslidenumber(i)}
             >
               <div
-                className={`aspect-square rounded-full bg-white grid place-content-center duration-500 lg:group-hover:h-full lg:group-hover:bg-opacity-50 ${
-                  slidenumber == i ? "bg-opacity-50 h-full" : "bg-opacity-0 h-2"
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-full  rounded-full bg-white duration-500 lg:group-hover:scale-100 lg:group-hover:bg-opacity-50 ${
+                  slidenumber == i
+                    ? "bg-opacity-50 scale-100"
+                    : "bg-opacity-0 scale-0"
                 }`}
-              >
-                <div className="h-2 aspect-square bg-white rounded-full"></div>
-              </div>
+              ></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 aspect-square bg-white rounded-full"></div>
             </div>
           ))}
         </div>

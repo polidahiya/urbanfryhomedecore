@@ -10,10 +10,7 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        // theme: "#c19a71",
-        theme: "#9b8091",
-        // theme: "#5b3b63cc",
-        // theme: "#8e766e",
+        theme: "#8e766e",
         footercolor: "#e7e2de",
       },
       fontFamily: {
