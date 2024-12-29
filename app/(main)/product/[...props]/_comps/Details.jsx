@@ -1,13 +1,30 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import Sizes from "./Sizes";
 import Cartbutton from "./Cartbutton";
 import Descriptionitem from "./Descriptionitem";
 import Sharebutton from "./Sharebutton";
 import ProductDetailsTable from "./ProductDetailsTable";
-import Image from "next/image";
-import Link from "next/link";
+import Coloroptions from "./Coloroptions";
+import { AppContextfn } from "@/app/Context";
 
 function Details({ product, color }) {
+  const cartproductname = `${product?.sku}-${color}`;
+  const { cart, setcart } = AppContextfn();
+
+  useEffect(() => {
+    if (!cart[cartproductname]?.added)
+      setcart((pre) => ({
+        ...pre,
+        [cartproductname]: {
+          dimension: product?.dimensions?.[0] || null,
+          quantity: 1,
+          color,
+          added: false,
+        },
+      }));
+  }, []);
+
   return (
     <div className="flex-[2] min-h-28">
       {/* name */}
@@ -45,34 +62,20 @@ function Details({ product, color }) {
         ]}
       />
       {/* color options */}
-      <div className="mt-5">
-        <p className="block text-sm">Color Options</p>
-        <div className="flex gap-2 mt-2">
-          {product?.variants.map((variant, index) => (
-            <Link
-              href={`/product/${product.sku}?color=${index}`}
-              key={index}
-              className={`border  outline-2 outline-theme overflow-hidden ${
-                index == color ? "outline" : "lg:hover:outline"
-              }`}
-            >
-              <Image
-                src={variant.images[0]}
-                alt={`${product.productName}-${variant.finish}`}
-                width={100}
-                height={100}
-                loading="lazy"
-                className="w-24 aspect-square"
-              ></Image>
-            </Link>
-          ))}
-        </div>
-      </div>
+      <Coloroptions
+        variants={product?.variants}
+        color={color}
+        sku={product.sku}
+        name={product.name}
+      />
       {/* sizes */}
-      <Sizes dimensions={product?.dimensions} />
+      <Sizes
+        dimensions={product?.dimensions}
+        cartproductname={cartproductname}
+      />
 
       <hr className="my-5" />
-      <Cartbutton />
+      <Cartbutton cartproductname={cartproductname} />
       {/* descriptions */}
       <div className="mt-10 border-b border-theme ">
         <Descriptionitem

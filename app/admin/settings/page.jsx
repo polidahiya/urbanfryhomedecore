@@ -7,7 +7,6 @@ function Page() {
     <div>
       <button onClick={async()=>{
         const res = await refreshproductsnow();
-        console.log(res);
       }}
       className="border p-5">refresh</button>
     </div>

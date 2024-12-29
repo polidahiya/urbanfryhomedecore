@@ -7,7 +7,7 @@ function Message() {
 
   return (
     <>
-      {messagearray.map((item) => (
+      {messagearray?.map((item) => (
         <Notif key={item.id} item={item} />
       ))}
     </>

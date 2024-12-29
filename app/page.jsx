@@ -19,7 +19,7 @@ async function page() {
   const allcookies = await cookies();
   const token = allcookies.get("token");
   const parseduserdata = allcookies.get("userdata")?.value;
-  const userdata = parseduserdata ? JSON.parse(parseduserdata) : {};
+  const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
 
   // new arrivals data
   const data = await Cachedproducts("newarrivals");

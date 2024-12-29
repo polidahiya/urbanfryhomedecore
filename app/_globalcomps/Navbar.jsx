@@ -319,6 +319,11 @@ const Subcats = ({ item, type, togglecategories }) => (
 );
 
 const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
+  const { cart } = AppContextfn();
+  const cartlength = Object.values(cart).filter(
+    (item) => item.added
+  ).length;
+
   return (
     <div className="h-full ml-auto flex items-center gap-4 lg:gap-6">
       {/* <button>
@@ -339,7 +344,7 @@ const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
           <Underlineeffect title={"CART"} />
         </span>
         <RiShoppingCartLine className="text-2xl lg:hidden" />
-        (0)
+        {`(${cartlength})`}
       </Link>
     </div>
   );

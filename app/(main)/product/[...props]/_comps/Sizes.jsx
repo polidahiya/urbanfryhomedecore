@@ -1,13 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { FaAngleDown } from "react-icons/fa6";
+import { AppContextfn } from "@/app/Context";
 
-function Sizes({ dimensions }) {
-  const [selectedOption, setSelectedOption] = useState("");
+function Sizes({ dimensions, cartproductname }) {
+  const { cart, setcart } = AppContextfn();
 
   const handleChange = (event) => {
-    setSelectedOption(event.target.value);
+    setcart((pre) => {
+      const updatedcart = { ...pre };
+      updatedcart[cartproductname] = {
+        ...updatedcart[cartproductname],
+        dimension: event.target.value,
+      };
+      return updatedcart;
+    });
   };
+
   return (
     <div className="mt-5">
       <div>
@@ -17,7 +26,7 @@ function Sizes({ dimensions }) {
         <div className="relative w-fit mt-2">
           <select
             id="menu"
-            value={selectedOption}
+            value={cart[cartproductname]?.dimension}
             onChange={handleChange}
             className="relative p-5 pr-10  border border-theme  outline-none lg:hover:border-black appearance-none cursor-pointer"
           >

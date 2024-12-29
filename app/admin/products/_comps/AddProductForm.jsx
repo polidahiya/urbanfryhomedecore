@@ -22,7 +22,6 @@ const AddProductForm = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     setloading(true);
-    console.log(data);
 
     const formData = new FormData();
 

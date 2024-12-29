@@ -7,9 +7,10 @@ import Underlineeffect from "../../../_globalcomps/Underlineeffect";
 import Link from "next/link";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 
-async function page({ params, searchParams }) {
-  const sku = (await params).sku;
-  const color = (await searchParams).color || 0;
+async function page({ params }) {
+  const props = (await params).props;
+  const sku = props[0];
+  const color = props[1] || 0;
   const products = await Cachedproducts();
 
   const product = products.filter((product) => product.sku === sku)[0];

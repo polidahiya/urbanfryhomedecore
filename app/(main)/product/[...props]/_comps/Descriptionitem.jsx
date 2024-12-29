@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 const Descriptionitem = ({ heading, details }) => {
   const [open, setopen] = useState(false);
@@ -23,7 +24,8 @@ const Descriptionitem = ({ heading, details }) => {
         }  overflow-hidden`}
       >
         {details.map((detail, index) => (
-          <p key={index} className="text-sm">
+          <p key={index} className="text-sm pb-3">
+            <IoIosArrowRoundForward className="inline-block mr-2" />
             {detail}
           </p>
         ))}
