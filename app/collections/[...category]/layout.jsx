@@ -2,6 +2,7 @@ import Navbar from "@/app/_globalcomps/Navbar";
 import Searchbarsection from "@/app/_globalcomps/_navbarcomps/Searchbarsection";
 import Footer from "@/app/_globalcomps/Footer";
 import { cookies } from "next/headers";
+import Sidecart from "@/app/_globalcomps/Sidecart";
 
 export const metadata = {
   title: "Create Next App",
@@ -17,6 +18,7 @@ export default async function RootLayout({ children }) {
   return (
     <div>
       <Navbar navtype={true} token={token} userdata={userdata} />
+      <Sidecart />
       <Searchbarsection />
       {children}
       <Footer />

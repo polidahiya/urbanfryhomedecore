@@ -17,10 +17,15 @@ function Details({ product, color }) {
       setcart((pre) => ({
         ...pre,
         [cartproductname]: {
+          added: false,
           dimension: product?.dimensions?.[0] || null,
           quantity: 1,
           color,
-          added: false,
+          sku: product.sku,
+          mrp: product.mrp,
+          sellingprice: product.sellingprice,
+          productName: product.productName,
+          image: product.variants[color].images[0],
         },
       }));
   }, []);

@@ -6,6 +6,10 @@ const AppContext = createContext({});
 export function Appwrapper({ children }) {
   const [cart, setcart] = useState({});
   const [showsearchbar, setshowsearchbar] = useState(false);
+  const [showsidecart, setshowsidecart] = useState({
+    show: false,
+    effect: false,
+  });
   const [messagearray, setmessagearray] = useState([]);
   const showdialoginitialvalues = {
     show: false,
@@ -50,6 +54,8 @@ export function Appwrapper({ children }) {
         setcart,
         showsearchbar,
         setshowsearchbar,
+        showsidecart,
+        setshowsidecart,
         setmessagefn,
         messagearray,
         setmessagearray,
