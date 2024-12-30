@@ -72,7 +72,12 @@ function Navbar({ navtype, token, userdata }) {
 
 const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
   const { cart, setshowsidecart } = AppContextfn();
-  const cartlength = Object.values(cart).filter((item) => item.added).length;
+  const cartitems = Object.values(cart).filter((item) => item.added);
+
+  const totalQuantity = cartitems.reduce(
+    (total, value) => total + value.quantity,
+    0
+  );
 
   return (
     <div className="h-full ml-auto flex items-center gap-4 lg:gap-6">
@@ -102,7 +107,7 @@ const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
           <Underlineeffect title={"CART"} />
         </span>
         <RiShoppingCartLine className="text-2xl lg:hidden" />
-        {`(${cartlength})`}
+        {`(${totalQuantity})`}
       </button>
     </div>
   );
