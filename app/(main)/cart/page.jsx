@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
 import { AppContextfn } from "@/app/Context";
@@ -28,7 +28,7 @@ function Page() {
       </div>
       <div>
         <h1 className="font-tenor text-4xl md:text-6xl capitalize pt-10">
-          Shopping Cart <FaOpencart  className="inline-block ml-5"/>
+          Shopping Cart <FaOpencart className="inline-block ml-5" />
         </h1>
       </div>
       {/* products */}
@@ -38,7 +38,7 @@ function Page() {
           <p className="text-center flex-1">Price</p>
           <p className="text-center flex-1">Quantity</p>
           <p className="text-center flex-1">Total</p>
-          <p className="text-center flex-1"></p>
+          <p className="text-center flex-1">Remove</p>
         </div>
         <div>
           {cartitems.map(([key, item], index) => (
@@ -71,20 +71,22 @@ function Page() {
 
 const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
   const handleToggle = (method) => {
-    if (method === "cod" && totalPrice >= 10000) {
-      alert("COD is only available for orders below ₹10,000.");
-      return;
-    }
+    if (method === "cod" && totalPrice >= 10000) return;
     setPaymentMethod(method);
   };
 
+  useEffect(() => {
+    if (paymentMethod === "cod" && totalPrice >= 10000)
+      setPaymentMethod("online");
+  }, [totalPrice]);
+
   return (
-    <div className="flex flex-col gap-4">
+    <div className="w-full md:w-fit flex flex-col gap-4">
       <span className="font-semibold">Payment Method</span>
-      <div className="flex flex-col gap-2 text-sm">
+      <div className="w-full flex flex-col gap-2 text-sm">
         {/* Online Payment Option */}
         <label
-          className={`flex items-center gap-3 p-3 border  cursor-pointer transition ${
+          className={`w-full flex items-center gap-3 p-3 border cursor-pointer transition ${
             paymentMethod === "online"
               ? "bg-white border-theme"
               : "bg-gray-100 border-gray-300"
@@ -96,14 +98,14 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
             value="online"
             checked={paymentMethod === "online"}
             onChange={() => handleToggle("online")}
-            className="w-5 h-5 accent-theme"
+            className="w-5 h-5 accent-theme cursor-pointer"
           />
           <span className="text-gray-700">Pay Online</span>
         </label>
 
         {/* COD Option */}
         <label
-          className={`flex items-center gap-3 p-3 border  cursor-pointer transition ${
+          className={`w-full flex items-center gap-3 p-3 border cursor-pointer transition ${
             paymentMethod === "cod"
               ? "bg-white border-theme"
               : "bg-gray-100 border-gray-300"
@@ -116,7 +118,7 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
             checked={paymentMethod === "cod"}
             onChange={() => handleToggle("cod")}
             disabled={totalPrice >= 10000}
-            className="w-5 h-5 accent-theme"
+            className="w-5 h-5 accent-theme cursor-pointer"
           />
           <span className="text-gray-700">Cash on Delivery (COD)</span>
         </label>

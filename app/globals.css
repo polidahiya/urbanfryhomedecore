@@ -25,13 +25,25 @@
     --background: #0a0a0a;
     --foreground: #ededed;
     }
-    } */
+} */
+
 .test {
   border: 1px solid red;
 }
+
 .hidescroll::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+.themescroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.themescroll::-webkit-scrollbar-thumb {
+  @apply bg-theme;
+  border-radius: 100px;
 }
 
 body {
@@ -84,17 +96,6 @@ body {
     transform: translateX(-50%);
   }
 }
-
-/* @media (width>1024) { */
-/* navbar classes */
-/* .shophover:hover > .shopcategoriesblock {
-  display: block;
-}
-
-.shopcategories:hover > .shopsubcat {
-  display: flex;
-} */
-/* } */
 
 @media (min-width: 1024px) {
   /* navbar classes */

@@ -7,7 +7,7 @@ function Productcard({ product }) {
     <div className="group relative w-full md:max-w-80">
       <div className="relative">
         <Link
-          className="w-full aspect-[4/5] relative block overflow-hidden"
+          className="w-full aspect-square relative block overflow-hidden"
           href={`/product/${product?.sku}`}
         >
           <Image
@@ -37,7 +37,7 @@ function Productcard({ product }) {
       </div>
       {/* details */}
       <div className="px-4 pt-4">
-        <p className="text-sm text-theme mt-[6px] hidden lg:block">LOOPSBYLJ</p>
+        <p className="text-sm text-theme mt-[6px] hidden lg:block">{product?.theme}</p>
         <p className="flex items-center justify-between flex-wrap mt-[6px]">
           <span>{product?.productName}</span>
           <span>
