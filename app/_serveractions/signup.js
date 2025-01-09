@@ -42,6 +42,7 @@ export const login = async (userdata) => {
       userdata.password,
       user.password
     );
+    
     if (!isPasswordMatch) {
       return { status: 400, message: "Wrong password" };
     }

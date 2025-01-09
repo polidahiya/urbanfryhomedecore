@@ -18,7 +18,7 @@ async function page({ searchParams }) {
         </Link>{" "}
         /{" "}
         <p className="capitalize text-theme">
-          Search: {searched?.length} results found for "{searchtext}"
+          Search: {searched?.length} results found for &quot;{searchtext}&quot;
         </p>
       </div>
       <div>

@@ -1,8 +1,9 @@
 import React from "react";
 import Dropdownmenu from "./Dropdownmenu";
-import { TiArrowUp } from "react-icons/ti";
+import { BsArrowLeftShort } from "react-icons/bs";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { MdAddToPhotos } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 
 const ProductVariants = ({
   varientstructure,
@@ -24,7 +25,7 @@ const ProductVariants = ({
     variants[index].images.forEach((image) => {
       if (!(image instanceof File)) setdeletedimages((pre) => [...pre, image]);
     });
-    
+
     // delete variant
     setstate((pre) => {
       const updatedstate = { ...pre };
@@ -97,7 +98,10 @@ const ProductVariants = ({
           <div className="mt-5">
             <h4 className="font-medium mb-2 text-sm">Images:</h4>
             {variant.images.map((image, imgIndex) => (
-              <div key={imgIndex} className="flex gap-2 items-center mb-2">
+              <div
+                key={imgIndex}
+                className="flex gap-2 flex-col items-center mb-2"
+              >
                 <img
                   src={
                     image instanceof File ? URL.createObjectURL(image) : image
@@ -109,27 +113,25 @@ const ProductVariants = ({
                   <button
                     type="button"
                     onClick={() => handleMoveImage(index, imgIndex, -1)}
-                    className="px-2 py-1 text-gray-800 border border-slate-300 rounded-md"
+                    className="h-full aspect-square text-sm border rounded-md"
                   >
-                    <TiArrowUp className="inline-block" />
-                    Move Up
+                    <BsArrowLeftShort className="inline-block" />
                   </button>
                   <button
                     type="button"
                     onClick={() => handleMoveImage(index, imgIndex, 1)}
-                    className="px-2 py-1 text-gray-800 border border-slate-300 rounded-md"
+                    className="h-full aspect-square text-sm border rounded-md"
                   >
-                    <TiArrowUp className="inline-block rotate-180" />
-                    Move Down
+                    <BsArrowLeftShort className="inline-block rotate-180" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteImage(index, imgIndex)}
+                    className="h-full aspect-square text-sm border rounded-md"
+                  >
+                    <MdDeleteOutline className="inline-block" />
                   </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => handleDeleteImage(index, imgIndex)}
-                  className="px-3 py-1 bg-red-500 text-white rounded-md"
-                >
-                  -
-                </button>
               </div>
             ))}
             <div className="relative border border-dotted border-slate-300 cursor-pointer w-32 aspect-square rounded-md">

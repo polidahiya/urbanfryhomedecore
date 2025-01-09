@@ -55,7 +55,9 @@ const AddProductForm = ({
       onSubmit={handleSubmit}
       className="p-6 bg-white shadow-lg rounded-md space-y-6 mt-10"
     >
-      <h2 className="text-2xl text-center font-semibold text-gray-800">Add New Product</h2>
+      <h2 className="text-2xl text-center font-semibold text-gray-800">
+        Add New Product
+      </h2>
       {/* Product Name */}
       <Standardinputfield
         titlename="Product Name"
@@ -230,7 +232,6 @@ const AddProductForm = ({
         positiveText="Yes"
         negativeText="No"
       />
-
 
       <div className="flex items-center justify-center gap-5">
         <button
