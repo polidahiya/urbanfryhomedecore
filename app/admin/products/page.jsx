@@ -30,21 +30,33 @@ function Page() {
   const resetState = () => {
     setdata(initialState);
   };
+  const [showform, setshowform] = useState(false);
 
   return (
     <div>
-      <div className="">
-        <AddProductForm
-          data={data}
-          setdata={setdata}
-          initialState={initialState}
-          resetState={resetState}
-          deletedimages={deletedimages}
-          setdeletedimages={setdeletedimages}
-        />
+      <div className="relative">
+        {showform && (
+          <>
+            <AddProductForm
+              data={data}
+              setdata={setdata}
+              initialState={initialState}
+              resetState={resetState}
+              deletedimages={deletedimages}
+              setdeletedimages={setdeletedimages}
+            />
+            <button
+              className="fixed top-5 right-5 w-10 aspect-square bg-slate-300"
+              onClick={() => setshowform(false)}
+            >
+              x
+            </button>
+          </>
+        )}
       </div>
-
-      <Showproducts setdata={setdata} setdeletedimages={setdeletedimages} />
+      {!showform && (
+        <Showproducts setdata={setdata} setdeletedimages={setdeletedimages} />
+      )}
     </div>
   );
 }

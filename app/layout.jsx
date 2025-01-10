@@ -11,7 +11,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <Appwrapper>
-        <body className={`antialiased themescroll`}>
+        <body className={`antialiased themescroll max-w-[1920px] mx-auto`}>
           <Message />
           {children}
         </body>

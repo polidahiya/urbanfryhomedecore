@@ -4,57 +4,73 @@ import Dropdownmenu from "./Dropdownmenu";
 import { Roomsearchproducts } from "@/app/_serveractions/_admin/Getliveproducts";
 import { AppContextfn } from "@/app/Context";
 import { Deleteproduct } from "@/app/_serveractions/_admin/adminAddproduct";
+import Adminsearchbar from "@/app/admin/_comps/_adminnavbar/Adminsearchbar";
 
 function Showproducts({ setdata, setdeletedimages }) {
+  const { setmessagefn } = AppContextfn();
   const [filterdata, setfilterdata] = useState({
-    room: "",
-    search: "",
+    categories: "Photo-Frames",
+    rooms: "Living-Room",
   });
+  const [search, setsearch] = useState("");
   const [products, setproducts] = useState([]);
+  const [loading, setloading] = useState(false);
 
-  const handlesearch = async () => {
-    const res = await Roomsearchproducts();
+  const handlesearch = async (search) => {
+    setloading(true);
+    const res = await Roomsearchproducts(search);
+    setloading(false);
     setproducts(res?.data);
+    if (res?.data?.length == 0) {
+      setmessagefn("No products found");
+    }
   };
 
   return (
-    <div className="p-6 mt-5">
-      <div>
-        {/* rooms */}
+    <div className="px-5 md:px-10">
+      <p className="my-10 font-semibold text-2xl">Products</p>
+      <Adminsearchbar
+        search={search}
+        setsearch={setsearch}
+        onsubmit={() => handlesearch(search)}
+      />
+      <div className="flex items-center gap-5 mt-5">
+        <Dropdownmenu
+          title={"categories"}
+          state={filterdata.categories}
+          onchange={(value) => {
+            setfilterdata((pre) => ({ ...pre, categories: value }));
+            handlesearch(value);
+          }}
+          options={["", ...Object.keys(staticdata.categories)]}
+        />
         <Dropdownmenu
           title={"Rooms"}
-          state={filterdata.room}
-          onchange={(value) =>
-            setfilterdata((pre) => ({ ...pre, room: value }))
-          }
-          options={Object.keys(staticdata.rooms)}
+          state={filterdata.rooms}
+          onchange={(value) => {
+            setfilterdata((pre) => ({ ...pre, rooms: value }));
+            handlesearch(value);
+          }}
+          options={["", ...Object.keys(staticdata.rooms)]}
         />
-        <div className="flex gap-2 border h-10 mt-2 p-px">
-          <input
-            type="text"
-            value={filterdata.search}
-            onChange={(e) => {
-              setfilterdata((pre) => ({ ...pre, search: e.target.value }));
-            }}
-            className="w-full px-5 outline-none"
-            placeholder="Search"
-          />
-          <button className="px-5 bg-theme text-white" onClick={handlesearch}>
-            Search
-          </button>
+      </div>
+      {!loading ? (
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-2 gap-y-16 my-10">
+          {products.map((product, i) => (
+            <Productcard
+              key={i}
+              product={product}
+              setproducts={setproducts}
+              setdata={setdata}
+              setdeletedimages={setdeletedimages}
+            />
+          ))}
         </div>
-      </div>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-2 gap-y-16 my-10">
-        {products.map((product, i) => (
-          <Productcard
-            key={i}
-            product={product}
-            setproducts={setproducts}
-            setdata={setdata}
-            setdeletedimages={setdeletedimages}
-          />
-        ))}
-      </div>
+      ) : (
+        <div className="mt-32">
+          <div className="border-y-4 border-theme w-10 aspect-square rounded-full mx-auto animate-spin duration-300"></div>
+        </div>
+      )}
     </div>
   );
 }
@@ -64,7 +80,7 @@ const Productcard = ({ product, setproducts, setdata, setdeletedimages }) => {
 
   const handledeleteproduct = async (product) => {
     const res = await Deleteproduct(product?.variants, product?._id);
-    
+
     setmessagefn(res?.message);
     if (res.status === 200)
       setproducts((pre) => pre.filter((item) => item._id !== product?._id));

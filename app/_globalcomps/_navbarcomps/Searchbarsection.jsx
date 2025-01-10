@@ -14,20 +14,32 @@ function Searchbarsection() {
   const [searchedproducts, setsearchedproducts] = useState([]);
   const [isfocused, setisfocused] = useState(false);
 
-  // add debouncing
-
+  // Add debounce logic
   useEffect(() => {
-    (async () => {
-      if (showsearchbar) {
-        if (searchtext.trim() == "") {
-          setsearchedproducts([]);
-          return;
-        }
-        const searched = await Searchedproductsfn(searchtext);
-        setsearchedproducts(searched);
+    let debounceTimeout;
+
+    const fetchSearchedProducts = async () => {
+      if (searchtext.trim() === "") {
+        setsearchedproducts([]);
+        return;
       }
-    })();
-  }, [searchtext]);
+
+      const searched = await Searchedproductsfn(searchtext);
+      setsearchedproducts(searched);
+    };
+
+    if (showsearchbar) {
+      // Clear the previous timer and set a new one
+      debounceTimeout = setTimeout(() => {
+        fetchSearchedProducts();
+      }, 500); // 500ms debounce delay
+    }
+
+    return () => {
+      // Cleanup the timeout when searchtext or showsearchbar changes
+      clearTimeout(debounceTimeout);
+    };
+  }, [searchtext, showsearchbar]);
 
   if (showsearchbar)
     return (
@@ -53,7 +65,7 @@ function Searchbarsection() {
         />
 
         <div className="mt-5 max-h-[calc(100dvh-160px)] overflow-y-scroll themescroll pb-5">
-          {searchedproducts.length == 0 ? (
+          {searchedproducts.length === 0 ? (
             <>
               <div>
                 <Categoriesoptions

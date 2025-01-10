@@ -84,15 +84,19 @@ const Sidemenu = ({ sidemenutoggle, token, userdata }) => {
               <p>User - {userdata?.username}</p>
               <button className="underline">Log Out</button>
             </div>
-            <Link href={"/"} className="flex justify-between">
+            <Link
+              href={"/cart"}
+              className="flex justify-between"
+              onClick={scrollable}
+            >
               <span className="underline">Shopping cart</span>
               <span className="px-5">1</span>
             </Link>
-            <Link href={"/"} className="underline">
+            <Link href={"/"} className="underline" onClick={scrollable}>
               My account
             </Link>
             {userdata?.usertype === "admin" && (
-              <Link href={"/admin"} className="underline">
+              <Link href={"/admin"} className="underline" onClick={scrollable}>
                 Admin Dashboard
               </Link>
             )}

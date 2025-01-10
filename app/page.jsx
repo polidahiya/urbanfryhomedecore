@@ -2,9 +2,9 @@ import React from "react";
 import Herosection from "./_comps/Herosection";
 import Marquebanner from "./_comps/Marquebanner";
 import Newarrivals from "./_comps/Newarrivals";
-import Imagegallery from "./_comps/Imagegallery";
-import Featuredin from "./_comps/Featuredin";
-import Blogs from "./_comps/Blogs";
+// import Imagegallery from "./_comps/Imagegallery";
+// import Featuredin from "./_comps/Featuredin";
+// import Blogs from "./_comps/Blogs";
 import Collections from "./_comps/Collections";
 import Customerreviews from "./_comps/Customerreviews";
 import Aboutus from "./_comps/Aboutus";
@@ -15,6 +15,8 @@ import Footer from "./_globalcomps/Footer";
 import Searchbarsection from "./_globalcomps/_navbarcomps/Searchbarsection";
 import { Cachedproducts } from "./_connections/Getcachedata";
 import Sidecart from "./_globalcomps/Sidecart";
+import Imagetapcomp from "./_comps/Imagetapcomp";
+import Madeinindia from "./_comps/Madeinindia";
 
 async function page() {
   const allcookies = await cookies();
@@ -51,8 +53,6 @@ async function page() {
         </p>
       </div>
       <Newarrivals heading="New Arivals" data={newarrivals} />
-      <Imagegallery />
-      <Featuredin />
       {/* marque section */}
       <section className="w-full text-[#56473e] overflow-hidden relative flex items-center">
         <Marquebanner
@@ -64,10 +64,11 @@ async function page() {
           ]}
         />
       </section>
-      <Blogs />
+      <Imagetapcomp />
       <Collections />
       <Customerreviews />
       <Aboutus />
+      <Madeinindia />
       <Faqs />
       <Footer />
       {/*  */}

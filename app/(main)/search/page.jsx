@@ -3,6 +3,7 @@ import Link from "next/link";
 import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
 import Searchbar from "./_comps/Searchbar";
 import Searchedproductsfn from "@/app/_globalcomps/_helperfunctions/Searchedproductsfn";
+import Productcard from "@/app/_globalcomps/Productcard";
 
 async function page({ searchParams }) {
   const allsearchParams = await searchParams;
@@ -31,6 +32,11 @@ async function page({ searchParams }) {
         <Searchbar />
       </div>
       {/* products */}
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] place-items-center gap-x-2 gap-y-16 my-10">
+        {searched.map((item, i) => (
+          <Productcard key={i} product={item} />
+        ))}
+      </div>
     </div>
   );
 }

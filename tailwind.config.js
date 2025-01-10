@@ -12,6 +12,7 @@ module.exports = {
         foreground: "var(--foreground)",
         theme: "#8e766e",
         footercolor: "#e7e2de",
+        adminbg: "#f9fafa",
       },
       fontFamily: {
         tenor: ['"Tenor Sans"', "sans-serif"],

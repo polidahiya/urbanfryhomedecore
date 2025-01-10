@@ -107,3 +107,19 @@ body {
     display: flex;
   }
 }
+
+/* blinkingdot */
+.blinkingdot {
+  animation: blinkingdot 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes blinkingdot {
+  0% {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}

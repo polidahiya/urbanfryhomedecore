@@ -1,5 +1,7 @@
 import React from "react";
 import { RiDeleteBackFill } from "react-icons/ri";
+import { TextField } from "@mui/material";
+
 
 function Standardinputfield({
   titlename,
@@ -26,7 +28,7 @@ function Standardinputfield({
         />
         <button
           type="button"
-          className="px-4 py-2 border  text-red-500 rounded-md "
+          className="px-4 py-2 border rounded-md "
           onClick={clear}
         >
           <RiDeleteBackFill className="h-full w-full" />
