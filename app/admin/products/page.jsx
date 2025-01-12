@@ -46,7 +46,7 @@ function Page() {
               setdeletedimages={setdeletedimages}
             />
             <button
-              className="fixed top-5 right-5 w-10 aspect-square bg-slate-300"
+              className="fixed top-1 right-1 md:top-5 md:right-5 w-10 aspect-square bg-slate-300"
               onClick={() => setshowform(false)}
             >
               x
@@ -55,7 +55,12 @@ function Page() {
         )}
       </div>
       {!showform && (
-        <Showproducts setdata={setdata} setdeletedimages={setdeletedimages} />
+        <Showproducts
+          setdata={setdata}
+          setdeletedimages={setdeletedimages}
+          setshowform={setshowform}
+          resetState={resetState}
+        />
       )}
     </div>
   );

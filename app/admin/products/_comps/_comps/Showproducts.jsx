@@ -5,12 +5,15 @@ import { Roomsearchproducts } from "@/app/_serveractions/_admin/Getliveproducts"
 import { AppContextfn } from "@/app/Context";
 import { Deleteproduct } from "@/app/_serveractions/_admin/adminAddproduct";
 import Adminsearchbar from "@/app/admin/_comps/_adminnavbar/Adminsearchbar";
+import { GrUpdate } from "react-icons/gr";
+import { AiFillDelete } from "react-icons/ai";
+import { IoCopy } from "react-icons/io5";
 
-function Showproducts({ setdata, setdeletedimages }) {
+function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
   const { setmessagefn } = AppContextfn();
   const [filterdata, setfilterdata] = useState({
-    categories: "Photo-Frames",
-    rooms: "Living-Room",
+    categories: "",
+    rooms: "",
   });
   const [search, setsearch] = useState("");
   const [products, setproducts] = useState([]);
@@ -28,7 +31,19 @@ function Showproducts({ setdata, setdeletedimages }) {
 
   return (
     <div className="px-5 md:px-10">
-      <p className="my-10 font-semibold text-2xl">Products</p>
+      <p className="my-10  flex items-center justify-between">
+        <span className="font-semibold text-2xl">Products</span>{" "}
+        <button
+          className="px-5 py-2 rounded-md bg-theme text-white"
+          onClick={() => {
+            setshowform(true);
+            resetState();
+            setdeletedimages([]);
+          }}
+        >
+          + <span className="hidden md:inline">Add New</span>
+        </button>
+      </p>
       <Adminsearchbar
         search={search}
         setsearch={setsearch}
@@ -63,6 +78,7 @@ function Showproducts({ setdata, setdeletedimages }) {
               setproducts={setproducts}
               setdata={setdata}
               setdeletedimages={setdeletedimages}
+              setshowform={setshowform}
             />
           ))}
         </div>
@@ -75,7 +91,13 @@ function Showproducts({ setdata, setdeletedimages }) {
   );
 }
 
-const Productcard = ({ product, setproducts, setdata, setdeletedimages }) => {
+const Productcard = ({
+  product,
+  setproducts,
+  setdata,
+  setdeletedimages,
+  setshowform,
+}) => {
   const { setshowdialog, setmessagefn } = AppContextfn();
 
   const handledeleteproduct = async (product) => {
@@ -87,38 +109,61 @@ const Productcard = ({ product, setproducts, setdata, setdeletedimages }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative max-w-72">
       <img
         src={product.variants[0].images[0]}
         alt="product image"
         className="w-full aspect-square object-cover"
       />
-      <p className="mt-1">{product?.productName}</p>
-      {/* update button */}
-      <button
-        className="absolute top-0 left-0 text-xs bg-green-500 text-white px-5 py-1"
-        onClick={() => {
-          setdata(product);
-          setdeletedimages([]);
-        }}
-      >
-        update
-      </button>
-      <button
-        className="absolute top-0 right-0 text-xs bg-red-500 text-white px-5 py-1"
-        onClick={() => {
-          setshowdialog({
-            show: true,
-            title: "Confirm Delete?",
-            continue: () => {
-              handledeleteproduct(product);
-            },
-            type: false,
-          });
-        }}
-      >
-        Delete
-      </button>
+      <p className="mt-1 text-center">{product?.productName}</p>
+      <div className="absolute top-0 right-0 flex flex-col gap-1 p-1">
+        {/* update button */}
+        <button
+          className="text-xs bg-green-500 text-white rounded-full p-2"
+          onClick={() => {
+            setdata(product);
+            setdeletedimages([]);
+            setshowform(true);
+          }}
+        >
+          <GrUpdate />
+        </button>
+        {/* copy */}
+        <button
+          className="text-xs bg-sky-600 text-white rounded-full p-2"
+          onClick={() => {
+            const updateddata = { ...product };
+            delete updateddata._id;
+            updateddata.sku = "";
+            updateddata.variants.forEach((variant) => {
+              variant.images = [];
+            });
+            console.log(updateddata);
+
+            setdata(updateddata);
+            setdeletedimages([]);
+            setshowform(true);
+          }}
+        >
+          <IoCopy />
+        </button>
+        {/* delete button */}
+        <button
+          className="text-xs bg-red-500 text-white rounded-full p-2"
+          onClick={() => {
+            setshowdialog({
+              show: true,
+              title: "Confirm Delete?",
+              continue: () => {
+                handledeleteproduct(product);
+              },
+              type: false,
+            });
+          }}
+        >
+          <AiFillDelete />
+        </button>
+      </div>
     </div>
   );
 };

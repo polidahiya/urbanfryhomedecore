@@ -70,6 +70,12 @@ const ProductVariants = ({
     }
   };
 
+  const handleupdateimage = (index, imgIndex, file) => {
+    const updatedVariants = [...variants];
+    updatedVariants[index].images[imgIndex] = file;
+    setstate((pre) => ({ ...pre, variants: updatedVariants }));
+  };
+
   return (
     <div>
       {variants?.map((variant, index) => (
@@ -97,59 +103,77 @@ const ProductVariants = ({
 
           <div className="mt-5">
             <h4 className="font-medium mb-2 text-sm">Images:</h4>
-            {variant.images.map((image, imgIndex) => (
-              <div
-                key={imgIndex}
-                className="flex gap-2 flex-col items-center mb-2"
-              >
-                <img
-                  src={
-                    image instanceof File ? URL.createObjectURL(image) : image
-                  }
-                  alt={`Variant ${index} Image ${imgIndex}`}
-                  className="w-32 aspect-square object-cover border"
-                />
-                <div className="flex gap-1">
-                  <button
-                    type="button"
-                    onClick={() => handleMoveImage(index, imgIndex, -1)}
-                    className="h-full aspect-square text-sm border rounded-md"
-                  >
-                    <BsArrowLeftShort className="inline-block" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleMoveImage(index, imgIndex, 1)}
-                    className="h-full aspect-square text-sm border rounded-md"
-                  >
-                    <BsArrowLeftShort className="inline-block rotate-180" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteImage(index, imgIndex)}
-                    className="h-full aspect-square text-sm border rounded-md"
-                  >
-                    <MdDeleteOutline className="inline-block" />
-                  </button>
+            <div className="flex items-start justify-center gap-2 flex-wrap">
+              {variant.images.map((image, imgIndex) => (
+                <div
+                  key={imgIndex}
+                  className="flex gap-2 flex-col items-center"
+                >
+                  <img
+                    src={
+                      image instanceof File ? URL.createObjectURL(image) : image
+                    }
+                    alt={`Variant ${index} Image ${imgIndex}`}
+                    className="w-32 aspect-square object-cover border"
+                  />
+                  <div className="flex gap-1 h-8">
+                    <button
+                      type="button"
+                      onClick={() => handleMoveImage(index, imgIndex, -1)}
+                      className="h-full aspect-square text-sm border rounded-md"
+                    >
+                      <BsArrowLeftShort className="inline-block" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleMoveImage(index, imgIndex, 1)}
+                      className="h-full aspect-square text-sm border rounded-md"
+                    >
+                      <BsArrowLeftShort className="inline-block rotate-180" />
+                    </button>
+                    {/* Replace Image Button */}
+                    <label className="h-full aspect-square text-blue-500 border rounded-md flex items-center justify-center cursor-pointer">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            handleupdateimage(index, imgIndex, file);
+                          }
+                          e.target.value = null; // Reset input
+                        }}
+                        className="hidden"
+                      />
+                      ↺
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteImage(index, imgIndex)}
+                      className="h-full aspect-square text-sm border rounded-md"
+                    >
+                      <MdDeleteOutline className="inline-block" />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-            <div className="relative border border-dotted border-slate-300 cursor-pointer w-32 aspect-square rounded-md">
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={(e) => {
-                  Array.from(e.target.files).forEach((file) =>
-                    handleAddImage(index, file)
-                  );
-                  e.target.value = null;
-                }}
-                className="absolute inset-0 mt-2 opacity-0 z-10 cursor-pointer"
-              />
-              <div className="h-full w-full pointer-events-none flex flex-col gap-2 items-center justify-center">
-                <BiSolidImageAdd className="text-5xl" />
-                <p className=" text-center text-sm">Add Image</p>
+              ))}
+              <div className="relative border border-dotted border-slate-300 cursor-pointer w-32 aspect-square rounded-md">
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => {
+                    Array.from(e.target.files).forEach((file) =>
+                      handleAddImage(index, file)
+                    );
+                    e.target.value = null;
+                  }}
+                  className="absolute inset-0 mt-2 opacity-0 z-10 cursor-pointer"
+                />
+                <div className="h-full w-full pointer-events-none flex flex-col gap-2 items-center justify-center">
+                  <BiSolidImageAdd className="text-5xl" />
+                  <p className=" text-center text-sm">Add Image</p>
+                </div>
               </div>
             </div>
           </div>
@@ -157,7 +181,7 @@ const ProductVariants = ({
             <button
               type="button"
               onClick={() => handleDeleteVariant(index)}
-              className="border px-4 py-2 rounded-md mt-4 float-right"
+              className="border px-4 py-2 rounded-md mt-4 float-right lg:hover:bg-red-500 lg:hover:text-white"
             >
               Delete Variant
             </button>

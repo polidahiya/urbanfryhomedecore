@@ -26,8 +26,8 @@ function Adminnav() {
     { href: "/admin/settings", label: "Settings", logo: <IoSettingsSharp /> },
   ];
   return (
-    <nav className="sticky top-0 flex flex-col h-screen p-5 w-64 z-20 bg-adminbg">
-      <Link href="/" className="px-5">
+    <nav className="sticky top-0 w-fit flex flex-col h-screen px-1 pb-5 md:p-5  md:w-64 z-20 bg-adminbg">
+      <Link href="/" className="px-5 hidden md:block">
         <Image src="/logo.png" alt="logo" height={40} width={150} />
       </Link>
       <div className="flex flex-col flex-1 w-full pt-5">
@@ -51,7 +51,7 @@ function Adminnav() {
           className={`relative w-full flex items-center gap-2 px-5 py-3 lg:hover:bg-slate-200 rounded-md`}
         >
           <IoLogOut />
-          Logout
+          <span className="hidden md:block">Logout</span>
         </button>
       </div>
     </nav>

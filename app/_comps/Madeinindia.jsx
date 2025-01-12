@@ -54,10 +54,10 @@ function Madeinindia() {
             @AltOrganizers
           </Link>
         </div>
-        <div className="flex items-start gap-5 px-5 w-full overflow-x-scroll">
+        <div className="flex items-start gap-5 px-5 w-full overflow-x-scroll snap-mandatory snap-x snap-always">
           {/* Dynamically map posts */}
           {posts.map((postUrl, index) => (
-            <div key={index}>
+            <div key={index} className="snap-center">
               <blockquote
                 className="instagram-media"
                 data-instgrm-permalink={postUrl}

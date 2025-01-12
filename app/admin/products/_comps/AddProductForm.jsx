@@ -53,7 +53,7 @@ const AddProductForm = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-6 bg-white shadow-lg rounded-md space-y-6"
+      className="px-1 py-6 md:p-6 bg-white shadow-lg rounded-md space-y-6"
     >
       <h2 className="text-2xl text-center font-semibold text-gray-800">
         Add New Product
