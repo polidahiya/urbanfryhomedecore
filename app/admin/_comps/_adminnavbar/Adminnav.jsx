@@ -26,9 +26,22 @@ function Adminnav() {
     { href: "/admin/settings", label: "Settings", logo: <IoSettingsSharp /> },
   ];
   return (
-    <nav className="sticky top-0 w-fit flex flex-col h-screen px-1 pb-5 md:p-5  md:w-64 z-20 bg-adminbg">
-      <Link href="/" className="px-5 hidden md:block">
-        <Image src="/logo.png" alt="logo" height={40} width={150} />
+    <nav className="sticky top-0 w-fit flex flex-col h-screen px-1 py-5 md:p-5  md:w-64 z-20 bg-adminbg">
+      <Link href="/" className="md:px-5">
+        <Image
+          src="/logo.png"
+          alt="logo"
+          height={40}
+          width={150}
+          className="hidden md:inline"
+        />
+        <Image
+          src="/minilogo.png"
+          alt="logo"
+          height={40}
+          width={40}
+          className=" md:hidden w-full aspect-square"
+        />
       </Link>
       <div className="flex flex-col flex-1 w-full pt-5">
         {navLinks.map(({ href, label, logo }, index) => (

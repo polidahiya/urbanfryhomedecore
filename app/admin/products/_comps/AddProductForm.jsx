@@ -15,6 +15,7 @@ const AddProductForm = ({
   resetState,
   deletedimages,
   setdeletedimages,
+  setshowform,
 }) => {
   const { setmessagefn } = AppContextfn();
   const [loading, setloading] = useState(false);
@@ -38,10 +39,13 @@ const AddProductForm = ({
 
     try {
       const res = await Addproduct(data, formData, deletedimages);
-      setmessagefn(res?.message);
       resetState();
+      setmessagefn(res?.message);
       setloading(false);
       setdeletedimages([]);
+      if (res.status == 200) {
+        setshowform(false);
+      }
     } catch (error) {
       resetState();
       setloading(false);
@@ -263,7 +267,6 @@ const AddProductForm = ({
 };
 
 export default AddProductForm;
-
 
 // import React, { useState } from "react";
 // import Standardinputfield from "./_comps/Standardinputfield";

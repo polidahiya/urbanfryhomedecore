@@ -4,15 +4,11 @@ import { notFound } from "next/navigation";
 import Adminnav from "./_comps/_adminnavbar/Adminnav";
 
 export default async function RootLayout({ children }) {
-  try {
-    const allcookies = await cookies();
-    const parseduserdata = allcookies.get("userdata").value;
-    const userdata = JSON.parse(parseduserdata);
-
-    if (userdata?.usertype !== "admin") {
-      notFound();
-    }
-  } catch (error) {
+  const allcookies = await cookies();
+  const parseduserdata = allcookies.get("userdata");
+  const parseduserdatavalue = parseduserdata?.value;
+  const userdata = JSON.parse(parseduserdatavalue);
+  if (userdata?.usertype !== "admin") {
     notFound();
   }
 

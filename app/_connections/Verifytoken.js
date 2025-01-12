@@ -21,20 +21,25 @@ import { cookies } from "next/headers";
 //   });
 // }
 
-export const Verification = async (permission) => {
+const Verification = async (permission) => {
   try {
     const allcoookies = await cookies();
     const token = allcoookies.get("token")?.value;
-    if (!token) return false;
+    if (!token) return { verified: false };
 
     const decoded = jwt.verify(token, process.env.jwt_secret);
-    
+
     if (
       decoded?.usertype === "admin" ||
-      decoded?.permission?.includes(permission)
-    )
-      return true;
+      decoded?.permission?.includes(permission) ||
+      permission == "public"
+    ) {
+      return { verified: true, email: decoded.email };
+    }
+    return { verified: false };
   } catch (error) {
-    return false;
+    return { verified: false };
   }
 };
+
+export default Verification;

@@ -44,6 +44,7 @@ function Page() {
               resetState={resetState}
               deletedimages={deletedimages}
               setdeletedimages={setdeletedimages}
+              setshowform={setshowform}
             />
             <button
               className="fixed top-1 right-1 md:top-5 md:right-5 w-10 aspect-square bg-slate-300"
