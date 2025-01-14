@@ -65,12 +65,13 @@ const Categories = ({ open }) => {
           togglecategories={togglecategories.categories}
         />
       </div>
-      <div
-        className="underlineff shopcategories w-full relative px-5 py-3 whitespace-nowrap cursor-pointer"
+      <Link
+        href="/collections/all"
+        className="block underlineff shopcategories w-full relative px-5 py-3 whitespace-nowrap cursor-pointer"
         onClick={scrollable}
       >
         <Underlineeffect title={"All Products"} />
-      </div>
+      </Link>
     </div>
   );
 };

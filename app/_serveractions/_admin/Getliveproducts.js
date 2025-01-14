@@ -5,7 +5,6 @@ import { getcollection } from "@/app/_connections/Mongodb";
 export const Roomsearchproducts = async (search) => {
   try {
     const { Productscollection, ObjectId } = await getcollection();
-    // const allproducts = await Productscollection.find().toArray();
 
     const query = {
       $or: [

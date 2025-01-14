@@ -12,39 +12,34 @@ function Herosection() {
 
   const slides = [
     {
-      heading: "Test heading test heading1",
-      para: "test para test this is a para this is a para this is a para para1",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-5Ji2hus-Az7tBv90olflynKz9CFQp-HcSA&s",
+      heading: "Altorganisers : Redefining Spaces",
+      para: "Get ready to organize your space like never before",
+      image: "/heroimages/1.jpg",
       link: "/",
     },
     {
-      heading: "Test heading test heading this is a heading this is a heading2",
-      para: "test para test this is a para this is a para this is a para para2",
-      image:
-        "https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      link: "/",
+      heading: "Nursery, Crafted with love",
+      para: "Keep your little one’s space tidy and adorable with our wooden nursery organizers",
+      image: "/heroimages/2.jpg",
+      link: "/collections/rooms/Nursery",
     },
     {
-      heading: "Test heading test heading3",
-      para: "test para test this is a para this is a para this is a para para3",
-      image:
-        "https://imgmedia.lbb.in/media/2022/01/61daa11cd966c63a4d39fd17_1641718044595.jpg",
-      link: "/",
+      heading: "Brew in Style with Our Coffee Organizers",
+      para: "Stylish wooden organizers for the ultimate home coffee bar.",
+      image: "/heroimages/3.jpg",
+      link: "/collections/rooms/Living-Room",
     },
     {
-      heading: "Test heading test heading4",
-      para: "test para test this is a para this is a para this is a para para4",
-      image:
-        "https://www.jiomart.com/images/product/original/rvxl0fngu9/overspread-interior-hub-stylish-flower-design-metal-wall-art-decor-for-living-room-bedroom-kids-room-kitchen-office-wall-hanging-decoration-items-for-home-decor-size-45-x-38-cm-black-medium-product-images-orvxl0fngu9-p604578094-2-202309221750.png?im=Resize=(420,420)",
-      link: "/",
+      heading: "AltOrganisers Wall Art",
+      para: "Minimalist art that speaks volumes",
+      image: "/heroimages/4.jpg",
+      link: "/collections/categories/Photo-Frames",
     },
     {
-      heading: "Test heading test heading5",
-      para: "test para test this is a para this is a para this is a para para5",
-      image:
-        "https://images.jdmagicbox.com/rep/b2b/wall-paper/wall-paper-11.jpg",
-      link: "/",
+      heading: "Style up with our shelves",
+      para: "Bring home pieces that bring joy to everyday moments",
+      image: "/heroimages/5.jpg",
+      link: "/collections/categories/Wall-Shelves",
     },
   ];
 

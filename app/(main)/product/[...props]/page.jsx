@@ -6,6 +6,7 @@ import Featuredin from "../../../_comps/Featuredin";
 import Underlineeffect from "../../../_globalcomps/Underlineeffect";
 import Link from "next/link";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
+import Commentcomp from "./_comps/_commentcomp/Commentcomp";
 
 async function page({ params }) {
   const props = (await params).props;
@@ -44,6 +45,9 @@ async function page({ params }) {
           </div>
         </div>
         <Details product={product} color={color} />
+      </div>
+      <div>
+        <Commentcomp />
       </div>
       <div className="">
         <Newarrivals heading="Similar Products" data={similarproducts} />
