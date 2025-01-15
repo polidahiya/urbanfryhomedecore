@@ -12,25 +12,12 @@ import Sidemenu from "./_navbarcomps/Sidemenu";
 
 function Navbar({ navtype, token, userdata }) {
   const { setshowsearchbar } = AppContextfn();
-  const [shownav, setshownav] = useState(true);
   const [transparentnav, settransparentnav] = useState(true);
   const [sidemenutoggle, setsidemenutoggle] = useState(false);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-
-    const handleScroll = () => {
-      // set transparency
+    const handleScroll = () =>
       settransparentnav(window.scrollY > 50 ? false : true);
-      //
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY) {
-        setshownav(false);
-      } else if (currentScrollY < lastScrollY) {
-        setshownav(true);
-      }
-      lastScrollY = currentScrollY;
-    };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -40,7 +27,7 @@ function Navbar({ navtype, token, userdata }) {
     <nav
       className={`fixed navhover top-0 left-0 w-full flex items-center px-5 md:px-10 h-20  hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
         ${navtype && transparentnav ? "text-white" : "bg-white text-inherit"} 
-        ${shownav ? "translate-y-0" : "-translate-y-full"}`}
+        `}
     >
       <Menubutton
         sidemenutoggle={sidemenutoggle}

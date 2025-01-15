@@ -4,10 +4,7 @@ import { IoMdStar, IoMdStarHalf, IoMdStarOutline } from "react-icons/io";
 import { MdAccountCircle } from "react-icons/md";
 
 function Commentcomp() {
-  const [showwritereview, setshowwritereview] = useState({
-    effect: false,
-    show: false,
-  });
+  const [showwritereview, setshowwritereview] = useState(false);
 
   const formatDate = (date) => {
     const day = String(date.getDate()).padStart(2, "0"); // Add leading zero to the day
@@ -49,6 +46,7 @@ function Commentcomp() {
       star: 2,
     },
   ];
+
   return (
     <div className="mt-10">
       <h2 className="text-center text-2xl font-tenor">Customer Reviews</h2>
@@ -58,10 +56,9 @@ function Commentcomp() {
             showwritereview={showwritereview}
             setshowwritereview={setshowwritereview}
           />
-          <Writereview
-            showwritereview={showwritereview}
-            setshowwritereview={setshowwritereview}
-          />
+          {showwritereview && (
+            <Writereview setshowwritereview={setshowwritereview} />
+          )}
         </>
       ) : (
         <>
@@ -70,10 +67,9 @@ function Commentcomp() {
             showwritereview={showwritereview}
             setshowwritereview={setshowwritereview}
           />
-          <Writereview
-            showwritereview={showwritereview}
-            setshowwritereview={setshowwritereview}
-          />
+          {showwritereview && (
+            <Writereview setshowwritereview={setshowwritereview} />
+          )}
           <Reviews Comments={Comments} />
         </>
       )}
@@ -118,8 +114,9 @@ const Reviewsoverview = ({ Comments, showwritereview, setshowwritereview }) => {
     <div className="mt-5">
       <div className="flex items-center justify-center flex-col lg:flex-row gap-10 lg:gap-0">
         <div>
-          <p className="flex items-center">
-            <RatingStars rating={averageRating} /> {averageRating} out of 5
+          <p className="flex items-center gap-2">
+            <RatingStars rating={averageRating} />
+            <span>{averageRating} out of 5</span>
           </p>
           <p>Based on {totalRatings} reviews</p>
         </div>
@@ -185,26 +182,103 @@ const Noreviews = ({ showwritereview, setshowwritereview }) => {
         <p>Be the first to write a review</p>
       </div>
       <div className="bg-slate-300 bg-opacity-50 w-px h-10 hidden md:block"></div>
-      <Reviewbutton />
+      <Reviewbutton
+        showwritereview={showwritereview}
+        setshowwritereview={setshowwritereview}
+      />
     </div>
   );
 };
 
-const Writereview = ({ showwritereview, setshowwritereview }) => {
-  return <div></div>;
+const Writereview = ({ setshowwritereview }) => {
+  const [data, setdata] = useState({
+    name: "",
+    email: "",
+    comment: "",
+    star: 0,
+  });
+
+  const Handlesubmit = () => {};
+
+  return (
+    <div className="px-2 md:px-10 mt-10">
+      <div className="max-w-2xl flex flex-col items-center mx-auto">
+        <p className="text-2xl font-black">Write a review</p>
+        <p className="mt-4">Rating</p>
+        <StarRating data={data} setdata={setdata} />
+        <input
+          type="text"
+          value={data?.name}
+          onChange={(e) => setdata((pre) => ({ ...pre, name: e.target.value }))}
+          className="w-full p-2 mt-5 outline outline-1 outline-slate-300 focus:outline-slate-600"
+          placeholder="Enter Your Name."
+        />
+        <input
+          type="text"
+          value={data?.comment}
+          onChange={(e) =>
+            setdata((pre) => ({ ...pre, comment: e.target.value }))
+          }
+          className="w-full p-2 mt-5 outline outline-1 outline-slate-300 focus:outline-slate-600"
+          placeholder="Enter Your Email."
+        />
+        <textarea
+          value={data?.email}
+          onChange={(e) =>
+            setdata((pre) => ({ ...pre, email: e.target.value }))
+          }
+          className="w-full p-2 mt-5 min-h-56 outline outline-1 outline-slate-300 focus:outline-slate-600"
+          placeholder="Write your comments here."
+        ></textarea>
+        <div className="flex items-center justify-center gap-5 mt-5 h-10">
+          <button
+            className="h-full px-10 border border-theme text-theme lg:hover:opacity-75"
+            onClick={() => setshowwritereview(false)}
+          >
+            Cancle Review
+          </button>
+          <button
+            className="h-full px-10 bg-theme text-white  lg:hover:opacity-75"
+            onClick={Handlesubmit}
+          >
+            Submit Review
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const StarRating = ({ data, setdata }) => {
+  const [hoveredStar, setHoveredStar] = useState(0);
+
+  return (
+    <div className="flex">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <div
+          key={star}
+          onMouseEnter={() => setHoveredStar(star)}
+          onMouseLeave={() => setHoveredStar(0)}
+          onClick={() => setdata((pre) => ({ ...pre, star: star }))}
+          className="cursor-pointer text-3xl"
+        >
+          {star <= (hoveredStar || data.star) ? (
+            <IoMdStar className="text-theme " />
+          ) : (
+            <IoMdStarOutline className="text-gray-400" />
+          )}
+        </div>
+      ))}
+    </div>
+  );
 };
 
 const Reviewbutton = ({ showwritereview, setshowwritereview }) => (
   <button
-    className="bg-theme text-white px-10 py-2"
-    onClick={() => {
-      setshowwritereview((pre) => ({ effect: false, show: true }));
-      setTimeout(() => {
-        setshowwritereview((pre) => ({ effect: false, show: true }));
-      }, 100);
-    }}
+    className="bg-theme text-white px-10 py-2 lg:hover:opacity-75"
+    onClick={() => setshowwritereview((pre) => !pre)}
   >
-    Write a review
+    {showwritereview ? "Cancle review" : "Write a review"}
   </button>
 );
 

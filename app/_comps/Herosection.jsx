@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import Link from "next/link";
+import Image from "next/image";
 
 function Herosection() {
   const [slidenumber, setslidenumber] = useState(0);
@@ -15,7 +16,7 @@ function Herosection() {
       heading: "Altorganisers : Redefining Spaces",
       para: "Get ready to organize your space like never before",
       image: "/heroimages/1.jpg",
-      link: "/",
+      link: "/collections/all",
     },
     {
       heading: "Nursery, Crafted with love",
@@ -88,12 +89,16 @@ function Herosection() {
           }}
         >
           {slides.map((slide, i) => (
-            <img
+            <Image
               key={i}
+              height={600}
+              width={600}
               src={slide.image}
               alt={slide.heading}
+              priority={i == 0 ? true : false}
+              loading={i == 0 ? "eager" : "lazy"}
               className="h-full min-w-full object-cover"
-            />
+            ></Image>
           ))}
         </div>
       </section>
@@ -106,7 +111,7 @@ function Herosection() {
               className="w-full min-w-full h-full flex flex-col items-center justify-center"
             >
               <h2
-                className="text-2xl lg:text-6xl font-tenor w-full min-w-full px-10"
+                className="text-4xl lg:text-6xl font-tenor w-full min-w-full px-10"
                 style={{
                   transform: `translateX(-${slidenumber * 100}%)`,
                   transition:
@@ -118,7 +123,7 @@ function Herosection() {
                 {slide.heading}
               </h2>
               <p
-                className="mt-2 w-full min-w-full px-10 text-sm lg:text-base"
+                className="mt-5 lg:mt-2 w-full min-w-full px-10 text-sm lg:text-base"
                 style={{
                   transform: `translateX(-${slidenumber * 100}%)`,
                   transition:
