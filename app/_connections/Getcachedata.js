@@ -27,6 +27,30 @@ export async function refreshproductsnow() {
   }
 }
 
+// reviews
+export const Cachedreviews = unstable_cache(
+  async () => {
+    const { reviewscollection } = await getcollection();
+    const reviewslist = await reviewscollection.find().toArray();
+    return reviewslist.map((item) => ({
+      ...item,
+      _id: item._id.toString(),
+    }));
+  },
+  ["reviews"],
+  { revalidate: CACHE_TIME, tags: ["reviews"] }
+);
+
+export async function refreshreviewsnow() {
+  try {
+    revalidateTag("reviews");
+    return { status: 200, message: "Reviews Refreshed on site" };
+  } catch (error) {
+    console.log(error);
+    return { status: 500, message: "Server Error!" };
+  }
+}
+
 // blogs
 export const Cachedblogs = unstable_cache(
   async () => {

@@ -17,6 +17,7 @@ async function connectToDatabase() {
       Productscollection: db.collection("Products"),
       userscollection: db.collection("users"),
       orderscollection: db.collection("orders"),
+      reviewscollection: db.collection("reviews"),
       contactmessages: db.collection("contactmessages"),
     };
   }
@@ -24,7 +25,7 @@ async function connectToDatabase() {
   return collections;
 }
 
-export async function  getcollection() {
+export async function getcollection() {
   await connectToDatabase();
   return { ...collections, ObjectId };
 }

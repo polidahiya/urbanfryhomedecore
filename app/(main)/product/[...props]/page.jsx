@@ -2,13 +2,19 @@ import React from "react";
 import Details from "./_comps/Details";
 import Imagescomp from "./_comps/Imagescomp";
 import Newarrivals from "../../../_comps/Newarrivals";
-import Featuredin from "../../../_comps/Featuredin";
 import Underlineeffect from "../../../_globalcomps/Underlineeffect";
 import Link from "next/link";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 import Commentcomp from "./_comps/_commentcomp/Commentcomp";
+import { Cachedreviews } from "@/app/_connections/Getcachedata";
+import { cookies } from "next/headers";
 
 async function page({ params }) {
+  const allcookies = await cookies();
+  const token = allcookies.get("token");
+  const parseduserdata = allcookies.get("userdata")?.value;
+  const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
+
   const props = (await params).props;
   const sku = props[0];
   const color = props[1] || 0;
@@ -20,6 +26,9 @@ async function page({ params }) {
       similarproduct.categories === product.categories &&
       similarproduct.sku !== product.sku
   );
+
+  const allreviews = await Cachedreviews();
+  const filteredreviews = allreviews.filter((item) => item.sku == sku);
 
   return (
     <div className="min-h-screen">
@@ -47,12 +56,16 @@ async function page({ params }) {
         <Details product={product} color={color} />
       </div>
       <div>
-        <Commentcomp />
+        <Commentcomp
+          sku={product.sku}
+          Comments={filteredreviews}
+          token={token}
+          userdata={userdata}
+        />
       </div>
       <div className="">
         <Newarrivals heading="Similar Products" data={similarproducts} />
       </div>
-      <Featuredin />
     </div>
   );
 }
