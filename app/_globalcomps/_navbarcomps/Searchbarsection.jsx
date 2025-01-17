@@ -48,7 +48,7 @@ function Searchbarsection() {
         <div
           className={`w-full flex items-center justify-between  h-20 text-inherit text-xs`}
         >
-          <img src="/logo.png" alt="" className={`h-10 mr-2 invert`} />
+          <img src="/uiimages/logo.png" alt="" className={`h-10 mr-2 invert`} />
           <button
             className="group h-full"
             onClick={() => setshowsearchbar(false)}

@@ -3,42 +3,10 @@ import Link from "next/link";
 import { staticdata } from "../commondata";
 
 function Collections() {
-  const list = [
-    {
-      title: "Moss Mania",
-      img: "https://loopsbylj.com/cdn/shop/files/Screen_Shot_2024-10-07_at_11.09.29_PM.png?v=1728322797&width=2000",
-      link: "/",
-    },
-    {
-      title: "Moss Mania",
-      img: "https://loopsbylj.com/cdn/shop/files/Screen_Shot_2024-10-07_at_11.09.29_PM.png?v=1728322797&width=2000",
-      link: "/",
-    },
-    {
-      title: "Moss Mania",
-      img: "https://loopsbylj.com/cdn/shop/files/Screen_Shot_2024-10-07_at_11.09.29_PM.png?v=1728322797&width=2000",
-      link: "/",
-    },
-    {
-      title: "Moss Mania",
-      img: "https://loopsbylj.com/cdn/shop/files/Screen_Shot_2024-10-07_at_11.09.29_PM.png?v=1728322797&width=2000",
-      link: "/",
-    },
-    {
-      title: "Moss Mania sdfdsfd dsfsdf",
-      img: "https://loopsbylj.com/cdn/shop/files/Screen_Shot_2024-10-07_at_11.09.29_PM.png?v=1728322797&width=2000",
-      link: "/",
-    },
-    {
-      title: "Moss Mania",
-      img: "https://loopsbylj.com/cdn/shop/files/Screen_Shot_2024-10-07_at_11.09.29_PM.png?v=1728322797&width=2000",
-      link: "/",
-    },
-  ];
   return (
     <div className="p-5 md:p-8">
       <h2 className="text-4xl md:text-6xl font-tenor">Collections</h2>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-1 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-1 mt-10">
         {Object.entries(staticdata.categories).map(([key, value], i) => (
           <Link
             key={i}

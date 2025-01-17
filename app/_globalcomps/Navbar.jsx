@@ -35,7 +35,7 @@ function Navbar({ navtype, token, userdata }) {
       />
       <Link href={"/"}>
         <img
-          src="/logo.png"
+          src="/uiimages/logo.png"
           alt=""
           className={`navhoverlogo h-10 mr-2 ${!navtype && "invert"} ${
             !transparentnav && "invert"

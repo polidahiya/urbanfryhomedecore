@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
 import { AppContextfn } from "@/app/Context";
+import { useRouter } from "next/navigation";
 
 function Cartbutton({ cartproductname }) {
+  const router = useRouter();
   const { cart, setcart, setmessagefn } = AppContextfn();
   const MAX_QUANTITY = 10; // Define the maximum quantity
 
@@ -32,6 +34,11 @@ function Cartbutton({ cartproductname }) {
 
   // add to cart button
   const handleAddToCart = () => {
+    if (cart[cartproductname]?.added) {
+      router.push("/cart");
+      return;
+    }
+
     setcart((pre) => {
       const updatedcart = { ...pre };
       updatedcart[cartproductname] = {
