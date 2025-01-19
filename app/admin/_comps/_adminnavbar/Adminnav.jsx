@@ -26,7 +26,7 @@ function Adminnav() {
     { href: "/admin/settings", label: "Settings", logo: <IoSettingsSharp /> },
   ];
   return (
-    <nav className="sticky top-0 w-fit flex flex-col h-screen px-1 py-5 md:p-5  md:w-64 z-20 bg-adminbg">
+    <nav className="sticky top-0 w-fit flex flex-col h-screen px-1 py-5 md:p-5  md:w-64 bg-adminbg">
       <Link href="/" className="md:px-5">
         <Image
           src="/uiimages/logo.png"

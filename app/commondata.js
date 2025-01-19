@@ -80,3 +80,5 @@ export const permissions = {
     products: ["Add_and_update_products", "Delete_products"],
   },
 };
+
+export const Statuslists = ["Pending", "Processing", "Shipped", "Delivered"];

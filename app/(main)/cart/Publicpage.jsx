@@ -27,8 +27,8 @@ function Publicpage({ userdata, token }) {
       return;
     }
     const res = await addorder(cartitems, totalPrice, paymentMethod, userdata);
-    if (res.status != 200 && paymentMethod == "online")
-      setmessagefn(res?.message);
+
+    setmessagefn(res?.message);
 
     if (res.status === 200) {
       if (paymentMethod == "online") {

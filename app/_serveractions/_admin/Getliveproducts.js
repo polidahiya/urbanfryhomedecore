@@ -1,9 +1,14 @@
 "use server";
-
 import { getcollection } from "@/app/_connections/Mongodb";
+import Verification from "@/app/_connections/Verifytoken";
 
 export const Roomsearchproducts = async (search) => {
   try {
+    const res = await Verification("View_admin_Products");
+    if (!res?.verified) {
+      return { status: 400, message: "Invalid user" };
+    }
+
     const { Productscollection, ObjectId } = await getcollection();
 
     const query = {
@@ -20,7 +25,7 @@ export const Roomsearchproducts = async (search) => {
     const allproducts = await Productscollection.find(query).toArray();
     allproducts.map((item) => (item._id = item._id.toString()));
 
-    return { status: 500, message: "", data: allproducts };
+    return { status: 200, message: "", data: allproducts };
   } catch (error) {
     return { status: 500, message: "Server Error!" };
   }
