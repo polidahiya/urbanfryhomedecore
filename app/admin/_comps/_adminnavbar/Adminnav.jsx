@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaDollyFlatbed } from "react-icons/fa";
-import { RiBloggerFill } from "react-icons/ri";
 import { IoBagAdd } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
 import { IoSettingsSharp } from "react-icons/io5";
@@ -12,6 +11,7 @@ import { IoLogOut } from "react-icons/io5";
 import { usePathname } from "next/navigation";
 import { logout } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
+import { RiCoupon2Fill } from "react-icons/ri";
 
 function Adminnav() {
   const { setmessagefn } = AppContextfn();
@@ -19,7 +19,7 @@ function Adminnav() {
   const navLinks = [
     { href: "/admin", label: "Home", logo: <IoHome /> },
     { href: "/admin/orders", label: "Orders", logo: <FaDollyFlatbed /> },
-    { href: "/admin/Blogs", label: "Blogs", logo: <RiBloggerFill /> },
+    { href: "/admin/coupons", label: "Coupons", logo: <RiCoupon2Fill /> },
     { href: "/admin/products", label: "Products", logo: <IoBagAdd /> },
     {
       href: "/admin/contactmessages",

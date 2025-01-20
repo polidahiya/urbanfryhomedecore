@@ -51,7 +51,7 @@ function Madeinindia() {
             href="https://www.instagram.com/altorganisers/"
             className="underline"
           >
-            @AltOrganizers
+            @AltOrganisers
           </Link>
         </div>
         <div className="flex items-start gap-5 px-5 w-full overflow-x-scroll snap-mandatory snap-x snap-always">

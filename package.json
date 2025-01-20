@@ -18,7 +18,6 @@
     "next-auth": "^4.24.11",
     "nextjs-google-analytics": "^2.3.7",
     "nodemailer": "^6.9.16",
-    "payu-websdk": "^1.1.1",
     "razorpay": "^2.9.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

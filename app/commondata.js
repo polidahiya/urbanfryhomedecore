@@ -68,6 +68,20 @@ export const staticdata = {
   },
 };
 
+export const cities = [
+  "Bengaluru",
+  "Mumbai",
+  "Gurgaon",
+  "New Delhi",
+  "Chennai",
+  "Hyderabad",
+  "Pune",
+  "Noida",
+  "Jaipur",
+  "Kolkata",
+  "Goa",
+];
+
 // login time
 export const logintime = 3600 * 24 * 30;
 

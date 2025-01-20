@@ -19,6 +19,7 @@ async function connectToDatabase() {
       orderscollection: db.collection("orders"),
       reviewscollection: db.collection("reviews"),
       contactmessages: db.collection("contactmessages"),
+      couponscollection: db.collection("couponscollection"),
     };
   }
 
