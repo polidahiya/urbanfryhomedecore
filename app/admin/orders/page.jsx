@@ -21,6 +21,7 @@ function Page() {
 
   useEffect(() => {
     (async () => {
+      setloading(true);
       const res = await Getorders(
         ordertype,
         search,
@@ -60,7 +61,10 @@ function Page() {
             </button>
             <button
               className={`border rounded-md px-5 py-1`}
-              onClick={() => setrefresher((pre) => !pre)}
+              onClick={() => {
+                setrefresher((pre) => !pre);
+                setmessagefn("Update successful");
+              }}
             >
               <BiRefresh />
             </button>
@@ -128,6 +132,7 @@ function Page() {
         <Showfullorder
           showfullorder={showfullorder}
           setshowfullorder={setshowfullorder}
+          setrefresher={setrefresher}
         />
       )}
     </div>

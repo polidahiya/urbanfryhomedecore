@@ -7,8 +7,12 @@ export default async function RootLayout({ children }) {
   const allcookies = await cookies();
   const parseduserdata = allcookies.get("userdata");
   const parseduserdatavalue = parseduserdata?.value;
-  const userdata = JSON.parse(parseduserdatavalue);
-  if (userdata?.usertype !== "admin") {
+  if (parseduserdatavalue) {
+    const userdata = JSON.parse(parseduserdatavalue);
+    if (userdata?.usertype !== "admin") {
+      notFound();
+    }
+  } else {
     notFound();
   }
 

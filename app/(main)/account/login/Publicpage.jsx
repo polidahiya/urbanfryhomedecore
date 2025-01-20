@@ -89,7 +89,7 @@ function Publicpage() {
               </button>
               <Link
                 href={"/account/signup"}
-                className="px-10 py-3 w-fit mt-auto border border-theme text-theme lg:hover:bg-theme lg:hover:text-white duration-300"
+                className="px-5 md:px-10 py-3 w-fit mt-auto border border-theme text-theme lg:hover:bg-theme lg:hover:text-white duration-300"
               >
                 Create Account
               </Link>

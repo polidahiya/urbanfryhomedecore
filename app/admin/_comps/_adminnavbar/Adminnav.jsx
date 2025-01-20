@@ -10,8 +10,11 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
 import { usePathname } from "next/navigation";
+import { logout } from "@/app/_serveractions/signup";
+import { AppContextfn } from "@/app/Context";
 
 function Adminnav() {
+  const { setmessagefn } = AppContextfn();
   const pathname = usePathname();
   const navLinks = [
     { href: "/admin", label: "Home", logo: <IoHome /> },
@@ -25,6 +28,14 @@ function Adminnav() {
     },
     { href: "/admin/settings", label: "Settings", logo: <IoSettingsSharp /> },
   ];
+
+  const Logoutfn = async () => {
+    const res = await logout();
+    setmessagefn(res?.message);
+    if (res?.status == 200) {
+      window.location.href = "/";
+    }
+  };
   return (
     <nav className="sticky top-0 w-fit flex flex-col h-screen px-1 py-5 md:p-5  md:w-64 bg-adminbg">
       <Link href="/" className="md:px-5">
@@ -62,6 +73,7 @@ function Adminnav() {
         ))}
         <button
           className={`relative w-full flex items-center gap-2 px-5 py-3 lg:hover:bg-slate-200 rounded-md`}
+          onClick={Logoutfn}
         >
           <IoLogOut />
           <span className="hidden md:block">Logout</span>

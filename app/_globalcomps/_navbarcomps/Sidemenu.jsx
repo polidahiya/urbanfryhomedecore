@@ -6,9 +6,20 @@ import Link from "next/link";
 import Underlineeffect from "../Underlineeffect";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import Categories from "./Categories";
+import { logout } from "@/app/_serveractions/signup";
+import { AppContextfn } from "@/app/Context";
 
 const Sidemenu = ({ sidemenutoggle, token, userdata }) => {
+  const { setmessagefn } = AppContextfn();
   const [open, setopen] = useState(false);
+
+  const logoutfn = async () => {
+    const res = await logout();
+    setmessagefn(res?.message);
+    if (res?.status == 200) {
+      window.location.reload();
+    }
+  };
 
   return (
     <div
@@ -82,7 +93,9 @@ const Sidemenu = ({ sidemenutoggle, token, userdata }) => {
           <div className="flex flex-col gap-5 px-3">
             <div className="flex justify-between">
               <p>User - {userdata?.username}</p>
-              <button className="underline">Log Out</button>
+              <button className="underline" onClick={logoutfn}>
+                Log Out
+              </button>
             </div>
             <Link
               href={"/cart"}

@@ -36,10 +36,50 @@ export const Getorders = async (
 
     allorders.map((item) => (item._id = item._id.toString()));
 
-    const totalOrders = await orderscollection.countDocuments(queries[ordertype]);
+    const totalOrders = await orderscollection.countDocuments(
+      queries[ordertype]
+    );
 
     return { status: 200, message: "", data: allorders, totalOrders };
   } catch (error) {
     return { status: 500, message: "Server Error!" };
+  }
+};
+
+export const updateorderstatus = async (id, value) => {
+  try {
+    const res = await Verification("View_admin_Orders");
+    if (!res?.verified) {
+      return { status: 400, message: "Invalid user" };
+    }
+
+    const { orderscollection, ObjectId } = await getcollection();
+
+    await orderscollection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { orderstage: value } }
+    );
+    return { status: 200, message: "Update successful" };
+  } catch (error) {
+    return { status: 500, message: "Server error" };
+  }
+};
+
+export const updateordernote = async (id, value) => {
+  try {
+    const res = await Verification("View_admin_Orders");
+    if (!res?.verified) {
+      return { status: 400, message: "Invalid user" };
+    }
+
+    const { orderscollection, ObjectId } = await getcollection();
+
+    await orderscollection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { note: value } }
+    );
+    return { status: 200, message: "Update successful" };
+  } catch (error) {
+    return { status: 500, message: "Server error" };
   }
 };
