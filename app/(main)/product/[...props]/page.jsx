@@ -70,4 +70,24 @@ async function page({ params }) {
   );
 }
 
+export const generateMetadata = async ({ params, searchParams }) => {
+  const props = (await params).props;
+  const sku = props[0];
+  const color = props[1] || 0;
+
+  const products = await Cachedproducts();
+  const product = products.filter((product) => product.sku === sku)[0];
+
+  return {
+    title: product?.seotitle,
+    description:
+      product?.seodescription ||
+      "Check out this amazing product at AltOrganisers!",
+    keywords: product?.seokeywords || "",
+    openGraph: {
+      images: product?.variants[color]?.images[0],
+    },
+  };
+};
+
 export default page;

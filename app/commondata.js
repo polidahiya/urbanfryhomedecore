@@ -1,5 +1,10 @@
 export const mobile = "+91 99999 99999";
 export const mail = "gmail@gmail.com";
+export const Socialaccounts = {
+  insta: "",
+  twitter: "",
+  facebook: "",
+};
 
 export const staticdata = {
   rooms: {
@@ -16,7 +21,7 @@ export const staticdata = {
       desc: "A home office should be both functional and inspiring, offering a space where productivity thrives. Incorporate a comfortable chair, a practical desk, and sufficient lighting to boost focus. Add wall shelves for organizing books, files, or decorative accents like planters and photo frames to keep the space lively. Mirrors can create the illusion of space in smaller rooms, while trays and organizers keep essentials tidy. With the right balance of aesthetics and utility, your home office can become a motivating and creative environment perfect for work or study.",
     },
     Kitchen: {
-      img: "/Categoriesimages/images.jpeg",
+      img: "/Categoriesimages/kitchenOrganisers.jpg",
       desc: "The kitchen is the hub of family life, where meals are prepared and memories are made. Enhance its functionality and style with well-placed decor like wall shelves, planters, and mirrors. Use trays and organizers to keep countertops tidy while adding visual appeal. Stylish kitchen storage solutions like jars or racks can hold essentials without compromising design. Incorporate elegant photo frames or small planters to personalize the space further. With a blend of practicality and beauty, your kitchen can become a space where functionality meets charm.",
     },
     Outdoor: {
@@ -38,7 +43,7 @@ export const staticdata = {
       desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
     },
     "Wall-Shelves": {
-      img: "/Categoriesimages/images.jpeg",
+      img: "/Categoriesimages/wallshelves.jpg",
       desc: "Wall shelves are the perfect blend of style and functionality, offering storage and decor opportunities in any room. Use them to display books, photo frames, planters, or decorative accents, making them ideal for living rooms, bedrooms, or even kitchens. Available in various designs, from minimalist floating shelves to intricate wooden patterns, they can elevate the aesthetic of your space. Wall shelves help declutter while providing an elegant platform for showcasing your personality. Whether creating a gallery wall or optimizing space, these shelves are a must-have for modern homes.",
     },
     Mirrors: {
@@ -54,11 +59,11 @@ export const staticdata = {
       desc: "Trays are versatile decorative pieces that combine functionality with style. Use them to organize essentials like candles, perfumes, or snacks, or as elegant serving pieces during gatherings. Available in various materials like wood, metal, or ceramic, they can match any interior design theme. Trays work perfectly in living rooms, bedrooms, or even kitchens, adding a touch of sophistication to your space. Whether used as table centerpieces or practical organizers, they help keep your home tidy while elevating its decor with a refined, polished look.",
     },
     "Bath-Organizers": {
-      img: "/Categoriesimages/images.jpeg",
+      img: "/Categoriesimages/BathroomOrganizers.jpg",
       desc: "Bath organizers help you create a clutter-free and serene bathroom space. Store toiletries, towels, or accessories in stylish yet functional organizers made from wood, plastic, or metal. Wall-mounted shelves, caddies, or baskets enhance storage without compromising on style. Add a decorative touch with sleek designs that match your bathroom’s theme. Perfect for small or large spaces, bath organizers bring order and sophistication, making your bathroom feel like a spa retreat. Keep your essentials within reach while maintaining a clean, visually appealing environment.",
     },
     "Bar-Organizers": {
-      img: "/Categoriesimages/images.jpeg",
+      img: "/Categoriesimages/barOrganizers.jpg",
       desc: "Bar organizers are essential for creating a stylish and functional bar area in your home. Keep glassware, spirits, and accessories neatly arranged with elegant trays, racks, or shelves. Available in materials like wood, metal, or glass, they blend seamlessly with modern or classic decor styles. Add charm with decorative accents like coasters, napkins, or small planters. Bar organizers are perfect for entertaining guests, ensuring everything you need is within reach. Whether hosting parties or enjoying a quiet evening, these organizers enhance the functionality and aesthetic of your bar area.",
     },
   },

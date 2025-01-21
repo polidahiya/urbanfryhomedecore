@@ -23,7 +23,7 @@ async function page({ params }) {
   return (
     <div>
       {/* theme */}
-      <div className="relative px-5 md:px-8 overflow-hidden">
+      <div className="relative px-5 md:px-8 overflow-hidden h-fit">
         <div className="py-36 text-white tracking-wider">
           {/* routes */}
           <div className="flex items-center gap-2 text-sm">
@@ -43,7 +43,7 @@ async function page({ params }) {
               ? type.replace(/-/g, " ")
               : category.replace(/-/g, " ")}
           </h1>
-          <p className="mt-6 w-full max-w-[500px] text-sm">
+          <p className="mt-6 w-full max-w-[500px] text-sm text-justify">
             {specialrender
               ? staticdata[type]?.desc
               : staticdata[type][category]?.desc}
@@ -59,7 +59,7 @@ async function page({ params }) {
               : staticdata[type][category]?.img
           }
           alt={specialrender ? type : category}
-          className="absolute top-0 left-0 w-full min-h-screen brightness-[0.35] object-cover max-h-screen -z-10"
+          className="block absolute top-0 left-0 w-full min-h-screen brightness-[0.35] object-cover -z-10"
         />
       </div>
       {/* body */}
@@ -71,11 +71,12 @@ async function page({ params }) {
         {/* products  */}
         {productstoshow.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 ">
-            <img
-              src="https://api.cuik-lulugroup2-p2-public.model-t.cc.commerce.ondemand.com/_ui/responsive/common/images/theme-lulu-en/images/no-products-found.jpg"
-              alt=""
-              className="w-full md:w-1/2"
-            />
+            <Image
+              src="/uiimages/notfoundimage.jpg"
+              alt="notfound image"
+              width={480}
+              height={410}
+            ></Image>
             <h1 className="text-2xl">No products found</h1>
           </div>
         ) : (

@@ -118,7 +118,10 @@ function Addnewform({ data, setdata, setshowform, resetState, setrefresher }) {
               <button
                 className="flex items-center justify-center gap-2  px-4 py-2  border  rounded-md"
                 type="button"
-                onClick={resetState}
+                onClick={() => {
+                  resetState();
+                  setshowform(false);
+                }}
               >
                 Cancle Update
               </button>
@@ -145,7 +148,10 @@ function Addnewform({ data, setdata, setshowform, resetState, setrefresher }) {
         <button
           type="button"
           className="absolute top-0 right-2 bg-gray-200 text-gray-700 rounded-full h-10 aspect-square hover:bg-gray-300"
-          onClick={() => setshowform(false)}
+          onClick={() => {
+            setshowform(false);
+            resetState();
+          }}
         >
           x
         </button>
