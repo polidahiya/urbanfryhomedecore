@@ -12,21 +12,68 @@ import { usePathname } from "next/navigation";
 import { logout } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
 import { RiCoupon2Fill } from "react-icons/ri";
+import { FaUsers } from "react-icons/fa";
+import { MdRateReview } from "react-icons/md";
 
-function Adminnav() {
+function Adminnav({ userdata }) {
   const { setmessagefn } = AppContextfn();
   const pathname = usePathname();
+  const userpermissions = userdata?.permission;
   const navLinks = [
-    { href: "/admin", label: "Home", logo: <IoHome /> },
-    { href: "/admin/orders", label: "Orders", logo: <FaDollyFlatbed /> },
-    { href: "/admin/coupons", label: "Coupons", logo: <RiCoupon2Fill /> },
-    { href: "/admin/products", label: "Products", logo: <IoBagAdd /> },
     {
-      href: "/admin/contactmessages",
-      label: "Messages",
-      logo: <AiFillMessage />,
+      href: "/admin",
+      label: "Home",
+      logo: <IoHome />,
+      isaccessible: true,
     },
-    { href: "/admin/settings", label: "Settings", logo: <IoSettingsSharp /> },
+    {
+      href: "/admin/orders",
+      label: "Orders",
+      logo: <FaDollyFlatbed />,
+      isaccessible:
+        userdata?.usertype == "admin"
+          ? true
+          : userpermissions?.includes("Order_permission"),
+    },
+    {
+      href: "/admin/coupons",
+      label: "Coupons",
+      logo: <RiCoupon2Fill />,
+      isaccessible:
+        userdata?.usertype == "admin"
+          ? true
+          : userpermissions?.includes("Coupons_permission"),
+    },
+    {
+      href: "/admin/products",
+      label: "Products",
+      logo: <IoBagAdd />,
+      isaccessible:
+        userdata?.usertype == "admin"
+          ? true
+          : userpermissions?.includes("Products_permission"),
+    },
+    {
+      href: "/admin/users",
+      label: "Users",
+      logo: <FaUsers />,
+      isaccessible:
+        userdata?.usertype == "admin"
+          ? true
+          : userpermissions?.includes("Users_permission"),
+    },
+    {
+      href: "/admin/customerreviews",
+      label: "Reviews",
+      logo: <MdRateReview />,
+      isaccessible: userdata?.usertype == "admin" ? true : false,
+    },
+    {
+      href: "/admin/settings",
+      label: "Settings",
+      logo: <IoSettingsSharp />,
+      isaccessible: true,
+    },
   ];
 
   const Logoutfn = async () => {
@@ -55,13 +102,13 @@ function Adminnav() {
         />
       </Link>
       <div className="flex flex-col flex-1 w-full pt-5">
-        {navLinks.map(({ href, label, logo }, index) => (
+        {navLinks.map(({ href, label, logo, isaccessible }, index) => (
           <Link
             key={index}
             className={`relative w-full flex items-center gap-2 px-5 py-3 lg:hover:bg-slate-200 rounded-md ${
               index === navLinks.length - 1 && "mt-auto"
-            }
-            ${pathname == href && "bg-slate-200"}`}
+            } ${pathname == href && "bg-slate-200"}
+            ${isaccessible ? "" : "hidden"}`}
             href={href}
           >
             {logo}

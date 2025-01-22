@@ -1,63 +1,63 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Adminsearchbar from "../_comps/_adminnavbar/Adminsearchbar";
-import { Getorders } from "@/app/_serveractions/_admin/getorders";
+import { Getusers } from "@/app/_serveractions/_admin/Getusers";
 import { AppContextfn } from "@/app/Context";
 import { BiRefresh } from "react-icons/bi";
-import Orderminicard from "./_comps/Orderminicard";
-import Showfullorder from "./_comps/Showfullorder";
+import Userminicard from "./_comps/Userminicard";
+import Showfulluser from "./_comps/Showfulluser";
 
 function Page() {
   const { setmessagefn } = AppContextfn();
-  const [ordertype, setordertype] = useState("all");
+  const [usertype, setusertype] = useState("all");
   const [search, setsearch] = useState("");
-  const [orders, setorders] = useState([]);
-  const [totalorders, settotalorders] = useState(0);
+  const [users, setusers] = useState([]);
+  const [totalusers, settotalusers] = useState(0);
   const [pagenumber, setpagenumber] = useState(1);
   const [loading, setloading] = useState(true);
   const [refresher, setrefresher] = useState(false);
-  const [showfullorder, setshowfullorder] = useState({ show: false, data: {} });
-  const numberoforderstoshow = 20;
+  const [showfulluser, setshowfulluser] = useState({ show: false, data: {} });
+  const numberofuserstoshow = 20;
 
   useEffect(() => {
     (async () => {
       setloading(true);
-      const res = await Getorders(
-        ordertype,
+      const res = await Getusers(
+        usertype,
         search,
-        numberoforderstoshow,
+        numberofuserstoshow,
         pagenumber
       );
       setloading(false);
       if (res?.status == 200) {
-        setorders(res?.data);
-        settotalorders(res?.totalOrders);
+        setusers(res?.data);
+        settotalusers(res?.totalusers);
       }
-      if (res?.data?.length == 0) setmessagefn("No Orders found");
+      if (res?.data?.length == 0) setmessagefn("No users found");
     })();
-  }, [pagenumber, ordertype, refresher]);
+  }, [pagenumber, usertype, refresher]);
 
   const handlesearch = async () => {
-    setordertype("search");
+    setusertype("search");
     setpagenumber(1);
     setrefresher((pre) => !pre);
   };
 
   const pagenation = new Array(
-    Math.ceil(totalorders / numberoforderstoshow)
+    Math.ceil(totalusers / numberofuserstoshow)
   ).fill(null);
 
   return (
     <div className="px-5 md:px-10">
       <div className="sticky top-0 bg-white">
         <div className="py-10  flex items-center">
-          <p className="font-semibold text-2xl">Orders</p>
+          <p className="font-semibold text-2xl">users</p>
           <div className="flex gap-1 ml-auto">
             <button
               className={`border rounded-md px-5 py-1 ${
-                ordertype == "all" && "bg-theme text-white"
+                usertype == "all" && "bg-theme text-white"
               }`}
-              onClick={() => setordertype("all")}
+              onClick={() => setusertype("all")}
             >
               All
             </button>
@@ -77,31 +77,14 @@ function Page() {
           setsearch={setsearch}
           onsubmit={() => handlesearch(search)}
         />
-        <div className="flex items-center mt-5 bg-adminbg font-semibold">
-          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            Name
-          </p>
-          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            Email
-          </p>
-          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            Payment Status
-          </p>
-          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            Order Status
-          </p>
-          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            Date
-          </p>
-        </div>
       </div>
       {!loading ? (
-        <div>
-          {orders?.map((order, i) => (
-            <Orderminicard
+        <div className="space-y-2 my-5">
+          {users?.map((user, i) => (
+            <Userminicard
               key={i}
-              order={order}
-              setshowfullorder={setshowfullorder}
+              user={user}
+              setshowfulluser={setshowfulluser}
             />
           ))}
         </div>
@@ -130,10 +113,10 @@ function Page() {
         })}
       </div>
       {/* show full order */}
-      {showfullorder.show && (
-        <Showfullorder
-          showfullorder={showfullorder}
-          setshowfullorder={setshowfullorder}
+      {showfulluser.show && (
+        <Showfulluser
+          showfulluser={showfulluser}
+          setshowfulluser={setshowfulluser}
           setrefresher={setrefresher}
         />
       )}

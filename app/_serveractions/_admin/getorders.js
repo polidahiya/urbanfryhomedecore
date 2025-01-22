@@ -9,7 +9,7 @@ export const Getorders = async (
   pagenumber
 ) => {
   try {
-    const res = await Verification("View_admin_Orders");
+    const res = await Verification("Order_permission");
     if (!res?.verified) {
       return { status: 400, message: "Invalid user" };
     }
@@ -48,7 +48,7 @@ export const Getorders = async (
 
 export const updateorderstatus = async (id, value) => {
   try {
-    const res = await Verification("View_admin_Orders");
+    const res = await Verification("Order_permission");
     if (!res?.verified) {
       return { status: 400, message: "Invalid user" };
     }
@@ -67,7 +67,7 @@ export const updateorderstatus = async (id, value) => {
 
 export const updateordernote = async (id, value) => {
   try {
-    const res = await Verification("View_admin_Orders");
+    const res = await Verification("Order_permission");
     if (!res?.verified) {
       return { status: 400, message: "Invalid user" };
     }

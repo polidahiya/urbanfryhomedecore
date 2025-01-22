@@ -70,7 +70,7 @@ async function page({ params }) {
   );
 }
 
-export const generateMetadata = async ({ params, searchParams }) => {
+export const generateMetadata = async ({ params }) => {
   const props = (await params).props;
   const sku = props[0];
   const color = props[1] || 0;
@@ -78,15 +78,41 @@ export const generateMetadata = async ({ params, searchParams }) => {
   const products = await Cachedproducts();
   const product = products.filter((product) => product.sku === sku)[0];
 
+  const title = product?.seotitle || "AltOrganisers - Explore Amazing Products";
+  const description =
+    product?.seodescription ||
+    "Check out this amazing product at AltOrganisers!";
+  const keywords = product?.seokeywords || "";
+  const image = product?.variants[color]?.images[0] || "/default-image.jpg"; // Default image if no variant image is found
+  const url = `https://altorganisers.com/product/${sku}/${color}`;
+
   return {
-    title: product?.seotitle,
-    description:
-      product?.seodescription ||
-      "Check out this amazing product at AltOrganisers!",
-    keywords: product?.seokeywords || "",
+    title,
+    description,
+    keywords,
     openGraph: {
-      images: product?.variants[color]?.images[0],
+      title,
+      description,
+      images: [{ url: image }],
+      url, // URL of the page
+      site_name: "AltOrganisers",
     },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+    additionalMetaTags: [
+      { property: "og:type", content: "product" }, // Facebook Open Graph type
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:image", content: image },
+      { property: "og:url", content: url },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: image },
+    ],
   };
 };
 

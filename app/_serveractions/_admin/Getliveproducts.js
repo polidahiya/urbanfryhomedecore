@@ -4,7 +4,7 @@ import Verification from "@/app/_connections/Verifytoken";
 
 export const Roomsearchproducts = async (search) => {
   try {
-    const res = await Verification("View_admin_Products");
+    const res = await Verification("Products_permission");
     if (!res?.verified) {
       return { status: 400, message: "Invalid user" };
     }

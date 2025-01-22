@@ -4,7 +4,7 @@ import { getcollection } from "@/app/_connections/Mongodb";
 
 export const getcoupons = async (gettype = "all", search) => {
   try {
-    const res = await Verification("admin_Coupons");
+    const res = await Verification("Coupons_permission");
     if (!res?.verified) {
       return { status: 400, message: "Invalid user" };
     }
@@ -27,7 +27,7 @@ export const getcoupons = async (gettype = "all", search) => {
 
 export const addcoupon = async (data) => {
   try {
-    const res = await Verification("admin_Coupons");
+    const res = await Verification("Coupons_permission");
     if (!res?.verified) {
       return { status: 400, message: "Invalid user" };
     }
@@ -59,7 +59,7 @@ export const addcoupon = async (data) => {
 
 export const deletecoupon = async (id) => {
   try {
-    const res = await Verification("admin_Coupons");
+    const res = await Verification("Coupons_permission");
     if (!res?.verified) {
       return { status: 400, message: "Invalid user" };
     }

@@ -31,7 +31,9 @@ export async function refreshproductsnow() {
 export const Cachedreviews = unstable_cache(
   async () => {
     const { reviewscollection } = await getcollection();
-    const reviewslist = await reviewscollection.find().toArray();
+    const reviewslist = await reviewscollection
+      .find({ verified: true })
+      .toArray();
     return reviewslist.map((item) => ({
       ...item,
       _id: item._id.toString(),
@@ -45,27 +47,6 @@ export async function refreshreviewsnow() {
   try {
     revalidateTag("reviews");
     return { status: 200, message: "Reviews Refreshed on site" };
-  } catch (error) {
-    console.log(error);
-    return { status: 500, message: "Server Error!" };
-  }
-}
-
-// blogs
-export const Cachedblogs = unstable_cache(
-  async () => {
-    const { blogscollection } = await getcollection();
-    const blogs = await blogscollection.find({}).sort({ _id: -1 }).toArray();
-    return blogs.map((item) => ({ ...item, _id: item._id.toString() }));
-  },
-  ["blogs"],
-  { revalidate: CACHE_TIME, tags: ["blogs"] }
-);
-
-export async function refreshblogsnow() {
-  try {
-    revalidateTag("blogs");
-    return { status: 200, message: "Blogs Refreshed on site" };
   } catch (error) {
     console.log(error);
     return { status: 500, message: "Server Error!" };

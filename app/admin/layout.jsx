@@ -7,9 +7,11 @@ export default async function RootLayout({ children }) {
   const allcookies = await cookies();
   const parseduserdata = allcookies.get("userdata");
   const parseduserdatavalue = parseduserdata?.value;
+  let userdata;
   if (parseduserdatavalue) {
-    const userdata = JSON.parse(parseduserdatavalue);
-    if (userdata?.usertype !== "admin") {
+    userdata = JSON.parse(parseduserdatavalue);
+    if (userdata?.usertype == "admin" || userdata?.permission.length != 0) {
+    } else {
       notFound();
     }
   } else {
@@ -18,7 +20,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <div className="flex">
-      <Adminnav />
+      <Adminnav userdata={userdata} />
       <div className="flex-1">{children}</div>
       <Confirmdialogbox />
     </div>

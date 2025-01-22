@@ -6,7 +6,7 @@ import { getcollection } from "@/app/_connections/Mongodb";
 export const Addproduct = async (data, imagesformdata, deletedimages) => {
   try {
     const { Productscollection, ObjectId } = await getcollection();
-    const res = await Verification("Add_and_update_products");
+    const res = await Verification("Products_permission");
     if (!res?.verified) {
       return { status: 400, message: "Invalid user" };
     }
@@ -56,7 +56,7 @@ export const Addproduct = async (data, imagesformdata, deletedimages) => {
 export const Deleteproduct = async (variants, id) => {
   const { Productscollection, ObjectId } = await getcollection();
   try {
-    const res = await Verification("Delete_products");
+    const res = await Verification("Products_permission");
     if (!res?.verified) {
       return { status: 400, message: "Invalid user" };
     }

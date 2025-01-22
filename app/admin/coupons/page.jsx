@@ -32,7 +32,9 @@ function Page() {
       setloading(true);
       const res = await getcoupons(searchtype, search);
       setloading(false);
-      setcoupons(res?.data);
+      if (res?.status == 200) {
+        setcoupons(res?.data);
+      }
       if (res?.data?.length == 0) setmessagefn("No Orders found");
     })();
   }, [searchtype, refresher]);
