@@ -20,7 +20,7 @@ function Publicpage({ userdata, token }) {
   const cartitems = Object.entries(cart).filter(([key, value]) => value.added);
   const [totalPrice, settotalPrice] = useState(0);
   const [coupon, setcoupon] = useState("");
-  const [appliedcoupondata, setappliedcoupondata] = useState();
+  const [appliedcoupondata, setappliedcoupondata] = useState(null);
 
   const getcouponprice = (pre, coupondata) => {
     if (coupondata?.discountType == "percentage") {
@@ -70,13 +70,16 @@ function Publicpage({ userdata, token }) {
       appliedcoupondata
     );
 
-    setmessagefn(res?.message);
+    if (!(res?.status == 200 && paymentMethod == "online")) {
+      setmessagefn(res?.message);
+    }
 
     if (res.status === 200) {
       if (paymentMethod == "online") {
         loadRazorpay(res.id);
       } else {
         setcart({});
+        Cookies.remove("altcoupon");
       }
     }
   };
@@ -102,6 +105,7 @@ function Publicpage({ userdata, token }) {
         const res = await Verifyrazorpay(response, id);
         if (res.status == 200) {
           setcart({});
+          Cookies.remove("altcoupon");
           setmessagefn("Order Placed Successfully");
         }
       },
@@ -170,6 +174,7 @@ function Publicpage({ userdata, token }) {
               setcoupon={setcoupon}
               settotalPrice={settotalPrice}
               getcouponprice={getcouponprice}
+              setappliedcoupondata={setappliedcoupondata}
             />
             <PaymentMethod
               paymentMethod={paymentMethod}

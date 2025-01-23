@@ -16,11 +16,36 @@ async function addorder(
       return { status: 400, message: "Invalid User" };
     }
 
-    const { orderscollection } = await getcollection();
+    const { orderscollection, couponscollection } = await getcollection();
+
+    // order validation
+    const totalofcart = cartitems.reduce(
+      (total, [key, value]) => total + value.quantity * value.sellingprice,
+      0
+    );
+    if (appliedcoupondata) {
+      const coupondata = await couponscollection.findOne({
+        code: appliedcoupondata?.code,
+        isActive: true,
+      });
+
+      if (!coupondata) {
+        return { status: 400, message: "Invalid Coupon" };
+      }
+      const priceaftercoupon = getcouponprice(totalofcart, coupondata);
+
+      if (priceaftercoupon != totalPrice) {
+        return { status: 400, message: "Invalid Order" };
+      }
+    } else {
+      if (totalofcart != totalPrice) {
+        return { status: 400, message: "Invalid Order" };
+      }
+    }
 
     const formattedDate = formatDate();
-    delete userdata.usertype;
-    delete userdata.permission;
+    delete userdata?.usertype;
+    delete userdata?.permission;
     let data = {
       products: Object.values(cartitems).map((product) => ({
         ...product[1],
@@ -50,5 +75,13 @@ async function addorder(
     return { status: 500, message: "Server error" };
   }
 }
+
+const getcouponprice = (pre, coupondata) => {
+  if (coupondata?.discountType == "percentage") {
+    return Math.floor(pre - (pre * coupondata?.discountValue) / 100);
+  } else if (coupondata?.discountType == "fixed amount") {
+    return Math.floor(pre - coupondata?.discountValue);
+  }
+};
 
 export default addorder;

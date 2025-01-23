@@ -19,8 +19,8 @@ export default async function Applycoupon(coupon) {
     }
 
     const currentDate = new Date();
-    const validFrom = new Date(coupondata.validFrom);
-    const validTo = new Date(coupondata.validTo);
+    const validFrom = new Date(coupondata?.validFrom);
+    const validTo = new Date(coupondata?.validTo);
 
     if (currentDate < validFrom || currentDate > validTo) {
       return { status: 400, message: "Coupon Expired" };
@@ -29,6 +29,7 @@ export default async function Applycoupon(coupon) {
     const orders = await orderscollection
       .find({ email: res?.email, appliedcoupon: coupon })
       .toArray();
+
     if (orders.length >= coupondata?.usagetimes) {
       return { status: 400, message: "Coupon reached max limit" };
     }

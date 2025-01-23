@@ -4,7 +4,13 @@ import Applycoupon from "@/app/_serveractions/applycoupons";
 import { AppContextfn } from "@/app/Context";
 import Cookies from "js-cookie";
 
-function Couponcomp({ coupon, setcoupon, settotalPrice, getcouponprice }) {
+function Couponcomp({
+  coupon,
+  setcoupon,
+  settotalPrice,
+  getcouponprice,
+  setappliedcoupondata,
+}) {
   const { setmessagefn } = AppContextfn();
 
   const Applycouponfn = async () => {
@@ -22,6 +28,7 @@ function Couponcomp({ coupon, setcoupon, settotalPrice, getcouponprice }) {
         const newprice = getcouponprice(pre, res?.coupondata);
         return newprice || pre;
       });
+      setappliedcoupondata(res?.coupondata)
     }
   };
 
