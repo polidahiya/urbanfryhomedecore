@@ -11,7 +11,11 @@ const Couponminicard = ({ coupon, setdata, setshowform }) => {
     >
       <p className="flex-1 text-center text-sm">{coupon?.code}</p>
       <p className="flex-1 text-center text-sm">{coupon?.discountType}</p>
-      <p className={`flex-1 text-center text-sm`}>{coupon?.discountValue}</p>
+      <p className={`flex-1 text-center text-sm`}>
+        {coupon?.discountValue}
+        {coupon?.discountType == "percentage" && "%"}
+        {coupon?.discountType == "fixed amount" && "/-"}
+      </p>
       <p className="flex-1 text-center text-sm">{coupon?.usagetimes}</p>
       <p className="flex-1 text-center text-sm">
         {coupon?.validFrom} to {coupon?.validTo}

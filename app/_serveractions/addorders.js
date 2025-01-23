@@ -3,7 +3,13 @@ import { getcollection } from "../_connections/Mongodb";
 import Verification from "../_connections/Verifytoken";
 import formatDate from "../_globalcomps/_helperfunctions/formateddate";
 
-async function addorder(cartitems, totalPrice, paymentMethod, userdata) {
+async function addorder(
+  cartitems,
+  totalPrice,
+  paymentMethod,
+  userdata,
+  appliedcoupondata
+) {
   try {
     const res = await Verification("public");
     if (!res?.verified) {
@@ -24,6 +30,8 @@ async function addorder(cartitems, totalPrice, paymentMethod, userdata) {
       paymentMethod,
       ...userdata,
       orderstage: 0,
+      appliedcoupon: appliedcoupondata?.code, //use in coupon checking
+      coupondata: appliedcoupondata,
       date: formattedDate,
     };
 
@@ -32,7 +40,7 @@ async function addorder(cartitems, totalPrice, paymentMethod, userdata) {
     }
 
     const result = await orderscollection.insertOne(data);
-    
+
     return {
       status: 200,
       id: result.insertedId.toString(),

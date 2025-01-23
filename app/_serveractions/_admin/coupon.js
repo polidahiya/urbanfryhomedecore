@@ -44,7 +44,6 @@ export const addcoupon = async (data) => {
     } else {
       // add new
       const res = await couponscollection.findOne({ code: data?.code });
-      console.log(res);
 
       if (res) {
         return { status: 400, message: "Coupon already exists" };

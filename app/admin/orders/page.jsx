@@ -48,7 +48,7 @@ function Page() {
   ).fill(null);
 
   return (
-    <div className="px-5 md:px-10">
+    <div className="px-5 md:px-10 min-w-[700px]">
       <div className="sticky top-0 bg-white">
         <div className="py-10  flex items-center">
           <p className="font-semibold text-2xl">Orders</p>

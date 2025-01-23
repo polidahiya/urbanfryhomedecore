@@ -11,22 +11,64 @@ import Razorpayidcreate from "@/app/_serveractions/_razorpay/Razorpayidcreate";
 import Verifyrazorpay from "@/app/_serveractions/_razorpay/Verifyrazorpay";
 import addorder from "@/app/_serveractions/addorders";
 import { BsCartX } from "react-icons/bs";
+import Couponcomp from "./_comps/Couponcomp";
+import Cookies from "js-cookie";
 
 function Publicpage({ userdata, token }) {
   const [paymentMethod, setPaymentMethod] = useState("online");
   const { cart, setcart, setmessagefn } = AppContextfn();
   const cartitems = Object.entries(cart).filter(([key, value]) => value.added);
-  const totalPrice = cartitems.reduce(
-    (total, [key, value]) => total + value.quantity * value.sellingprice,
-    0
-  );
+  const [totalPrice, settotalPrice] = useState(0);
+  const [coupon, setcoupon] = useState("");
+  const [appliedcoupondata, setappliedcoupondata] = useState();
+
+  const getcouponprice = (pre, coupondata) => {
+    if (coupondata?.discountType == "percentage") {
+      Cookies.set("altcoupon", JSON.stringify(coupondata));
+      return Math.floor(pre - (pre * coupondata?.discountValue) / 100);
+    } else if (coupondata?.discountType == "fixed amount") {
+      Cookies.set("altcoupon", JSON.stringify(coupondata));
+      return Math.floor(pre - coupondata?.discountValue);
+    }
+  };
+  // update total price when cart items change
+  useEffect(() => {
+    const coupondata = Cookies.get("altcoupon");
+
+    if (coupondata) {
+      const coupon = JSON.parse(coupondata);
+      setappliedcoupondata(coupon);
+      setcoupon(coupon?.code);
+
+      const totaprice = cartitems.reduce(
+        (total, [key, value]) => total + value.quantity * value.sellingprice,
+        0
+      );
+      const newprice = getcouponprice(totaprice, coupon);
+
+      settotalPrice(newprice);
+    } else {
+      settotalPrice(
+        cartitems.reduce(
+          (total, [key, value]) => total + value.quantity * value.sellingprice,
+          0
+        )
+      );
+    }
+  }, [cart]);
 
   const Order = async () => {
     if (!token) {
       setmessagefn("Please login to order");
       return;
     }
-    const res = await addorder(cartitems, totalPrice, paymentMethod, userdata);
+    const res = await addorder(
+      cartitems,
+      totalPrice,
+      paymentMethod,
+      userdata,
+      appliedcoupondata
+    );
 
     setmessagefn(res?.message);
 
@@ -54,7 +96,7 @@ function Publicpage({ userdata, token }) {
       currency: order.currency || "INR",
       name: "AltOrganisers",
       description: "Transaction",
-      image: "/uiimages/minilogo.png",
+      image: "/uiimages/logo.png",
       order_id: order.id, // Order ID generated from your backend
       handler: async (response) => {
         const res = await Verifyrazorpay(response, id);
@@ -123,6 +165,12 @@ function Publicpage({ userdata, token }) {
           </div>
           {/* checkout */}
           <div className="flex flex-col md:flex-row items-start justify-center gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10 my-10">
+            <Couponcomp
+              coupon={coupon}
+              setcoupon={setcoupon}
+              settotalPrice={settotalPrice}
+              getcouponprice={getcouponprice}
+            />
             <PaymentMethod
               paymentMethod={paymentMethod}
               setPaymentMethod={setPaymentMethod}

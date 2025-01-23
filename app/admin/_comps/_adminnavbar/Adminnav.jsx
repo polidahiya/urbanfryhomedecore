@@ -85,20 +85,14 @@ function Adminnav({ userdata }) {
   };
   return (
     <nav className="sticky top-0 w-fit flex flex-col h-screen px-1 py-5 md:p-5  md:w-64 bg-adminbg">
-      <Link href="/" className="md:px-5">
+      <Link href="/" className="md:px-5 flex items-center justify-center">
         <Image
           src="/uiimages/logo.png"
           alt="logo"
-          height={40}
-          width={150}
-          className="hidden md:inline"
-        />
-        <Image
-          src="/minilogo.png"
-          alt="logo"
-          height={40}
-          width={40}
-          className=" md:hidden w-full aspect-square"
+          className="w-16 aspect-square mr-2"
+          width={200}
+          height={200}
+          quality={100}
         />
       </Link>
       <div className="flex flex-col flex-1 w-full pt-5">

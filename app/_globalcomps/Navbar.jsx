@@ -9,6 +9,7 @@ import Accountbutton from "./_navbarcomps/Accountbutton";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Menubutton from "./_navbarcomps/Menubutton";
 import Sidemenu from "./_navbarcomps/Sidemenu";
+import Image from "next/image";
 
 function Navbar({ navtype, token, userdata }) {
   const { setshowsearchbar } = AppContextfn();
@@ -34,12 +35,13 @@ function Navbar({ navtype, token, userdata }) {
         setsidemenutoggle={setsidemenutoggle}
       />
       <Link href={"/"}>
-        <img
+        <Image
           src="/uiimages/logo.png"
-          alt=""
-          className={`navhoverlogo h-10 mr-2 ${!navtype && "invert"} ${
-            !transparentnav && "invert"
-          }`}
+          alt="logo"
+          className="w-16 aspect-square mr-2"
+          width={200}
+          height={200}
+          quality={100}
         />
       </Link>
       {/* side menu */}

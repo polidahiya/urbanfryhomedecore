@@ -7,6 +7,7 @@ import Link from "next/link";
 import { staticdata } from "@/app/commondata";
 import Searchbox from "./_searchbarcomps/Searchbox";
 import Searchedproductcard from "./_searchbarcomps/Searchedproductcard";
+import Image from "next/image";
 
 function Searchbarsection() {
   const { showsearchbar, setshowsearchbar } = AppContextfn();
@@ -48,7 +49,14 @@ function Searchbarsection() {
         <div
           className={`w-full flex items-center justify-between  h-20 text-inherit text-xs`}
         >
-          <img src="/uiimages/logo.png" alt="" className={`h-10 mr-2 invert`} />
+          <Image
+             src="/uiimages/logo.png"
+             alt="logo"
+             className="w-16 aspect-square mr-2"
+             width={200}
+             height={200}
+             quality={100}
+          />
           <button
             className="group h-full"
             onClick={() => setshowsearchbar(false)}

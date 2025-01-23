@@ -79,10 +79,6 @@ body {
   transition: color 0;
 }
 
-.navhover:hover .navhoverlogo {
-  filter: invert();
-}
-
 .marquee-content {
   /* width: max-content;  */
   animation: marquee 40s linear infinite;

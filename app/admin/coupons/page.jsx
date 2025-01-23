@@ -98,7 +98,7 @@ function Page() {
             Discount Value
           </p>
           <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            usagetimes
+            Usage times
           </p>
           <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
             Date

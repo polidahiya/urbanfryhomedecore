@@ -52,7 +52,7 @@ function Addnewform({ data, setdata, setshowform, resetState, setrefresher }) {
           onchange={(value) =>
             setdata((pre) => ({ ...pre, discountType: value }))
           }
-          options={["Percentage", "Fixed Amount"]}
+          options={["percentage", "fixed amount"]}
         />
         <Standardinputfield
           titlename="Discount"

@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // theme: "#cd834c", new logo color
         theme: "#8e766e",
         footercolor: "#e7e2de",
         adminbg: "#f9fafa",
