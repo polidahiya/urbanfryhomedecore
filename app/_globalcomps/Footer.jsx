@@ -42,13 +42,15 @@ function Footer() {
       </div>
       <div className="w-full h-px bg-theme opacity-50 my-10" />
       <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-10 mt-10 text-theme">
-        <Link href={"/"} className="underlineff">
+        <Link href={`tel:${mobile}`} >
           <Underlineeffect title={mobile} />
         </Link>
-        <Link href={"/"} className="underlineff">
+        <Link href={`mailto:${mail}`} >
           <Underlineeffect title={mail} />
         </Link>
-        <p className="lg:ml-auto">© Copyright, Loops by LJ, 2024</p>
+        <p className="lg:ml-auto">
+          © Copyright, AltOrganisers, {new Date().getFullYear()}
+        </p>
       </div>
     </footer>
   );

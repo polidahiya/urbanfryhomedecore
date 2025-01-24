@@ -3,7 +3,7 @@ import React from "react";
 import { AppContextfn } from "@/app/Context";
 import { useRouter } from "next/navigation";
 
-function Cartbutton({ cartproductname }) {
+function Cartbutton({ product, cartproductname }) {
   const router = useRouter();
   const { cart, setcart, setmessagefn } = AppContextfn();
   const MAX_QUANTITY = 10; // Define the maximum quantity
@@ -34,6 +34,11 @@ function Cartbutton({ cartproductname }) {
 
   // add to cart button
   const handleAddToCart = () => {
+    if (!product?.available) {
+      setmessagefn("This product is not available");
+      return;
+    }
+
     if (cart[cartproductname]?.added) {
       router.push("/cart");
       return;

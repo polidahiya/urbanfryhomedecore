@@ -1,5 +1,5 @@
 export const mobile = "+91 99999 99999";
-export const mail = "gmail@gmail.com";
+export const mail = "altorganisers@gmail.com";
 export const Socialaccounts = {
   insta: "",
   twitter: "",

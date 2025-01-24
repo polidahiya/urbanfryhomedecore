@@ -2,6 +2,8 @@
 import { getcollection } from "../_connections/Mongodb";
 import Verification from "../_connections/Verifytoken";
 import formatDate from "../_globalcomps/_helperfunctions/formateddate";
+import order_confiramtion_mail_template from "../_mailtemplate/orderconfirmationmail";
+import sendEmail from "../_connections/Sendmail";
 
 async function addorder(
   cartitems,
@@ -65,6 +67,16 @@ async function addorder(
     }
 
     const result = await orderscollection.insertOne(data);
+
+    // send mail
+    if (paymentMethod == "cod") {
+      const mailtemplate = order_confiramtion_mail_template(
+        data?.products,
+        data?.totalPrice,
+        data?.username
+      );
+      sendEmail("Order Confirmation!", data?.email, mailtemplate);
+    }
 
     return {
       status: 200,

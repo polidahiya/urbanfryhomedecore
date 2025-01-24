@@ -80,7 +80,7 @@ function Details({ product, color }) {
       />
 
       <hr className="my-5" />
-      <Cartbutton cartproductname={cartproductname} />
+      <Cartbutton product={product} cartproductname={cartproductname} />
       {/* descriptions */}
       <div className="mt-10 border-b border-theme ">
         <Descriptionitem
