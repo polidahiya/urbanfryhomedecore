@@ -30,7 +30,7 @@ async function page() {
   const newarrivals = data.filter((item) => item.lastupdated > lastweek);
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Navbar navtype={true} token={token} userdata={userdata} />
       <Herosection />
       {/* marque section */}
@@ -54,7 +54,7 @@ async function page() {
           that are giving a makeover to our rather drab home carpets.
         </p>
       </div> */}
-      <Newarrivals heading="New Arivals" data={newarrivals} />
+      <Newarrivals heading="New Arrivals" data={newarrivals} />
       {/* marque section */}
       <Imagetapcomp />
       <section className="w-full text-[#56473e] overflow-hidden relative flex items-center">

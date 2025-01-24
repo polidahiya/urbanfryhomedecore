@@ -59,6 +59,7 @@ async function page({ params }) {
               : staticdata[type][category]?.img
           }
           alt={specialrender ? type : category}
+          quality={100}
           className="block absolute top-0 left-0 w-full min-h-screen brightness-[0.35] object-cover -z-10"
         />
       </div>
