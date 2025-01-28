@@ -34,7 +34,7 @@ export const login = async (userdata) => {
       return { status: 400, message: "User not found" };
     }
 
-    if (!user.password) {
+    if (!userdata.password) {
       return { status: 400, message: "Wrong password" };
     }
 
@@ -42,7 +42,7 @@ export const login = async (userdata) => {
       userdata.password,
       user.password
     );
-    
+
     if (!isPasswordMatch) {
       return { status: 400, message: "Wrong password" };
     }
@@ -51,6 +51,7 @@ export const login = async (userdata) => {
       username: user?.name,
       email: user?.email,
       usertype: user?.usertype,
+      address: userdata?.address,
       permission: user?.permission || [],
     });
 
@@ -80,9 +81,10 @@ export const signup = async (userdata) => {
     }
 
     await generateToken({
-      username: userdata.name,
-      email: userdata.email,
-      usertype: userdata.usertype,
+      username: userdata?.name,
+      email: userdata?.email,
+      usertype: userdata?.usertype,
+      address: userdata?.address,
       permission: [],
     });
 

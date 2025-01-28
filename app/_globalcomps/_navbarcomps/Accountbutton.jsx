@@ -24,7 +24,7 @@ function Accountbutton({ token, userdata }) {
             <>
               <p>{userdata?.username}</p>
               <hr />
-              <Link href={"/"} className="block underlineff">
+              <Link href={"/account"} className="block underlineff">
                 <Underlineeffect title={"MY ACCOUNT"} />
               </Link>
               {userdata?.usertype === "admin" && (

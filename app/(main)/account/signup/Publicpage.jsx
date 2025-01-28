@@ -12,6 +12,7 @@ function Publicpage() {
     name: "",
     email: "",
     password: "",
+    address: "",
   };
   const [formData, setFormData] = useState(initialformvalues);
 
@@ -99,6 +100,23 @@ function Publicpage() {
                 className="absolute top-0 left-0 py-4 flex items-center px-4 text-sm duration-300 text-theme pointer-events-none"
               >
                 Password <span className="text-red-500">*</span>
+              </label>
+            </div>
+            <div className=" relative border border-theme">
+              <input
+                type="name"
+                id="address"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                className="forminput w-full  py-4 px-4 text-gray-700 outline-none"
+                required
+              />
+              <label
+                htmlFor="name"
+                className="absolute top-0 left-0 py-4 flex items-center px-4 text-sm duration-300 text-theme pointer-events-none"
+              >
+                Address <span className="text-red-500">*</span>
               </label>
             </div>
             <div className="flex gap-5 mt-3">

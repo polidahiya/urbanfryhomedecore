@@ -105,7 +105,7 @@ const Sidemenu = ({ sidemenutoggle, token, userdata }) => {
               <span className="underline">Shopping cart</span>
               <span className="px-5">1</span>
             </Link>
-            <Link href={"/"} className="underline" onClick={scrollable}>
+            <Link href={"/account"} className="underline" onClick={scrollable}>
               My account
             </Link>
             {userdata?.usertype === "admin" && (

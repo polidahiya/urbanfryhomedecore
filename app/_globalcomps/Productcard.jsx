@@ -18,7 +18,6 @@ function Productcard({ product }) {
             width={500}
             loading="lazy"
           ></Image>
-          {}
           <Image
             src={product?.variants[0]?.images[1] || ""}
             alt={product.productName}

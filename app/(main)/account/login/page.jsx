@@ -1,9 +1,14 @@
 import React from "react";
 import Publicpage from "./Publicpage";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 async function page() {
-  const allcookes = await cookies();
+  const allcookies = await cookies();
+  const token = allcookies.get("token");
+  if (token) {
+    redirect("/");
+  }
 
   return (
     <div>

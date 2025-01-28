@@ -17,6 +17,7 @@ import { Cachedproducts } from "./_connections/Getcachedata";
 import Sidecart from "./_globalcomps/Sidecart";
 import Imagetapcomp from "./_comps/Imagetapcomp";
 import Madeinindia from "./_comps/Madeinindia";
+import { Cachedreviews } from "./_connections/Getcachedata";
 
 async function page() {
   const allcookies = await cookies();
@@ -28,6 +29,10 @@ async function page() {
   const data = await Cachedproducts();
   const lastweek = new Date().getTime() - 1000 * 60 * 60 * 24 * 7;
   const newarrivals = data.filter((item) => item.lastupdated > lastweek);
+
+  // Cachedreviews
+  const allrewiews = await Cachedreviews();
+  const fivestarreviews = allrewiews.filter((item) => item.star == 5);
 
   return (
     <div className="overflow-x-hidden">
@@ -70,7 +75,7 @@ async function page() {
         />
       </section>
       <Collections />
-      <Customerreviews />
+      <Customerreviews fivestarreviews={fivestarreviews} />
       <Aboutus />
       <Madeinindia />
       <Faqs />
