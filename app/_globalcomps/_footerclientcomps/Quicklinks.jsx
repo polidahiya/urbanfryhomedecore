@@ -7,20 +7,19 @@ import { RiArrowDownSLine } from "react-icons/ri";
 function Quicklinks() {
   const [showlinks, setshowlinks] = useState(false);
   const quicklink1 = [
-    { title: "Terms & Conditions", link: "/" },
-    { title: "Privacy Policy", link: "/" },
-    { title: "Shipping Policy", link: "/" },
-    { title: "Return & Exchange Policy", link: "/" },
-    { title: "Rug Guide", link: "/" },
-    { title: "FAQs", link: "/" },
-    { title: "Become a Retailer", link: "/" },
+    { title: "SHIPPING", link: "/" },
+    { title: "RETURNS", link: "/" },
+    { title: "CUSTOMER SUPPORT", link: "/" },
+    { title: "TERMS & CONDITIONS", link: "/" },
     { title: "Contact Us", link: "/" },
   ];
 
   return (
     <div className="flex-1 text-sm">
       <h3
-        className={`flex items-center tracking-wider lg:mb-4 select-none ${showlinks && "mb-4"}`}
+        className={`flex items-center tracking-wider lg:mb-4 select-none ${
+          showlinks && "mb-4"
+        }`}
         onClick={() => {
           setshowlinks((pre) => !pre);
         }}

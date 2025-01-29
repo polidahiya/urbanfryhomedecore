@@ -9,9 +9,15 @@ import Categories from "./Categories";
 import { logout } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
 
-const Sidemenu = ({ sidemenutoggle, token, userdata }) => {
-  const { setmessagefn } = AppContextfn();
+const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
+  const { setmessagefn, cart } = AppContextfn();
   const [open, setopen] = useState(false);
+  const cartitems = Object.values(cart).filter((item) => item.added);
+
+  const totalQuantity = cartitems.reduce(
+    (total, value) => total + value.quantity,
+    0
+  );
 
   const logoutfn = async () => {
     const res = await logout();
@@ -78,7 +84,10 @@ const Sidemenu = ({ sidemenutoggle, token, userdata }) => {
       </div>
       <div
         className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"
-        onClick={scrollable}
+        onClick={() => {
+          scrollable();
+          setsidemenutoggle(false);
+        }}
       >
         <Link
           href={"/customization"}
@@ -100,12 +109,22 @@ const Sidemenu = ({ sidemenutoggle, token, userdata }) => {
             <Link
               href={"/cart"}
               className="flex justify-between"
-              onClick={scrollable}
+              onClick={() => {
+                scrollable();
+                setsidemenutoggle(false);
+              }}
             >
               <span className="underline">Shopping cart</span>
-              <span className="px-5">1</span>
+              <span className="px-5">{totalQuantity}</span>
             </Link>
-            <Link href={"/account"} className="underline" onClick={scrollable}>
+            <Link
+              href={"/account"}
+              className="underline"
+              onClick={() => {
+                scrollable();
+                setsidemenutoggle(false);
+              }}
+            >
               My account
             </Link>
             {userdata?.usertype === "admin" && (

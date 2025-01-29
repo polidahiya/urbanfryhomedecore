@@ -78,7 +78,67 @@ async function page() {
       <Customerreviews fivestarreviews={fivestarreviews} />
       <Aboutus />
       <Madeinindia />
-      <Faqs />
+      <Faqs
+        faqlist={[
+          {
+            question: "What types of products does Alt Organisers offer?",
+            answer: [
+              "Alt Organisers specializes in premium space organizers designed to bring style and functionality to your home or office. Our range includes drawer organizers, closet solutions, kitchen storage, desk organizers, and much more, crafted with high-quality materials.",
+            ],
+          },
+          {
+            question: "Where does Alt Organisers ship?",
+            answer: [
+              "We ship across India. For international shipping, please contact us via email for options and details.",
+            ],
+          },
+          {
+            question: "How long will it take for my order to arrive?",
+            answer: [
+              "• In-stock items: Typically shipped within 2-4 business days.",
+              "• Made-to-order or customized items: Production and shipping may take 3-4 weeks.",
+              "Once your order is dispatched, we’ll share tracking details so you can monitor the delivery.",
+            ],
+          },
+          {
+            question: " What are the payment options available?",
+            answer: [
+              "• Yes, returns are accepted for defective or damaged items, provided they are reported within 48 hours of delivery. The product must be unused, in its original packaging, and returned within one week of delivery.",
+              "• For returns due to other concerns, a reverse shipping fee of 10% of the product cost will be deducted, and store credit will be issued for the remaining amount.",
+            ],
+          },
+          {
+            question: "Can I return or exchange a product?",
+            answer: [
+              "Consider the size of your dining area and the number of people you want to seat. Round tables are great for smaller spaces, while rectangular tables work well for larger rooms. Choose a material that suits your style and lifestyle, such as wood for a classic look or glass for a modern feel.",
+            ],
+          },
+          {
+            question: "Are there any non-returnable products?",
+            answer: [
+              "Yes, items marked as ‘Final Sale’ or ‘Non-Returnable’ cannot be returned. Custom-made or commissioned items are also non-returnable.",
+            ],
+          },
+          {
+            question: "What if I receive a damaged or defective product?",
+            answer: [
+              "Please inspect your product upon delivery. If you find any damage or defect, notify us within 48 hours of receipt. We will arrange a return or replacement free of charge.",
+            ],
+          },
+          {
+            question: "How do refunds work?",
+            answer: [
+              "Refunds are evaluated on a case-by-case basis. Once approved, refunds or store credits will be processed within 15 working days after we receive and inspect the returned product. Please note that transaction fees of 5% are non-refundable.",
+            ],
+          },
+          {
+            question: " Can I cancel my order?",
+            answer: [
+              "Orders can only be canceled within 24 hours of placement. Custom-made or commissioned items cannot be canceled once the order is confirmed.",
+            ],
+          },
+        ]}
+      />
       <Footer />
       {/*  */}
       <Searchbarsection />

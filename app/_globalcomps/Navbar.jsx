@@ -47,6 +47,7 @@ function Navbar({ navtype, token, userdata }) {
       {/* side menu */}
       <Sidemenu
         sidemenutoggle={sidemenutoggle}
+        setsidemenutoggle={setsidemenutoggle}
         token={token}
         userdata={userdata}
       />

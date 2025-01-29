@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { AppContextfn } from "@/app/Context";
+import Updateuserdetails from "@/app/_serveractions/Updateuserdetails";
 
 function Userdetails({ userdata }) {
   const { setmessagefn } = AppContextfn();
@@ -20,15 +21,12 @@ function Userdetails({ userdata }) {
 
   const submitform = async (e) => {
     e.preventDefault();
-    const res = await signup(formData);
+    const res = await Updateuserdetails(formData);
     setmessagefn(res?.message);
-    if (res?.status == 200) {
-      setFormData(initialformvalues);
-    }
   };
 
   return (
-    <div className="lg:flex-[3] w-full" id="accoutndetails">
+    <div className="lg:flex-[3] w-full">
       <h2>User Details</h2>
       <form
         onSubmit={submitform}
