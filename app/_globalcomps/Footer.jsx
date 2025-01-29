@@ -8,10 +8,9 @@ import Quicklinks from "./_footerclientcomps/Quicklinks";
 
 function Footer() {
   const whatwedolinks = [
-    { title: "Unorthodox Design", link: "/" },
-    { title: "Amalgamation of the old and new", link: "/" },
-    { title: "Uncompromising Quality", link: "/" },
-    { title: "Tailor Made for you", link: "/" },
+    { title: "ABOUT US", link: "/" },
+    { title: "THE ALT METHOD", link: "/" },
+    { title: "THE JOURNEY TO ORGANISATION", link: "/" },
   ];
 
   return (
@@ -24,10 +23,12 @@ function Footer() {
         <Quicklinks />
         <div className="w-full h-px bg-theme opacity-50 my-5 lg:hidden" />
         <div className="flex-1 text-sm">
-          <h3 className="mb-4 tracking-wider">WHAT WE DO?</h3>
+          <h3 className="mb-4 tracking-wider">ABOUT</h3>
           <div className="flex flex-col gap-3">
             {whatwedolinks.map((item, i) => (
-              <p key={i}>{item?.title}</p>
+              <Link href={item?.link} key={i}>
+                <Underlineeffect title={item?.title} />
+              </Link>
             ))}
           </div>
           <div className="flex gap-5 text-3xl text-theme mt-10">
@@ -42,10 +43,10 @@ function Footer() {
       </div>
       <div className="w-full h-px bg-theme opacity-50 my-10" />
       <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-10 mt-10 text-theme">
-        <Link href={`tel:${mobile}`} >
+        <Link href={`tel:${mobile}`}>
           <Underlineeffect title={mobile} />
         </Link>
-        <Link href={`mailto:${mail}`} >
+        <Link href={`mailto:${mail}`}>
           <Underlineeffect title={mail} />
         </Link>
         <p className="lg:ml-auto">

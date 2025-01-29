@@ -7,10 +7,10 @@ import { RiArrowDownSLine } from "react-icons/ri";
 function Quicklinks() {
   const [showlinks, setshowlinks] = useState(false);
   const quicklink1 = [
-    { title: "SHIPPING", link: "/" },
-    { title: "RETURNS", link: "/" },
+    { title: "SHIPPING", link: "/shipping" },
+    { title: "RETURNS", link: "/shipping#return" },
     { title: "CUSTOMER SUPPORT", link: "/" },
-    { title: "TERMS & CONDITIONS", link: "/" },
+    { title: "TERMS & CONDITIONS", link: "/termsandconditions" },
     { title: "Contact Us", link: "/" },
   ];
 

@@ -119,3 +119,29 @@ body {
     transform: translate(-50%, -50%) scale(2);
   }
 }
+
+/* policies */
+.policies{
+  margin: 40px 0;
+}
+.policies div {
+}
+.policies h2{
+  font-size: larger;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 5px;
+
+}
+.policies ul{
+
+}
+.policies li{
+  list-style-type: disc;
+  margin-left: 30px;
+  font-size: smaller;
+}
+.policies p{
+  margin-top: 10px;
+  font-size: small;
+}
