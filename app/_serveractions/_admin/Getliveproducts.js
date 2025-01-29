@@ -2,27 +2,38 @@
 import { getcollection } from "@/app/_connections/Mongodb";
 import Verification from "@/app/_connections/Verifytoken";
 
-export const Roomsearchproducts = async (search) => {
+export const Roomsearchproducts = async (ordertype = "all", search) => {
   try {
     const res = await Verification("Products_permission");
     if (!res?.verified) {
       return { status: 400, message: "Invalid user" };
     }
 
-    const { Productscollection, ObjectId } = await getcollection();
+    const { Productscollection } = await getcollection();
 
-    const query = {
-      $or: [
-        { categories: { $regex: new RegExp(search, "i") } },
-        { rooms: { $regex: new RegExp(search, "i") } },
-        { productName: { $regex: new RegExp(search, "i") } },
-        { sku: { $regex: new RegExp(search, "i") } },
-        { Material: { $regex: new RegExp(search, "i") } },
-        { theme: { $regex: new RegExp(search, "i") } },
-      ],
+    const queries = {
+      all: {},
+      rooms: {
+        rooms: search,
+      },
+      category: {
+        categories: search,
+      },
+      search: {
+        $or: [
+          { categories: { $regex: new RegExp(search, "i") } },
+          { rooms: { $regex: new RegExp(search, "i") } },
+          { productName: { $regex: new RegExp(search, "i") } },
+          { sku: { $regex: new RegExp(search, "i") } },
+          { Material: { $regex: new RegExp(search, "i") } },
+          { theme: { $regex: new RegExp(search, "i") } },
+        ],
+      },
     };
 
-    const allproducts = await Productscollection.find(query).toArray();
+    const allproducts = await Productscollection.find(
+      queries[ordertype]
+    ).toArray();
     allproducts.map((item) => (item._id = item._id.toString()));
 
     return { status: 200, message: "", data: allproducts };

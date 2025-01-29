@@ -58,11 +58,11 @@ export const staticdata = {
       img: "/Categoriesimages/images.jpeg",
       desc: "Trays are versatile decorative pieces that combine functionality with style. Use them to organize essentials like candles, perfumes, or snacks, or as elegant serving pieces during gatherings. Available in various materials like wood, metal, or ceramic, they can match any interior design theme. Trays work perfectly in living rooms, bedrooms, or even kitchens, adding a touch of sophistication to your space. Whether used as table centerpieces or practical organizers, they help keep your home tidy while elevating its decor with a refined, polished look.",
     },
-    "Bath-Organizers": {
+    "Bath-Organisers": {
       img: "/Categoriesimages/BathroomOrganizers.jpg",
       desc: "Bath organizers help you create a clutter-free and serene bathroom space. Store toiletries, towels, or accessories in stylish yet functional organizers made from wood, plastic, or metal. Wall-mounted shelves, caddies, or baskets enhance storage without compromising on style. Add a decorative touch with sleek designs that match your bathroom’s theme. Perfect for small or large spaces, bath organizers bring order and sophistication, making your bathroom feel like a spa retreat. Keep your essentials within reach while maintaining a clean, visually appealing environment.",
     },
-    "Bar-Organizers": {
+    "Bar-Organisers": {
       img: "/Categoriesimages/barOrganizers.jpg",
       desc: "Bar organizers are essential for creating a stylish and functional bar area in your home. Keep glassware, spirits, and accessories neatly arranged with elegant trays, racks, or shelves. Available in materials like wood, metal, or glass, they blend seamlessly with modern or classic decor styles. Add charm with decorative accents like coasters, napkins, or small planters. Bar organizers are perfect for entertaining guests, ensuring everything you need is within reach. Whether hosting parties or enjoying a quiet evening, these organizers enhance the functionality and aesthetic of your bar area.",
     },

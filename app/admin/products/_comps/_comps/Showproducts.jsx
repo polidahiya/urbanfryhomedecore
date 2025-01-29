@@ -19,9 +19,9 @@ function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
   const [products, setproducts] = useState([]);
   const [loading, setloading] = useState(false);
 
-  const handlesearch = async (search) => {
+  const handlesearch = async (ordertype, search) => {
     setloading(true);
-    const res = await Roomsearchproducts(search);
+    const res = await Roomsearchproducts(ordertype, search);
     setloading(false);
     setproducts(res?.data);
     if (res?.data?.length == 0) {
@@ -47,15 +47,22 @@ function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
       <Adminsearchbar
         search={search}
         setsearch={setsearch}
-        onsubmit={() => handlesearch(search)}
+        onsubmit={() => handlesearch("search", search)}
+        placeholder="Search Categories, Rooms, Product Name, Sku, Material or Theme"
       />
-      <div className="flex items-center gap-5 mt-5">
+      <div className="flex items-end gap-5 mt-5">
+        <button
+          className="bg-theme text-white px-5 py-2 rounded-md"
+          onClick={() => handlesearch("all", "")}
+        >
+          All
+        </button>
         <Dropdownmenu
-          title={"categories"}
+          title={"Categories"}
           state={filterdata.categories}
           onchange={(value) => {
             setfilterdata((pre) => ({ ...pre, categories: value }));
-            handlesearch(value);
+            handlesearch("category", value);
           }}
           options={["", ...Object.keys(staticdata.categories)]}
         />
@@ -64,7 +71,7 @@ function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
           state={filterdata.rooms}
           onchange={(value) => {
             setfilterdata((pre) => ({ ...pre, rooms: value }));
-            handlesearch(value);
+            handlesearch("rooms", value);
           }}
           options={["", ...Object.keys(staticdata.rooms)]}
         />
