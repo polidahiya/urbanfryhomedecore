@@ -34,7 +34,7 @@ function Sidecart() {
   return (
     <div className="w-full h-screen fixed top-0 left-0 bg-black bg-opacity-0 z-30">
       <div
-        className={`w-full max-w-[500px] h-full  absolute top-0 right-0  bg-theme text-white z-30 duration-300 ease-out border-l border-white overflow-y-scroll
+        className={`w-full max-w-[500px] h-full  absolute top-0 right-0  bg-theme text-white z-30 duration-300 ease-out md:border-l border-white overflow-y-scroll
         ${showsidecart?.effect ? "translate-x-0" : "translate-x-full"}`}
       >
         <button
@@ -96,19 +96,13 @@ function Sidecart() {
                   ₹ {parseInt(totalPrice, 10).toLocaleString("en-IN")}
                 </p>
               </div>
-              <button className="w-full flex items-center justify-center gap-2 bg-white bg-opacity-30 py-3 text-sm text-white  mt-5">
-                BUY NOW
-                <Upioptions />
-                <FiChevronRight />
-              </button>
-              <div className="flex items-center justify-center mt-5 mb-10">
+              <div className="flex items-center justify-center mt-7 mb-10">
                 <Link
                   href="/cart"
-                  className="py-1 relative group tracking-widest"
+                  className="py-2 relative font-normal tracking-widest bg-white bg-opacity-75 lg:hover:bg-opacity-100 duration-300 text-theme w-full text-center"
                   onClick={closemenu}
                 >
                   VIEW CART
-                  <span className="absolute bottom-0 left-0 h-px w-full bg-white lg:group-hover:w-0 duration-300"></span>
                 </Link>
               </div>
             </div>

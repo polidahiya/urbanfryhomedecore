@@ -106,7 +106,7 @@ function Publicpage() {
             </div>
           </form>
           <p className="mt-3">
-            <Closeeffectlink title={"Forgot password?"} link={"/"} />
+            <Closeeffectlink title={"Forgot password?"} link={"/account/forgotpassword"} />
           </p>
         </div>
         {/* image */}

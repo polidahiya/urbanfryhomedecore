@@ -13,6 +13,8 @@ import addorder from "@/app/_serveractions/addorders";
 import { BsCartX } from "react-icons/bs";
 import Couponcomp from "./_comps/Couponcomp";
 import Cookies from "js-cookie";
+import PaymentMethod from "./_comps/Paymentmethod";
+import { FaRegPenToSquare } from "react-icons/fa6";
 
 function Publicpage({ userdata, token }) {
   const [paymentMethod, setPaymentMethod] = useState("online");
@@ -167,8 +169,25 @@ function Publicpage({ userdata, token }) {
               ))}
             </div>
           </div>
+          {/* address */}
+          <div className="flex flex-col md:flex-row items-start justify-evenly gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10 my-10">
+            <div className="w-full md:w-fit flex flex-col gap-4">
+              <div className="font-semibold">Address</div>
+              <div className="flex items-center flex-wrap">
+                <p className=" bg-white py-2 px-5">
+                  {userdata?.address}
+                </p>
+                <Link
+                  href="/account"
+                  className="flex items-center gap-1 bg-theme text-white  px-5 py-2 bg-opacity-75 lg:hover:bg-opacity-100"
+                >
+                  <FaRegPenToSquare /> Update
+                </Link>
+              </div>
+            </div>
+          </div>
           {/* checkout */}
-          <div className="flex flex-col md:flex-row items-start justify-center gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10 my-10">
+          <div className="flex flex-col md:flex-row items-start justify-evenly gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10 my-10">
             <Couponcomp
               coupon={coupon}
               setcoupon={setcoupon}
@@ -202,71 +221,6 @@ function Publicpage({ userdata, token }) {
     </div>
   );
 }
-
-const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
-  const handleToggle = (method) => {
-    if (method === "cod" && totalPrice >= 10000) return;
-    setPaymentMethod(method);
-  };
-
-  useEffect(() => {
-    if (paymentMethod === "cod" && totalPrice >= 10000)
-      setPaymentMethod("online");
-  }, [totalPrice]);
-
-  return (
-    <div className="w-full md:w-fit flex flex-col gap-4">
-      <span className="font-semibold">Payment Method</span>
-      <div className="w-full flex flex-col gap-2 text-sm">
-        {/* Online Payment Option */}
-        <label
-          className={`w-full flex items-center gap-3 p-3 border cursor-pointer transition ${
-            paymentMethod === "online"
-              ? "bg-white border-theme"
-              : "bg-gray-100 border-gray-300"
-          }`}
-        >
-          <input
-            type="radio"
-            name="payment"
-            value="online"
-            checked={paymentMethod === "online"}
-            onChange={() => handleToggle("online")}
-            className="w-5 h-5 accent-theme cursor-pointer"
-          />
-          <span className="text-gray-700">Pay Online</span>
-        </label>
-
-        {/* COD Option */}
-        <label
-          className={`w-full flex items-center gap-3 p-3 border cursor-pointer transition ${
-            paymentMethod === "cod"
-              ? "bg-white border-theme"
-              : "bg-gray-100 border-gray-300"
-          } ${totalPrice >= 10000 ? "opacity-50 cursor-not-allowed" : ""}`}
-        >
-          <input
-            type="radio"
-            name="payment"
-            value="cod"
-            checked={paymentMethod === "cod"}
-            onChange={() => handleToggle("cod")}
-            disabled={totalPrice >= 10000}
-            className="w-5 h-5 accent-theme cursor-pointer"
-          />
-          <span className="text-gray-700">Cash on Delivery (COD)</span>
-        </label>
-      </div>
-
-      {/* Disabled Message */}
-      {totalPrice >= 10000 && (
-        <p className="text-xs text-gray-500">
-          * COD is available only for orders below ₹10,000.
-        </p>
-      )}
-    </div>
-  );
-};
 
 const Emptycart = () => {
   return (

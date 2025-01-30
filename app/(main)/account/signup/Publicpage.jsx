@@ -5,6 +5,8 @@ import Underlineeffect from "../../../_globalcomps/Underlineeffect";
 import Closeeffectlink from "@/app/_globalcomps/Closeeffectlink";
 import { signup } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
+import { RiEyeCloseFill } from "react-icons/ri";
+import { RiEye2Line } from "react-icons/ri";
 
 function Publicpage() {
   const { setmessagefn } = AppContextfn();
@@ -15,6 +17,7 @@ function Publicpage() {
     address: "",
   };
   const [formData, setFormData] = useState(initialformvalues);
+  const [showpass, setshowpass] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,9 +88,9 @@ function Publicpage() {
                 E-mail <span className="text-red-500">*</span>
               </label>
             </div>
-            <div className=" relative border border-theme">
+            <div className="relative flex border border-theme">
               <input
-                type="password"
+                type={showpass ? "text" : "password"}
                 id="password"
                 name="password"
                 value={formData.password}
@@ -101,6 +104,13 @@ function Publicpage() {
               >
                 Password <span className="text-red-500">*</span>
               </label>
+              <button
+                type="button"
+                className="aspect-square px-4"
+                onClick={() => setshowpass((pre) => !pre)}
+              >
+                {showpass ? <RiEye2Line /> : <RiEyeCloseFill />}
+              </button>
             </div>
             <div className=" relative border border-theme">
               <input
