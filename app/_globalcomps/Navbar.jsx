@@ -17,18 +17,22 @@ function Navbar({ navtype, token, userdata }) {
   const [sidemenutoggle, setsidemenutoggle] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () =>
-      settransparentnav(window.scrollY > 50 ? false : true);
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        if (transparentnav) settransparentnav(false);
+      } else {
+        if (!transparentnav) settransparentnav(true);
+      }
+    };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [transparentnav]);
 
   return (
     <nav
-      className={`fixed navhover top-0 left-0 w-full flex items-center px-5 md:px-10 h-20  hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
-        ${navtype && transparentnav ? "text-white" : "bg-white text-inherit"} 
-        `}
+      className={`fixed navhover top-0 left-0 w-full flex items-center px-5 md:px-10 h-20  lg:hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
+        ${navtype && transparentnav ? "text-black" : "bg-white text-inherit"}`}
     >
       <Menubutton
         sidemenutoggle={sidemenutoggle}

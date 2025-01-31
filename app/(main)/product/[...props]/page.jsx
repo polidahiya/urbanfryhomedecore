@@ -65,7 +65,9 @@ async function page({ params }) {
         />
       </div>
       <div className="">
-        <Newarrivals heading="Similar Products" data={similarproducts} />
+        {similarproducts.length != 0 && (
+          <Newarrivals heading="Similar Products" data={similarproducts} />
+        )}
       </div>
       <div>
         <Faqs

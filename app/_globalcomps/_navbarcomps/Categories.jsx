@@ -3,7 +3,6 @@ import Link from "next/link";
 import Underlineeffect from "../Underlineeffect";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { staticdata } from "@/app/commondata";
-import scrollable from "../_helperfunctions/Scrollable";
 
 const Categories = ({ open }) => {
   const [togglecategories, settogglecategories] = useState({
@@ -68,7 +67,6 @@ const Categories = ({ open }) => {
       <Link
         href="/collections/all"
         className="block underlineff shopcategories w-full relative px-5 py-3 whitespace-nowrap cursor-pointer"
-        onClick={scrollable}
       >
         <Underlineeffect title={"All Products"} />
       </Link>
@@ -87,7 +85,6 @@ const Subcats = ({ item, type, togglecategories }) => (
         href={`/collections/${type}/${keys}`}
         key={i}
         className="underlineff relative px-5 py-3 whitespace-nowrap"
-        onClick={scrollable}
       >
         <Underlineeffect title={keys.replace(/-/g, " ")} />
       </Link>

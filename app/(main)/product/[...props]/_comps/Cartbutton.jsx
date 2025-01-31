@@ -2,6 +2,7 @@
 import React from "react";
 import { AppContextfn } from "@/app/Context";
 import { useRouter } from "next/navigation";
+import { PiSmileySad } from "react-icons/pi";
 
 function Cartbutton({ product, cartproductname }) {
   const router = useRouter();
@@ -35,7 +36,7 @@ function Cartbutton({ product, cartproductname }) {
   // add to cart button
   const handleAddToCart = () => {
     if (!product?.available) {
-      setmessagefn("This product is not available");
+      setmessagefn("This product is currently unavailable");
       return;
     }
 
@@ -85,10 +86,21 @@ function Cartbutton({ product, cartproductname }) {
       </div>
       {/* add to cart button */}
       <button
-        className="w-full h-full text-white bg-theme text-sm px-10"
+        className="w-full h-full text-white bg-theme text-sm "
         onClick={handleAddToCart}
       >
-        {cart[cartproductname]?.added ? "VIEW CART" : "ADD TO CART"}
+        {product?.available ? (
+          cart[cartproductname]?.added ? (
+            "VIEW CART"
+          ) : (
+            "ADD TO CART"
+          )
+        ) : (
+          <span className="flex items-center justify-center gap-3">
+            <PiSmileySad className="scale-[2]"/>
+            Currently Unavailable
+          </span>
+        )}
       </button>
     </div>
   );

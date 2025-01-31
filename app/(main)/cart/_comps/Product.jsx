@@ -51,13 +51,12 @@ function Product({ item, cartproductname }) {
       <div className="text-left  lg:flex-[3] ">
         <Link href={`/product/${item?.sku}/${item?.color}`} className="block">
           <div className="w-full flex items-start lg:items-center">
-            <div className="min-w-[100px] aspect-square">
+            <div className="min-w-24 w-24 aspect-square">
               <Image
                 src={item?.image}
                 alt={item?.productName}
-                height={100}
-                width={100}
-                quality={10}
+                height={500}
+                width={500}
                 className="h-full w-full object-contain"
               ></Image>
             </div>

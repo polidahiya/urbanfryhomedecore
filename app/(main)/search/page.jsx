@@ -3,7 +3,7 @@ import Link from "next/link";
 import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
 import Searchbar from "./_comps/Searchbar";
 import Searchedproductsfn from "@/app/_globalcomps/_helperfunctions/Searchedproductsfn";
-import Productcard from "@/app/_globalcomps/Productcard";
+import Productcard from "@/app/_globalcomps/_productcard/Productcard";
 
 async function page({ searchParams }) {
   const allsearchParams = await searchParams;

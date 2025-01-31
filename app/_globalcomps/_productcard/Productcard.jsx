@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Quickviewbutton from "./Quickviewbutton";
 
 function Productcard({ product }) {
   return (
-    <div className="group relative w-full md:max-w-80">
+    <div className="group relative w-full h-full md:max-w-80">
       <div className="relative">
         <Link
           className="w-full aspect-square relative block overflow-hidden"
@@ -28,11 +29,14 @@ function Productcard({ product }) {
           ></Image>
         </Link>
         {/* quick view button */}
-        <div className="absolute bottom-0 left-0 w-full p-2 hidden lg:group-hover:block z-10">
-          <button className="w-full p-5 bg-white text-theme text-sm lg:hover:bg-theme lg:hover:text-white duration-300">
-            Quick view
-          </button>
-        </div>
+        <Quickviewbutton product={product}/>
+        {!product?.available && (
+          <div className="absolute bottom-0 p-2 w-full lg:group-hover:bottom-16 duration-300">
+            <p className="w-full text-center bg-white bg-opacity-75 py-3 lg:group-hover:bg-opacity-100">
+              Available Soon{"!"}
+            </p>
+          </div>
+        )}
       </div>
       {/* details */}
       <div className="px-4 pt-4">
@@ -40,9 +44,10 @@ function Productcard({ product }) {
           {product?.theme}
         </p>
         <p className="flex items-center justify-between flex-wrap mt-[6px]">
-          <span>{product?.productName}</span>
-          <span>
+          <span className="line-clamp-2">{product?.productName}</span>
+          <span className="">
             From ₹{parseInt(product?.sellingprice, 10).toLocaleString("en-IN")}
+            &#47;&#45;
           </span>
         </p>
       </div>

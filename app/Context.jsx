@@ -18,6 +18,7 @@ export function Appwrapper({ children }) {
     type: true,
   };
   const [showdialog, setshowdialog] = useState(showdialoginitialvalues);
+  const [quickview, setquickview] = useState({ show: false, data: {} });
   //admin states
 
   // message function
@@ -62,6 +63,8 @@ export function Appwrapper({ children }) {
         showdialog,
         setshowdialog,
         showdialoginitialvalues,
+        quickview,
+        setquickview,
       }}
     >
       {children}

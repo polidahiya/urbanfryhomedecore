@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-import Productcard from "../_globalcomps/Productcard";
+import Productcard from "../_globalcomps/_productcard/Productcard";
 
 function Newarrivals({ heading, data }) {
   const containerref = useRef(null);

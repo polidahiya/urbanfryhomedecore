@@ -18,8 +18,8 @@ function Coloroptions({ variants, color, sku, name }) {
             <Image
               src={variant.images[0]}
               alt={`${name}-${variant.finish}`}
-              width={100}
-              height={100}
+              width={500}
+              height={500}
               loading="lazy"
               className="w-24 aspect-square"
             ></Image>

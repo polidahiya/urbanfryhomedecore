@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
-import scrollable from "../_helperfunctions/Scrollable";
 import Link from "next/link";
 import Underlineeffect from "../Underlineeffect";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -35,10 +34,7 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
           : "-translate-x-full lg:translate-x-0 opacity-0 lg:opacity-100"
       }`}
     >
-      <div
-        className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"
-        onClick={scrollable}
-      >
+      <div className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
         <Link
           href={"/"}
           className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
@@ -46,10 +42,7 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
           <Underlineeffect title={"LAST CHANCE"} />
         </Link>
       </div>
-      <div
-        className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"
-        onClick={scrollable}
-      >
+      <div className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
         <Link
           href={"/"}
           className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
@@ -71,10 +64,7 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
         </div>
         <Categories open={open} />
       </div>
-      <div
-        className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"
-        onClick={scrollable}
-      >
+      <div className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
         <Link
           href={"/"}
           className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
@@ -85,7 +75,6 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
       <div
         className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"
         onClick={() => {
-          scrollable();
           setsidemenutoggle(false);
         }}
       >
@@ -110,7 +99,6 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
               href={"/cart"}
               className="flex justify-between"
               onClick={() => {
-                scrollable();
                 setsidemenutoggle(false);
               }}
             >
@@ -121,14 +109,13 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
               href={"/account"}
               className="underline"
               onClick={() => {
-                scrollable();
                 setsidemenutoggle(false);
               }}
             >
               My account
             </Link>
             {userdata?.usertype === "admin" && (
-              <Link href={"/admin"} className="underline" onClick={scrollable}>
+              <Link href={"/admin"} className="underline">
                 Admin Dashboard
               </Link>
             )}
@@ -138,7 +125,6 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
             <Link
               href={"/account/login"}
               className="block px-10 py-3 bg-theme text-white text-center duration-300"
-              onClick={scrollable}
             >
               LOG IN
             </Link>
@@ -147,7 +133,6 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
               <Link
                 href={"/account/signup"}
                 className="relative inline-block underline"
-                onClick={scrollable}
               >
                 Create Account
               </Link>

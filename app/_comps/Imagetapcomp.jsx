@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Productcard from "../_globalcomps/Productcard";
+import Productcard from "../_globalcomps/_productcard/Productcard";
 import Link from "next/link";
 import { Cachedproducts } from "../_connections/Getcachedata";
 

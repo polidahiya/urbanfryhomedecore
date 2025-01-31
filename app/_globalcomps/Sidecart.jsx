@@ -62,9 +62,8 @@ function Sidecart() {
                     <Image
                       src={value?.image}
                       alt={value?.productName}
-                      height={100}
-                      width={100}
-                      quality={10}
+                      height={500}
+                      width={500}
                       className="h-full w-full object-contain"
                     ></Image>
                   </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
-import Productcard from "@/app/_globalcomps/Productcard";
+import Productcard from "@/app/_globalcomps/_productcard/Productcard";
 import { staticdata } from "@/app/commondata";
 import SortSelector from "./_comps/Sorting";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
