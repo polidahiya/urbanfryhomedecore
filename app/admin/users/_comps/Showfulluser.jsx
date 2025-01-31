@@ -83,7 +83,7 @@ function Showfulluser({ showfulluser, setshowfulluser, setrefresher }) {
             className="border rounded-md px-5 py-2"
             onClick={() => setshowfulluser({ show: false, data: {} })}
           >
-            Cancle
+            Cancel
           </button>
           {userdata?.email !== "altorganisers@gmail.com" && (
             <button

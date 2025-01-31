@@ -8,6 +8,7 @@ import Adminsearchbar from "@/app/admin/_comps/_adminnavbar/Adminsearchbar";
 import { GrUpdate } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import { IoCopy } from "react-icons/io5";
+import Link from "next/link";
 
 function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
   const { setmessagefn } = AppContextfn();
@@ -123,6 +124,8 @@ const Productcard = ({
         className="w-full aspect-square object-cover"
       />
       <p className="mt-1 text-center">{product?.productName}</p>
+      <Link href={`/product/${product?.sku}`}
+      className="block w-full bg-theme text-white py-2 mt-2 text-center bg-opacity-75 lg:hover:bg-opacity-100">View</Link>
       <div className="absolute top-0 right-0 flex flex-col gap-1 p-1">
         {/* update button */}
         <button

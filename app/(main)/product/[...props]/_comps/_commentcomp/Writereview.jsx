@@ -86,7 +86,7 @@ const WriteReview = ({ setshowwritereview, sku, userdata }) => {
             className="w-full h-10 px-10 border border-theme text-theme lg:hover:opacity-75 whitespace-nowrap"
             onClick={() => setshowwritereview(false)}
           >
-            Cancle Review
+            Cancel Review
           </button>
           <button
             type="submit"

@@ -70,7 +70,7 @@ function Showfullorder({ orderData, setshowfullorder }) {
             <strong>Total Price:</strong> ₹{orderData.totalPrice}
           </p>
         </div>
-        {/* cancle button */}
+        {/* cancel button */}
         <button
           className="absolute top-2 right-2 bg-gray-200 text-gray-700 rounded-full h-10 aspect-square hover:bg-gray-300"
           onClick={() => setshowfullorder({ show: false, data: {} })}

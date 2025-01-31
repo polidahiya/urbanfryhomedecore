@@ -6,7 +6,7 @@ import { Cachedproducts } from "../_connections/Getcachedata";
 
 async function Imagetapcomp() {
   const allprodcuts = await Cachedproducts();
-  const selectedproduct = allprodcuts.filter((item) => item.sku == "sku1");
+  const selectedproduct = allprodcuts.filter((item) => item.sku == "ALT-COFF-02-BRN");
   return (
     <div className="flex flex-col lg:flex-row">
       <div className="flex-1 relative">

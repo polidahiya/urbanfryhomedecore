@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Controller, Parallax } from "swiper/modules"; // Import modules
@@ -9,8 +9,22 @@ import "swiper/css/pagination";
 import RatingStars from "../(main)/product/[...props]/_comps/_commentcomp/RatingStars";
 
 function Customerreviews({ fivestarreviews }) {
-  const prevRef = useRef(null); // Ref for the custom previous button
-  const nextRef = useRef(null); // Ref for the custom next button
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      setTimeout(() => {
+        if (swiperRef.current.navigation) {
+          swiperRef.current.params.navigation.prevEl = prevRef.current;
+          swiperRef.current.params.navigation.nextEl = nextRef.current;
+          swiperRef.current.navigation.init();
+          swiperRef.current.navigation.update();
+        }
+      });
+    }
+  }, []);
 
   return (
     <div className="my-12 relative max-w-3xl mx-auto">
@@ -31,19 +45,7 @@ function Customerreviews({ fivestarreviews }) {
           loop={true}
           speed={1300}
           pagination={{ clickable: true }}
-          navigation={{
-            prevEl: prevRef.current, // Attach custom prev button
-            nextEl: nextRef.current, // Attach custom next button
-          }}
-          onSwiper={(swiper) => {
-            // Attach refs after Swiper is initialized
-            setTimeout(() => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-              swiper.navigation.init();
-              swiper.navigation.update();
-            });
-          }}
+          onSwiper={(swiper) => (swiperRef.current = swiper)} // Store swiper instance
           parallax={true}
           className="mySwiper flex-1 w-full"
         >

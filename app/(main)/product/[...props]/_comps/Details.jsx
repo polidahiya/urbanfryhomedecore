@@ -21,11 +21,11 @@ function Details({ product, color }) {
           dimension: product?.dimensions?.[0] || null,
           quantity: 1,
           color,
-          sku: product.sku,
-          mrp: product.mrp,
-          sellingprice: product.sellingprice,
-          productName: product.productName,
-          image: product.variants[color].images[0],
+          sku: product?.sku,
+          mrp: product?.mrp,
+          sellingprice: product?.sellingprice,
+          productName: product?.productName,
+          image: product?.variants[color].images[0],
         },
       }));
   }, []);
@@ -37,20 +37,20 @@ function Details({ product, color }) {
         <h1 className="text-3xl font-tenor">{product?.productName}</h1>
         {/* share buttton */}
         <Sharebutton
-          sku={product.sku}
-          description={product.keyfeatures.join("________")}
-          image={product.variants[color].images[0]}
+          sku={product?.sku}
+          description={product?.keyfeatures.join("________")}
+          image={product?.variants[color].images[0]}
         />
       </div>
       {/* price */}
       <p className="mt-5 text-xl">
-        {product.mrp && (
+        {product?.mrp != product?.sellingprice && (
           <span className="text-theme text-base line-through mr-3">
-            ₹{parseInt(product.mrp, 10).toLocaleString("en-IN")}
+            ₹{parseInt(product?.mrp, 10).toLocaleString("en-IN")}
           </span>
         )}
         <span className="">
-          ₹{parseInt(product.sellingprice, 10).toLocaleString("en-IN")}
+          ₹{parseInt(product?.sellingprice, 10).toLocaleString("en-IN")}
         </span>
       </p>
       <hr className="my-5" />
@@ -70,8 +70,8 @@ function Details({ product, color }) {
       <Coloroptions
         variants={product?.variants}
         color={color}
-        sku={product.sku}
-        name={product.name}
+        sku={product?.sku}
+        name={product?.name}
       />
       {/* sizes */}
       <Sizes

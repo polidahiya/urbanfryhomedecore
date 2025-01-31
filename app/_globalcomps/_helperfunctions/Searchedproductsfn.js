@@ -68,7 +68,7 @@ const Searchedproductsfn = async (searchQuery) => {
 
 // {
 //     "_id": "67725345c57ca2099444db12",
-//     "categories": "Photo-Frames",
+//     "categories": "Pantry-Organizers",
 //     "rooms": "Living-Room",
 //     "productName": "Utilities for controlling the tracking (letter spacing) of an element.",
 //     "sku": "sku-12345",

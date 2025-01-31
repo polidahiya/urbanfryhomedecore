@@ -12,7 +12,7 @@ function Productcard({ product }) {
         >
           <Image
             src={product?.variants[0]?.images[0] || ""}
-            alt={product.productName}
+            alt={product?.productName}
             className="h-full w-full absolute  object-cover lg:group-hover:scale-105 lg:group-hover:opacity-0 duration-300"
             height={500}
             width={500}
@@ -20,7 +20,7 @@ function Productcard({ product }) {
           ></Image>
           <Image
             src={product?.variants[0]?.images[1] || ""}
-            alt={product.productName}
+            alt={product?.productName}
             className="h-full w-full absolute  object-cover opacity-0 lg:group-hover:scale-110 lg:group-hover:opacity-100 duration-300"
             height={500}
             width={500}
@@ -36,7 +36,9 @@ function Productcard({ product }) {
       </div>
       {/* details */}
       <div className="px-4 pt-4">
-        <p className="text-sm text-theme mt-[6px] hidden lg:block">{product?.theme}</p>
+        <p className="text-sm text-theme mt-[6px] hidden lg:block">
+          {product?.theme}
+        </p>
         <p className="flex items-center justify-between flex-wrap mt-[6px]">
           <span>{product?.productName}</span>
           <span>

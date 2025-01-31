@@ -13,7 +13,7 @@ const Reviewbutton = ({ showwritereview, setshowwritereview, token }) => {
         setshowwritereview((pre) => !pre);
       }}
     >
-      {showwritereview ? "Cancle review" : "Write a review"}
+      {showwritereview ? "Cancel review" : "Write a review"}
     </button>
   );
 };

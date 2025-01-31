@@ -29,24 +29,25 @@ function Madeinindia() {
       {/* Hero Section */}
       <div className="relative w-full h-96">
         <img
-          src="https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg"
+          src="/uiimages/madeinindiaimage.jpg"
           alt="Made in India"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute flex flex-col justify-center gap-5 inset-0 text-white p-5 md:p-10">
           <h2 className="font-tenor text-4xl md:text-6xl">
-            Made in India, Proudly
+            Proudly Made in India!
           </h2>
           <p>
-            We are incredibly proud to only be using India resources and
-            manpower throughout our supply chain.
+            We take great pride in relying solely on Indian resources and
+            skilled manpower throughout our supply chain.
           </p>
         </div>
       </div>
 
       {/* Instagram Section */}
       <div className="bg-theme w-full">
-        <div className="flex items-center justify-center w-full text-white font-semibold p-10">
+        <div className="flex items-center justify-center gap-1 w-full text-white font-semibold p-10">
+          Follow us on instagram{" "}
           <Link
             href="https://www.instagram.com/altorganisers/"
             className="underline"

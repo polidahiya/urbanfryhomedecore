@@ -112,13 +112,18 @@ const AddProductForm = ({
         clear={() => setdata((pre) => ({ ...pre, sellingprice: "" }))}
       />
       {/* Material  */}
-      <Standardinputfield
-        titlename="Material"
-        value={data.Material}
-        onchange={(e) =>
-          setdata((pre) => ({ ...pre, Material: e.target.value }))
-        }
-        clear={() => setdata((pre) => ({ ...pre, Material: "" }))}
+      <Dropdownmenu
+        title={"Material"}
+        state={data.Material}
+        onchange={(value) => setdata((pre) => ({ ...pre, Material: value }))}
+        options={[
+          "Acacia Wood",
+          "Sheesham Wood",
+          "Mango Wood",
+          "HDMR",
+          "Reclaimed Wood",
+          "Solid Wood",
+        ]}
       />
       {/* Warranty  */}
       <Standardinputfield
@@ -258,7 +263,7 @@ const AddProductForm = ({
               setdeletedimages([]);
             }}
           >
-            Cancle Update
+            Cancel Update
           </button>
         )}
       </div>

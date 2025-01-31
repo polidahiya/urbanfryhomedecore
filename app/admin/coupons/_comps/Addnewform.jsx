@@ -123,7 +123,7 @@ function Addnewform({ data, setdata, setshowform, resetState, setrefresher }) {
                   setshowform(false);
                 }}
               >
-                Cancle Update
+                Cancel Update
               </button>
               <button
                 className="flex items-center justify-center gap-2  px-4 py-2  border border-red-500 rounded-md text-red-500"

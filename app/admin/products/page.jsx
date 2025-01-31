@@ -5,14 +5,14 @@ import Showproducts from "./_comps/_comps/Showproducts";
 
 function Page() {
   const initialState = {
-    categories: "Photo-Frames",
+    categories: "Pantry-Organizers",
     rooms: "Living-Room",
     productName: "",
     sku: "",
     handlingtime: "",
     mrp: "",
     sellingprice: "",
-    Material: "",
+    Material: "Acacia Wood",
     Warranty: "",
     theme: "",
     dimensions: [""],

@@ -147,7 +147,7 @@ function Publicpage({ user }) {
                   href={"/account/login"}
                   className="px-10 py-3 w-fit mt-auto text-theme border border-theme bg-opacity-70 lg:hover:bg-theme lg:hover:text-white duration-300"
                 >
-                  Cancle
+                  Cancel
                 </Link>
               )}
             </div>

@@ -29,7 +29,7 @@ function Confirmdialogbox() {
                 setshowdialog(showdialoginitialvalues);
               }}
             >
-              Cancle
+              Cancel
             </button>
           </div>
         </div>
