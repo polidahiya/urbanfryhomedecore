@@ -23,7 +23,7 @@ const Descriptionitem = ({ heading, details }) => {
           open ? "max-h-screen duration-1000" : "max-h-0 duration-500"
         }  overflow-hidden`}
       >
-        {details.map((detail, index) => (
+        {details?.map((detail, index) => (
           <p key={index} className="text-sm pb-3">
             <IoIosArrowRoundForward className="inline-block mr-2" />
             {detail}

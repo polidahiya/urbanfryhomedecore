@@ -30,7 +30,7 @@ function Sizes({ dimensions, cartproductname }) {
             onChange={handleChange}
             className="relative p-5 pr-10  border border-theme  outline-none lg:hover:border-black appearance-none cursor-pointer"
           >
-            {dimensions.map((dimension, index) => (
+            {dimensions?.map((dimension, index) => (
               <option key={index} value={dimension} className="text-sm">
                 {dimension}
               </option>

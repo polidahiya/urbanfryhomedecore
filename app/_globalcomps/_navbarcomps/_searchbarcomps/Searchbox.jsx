@@ -1,11 +1,22 @@
 import React from "react";
-import Link from "next/link";
 import { AppContextfn } from "@/app/Context";
+import { useRouter } from "next/navigation";
 
 const Searchbox = ({ searchtext, setsearchtext, setisfocused }) => {
   const { setshowsearchbar } = AppContextfn();
+  const router = useRouter();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setshowsearchbar(false);
+    router.push(`/search?q=${searchtext}`);
+  };
+
   return (
-    <div className="h-16 flex items-stretch justify-between gap-1 md:gap-5">
+    <form 
+      className="h-16 flex items-stretch justify-between gap-1 md:gap-5"
+      onSubmit={handleSubmit}
+    >
       <div className="relative h-full w-full">
         <input
           type="text"
@@ -16,18 +27,17 @@ const Searchbox = ({ searchtext, setsearchtext, setisfocused }) => {
           required
           onChange={(e) => setsearchtext(e.target.value)}
         />
-        <label className="absolute top-0 left-0 text-theme flex items-center h-full w-full pointer-events-none  px-4  duration-300">
+        <label className="absolute top-0 left-0 text-theme flex items-center h-full w-full pointer-events-none px-4 duration-300">
           What are you looking for?
         </label>
       </div>
-      <Link
+      <button
+        type="submit"
         className="flex items-center justify-center h-full px-5 md:px-11 bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 duration-300"
-        href={`/search?q=${searchtext}`}
-        onClick={() => setshowsearchbar(false)}
       >
         Search
-      </Link>
-    </div>
+      </button>
+    </form>
   );
 };
 

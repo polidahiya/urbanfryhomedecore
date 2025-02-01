@@ -32,7 +32,7 @@ function Imagescomp({ images, name }) {
 
   return (
     <div className="grid grid-cols-4 gap-1 w-full">
-      {images.map((image, i) => (
+      {images?.map((image, i) => (
         <Image
           src={image}
           alt={name.replace(/-/g, " ")}

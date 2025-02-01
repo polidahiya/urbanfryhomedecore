@@ -7,7 +7,7 @@ function Coloroptions({ variants, color, sku, name }) {
     <div className="mt-5">
       <p className="block text-sm">Color Options</p>
       <div className="flex gap-2 mt-2">
-        {variants.map((variant, index) => (
+        {variants?.map((variant, index) => (
           <Link
             href={`/product/${sku}/${index}`}
             key={index}

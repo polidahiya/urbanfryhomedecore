@@ -9,6 +9,7 @@ import Commentcomp from "./_comps/_commentcomp/Commentcomp";
 import { Cachedreviews } from "@/app/_connections/Getcachedata";
 import { cookies } from "next/headers";
 import Faqs from "@/app/_comps/Faqs";
+import { notFound } from "next/navigation";
 
 async function page({ params }) {
   const allcookies = await cookies();
@@ -21,11 +22,14 @@ async function page({ params }) {
   const color = props[1] || 0;
   const products = await Cachedproducts();
 
-  const product = products.filter((product) => product.sku === sku)[0];
+  const filteredproducts = products.filter((product) => product?.sku === sku);
+  if (filteredproducts.length == 0) notFound();
+  const product = filteredproducts[0];
+
   const similarproducts = products.filter(
     (similarproduct) =>
-      similarproduct.categories === product.categories &&
-      similarproduct.sku !== product.sku
+      similarproduct?.categories === product?.categories &&
+      similarproduct?.sku !== product?.sku
   );
 
   const allreviews = await Cachedreviews();
@@ -36,21 +40,21 @@ async function page({ params }) {
       <div className="mt-20 md:mt-28 flex flex-col lg:flex-row gap-10 px-5 md:px-10">
         <div className="flex-[3]">
           <Imagescomp
-            images={product.variants[color].images}
-            name={product.productName}
+            images={product?.variants[color].images}
+            name={product?.productName}
           />
           {/* routes */}
-          <div className="flex items-center gap-2 text-sm mt-10">
+          <div className="flex items-center gap-2 text-sm mt-10 text-nowrap line-clamp-1">
             <Link href={"/"} className="">
               <Underlineeffect title={"Home"} />
             </Link>{" "}
             /{" "}
             <Link href={"/"} className="">
-              <Underlineeffect title={product.categories} />
+              <Underlineeffect title={product?.categories} />
             </Link>{" "}
             /{" "}
             <p className="capitalize text-[#a7a5a2]">
-              {product.productName.replace(/-/g, " ")}
+              {product?.productName.replace(/-/g, " ")}
             </p>
           </div>
         </div>
@@ -58,7 +62,7 @@ async function page({ params }) {
       </div>
       <div>
         <Commentcomp
-          sku={product.sku}
+          sku={product?.sku}
           Comments={filteredreviews}
           token={token}
           userdata={userdata}
@@ -124,7 +128,7 @@ export const generateMetadata = async ({ params }) => {
   const color = props[1] || 0;
 
   const products = await Cachedproducts();
-  const product = products.filter((product) => product.sku === sku)[0];
+  const product = products.filter((product) => product?.sku === sku)[0];
 
   const title = product?.seotitle || "AltOrganisers - Explore Amazing Products";
   const description =
