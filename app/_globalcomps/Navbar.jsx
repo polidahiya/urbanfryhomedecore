@@ -31,14 +31,14 @@ function Navbar({ navtype, token, userdata }) {
 
   return (
     <nav
-      className={`fixed navhover top-0 left-0 w-full flex items-center px-5 md:px-10 h-20  lg:hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
+      className={`fixed navhover top-0 left-0 w-full flex items-center px-5 md:px-10 h-20 lg:hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
         ${navtype && transparentnav ? "text-black" : "bg-white text-inherit"}`}
     >
       <Menubutton
         sidemenutoggle={sidemenutoggle}
         setsidemenutoggle={setsidemenutoggle}
       />
-      <Link href={"/"}>
+      <Link href={"/"} className="scale-125">
         <Image
           src="/uiimages/logo.png"
           alt="logo"
