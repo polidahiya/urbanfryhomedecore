@@ -1,13 +1,17 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
-const SortSelector = ({ onSortChange,numberofproduct }) => {
-  const [selectedSort, setSelectedSort] = useState("popularity");
+const SortSelector = ({ sort, numberofproduct }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [selectedSort, setSelectedSort] = useState(sort);
 
   const handleSortChange = (event) => {
     const value = event.target.value;
     setSelectedSort(value);
-    onSortChange(value);
+    router.replace(`${pathname}?sort=${value}#sort`);
   };
 
   return (
@@ -21,15 +25,15 @@ const SortSelector = ({ onSortChange,numberofproduct }) => {
         onChange={handleSortChange}
         className="p-2 text-sm border-none outline-none cursor-pointer"
       >
-        <option value="popularity">Popularity</option>
-        <option value="priceLowToHigh">Price: Low to High</option>
-        <option value="priceHighToLow">Price: High to Low</option>
-        <option value="newest">Newest First</option>
-        <option value="rating">Customer Rating</option>
+        <option value={0}>Default</option>
+        <option value={1}>Newest First</option>
+        <option value={2}>Oldest First</option>
+        <option value={3}>Price: Low to High</option>
+        <option value={4}>Price: High to Low</option>
+        <option value={5}>Lightest</option>
+        <option value={6}>Heaviest</option>
       </select>
-      <span className="text-theme">
-        {numberofproduct} Items
-      </span>
+      <span className="text-theme">{numberofproduct} Items</span>
     </div>
   );
 };

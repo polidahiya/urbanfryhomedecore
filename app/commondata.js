@@ -89,7 +89,11 @@ export const staticdata = {
   },
   all: {
     img: "/Categoriesimages/images.jpeg",
-    desc: "Bar organizers are essential for creating a stylish and functional bar area in your home. Keep glassware, spirits, and accessories neatly arranged with elegant trays, racks, or shelves. Available in materials like wood, metal, or glass, they blend seamlessly with modern or classic decor styles. Add charm with decorative accents like coasters, napkins, or small planters. Bar organizers are perfect for entertaining guests, ensuring everything you need is within reach. Whether hosting parties or enjoying a quiet evening, these organizers enhance the functionality and aesthetic of your bar area.",
+    desc: "Keep your home and office clutter-free with our range of storage solutions. From pantry, cabinet, and drawer organizers for a tidy kitchen to shoe racks and under-bed storage for maximizing space, we have it all. Enhance your workspace with office storage and supplies, simplify your beauty routine with makeup organizers & mirrors, and keep your bathroom neat with shower & bathtub storage. Add function and style with wall shelves, toy storage, and home decor to complete your space. Stay organized effortlessly with solutions designed for every corner of your home!",
+  },
+  new: {
+    img: "/Categoriesimages/images.jpeg",
+    desc: "Upgrade your space with our newest arrivals! From pantry, cabinet, and drawer organizers to shoe storage and under-bed solutions, explore fresh ways to declutter. Find the latest office storage, makeup organizers, and shower storage for a more functional home. Enhance your decor with wall shelves, toy storage, and stylish home accents—all designed to keep your space neat and stylish. Stay ahead with innovative storage solutions that make organizing effortless!",
   },
 };
 

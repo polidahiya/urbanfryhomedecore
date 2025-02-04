@@ -2,12 +2,12 @@ import { useEffect } from "react";
 
 const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
   const handleToggle = (method) => {
-    if (method === "cod" && totalPrice >= 10000) return;
+    if (method === "cod" && totalPrice >= 5000) return;
     setPaymentMethod(method);
   };
 
   useEffect(() => {
-    if (paymentMethod === "cod" && totalPrice >= 10000)
+    if (paymentMethod === "cod" && totalPrice >= 5000)
       setPaymentMethod("online");
   }, [totalPrice]);
 
@@ -40,7 +40,7 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
             paymentMethod === "cod"
               ? "bg-white border-theme"
               : "bg-gray-100 border-gray-300"
-          } ${totalPrice >= 10000 ? "opacity-50 cursor-not-allowed" : ""}`}
+          } ${totalPrice >= 5000 ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           <input
             type="radio"
@@ -48,7 +48,7 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
             value="cod"
             checked={paymentMethod === "cod"}
             onChange={() => handleToggle("cod")}
-            disabled={totalPrice >= 10000}
+            disabled={totalPrice >= 5000}
             className="w-5 h-5 accent-theme cursor-pointer"
           />
           <span className="text-gray-700">Cash on Delivery (COD)</span>
@@ -56,9 +56,9 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
       </div>
 
       {/* Disabled Message */}
-      {totalPrice >= 10000 && (
+      {totalPrice >= 5000 && (
         <p className="text-xs text-gray-500">
-          * COD is available only for orders below ₹10,000.
+          * COD is available only for orders below ₹5,000.
         </p>
       )}
     </div>

@@ -7,6 +7,7 @@ import { signup } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { RiEye2Line } from "react-icons/ri";
+import Image from "next/image";
 
 function Publicpage() {
   const { setmessagefn } = AppContextfn();
@@ -38,7 +39,7 @@ function Publicpage() {
 
   return (
     <div className="min-h-screen mt-36">
-      <div className="flex flex-col lg:flex-row gap-5 px-8">
+      <div className="flex flex-col lg:flex-row gap-5 px-8 pb-10">
         <div className="flex-1">
           {/* navigations */}
           <div className="flex items-center gap-2 text-sm">
@@ -144,9 +145,11 @@ function Publicpage() {
         </div>
         {/* image */}
         <div className="flex-1">
-          <img
-            src="https://loopsbylj.com/cdn/shop/files/LoopsbyLJ_Account_Login.jpg?v=1708439766&width=720"
-            alt=""
+          <Image
+            src="/uiimages/loginimage.jpg"
+            height={1000}
+            width={1000}
+            alt="login image"
             className="inset-0"
           />
         </div>

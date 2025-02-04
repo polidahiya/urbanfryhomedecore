@@ -38,7 +38,13 @@ function Navbar({ navtype, token, userdata }) {
         sidemenutoggle={sidemenutoggle}
         setsidemenutoggle={setsidemenutoggle}
       />
-      <Link href={"/"} className="scale-125">
+      <Link
+        href={"/"}
+        className="scale-125"
+        onClick={() => {
+          setsidemenutoggle(false);
+        }}
+      >
         <Image
           src="/uiimages/logo.png"
           alt="logo"

@@ -7,17 +7,49 @@ import SortSelector from "./_comps/Sorting";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 import Image from "next/image";
 
-async function page({ params }) {
+async function page({ params, searchParams }) {
   const [type, category] = (await params).category;
+  const { sort = 0 } = await searchParams;
+
   let specialrender = true;
   const products = await Cachedproducts();
 
+  // filter
   let productstoshow;
   if (type == "all") {
     productstoshow = products;
+  } else if (type == "new") {
+    const lastWeek = Date.now() - 7 * 24 * 60 * 60 * 1000;
+    productstoshow = products.filter((item) => item.lastupdated > lastWeek);
   } else {
     specialrender = false;
-    productstoshow = products.filter((product) => product[type] === category);
+    productstoshow = products.filter((product) => product[type] == category);
+  }
+
+  // sort
+  // newest first
+  if (sort == 1) {
+    productstoshow.sort((a, b) => b.lastupdated - a.lastupdated);
+  }
+  // oldest first
+  if (sort == 2) {
+    productstoshow.sort((a, b) => a.lastupdated - b.lastupdated);
+  }
+  // price low to high
+  if (sort == 3) {
+    productstoshow.sort((a, b) => a.sellingprice - b.sellingprice);
+  }
+  // price high to low
+  if (sort == 4) {
+    productstoshow.sort((a, b) => b.sellingprice - a.sellingprice);
+  }
+  // lightest
+  if (sort == 5) {
+    productstoshow.sort((a, b) => a.weight - b.weight);
+  }
+  // heaviest
+  if (sort == 6) {
+    productstoshow.sort((a, b) => b.weight - a.weight);
   }
 
   return (
@@ -32,16 +64,12 @@ async function page({ params }) {
             </Link>{" "}
             /{" "}
             <p className="capitalize text-[#a7a5a2]">
-              {specialrender
-                ? type.replace(/-/g, " ")
-                : category.replace(/-/g, " ")}
+              {(specialrender ? type : category)?.replace(/-/g, " ")}
             </p>
           </div>
           {/*  */}
-          <h1 className="text-white mt-10 text-6xl font-tenor">
-            {specialrender
-              ? type.replace(/-/g, " ")
-              : category.replace(/-/g, " ")}
+          <h1 className="text-white mt-10 text-6xl font-tenor capitalize">
+            {(specialrender ? type : category)?.replace(/-/g, " ")}
           </h1>
           <p className="mt-6 w-full max-w-[500px] text-sm text-justify">
             {specialrender
@@ -67,7 +95,7 @@ async function page({ params }) {
       <div className="px-2 md:px-8  py-8">
         {/* sort */}
         <div>
-          <SortSelector numberofproduct={productstoshow.length} />
+          <SortSelector sort={sort} numberofproduct={productstoshow.length} />
         </div>
         {/* products  */}
         {productstoshow.length === 0 ? (
