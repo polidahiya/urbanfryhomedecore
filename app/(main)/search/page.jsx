@@ -4,11 +4,13 @@ import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
 import Searchbar from "./_comps/Searchbar";
 import Searchedproductsfn from "@/app/_globalcomps/_helperfunctions/Searchedproductsfn";
 import Productcard from "@/app/_globalcomps/_productcard/Productcard";
+import { Cachedproducts } from "@/app/_connections/Getcachedata";
 
 async function page({ searchParams }) {
   const allsearchParams = await searchParams;
   const searchtext = allsearchParams?.q || "";
-  const searched = await Searchedproductsfn(searchtext);
+  const allproducts = await Cachedproducts();
+  const searched = await Searchedproductsfn(allproducts, searchtext);
 
   return (
     <div className="pt-32 px-5 md:px-8">

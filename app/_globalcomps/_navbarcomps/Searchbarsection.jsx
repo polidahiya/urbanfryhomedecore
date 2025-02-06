@@ -10,7 +10,7 @@ import Searchedproductcard from "./_searchbarcomps/Searchedproductcard";
 import Image from "next/image";
 
 function Searchbarsection() {
-  const { showsearchbar, setshowsearchbar } = AppContextfn();
+  const { showsearchbar, setshowsearchbar, allproducts } = AppContextfn();
   const [searchtext, setsearchtext] = useState("");
   const [searchedproducts, setsearchedproducts] = useState([]);
   const [isfocused, setisfocused] = useState(false);
@@ -25,7 +25,7 @@ function Searchbarsection() {
         return;
       }
 
-      const searched = await Searchedproductsfn(searchtext);
+      const searched = await Searchedproductsfn(allproducts,searchtext);
       setsearchedproducts(searched);
     };
 
@@ -50,12 +50,12 @@ function Searchbarsection() {
           className={`w-full flex items-center justify-between  h-20 text-inherit text-xs`}
         >
           <Image
-             src="/uiimages/logo.png"
-             alt="logo"
-             className="w-16 aspect-square mr-2"
-             width={200}
-             height={200}
-             quality={100}
+            src="/uiimages/logo.png"
+            alt="logo"
+            className="w-16 aspect-square mr-2"
+            width={200}
+            height={200}
+            quality={100}
           />
           <button
             className="group h-full"
@@ -71,7 +71,7 @@ function Searchbarsection() {
           isfocused={isfocused}
           setisfocused={setisfocused}
         />
-
+        {/* category subcat */}
         <div className="mt-5 max-h-[calc(100dvh-160px)] overflow-y-scroll themescroll pb-5">
           {searchedproducts.length === 0 ? (
             <>

@@ -2,6 +2,7 @@ import "./globals.css";
 import { Appwrapper } from "./Context";
 import Message from "./_globalcomps/Message";
 import Quickview from "./_globalcomps/Quickview";
+import { Cachedproducts } from "./_connections/Getcachedata";
 
 export const metadata = {
   title: "AltOrganisers",
@@ -10,9 +11,11 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const allproducts = await Cachedproducts();
+  
   return (
     <html lang="en">
-      <Appwrapper>
+      <Appwrapper allproducts={allproducts}>
         <body className={`antialiased themescroll max-w-[1920px] mx-auto`}>
           <Message />
           <Quickview />

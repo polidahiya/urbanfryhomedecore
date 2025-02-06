@@ -11,7 +11,9 @@ const SortSelector = ({ sort, numberofproduct }) => {
   const handleSortChange = (event) => {
     const value = event.target.value;
     setSelectedSort(value);
-    router.replace(`${pathname}?sort=${value}#sort`);
+    router.replace(`${pathname}?sort=${value}`, {
+      scroll: false,
+    });
   };
 
   return (

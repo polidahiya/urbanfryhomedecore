@@ -9,11 +9,12 @@ const Searchbox = ({ searchtext, setsearchtext, setisfocused }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setshowsearchbar(false);
+    setisfocused(false);
     router.push(`/search?q=${searchtext}`);
   };
 
   return (
-    <form 
+    <form
       className="h-16 flex items-stretch justify-between gap-1 md:gap-5"
       onSubmit={handleSubmit}
     >
@@ -25,7 +26,10 @@ const Searchbox = ({ searchtext, setsearchtext, setisfocused }) => {
           className="forminput h-full w-full px-4 border border-theme outline-none"
           value={searchtext}
           required
-          onChange={(e) => setsearchtext(e.target.value)}
+          onChange={(e) => {
+            setisfocused(true);
+            setsearchtext(e.target.value);
+          }}
         />
         <label className="absolute top-0 left-0 text-theme flex items-center h-full w-full pointer-events-none px-4 duration-300">
           What are you looking for?

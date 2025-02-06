@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import Searchbox from "@/app/_globalcomps/_navbarcomps/_searchbarcomps/Searchbox";
 import Searchedproductcard from "@/app/_globalcomps/_navbarcomps/_searchbarcomps/Searchedproductcard";
 import Searchedproductsfn from "@/app/_globalcomps/_helperfunctions/Searchedproductsfn";
+import { AppContextfn } from "@/app/Context";
 
 function Searchbar() {
+  const { allproducts } = AppContextfn();
   const [searchtext, setsearchtext] = useState("");
   const [searchedproducts, setsearchedproducts] = useState([]);
   const [isfocused, setisfocused] = useState(false);
@@ -26,7 +28,7 @@ function Searchbar() {
         setsearchedproducts([]);
         return;
       }
-      const searched = await Searchedproductsfn(debouncedText);
+      const searched = await Searchedproductsfn(allproducts, debouncedText);
       setsearchedproducts(searched);
     })();
   }, [debouncedText, isfocused]);
@@ -40,7 +42,7 @@ function Searchbar() {
         setisfocused={setisfocused}
       />
       {isfocused && debouncedText.trim() !== "" ? (
-        <div className="absolute top-full left-0 w-full bg-white z-10 p-5 max-h-96 border-x border-b border-theme overflow-y-scroll themescroll">
+        <div className="absolute top-full left-0 w-full bg-white z-10 p-5 max-h-96 border border-theme overflow-y-scroll themescroll mt-1">
           <Searchedproductcard searchedproducts={searchedproducts} />
         </div>
       ) : (
