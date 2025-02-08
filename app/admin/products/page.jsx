@@ -1,9 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddProductForm from "./_comps/AddProductForm";
 import Showproducts from "./_comps/_comps/Showproducts";
+import { useSearchParams } from "next/navigation";
+import { Roomsearchproducts } from "@/app/_serveractions/_admin/Getliveproducts";
+import { AppContextfn } from "@/app/Context";
+import Importexportmenu from "./_comps/Importexportmenu";
 
 function Page() {
+  const searchParams = useSearchParams();
+  const productsku = searchParams.get("sku");
+  const { setmessagefn } = AppContextfn();
+
   const initialState = {
     categories: "Pantry-Organizers",
     rooms: "Living-Room",
@@ -31,6 +39,21 @@ function Page() {
     setdata(initialState);
   };
   const [showform, setshowform] = useState(false);
+  const [showimportmenu, setshowimportmenu] = useState(false);
+
+  useEffect(() => {
+    if (productsku) {
+      (async () => {
+        const res = await Roomsearchproducts("sku", productsku);
+        if (res?.data?.length != 0) {
+          setdata(res?.data[0]);
+          setshowform(true);
+        } else {
+          setmessagefn("Product not found");
+        }
+      })();
+    }
+  }, [productsku]);
 
   return (
     <div>
@@ -61,7 +84,11 @@ function Page() {
           setdeletedimages={setdeletedimages}
           setshowform={setshowform}
           resetState={resetState}
+          setshowimportmenu={setshowimportmenu}
         />
+      )}
+      {showimportmenu && (
+        <Importexportmenu setshowimportmenu={setshowimportmenu}/>
       )}
     </div>
   );

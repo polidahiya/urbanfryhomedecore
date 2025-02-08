@@ -16,7 +16,7 @@ function Coloroptions({ variants, color, sku, name }) {
             }`}
           >
             <Image
-              src={variant.images[0]}
+              src={variant.images[0] || "/uiimages/404.avif"}
               alt={`${name}-${variant.finish}`}
               width={500}
               height={500}

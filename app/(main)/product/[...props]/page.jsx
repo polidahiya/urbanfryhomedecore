@@ -10,6 +10,7 @@ import { Cachedreviews } from "@/app/_connections/Getcachedata";
 import { cookies } from "next/headers";
 import Faqs from "@/app/_comps/Faqs";
 import { notFound } from "next/navigation";
+import { MdModeEditOutline } from "react-icons/md";
 
 async function page({ params }) {
   const allcookies = await cookies();
@@ -44,22 +45,23 @@ async function page({ params }) {
             name={product?.productName}
           />
           {/* routes */}
-          <div className="flex items-center gap-2 text-sm mt-10 text-nowrap line-clamp-1">
-            <Link href={"/"} className="">
+          <div className="text-sm mt-10 ">
+            <Link href={"/"}>
               <Underlineeffect title={"Home"} />
             </Link>{" "}
             /{" "}
-            <Link href={"/"} className="">
-              <Underlineeffect title={product?.categories} />
+            <Link href={"/"}>
+              <Underlineeffect title={product?.categories.replace(/-/g, " ")} />
             </Link>{" "}
             /{" "}
-            <p className="capitalize text-[#a7a5a2]">
+            <span className="capitalize text-[#a7a5a2]">
               {product?.productName.replace(/-/g, " ")}
-            </p>
+            </span>
           </div>
         </div>
         <Details product={product} color={color} />
       </div>
+      {/* comments */}
       <div>
         <Commentcomp
           sku={product?.sku}
@@ -68,11 +70,13 @@ async function page({ params }) {
           userdata={userdata}
         />
       </div>
-      <div className="">
+      {/* similar products */}
+      <div>
         {similarproducts.length != 0 && (
           <Newarrivals heading="Similar Products" data={similarproducts} />
         )}
       </div>
+      {/* faq */}
       <div>
         <Faqs
           faqlist={[
@@ -118,6 +122,17 @@ async function page({ params }) {
           ]}
         />
       </div>
+      {/* edit button */}
+      {(userdata?.usertype == "admin" ||
+        userdata?.permission.includes("Products_permission")) && (
+        <Link
+          href={`/admin/products?sku=${product?.sku}`}
+          className="fixed bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-theme text-white border border-white rounded-full pl-5 pr-7 py-3 z-20"
+        >
+          <MdModeEditOutline />
+          Edit
+        </Link>
+      )}
     </div>
   );
 }

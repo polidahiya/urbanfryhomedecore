@@ -126,3 +126,13 @@ export const permissions = [
 ];
 
 export const Statuslists = ["Pending", "Processing", "Shipped", "Delivered"];
+
+// materialoptions
+export const materialoptions = [
+  "Acacia Wood",
+  "Sheesham Wood",
+  "Mango Wood",
+  "HDMR",
+  "Reclaimed Wood",
+  "Solid Wood",
+];

@@ -8,10 +8,16 @@ import Adminsearchbar from "@/app/admin/_comps/_adminnavbar/Adminsearchbar";
 import { GrUpdate } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import { IoCopy } from "react-icons/io5";
-import Link from "next/link";
 import Image from "next/image";
+import Previewproducts from "../Previewproducts";
 
-function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
+function Showproducts({
+  setdata,
+  setdeletedimages,
+  setshowform,
+  resetState,
+  setshowimportmenu,
+}) {
   const { setmessagefn } = AppContextfn();
   const [filterdata, setfilterdata] = useState({
     categories: "",
@@ -20,6 +26,7 @@ function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
   const [search, setsearch] = useState("");
   const [products, setproducts] = useState([]);
   const [loading, setloading] = useState(false);
+  const [previewdata, setpreviewdata] = useState({ show: false, data: {} });
 
   const handlesearch = async (ordertype, search) => {
     setloading(true);
@@ -33,10 +40,10 @@ function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
 
   return (
     <div className="px-5 md:px-10">
-      <p className="my-10  flex items-center justify-between">
+      <div className="my-10  flex items-center gap-2">
         <span className="font-semibold text-2xl">Products</span>{" "}
         <button
-          className="px-5 py-2 rounded-md bg-theme text-white"
+          className="px-5 py-2 rounded-md bg-theme text-white ml-auto"
           onClick={() => {
             setshowform(true);
             resetState();
@@ -45,7 +52,15 @@ function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
         >
           + <span className="hidden md:inline">Add New</span>
         </button>
-      </p>
+        <button
+          className="px-5 py-2 rounded-md bg-theme text-white"
+          onClick={() => {
+            setshowimportmenu(true);
+          }}
+        >
+          Import/Export
+        </button>
+      </div>
       <Adminsearchbar
         search={search}
         setsearch={setsearch}
@@ -88,6 +103,7 @@ function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
               setdata={setdata}
               setdeletedimages={setdeletedimages}
               setshowform={setshowform}
+              setpreviewdata={setpreviewdata}
             />
           ))}
         </div>
@@ -95,6 +111,13 @@ function Showproducts({ setdata, setdeletedimages, setshowform, resetState }) {
         <div className="mt-32">
           <div className="border-y-4 border-theme w-10 aspect-square rounded-full mx-auto animate-spin duration-300"></div>
         </div>
+      )}
+      {/* preview  */}
+      {previewdata?.show && (
+        <Previewproducts
+          previewdata={previewdata}
+          setpreviewdata={setpreviewdata}
+        />
       )}
     </div>
   );
@@ -106,6 +129,7 @@ const Productcard = ({
   setdata,
   setdeletedimages,
   setshowform,
+  setpreviewdata,
 }) => {
   const { setshowdialog, setmessagefn } = AppContextfn();
 
@@ -119,21 +143,23 @@ const Productcard = ({
 
   return (
     <div className="relative max-w-72">
-      <Image
-        src={product?.variants[0]?.images[0] || ""}
-        alt={product?.productName}
-        className="w-full aspect-square object-cover"
-        height={500}
-        width={500}
-        loading="lazy"
-      ></Image>
+      {product?.variants && (
+        <Image
+          src={product?.variants[0]?.images[0] || "/uiimages/404.avif"}
+          alt={product?.productName}
+          className="w-full aspect-square object-cover"
+          height={500}
+          width={500}
+          loading="lazy"
+        ></Image>
+      )}
       <p className="mt-1 text-center">{product?.productName}</p>
-      <Link
-        href={`/product/${product?.sku}`}
+      <button
         className="block w-full bg-theme text-white py-2 mt-2 text-center bg-opacity-75 lg:hover:bg-opacity-100"
+        onClick={() => setpreviewdata({ show: true, data: product })}
       >
         View
-      </Link>
+      </button>
       <div className="absolute top-0 right-0 flex flex-col gap-1 p-1">
         {/* update button */}
         <button

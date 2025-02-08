@@ -12,7 +12,7 @@ function Productcard({ product }) {
           href={`/product/${product?.sku}`}
         >
           <Image
-            src={product?.variants[0]?.images[0] || ""}
+            src={product?.variants[0]?.images[0] || "/uiimages/404.avif"}
             alt={product?.productName}
             className="h-full w-full absolute  object-cover lg:group-hover:scale-105 lg:group-hover:opacity-0 duration-300"
             height={500}
@@ -20,7 +20,7 @@ function Productcard({ product }) {
             loading="lazy"
           ></Image>
           <Image
-            src={product?.variants[0]?.images[1] || ""}
+            src={product?.variants[0]?.images[1] || "/uiimages/404.avif"}
             alt={product?.productName}
             className="h-full w-full absolute  object-cover opacity-0 lg:group-hover:scale-110 lg:group-hover:opacity-100 duration-300"
             height={500}
@@ -29,7 +29,7 @@ function Productcard({ product }) {
           ></Image>
         </Link>
         {/* quick view button */}
-        <Quickviewbutton product={product}/>
+        <Quickviewbutton product={product} />
         {!product?.available && (
           <div className="absolute bottom-0 p-2 w-full lg:group-hover:bottom-16 duration-300">
             <p className="w-full text-center bg-white bg-opacity-75 py-3 lg:group-hover:bg-opacity-100">

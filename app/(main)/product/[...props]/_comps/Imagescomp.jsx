@@ -31,10 +31,10 @@ function Imagescomp({ images, name }) {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-1 w-full">
+    <div className="grid grid-cols-4 gap-1">
       {images?.map((image, i) => (
         <Image
-          src={image}
+          src={image || "/uiimages/404.avif"}
           alt={name.replace(/-/g, " ")}
           key={i}
           height={800}

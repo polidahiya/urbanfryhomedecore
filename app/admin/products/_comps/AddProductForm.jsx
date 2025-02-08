@@ -7,6 +7,7 @@ import { staticdata } from "@/app/commondata";
 import Dropdownmenu from "./_comps/Dropdownmenu";
 import { AppContextfn } from "@/app/Context";
 import Togglebuttons from "./_comps/Togglebuttons";
+import { materialoptions } from "@/app/commondata";
 
 const AddProductForm = ({
   data,
@@ -116,14 +117,7 @@ const AddProductForm = ({
         title={"Material"}
         state={data.Material}
         onchange={(value) => setdata((pre) => ({ ...pre, Material: value }))}
-        options={[
-          "Acacia Wood",
-          "Sheesham Wood",
-          "Mango Wood",
-          "HDMR",
-          "Reclaimed Wood",
-          "Solid Wood",
-        ]}
+        options={materialoptions}
       />
       {/* Warranty  */}
       <Standardinputfield
@@ -173,7 +167,7 @@ const AddProductForm = ({
       />
       {/* Product weight */}
       <Standardinputfield
-        titlename="Product Weight"
+        titlename="Product Weight (in kg)"
         type="number"
         isRequired={false}
         value={data.weight}

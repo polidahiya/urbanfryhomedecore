@@ -1,0 +1,43 @@
+import React from "react";
+import Imagescomp from "@/app/(main)/product/[...props]/_comps/Imagescomp";
+import Link from "next/link";
+import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
+import Details from "@/app/(main)/product/[...props]/_comps/Details";
+
+function Previewproducts({ previewdata, setpreviewdata }) {
+  const product = previewdata?.data;
+  const color = 0;
+  return (
+    <div className="fixed inset-0 flex flex-col lg:flex-row gap-10 px-5 py-10  md:px-10 bg-white overflow-y-scroll themescroll">
+      <div className="flex-[3]">
+        <Imagescomp
+          images={product?.variants[color].images}
+          name={product?.productName}
+        />
+        {/* routes */}
+        <div className="flex items-center gap-2 text-sm mt-10">
+          <Link href={"/"} className="">
+            <Underlineeffect title={"Home"} />
+          </Link>{" "}
+          /{" "}
+          <Link href={"/"} className="">
+            <Underlineeffect title={product?.categories.replace(/-/g, " ")} />
+          </Link>{" "}
+          /{" "}
+          <p className="capitalize text-[#a7a5a2] inline">
+            {product?.productName.replace(/-/g, " ")}
+          </p>
+        </div>
+      </div>
+      <Details product={product} color={color} />
+      <button
+        className="absolute top-5 right-5 w-10 aspect-square bg-slate-300"
+        onClick={() => setpreviewdata({ show: false, data: {} })}
+      >
+        x
+      </button>
+    </div>
+  );
+}
+
+export default Previewproducts;
