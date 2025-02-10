@@ -113,7 +113,7 @@ const Noorders = () => {
       <p className="text-sm mt-2">You haven{"'"}t placed any orders yet</p>
       <Link
         rel="stylesheet"
-        href="/collections/all"
+        href="/collections/special/all"
         className="mt-5 px-10 py-4 bg-theme text-white"
       >
         Start Shopping

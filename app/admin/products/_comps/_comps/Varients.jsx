@@ -80,7 +80,9 @@ const ProductVariants = ({
     <div>
       {variants?.map((variant, index) => (
         <div key={index} className="mt-4 p-4 border rounded-md">
-          <h2 className="py-5 font-bold text-center">Variant - {index + 1}</h2>
+          <h2 className="py-5 font-bold text-center">
+            Variant -{index == 0 ? "Default" : index}
+          </h2>
           <Dropdownmenu
             title={"Finishes"}
             state={variants[index].finish}
@@ -177,15 +179,17 @@ const ProductVariants = ({
               </div>
             </div>
           </div>
-          <div className="flex justify-end">
-            <button
-              type="button"
-              onClick={() => handleDeleteVariant(index)}
-              className="border px-4 py-2 rounded-md mt-4 float-right lg:hover:bg-red-500 lg:hover:text-white"
-            >
-              Delete Variant
-            </button>
-          </div>
+          {index != 0 && (
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => handleDeleteVariant(index)}
+                className="border px-4 py-2 rounded-md mt-4 float-right lg:hover:bg-red-500 lg:hover:text-white"
+              >
+                Delete Variant
+              </button>
+            </div>
+          )}
         </div>
       ))}
       <button

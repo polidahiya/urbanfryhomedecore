@@ -27,6 +27,7 @@ function Page() {
     weight: "",
     keyfeatures: [""],
     descriptions: [""],
+    collections: [],
     variants: [{ finish: "Honey Oak", images: [] }],
     seotitle: "",
     seodescription: "",
@@ -45,11 +46,13 @@ function Page() {
     if (productsku) {
       (async () => {
         const res = await Roomsearchproducts("sku", productsku);
-        if (res?.data?.length != 0) {
-          setdata(res?.data[0]);
-          setshowform(true);
-        } else {
-          setmessagefn("Product not found");
+        if (res?.status == 200) {
+          if (res?.data?.length != 0) {
+            setdata(res?.data[0]);
+            setshowform(true);
+          } else {
+            setmessagefn("Product not found");
+          }
         }
       })();
     }
@@ -88,7 +91,7 @@ function Page() {
         />
       )}
       {showimportmenu && (
-        <Importexportmenu setshowimportmenu={setshowimportmenu}/>
+        <Importexportmenu setshowimportmenu={setshowimportmenu} />
       )}
     </div>
   );

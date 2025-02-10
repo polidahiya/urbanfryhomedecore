@@ -86,14 +86,31 @@ export const staticdata = {
       img: "/Categoriesimages/barOrganizers.jpg",
       desc: "Bar organizers are essential for creating a stylish and functional bar area in your home. Keep glassware, spirits, and accessories neatly arranged with elegant trays, racks, or shelves. Available in materials like wood, metal, or glass, they blend seamlessly with modern or classic decor styles. Add charm with decorative accents like coasters, napkins, or small planters. Bar organizers are perfect for entertaining guests, ensuring everything you need is within reach. Whether hosting parties or enjoying a quiet evening, these organizers enhance the functionality and aesthetic of your bar area.",
     },
+    "Book-Storage": {
+      img: "/Categoriesimages/barOrganizers.jpg",
+      desc: "Keep your books organized and within easy reach with our stylish and compact book holders. Perfect for desks, shelves, or nightstands, these space-saving solutions add both functionality and charm to any room. Whether you're showcasing your favorite reads or tidying up your workspace, our book holders are designed to complement any decor while keeping your books neatly in place.",
+    },
   },
-  all: {
-    img: "/Categoriesimages/images.jpeg",
-    desc: "Keep your home and office clutter-free with our range of storage solutions. From pantry, cabinet, and drawer organizers for a tidy kitchen to shoe racks and under-bed storage for maximizing space, we have it all. Enhance your workspace with office storage and supplies, simplify your beauty routine with makeup organizers & mirrors, and keep your bathroom neat with shower & bathtub storage. Add function and style with wall shelves, toy storage, and home decor to complete your space. Stay organized effortlessly with solutions designed for every corner of your home!",
+  special: {
+    all: {
+      img: "/Categoriesimages/images.jpeg",
+      desc: "Keep your home and office clutter-free with our range of storage solutions. From pantry, cabinet, and drawer organizers for a tidy kitchen to shoe racks and under-bed storage for maximizing space, we have it all. Enhance your workspace with office storage and supplies, simplify your beauty routine with makeup organizers & mirrors, and keep your bathroom neat with shower & bathtub storage. Add function and style with wall shelves, toy storage, and home decor to complete your space. Stay organized effortlessly with solutions designed for every corner of your home!",
+    },
+    new: {
+      img: "/Categoriesimages/images.jpeg",
+      desc: "Upgrade your space with our newest arrivals! From pantry, cabinet, and drawer organizers to shoe storage and under-bed solutions, explore fresh ways to declutter. Find the latest office storage, makeup organizers, and shower storage for a more functional home. Enhance your decor with wall shelves, toy storage, and stylish home accents—all designed to keep your space neat and stylish. Stay ahead with innovative storage solutions that make organizing effortless!",
+    },
   },
-  new: {
+};
+
+export const collections = {
+  "Last-Chance": {
     img: "/Categoriesimages/images.jpeg",
-    desc: "Upgrade your space with our newest arrivals! From pantry, cabinet, and drawer organizers to shoe storage and under-bed solutions, explore fresh ways to declutter. Find the latest office storage, makeup organizers, and shower storage for a more functional home. Enhance your decor with wall shelves, toy storage, and stylish home accents—all designed to keep your space neat and stylish. Stay ahead with innovative storage solutions that make organizing effortless!",
+    desc: "Don’t miss out on these final pieces! Our Last Chance collection features limited-stock items at unbeatable prices. Whether you’re looking for unique finds or timeless favorites, this is your opportunity to grab high-quality products before they’re gone for good. Hurry—once they’re sold out, they’re gone forever!",
+  },
+  "Ready-To-Ship": {
+    img: "/Categoriesimages/images.jpeg",
+    desc: "Need it fast? Our Ready to Ship collection features products that are in stock and prepared for immediate dispatch. Skip the wait and get your favorite items delivered to your doorstep in no time. Perfect for last-minute needs or quick upgrades, these products are ready when you are!",
   },
 };
 

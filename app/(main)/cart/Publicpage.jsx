@@ -230,7 +230,7 @@ const Emptycart = () => {
         You haven’t added <br /> anything to cart.
       </p>
       <Link
-        href="/collections/all"
+        href="/collections/special/all"
         className="py-3 px-10 mt-5 bg-theme text-white lg:hover:opacity-75"
       >
         Explore

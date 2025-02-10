@@ -15,18 +15,18 @@ function Previewproducts({ previewdata, setpreviewdata }) {
           name={product?.productName}
         />
         {/* routes */}
-        <div className="flex items-center gap-2 text-sm mt-10">
-          <Link href={"/"} className="">
+        <div className="text-sm mt-10 ">
+          <Link href={"/"}>
             <Underlineeffect title={"Home"} />
           </Link>{" "}
           /{" "}
-          <Link href={"/"} className="">
+          <Link href={"/"}>
             <Underlineeffect title={product?.categories.replace(/-/g, " ")} />
           </Link>{" "}
           /{" "}
-          <p className="capitalize text-[#a7a5a2] inline">
+          <span className="capitalize text-[#a7a5a2]">
             {product?.productName.replace(/-/g, " ")}
-          </p>
+          </span>
         </div>
       </div>
       <Details product={product} color={color} />

@@ -8,6 +8,8 @@ import Dropdownmenu from "./_comps/Dropdownmenu";
 import { AppContextfn } from "@/app/Context";
 import Togglebuttons from "./_comps/Togglebuttons";
 import { materialoptions } from "@/app/commondata";
+import Multiselectmenu from "./_comps/Multiselectmenu";
+import { collections } from "@/app/commondata";
 
 const AddProductForm = ({
   data,
@@ -18,6 +20,8 @@ const AddProductForm = ({
   setdeletedimages,
   setshowform,
 }) => {
+  console.log(data);
+  
   const { setmessagefn } = AppContextfn();
   const [loading, setloading] = useState(false);
 
@@ -66,7 +70,7 @@ const AddProductForm = ({
       {/* Product Name */}
       <Standardinputfield
         titlename="Product Name"
-        value={data.productName}
+        value={data?.productName}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, productName: e.target.value }))
         }
@@ -75,21 +79,21 @@ const AddProductForm = ({
       {/* rooms */}
       <Dropdownmenu
         title={"Rooms"}
-        state={data.rooms}
+        state={data?.rooms}
         onchange={(value) => setdata((pre) => ({ ...pre, rooms: value }))}
-        options={Object.keys(staticdata.rooms)}
+        options={Object.keys(staticdata?.rooms)}
       />
       {/* categories */}
       <Dropdownmenu
         title={"Category"}
-        state={data.categories}
+        state={data?.categories}
         onchange={(value) => setdata((pre) => ({ ...pre, categories: value }))}
-        options={Object.keys(staticdata.categories)}
+        options={Object.keys(staticdata?.categories)}
       />
       {/* sku id */}
       <Standardinputfield
         titlename="SKU ID"
-        value={data.sku}
+        value={data?.sku}
         onchange={(e) => setdata((pre) => ({ ...pre, sku: e.target.value }))}
         clear={() => setdata((pre) => ({ ...pre, sku: "" }))}
       />
@@ -98,7 +102,7 @@ const AddProductForm = ({
         titlename="MRP"
         type="number"
         isRequired={false}
-        value={data.mrp}
+        value={data?.mrp}
         onchange={(e) => setdata((pre) => ({ ...pre, mrp: e.target.value }))}
         clear={() => setdata((pre) => ({ ...pre, mrp: "" }))}
       />
@@ -106,7 +110,7 @@ const AddProductForm = ({
       <Standardinputfield
         titlename="Selling Price"
         type="number"
-        value={data.sellingprice}
+        value={data?.sellingprice}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, sellingprice: e.target.value }))
         }
@@ -115,7 +119,7 @@ const AddProductForm = ({
       {/* Material  */}
       <Dropdownmenu
         title={"Material"}
-        state={data.Material}
+        state={data?.Material}
         onchange={(value) => setdata((pre) => ({ ...pre, Material: value }))}
         options={materialoptions}
       />
@@ -125,7 +129,7 @@ const AddProductForm = ({
         type="number"
         isRequired={false}
         placeholder="In months"
-        value={data.Warranty}
+        value={data?.Warranty}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, Warranty: e.target.value }))
         }
@@ -135,13 +139,13 @@ const AddProductForm = ({
       <Standardinputfield
         titlename="Theme"
         isRequired={false}
-        value={data.theme}
+        value={data?.theme}
         onchange={(e) => setdata((pre) => ({ ...pre, theme: e.target.value }))}
         clear={() => setdata((pre) => ({ ...pre, theme: "" }))}
       />
       {/* Dimensions */}
       <Multiplevaluesfield
-        state={data.dimensions}
+        state={data?.dimensions}
         statename="dimensions"
         setState={setdata}
         placeholder={"e.g., 12x8x6 (Inches)"}
@@ -149,7 +153,7 @@ const AddProductForm = ({
       />
       {/* Key features */}
       <Multiplevaluesfield
-        state={data.keyfeatures}
+        state={data?.keyfeatures}
         setState={setdata}
         statename="keyfeatures"
         placeholder={"key feature"}
@@ -159,7 +163,7 @@ const AddProductForm = ({
       <Standardinputfield
         titlename="Handling Time"
         isRequired={false}
-        value={data.handlingtime}
+        value={data?.handlingtime}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, handlingtime: e.target.value }))
         }
@@ -170,23 +174,31 @@ const AddProductForm = ({
         titlename="Product Weight (in kg)"
         type="number"
         isRequired={false}
-        value={data.weight}
+        value={data?.weight}
         onchange={(e) => setdata((pre) => ({ ...pre, weight: e.target.value }))}
         clear={() => setdata((pre) => ({ ...pre, weight: "" }))}
       />
       {/* Descriptions */}
       <Multiplevaluesfield
-        state={data.descriptions}
+        state={data?.descriptions}
         statename="descriptions"
         setState={setdata}
         placeholder={"Lorem ipsum"}
         title={"Descriptions"}
       />
+      {/* collections */}
+      <Multiselectmenu
+        state={data?.collections || []}
+        statename="collections"
+        setState={setdata}
+        title={"Collections"}
+        options={Object.keys(collections)}
+      />
       {/* variants */}
       <ProductVariants
         data={data}
         varientstructure={initialState.variants}
-        variants={data.variants}
+        variants={data?.variants}
         setstate={setdata}
         deletedimages={deletedimages}
         setdeletedimages={setdeletedimages}
@@ -196,7 +208,7 @@ const AddProductForm = ({
       {/* title */}
       <Standardinputfield
         titlename="Title"
-        value={data.seotitle}
+        value={data?.seotitle}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, seotitle: e.target.value }))
         }
@@ -207,7 +219,7 @@ const AddProductForm = ({
       <Standardinputfield
         titlename="Description"
         isRequired={false}
-        value={data.seodescription}
+        value={data?.seodescription}
         setState={setdata}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, seodescription: e.target.value }))
@@ -219,7 +231,7 @@ const AddProductForm = ({
       <Standardinputfield
         titlename="Keywords"
         isRequired={false}
-        value={data.seokeywords}
+        value={data?.seokeywords}
         onchange={(e) =>
           setdata((pre) => ({ ...pre, seokeywords: e.target.value }))
         }
@@ -229,7 +241,7 @@ const AddProductForm = ({
       {/* available */}
       <Togglebuttons
         titlename="Available?"
-        value={data.available}
+        value={data?.available}
         positive={() => setdata((prev) => ({ ...prev, available: true }))}
         negative={() => setdata((prev) => ({ ...prev, available: false }))}
         positiveText="Yes"
@@ -246,9 +258,9 @@ const AddProductForm = ({
               className={`block h-5 aspect-square border-t-2 border-b-2 border-white rounded-full animate-spin`}
             ></span>
           )}
-          {data._id ? "Update Product" : "Add Product"}
+          {data?._id ? "Update Product" : "Add Product"}
         </button>
-        {data._id && (
+        {data?._id && (
           <button
             className="flex items-center justify-center gap-2  px-4 py-2  border  rounded-md"
             type="button"

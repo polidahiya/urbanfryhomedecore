@@ -123,16 +123,17 @@ async function page({ params }) {
         />
       </div>
       {/* edit button */}
-      {(userdata?.usertype == "admin" ||
-        userdata?.permission.includes("Products_permission")) && (
-        <Link
-          href={`/admin/products?sku=${product?.sku}`}
-          className="fixed bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-theme text-white border border-white rounded-full pl-5 pr-7 py-3 z-20"
-        >
-          <MdModeEditOutline />
-          Edit
-        </Link>
-      )}
+      {token &&
+        (userdata?.usertype == "admin" ||
+          userdata?.permission.includes("Products_permission")) && (
+          <Link
+            href={`/admin/products?sku=${product?.sku}`}
+            className="fixed bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-theme text-white border border-white rounded-full pl-5 pr-7 py-3 z-20"
+          >
+            <MdModeEditOutline />
+            Edit
+          </Link>
+        )}
     </div>
   );
 }

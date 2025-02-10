@@ -32,9 +32,13 @@ function Showproducts({
     setloading(true);
     const res = await Roomsearchproducts(ordertype, search);
     setloading(false);
-    setproducts(res?.data);
-    if (res?.data?.length == 0) {
-      setmessagefn("No products found");
+    if (res?.status == 200) {
+      setproducts(res?.data);
+      if (res?.data?.length == 0) {
+        setmessagefn("No products found");
+      }
+    } else {
+      setmessagefn(res?.message);
     }
   };
 

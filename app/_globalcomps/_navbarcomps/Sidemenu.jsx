@@ -36,15 +36,16 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
     >
       <div className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
         <Link
-          href={"/"}
+          href={"/collections/custom/Last-Chance"}
           className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
+          onClick={() => setopen((pre) => !pre)}
         >
           <Underlineeffect title={"LAST CHANCE"} />
         </Link>
       </div>
       <div className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
         <Link
-          href={"/collections/new"}
+          href={"/collections/special/new"}
           className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
           onClick={() => {
             setsidemenutoggle(false);
@@ -69,8 +70,9 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
       </div>
       <div className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
         <Link
-          href={"/"}
+          href={"/collections/custom/Ready-To-Ship"}
           className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
+          onClick={() => setopen((pre) => !pre)}
         >
           <Underlineeffect title={"READY TO SHIP"} />
         </Link>

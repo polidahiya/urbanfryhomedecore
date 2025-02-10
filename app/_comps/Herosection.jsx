@@ -24,7 +24,7 @@ function ImageSwiper() {
       heading: "Altorganisers : Redefining Spaces",
       para: "Get ready to organize your space like never before",
       image: "/heroimages/1.jpg",
-      link: "/collections/all",
+      link: "/collections/special/all",
     },
     {
       heading: "Nursery, Crafted with love",

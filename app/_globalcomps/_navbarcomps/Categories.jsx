@@ -65,7 +65,7 @@ const Categories = ({ open }) => {
         />
       </div>
       <Link
-        href="/collections/all"
+        href="/collections/special/all"
         className="block underlineff shopcategories w-full relative px-5 py-3 whitespace-nowrap cursor-pointer"
       >
         <Underlineeffect title={"All Products"} />
