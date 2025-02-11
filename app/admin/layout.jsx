@@ -5,6 +5,12 @@ import Adminnav from "./_comps/_adminnavbar/Adminnav";
 
 export default async function RootLayout({ children }) {
   const allcookies = await cookies();
+  const token = allcookies.get("token");
+
+  if (!token) {
+    notFound();
+  }
+
   const parseduserdata = allcookies.get("userdata");
   const parseduserdatavalue = parseduserdata?.value;
   let userdata;

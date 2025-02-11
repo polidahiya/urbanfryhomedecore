@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { createContext, useContext, useState, useEffect } from "react";
 const AppContext = createContext({});
 
-export function Appwrapper({ children, allproducts }) {
+export function Appwrapper({ children, token, userdata, allproducts }) {
   const [cart, setcart] = useState({});
   const [showsearchbar, setshowsearchbar] = useState(false);
   const [showsidecart, setshowsidecart] = useState({
@@ -51,6 +51,8 @@ export function Appwrapper({ children, allproducts }) {
   return (
     <AppContext.Provider
       value={{
+        token,
+        userdata,
         allproducts,
         cart,
         setcart,

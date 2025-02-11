@@ -16,8 +16,11 @@ async function page() {
           </Link>{" "}
           / <p className="capitalize text-theme">Customization</p>
         </div>
-        <h1 className="font-tenor text-7xl capitalize py-6">Customization</h1>
-        <div>
+        <h1 className="font-tenor text-4xl md:text-6xl capitalize pt-10">
+          Customization
+        </h1>
+        {/* <h1 className="font-tenor text-7xl capitalize py-6">Customization</h1> */}
+        <div className="mt-10">
           <p>
             At Loops by LJ, we understand that each rug is a reflection of its
             owner&rsquo;s unique taste, style and preferences. As a result, we

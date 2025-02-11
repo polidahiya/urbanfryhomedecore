@@ -3,6 +3,7 @@ import { Appwrapper } from "./Context";
 import Message from "./_globalcomps/Message";
 import Quickview from "./_globalcomps/Quickview";
 import { Cachedproducts } from "./_connections/Getcachedata";
+import { cookies } from "next/headers";
 
 export const metadata = {
   title: "AltOrganisers",
@@ -11,11 +12,16 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
+  const allcookies = await cookies();
+  const token = allcookies.get("token");
+  const parseduserdata = allcookies.get("userdata")?.value;
+  const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
+
   const allproducts = await Cachedproducts();
-  
+
   return (
     <html lang="en">
-      <Appwrapper allproducts={allproducts}>
+      <Appwrapper token={token} userdata={userdata} allproducts={allproducts}>
         <body className={`antialiased themescroll max-w-[1920px] mx-auto`}>
           <Message />
           <Quickview />

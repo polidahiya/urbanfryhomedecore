@@ -14,7 +14,7 @@ import { BsCartX } from "react-icons/bs";
 import Couponcomp from "./_comps/Couponcomp";
 import Cookies from "js-cookie";
 import PaymentMethod from "./_comps/Paymentmethod";
-import { FaRegPenToSquare } from "react-icons/fa6";
+import Addressbar from "./_comps/Addressbar";
 
 function Publicpage({ userdata, token }) {
   const [paymentMethod, setPaymentMethod] = useState("online");
@@ -170,22 +170,7 @@ function Publicpage({ userdata, token }) {
             </div>
           </div>
           {/* address */}
-          <div className="flex flex-col md:flex-row items-start justify-evenly gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10 my-10">
-            <div className="w-full md:w-fit flex flex-col gap-4">
-              <div className="font-semibold">Address</div>
-              <div className="flex items-center flex-wrap">
-                <p className=" bg-white py-2 px-5">
-                  {userdata?.address}
-                </p>
-                <Link
-                  href="/account"
-                  className="flex items-center gap-1 bg-theme text-white  px-5 py-2 bg-opacity-75 lg:hover:bg-opacity-100"
-                >
-                  <FaRegPenToSquare /> Update
-                </Link>
-              </div>
-            </div>
-          </div>
+          <Addressbar />
           {/* checkout */}
           <div className="flex flex-col md:flex-row items-start justify-evenly gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10 my-10">
             <Couponcomp

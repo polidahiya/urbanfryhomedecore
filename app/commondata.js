@@ -36,6 +36,10 @@ export const staticdata = {
       img: "/Categoriesimages/images.jpeg",
       desc: "The dining room is where delicious meals and cherished conversations come together. Elevate this space with elegant decor like table runners, decorative trays, and planters as centerpieces. Add mirrors to create an illusion of space and reflect light, enhancing the ambiance. Wall shelves or photo frames can add a personal touch, while bar organizers are perfect for hosting and entertaining. Whether hosting guests or enjoying everyday meals, the dining room should exude warmth, elegance, and a welcoming atmosphere that makes every meal special.",
     },
+    Bathroom: {
+      img: "/Categoriesimages/images.jpeg",
+      desc: "The bathroom is your personal sanctuary, a space where functionality meets tranquility. It’s the perfect spot to refresh and unwind after a long day. Elevate it with soft, plush towels, stylish bath mats, and elegant shower curtains. Incorporate soothing elements like scented candles, potted plants, or essential oil diffusers to create a spa-like ambiance. Add practical yet chic storage solutions such as floating shelves, vanity organizers, or baskets to keep essentials tidy and within reach. Whether you prefer a modern, rustic, or minimalist look, your bathroom can be a serene retreat that reflects your style while offering comfort and relaxation.",
+    },
   },
   categories: {
     "Pantry-Organizers": {

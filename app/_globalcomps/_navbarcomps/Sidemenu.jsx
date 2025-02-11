@@ -38,7 +38,9 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
         <Link
           href={"/collections/custom/Last-Chance"}
           className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
-          onClick={() => setopen((pre) => !pre)}
+          onClick={() => {
+            setsidemenutoggle(false);
+          }}
         >
           <Underlineeffect title={"LAST CHANCE"} />
         </Link>
@@ -72,7 +74,9 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
         <Link
           href={"/collections/custom/Ready-To-Ship"}
           className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
-          onClick={() => setopen((pre) => !pre)}
+          onClick={() => {
+            setsidemenutoggle(false);
+          }}
         >
           <Underlineeffect title={"READY TO SHIP"} />
         </Link>

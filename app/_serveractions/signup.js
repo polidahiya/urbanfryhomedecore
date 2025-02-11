@@ -6,9 +6,17 @@ import { logintime } from "../commondata";
 import { getcollection } from "../_connections/Mongodb";
 
 const generateToken = async (userdata) => {
-  const token = jwt.sign({ ...userdata }, process.env.jwt_secret, {
-    expiresIn: logintime,
-  });
+  const token = jwt.sign(
+    {
+      email: userdata?.email,
+      usertype: userdata?.usertype,
+      permission: userdata?.permission,
+    },
+    process.env.jwt_secret,
+    {
+      expiresIn: logintime,
+    }
+  );
 
   const cookieStore = await cookies();
   cookieStore.set("token", token, {
@@ -51,7 +59,7 @@ export const login = async (userdata) => {
       username: user?.name,
       email: user?.email,
       usertype: user?.usertype,
-      address: userdata?.address,
+      address: user?.address,
       permission: user?.permission || [],
     });
 
@@ -64,17 +72,17 @@ export const login = async (userdata) => {
 
 export const signup = async (userdata) => {
   try {
-    const { userscollection } = await getcollection();
     const existingUser = await findUserByEmail(userdata.email);
     if (existingUser) {
       return { status: 400, message: "User already registered" };
     }
-
+    
     // Hash password
     userdata.password = await bcrypt.hash(userdata.password, 12);
     userdata.usertype = "user";
     userdata.permission = [];
-
+    
+    const { userscollection } = await getcollection();
     const insertedUser = await userscollection.insertOne(userdata);
     if (!insertedUser) {
       return { status: 500, message: "Failed to create user" };

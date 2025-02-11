@@ -6,7 +6,7 @@ import { PiSmileySad } from "react-icons/pi";
 
 function Cartbutton({ product, cartproductname }) {
   const router = useRouter();
-  const { cart, setcart, setmessagefn } = AppContextfn();
+  const { cart, setcart, setmessagefn, setquickview } = AppContextfn();
   const MAX_QUANTITY = 10; // Define the maximum quantity
 
   const handleIncrement = () => {
@@ -41,6 +41,7 @@ function Cartbutton({ product, cartproductname }) {
     }
 
     if (cart[cartproductname]?.added) {
+      setquickview({ show: false, data: {} });
       router.push("/cart");
       return;
     }
@@ -97,7 +98,7 @@ function Cartbutton({ product, cartproductname }) {
           )
         ) : (
           <span className="flex items-center justify-center gap-3">
-            <PiSmileySad className="scale-[2]"/>
+            <PiSmileySad className="scale-[2]" />
             Currently Unavailable
           </span>
         )}
