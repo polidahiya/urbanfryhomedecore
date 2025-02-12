@@ -50,7 +50,7 @@ async function page({ params }) {
               <Underlineeffect title={"Home"} />
             </Link>{" "}
             /{" "}
-            <Link href={"/"}>
+            <Link href={`/collections/categories/${product?.categories}`}>
               <Underlineeffect title={product?.categories.replace(/-/g, " ")} />
             </Link>{" "}
             /{" "}

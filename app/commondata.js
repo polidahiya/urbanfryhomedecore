@@ -94,6 +94,10 @@ export const staticdata = {
       img: "/Categoriesimages/barOrganizers.jpg",
       desc: "Keep your books organized and within easy reach with our stylish and compact book holders. Perfect for desks, shelves, or nightstands, these space-saving solutions add both functionality and charm to any room. Whether you're showcasing your favorite reads or tidying up your workspace, our book holders are designed to complement any decor while keeping your books neatly in place.",
     },
+    Planters: {
+      img: "/Categoriesimages/barOrganizers.jpg",
+      desc: "Bring a touch of greenery into your space with our elegant and versatile planters. Perfect for windowsills, countertops, or outdoor patios, these stylish planters enhance any environment while giving your plants the perfect home to thrive. Whether you're displaying vibrant flowers, lush succulents, or fresh herbs, our planters are designed to complement any decor, adding natural beauty and charm to every corner of your home.",
+    },
   },
   special: {
     all: {

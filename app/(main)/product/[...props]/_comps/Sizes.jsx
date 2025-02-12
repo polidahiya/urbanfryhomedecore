@@ -23,12 +23,12 @@ function Sizes({ dimensions, cartproductname }) {
         <label htmlFor="menu" className="block text-sm">
           Size
         </label>
-        <div className="relative w-fit mt-2">
+        <div className="relative w-full  border border-theme lg:hover:border-black mt-2 overflow-hidden">
           <select
             id="menu"
             value={cart[cartproductname]?.dimension}
             onChange={handleChange}
-            className="relative p-5 pr-10  border border-theme  outline-none lg:hover:border-black appearance-none cursor-pointer"
+            className="relative p-5 pr-10   outline-none  appearance-none cursor-pointer"
           >
             {dimensions?.map((dimension, index) => (
               <option key={index} value={dimension} className="text-sm">

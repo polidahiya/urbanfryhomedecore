@@ -57,7 +57,7 @@ function Details({ product, color }) {
 
       <ProductDetailsTable
         data={[
-          { label: "SKU", value: product?.sku },
+          // { label: "SKU", value: product?.sku },
           { label: "Theme", value: product?.theme },
           { label: "Material", value: product?.Material },
           { label: "Finish", value: product?.variants[color].finish },
