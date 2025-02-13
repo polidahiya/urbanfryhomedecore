@@ -20,8 +20,6 @@ const AddProductForm = ({
   setdeletedimages,
   setshowform,
 }) => {
-  console.log(data);
-
   const { setmessagefn } = AppContextfn();
   const [loading, setloading] = useState(false);
 

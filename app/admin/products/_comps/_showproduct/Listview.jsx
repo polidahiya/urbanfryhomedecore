@@ -24,7 +24,7 @@ function Listview({
   };
 
   return (
-    <div className="mt-5 overflow-x-scroll max-w-[calc(100vw-104px)] md:max-w-[calc(100vw-336px)]">
+    <div className="mt-5 overflow-x-scroll max-w-[calc(100vw-104px)] md:max-w-[calc(100vw-336px)] max-h-screen overflow-y-scroll">
       <table className="border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-200 ">
