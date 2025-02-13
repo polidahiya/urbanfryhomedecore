@@ -4,6 +4,7 @@ import Image from "next/image";
 import Quickviewbutton from "./Quickviewbutton";
 
 function Productcard({ product }) {
+  const firstimage = product?.variants[0]?.images[0] || "/uiimages/404.avif";
   return (
     <div className="group relative w-full h-full md:max-w-80">
       <div className="relative">
@@ -12,7 +13,7 @@ function Productcard({ product }) {
           href={`/product/${product?.sku}`}
         >
           <Image
-            src={product?.variants[0]?.images[0] || "/uiimages/404.avif"}
+            src={firstimage}
             alt={product?.productName}
             className="h-full w-full absolute  object-cover lg:group-hover:scale-105 lg:group-hover:opacity-0 duration-300"
             height={500}
@@ -20,7 +21,7 @@ function Productcard({ product }) {
             loading="lazy"
           ></Image>
           <Image
-            src={product?.variants[0]?.images[1] || "/uiimages/404.avif"}
+            src={product?.variants[0]?.images[1] || firstimage}
             alt={product?.productName}
             className="h-full w-full absolute  object-cover opacity-0 lg:group-hover:scale-110 lg:group-hover:opacity-100 duration-300"
             height={500}

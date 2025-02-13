@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import AddProductForm from "./_comps/AddProductForm";
-import Showproducts from "./_comps/_comps/Showproducts";
+import Showproducts from "./_comps/_showproduct/Showproducts";
 import { useSearchParams } from "next/navigation";
 import { Roomsearchproducts } from "@/app/_serveractions/_admin/Getliveproducts";
 import { AppContextfn } from "@/app/Context";

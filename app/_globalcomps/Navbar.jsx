@@ -31,7 +31,7 @@ function Navbar({ navtype, token, userdata }) {
 
   return (
     <nav
-      className={`fixed navhover top-0 left-0 w-full flex items-center px-5 md:px-10 h-20 lg:hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
+      className={`fixed navhover top-0 left-1/2 -translate-x-1/2 w-full lg:max-w-[1920px] flex items-center px-5 md:px-10 h-20 lg:hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
         ${navtype && transparentnav ? "text-black" : "bg-white text-inherit"}`}
     >
       <Menubutton

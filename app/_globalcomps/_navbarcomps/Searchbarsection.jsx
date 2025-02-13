@@ -44,7 +44,7 @@ function Searchbarsection() {
 
   if (showsearchbar)
     return (
-      <div className="fixed top-0 left-0 h-[100dvh]  bg-white  w-full z-30 px-5 md:px-10">
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 lg:max-w-[1920px] h-[100dvh]  bg-white  w-full z-30 px-5 md:px-10">
         {/* nav */}
         <div
           className={`w-full flex items-center justify-between  h-20 text-inherit text-xs`}

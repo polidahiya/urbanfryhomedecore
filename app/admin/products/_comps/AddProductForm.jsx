@@ -21,7 +21,7 @@ const AddProductForm = ({
   setshowform,
 }) => {
   console.log(data);
-  
+
   const { setmessagefn } = AppContextfn();
   const [loading, setloading] = useState(false);
 
@@ -65,7 +65,7 @@ const AddProductForm = ({
       className="px-1 py-6 md:p-6 bg-white shadow-lg rounded-md space-y-6"
     >
       <h2 className="text-2xl text-center font-semibold text-gray-800">
-        Add New Product
+        {data?._id ? "Update" : "Add New Product"}
       </h2>
       {/* Product Name */}
       <Standardinputfield
@@ -248,7 +248,7 @@ const AddProductForm = ({
         negativeText="No"
       />
 
-      <div className="flex items-center justify-center gap-5">
+      <div className="flex items-center justify-center gap-5 sticky bottom-5">
         <button
           type="submit"
           className="flex items-center justify-center gap-2  px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
@@ -262,7 +262,7 @@ const AddProductForm = ({
         </button>
         {data?._id && (
           <button
-            className="flex items-center justify-center gap-2  px-4 py-2  border  rounded-md"
+            className="flex items-center justify-center gap-2  px-4 py-2 bg-white  border  rounded-md"
             type="button"
             onClick={() => {
               resetState();
