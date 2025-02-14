@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
+import Underlineffect from "@/app/_globalcomps/Underlineffect";
 import Orderhistory from "./Comps/Orderhistory";
 import Getuserorders from "@/app/_serveractions/Getuserorders";
 import Userdetails from "./Comps/Userdetails";
@@ -19,9 +19,11 @@ async function page() {
     <div className="pt-32 px-5 md:px-8">
       {/* navigations */}
       <div className="flex items-center gap-2 text-sm">
-        <Link href={"/"} className="">
-          <Underlineeffect title={"Home"} />
-        </Link>{" "}
+        <Underlineffect
+          Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}
+          title="Home"
+          styles="w-fit"
+        />{" "}
         / <p className="capitalize text-theme">Account</p>
       </div>
       <div>

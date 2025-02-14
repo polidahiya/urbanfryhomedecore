@@ -1,4 +1,4 @@
-import Underlineeffect from "../Underlineeffect";
+import Underlineffect from "../Underlineffect";
 import Link from "next/link";
 import { logout } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
@@ -14,23 +14,38 @@ function Accountbutton({ token, userdata }) {
   };
 
   return (
-    <div className="relative hidden lg:block">
-      <button className="underlineff peer">
-        <Underlineeffect title={"ACCOUNT"} />
-      </button>
-      <div className="hidden peer-hover:block lg:hover:block absolute top-full left-1/2 -translate-x-1/2 w-52 pt-5">
+    <div className="group/account relative hidden lg:block">
+      <Underlineffect
+        Comp={({ innercomp }) => <button>{innercomp}</button>}
+        title={"ACCOUNT"}
+        styles="w-fit"
+      />
+
+      <div className="hidden lg:group-hover/account:block lg:hover:block absolute top-full left-1/2 -translate-x-1/2 w-52 pt-5">
         <div className="flex flex-col gap-3 p-5 border border-slate-300 bg-white">
           {token ? (
             <>
               <p>{userdata?.username}</p>
               <hr />
-              <Link href={"/account"} className="block underlineff">
-                <Underlineeffect title={"MY ACCOUNT"} />
-              </Link>
+              <Underlineffect
+                Comp={({ innercomp }) => (
+                  <Link href={"/account"} className="block underlineff">
+                    {innercomp}
+                  </Link>
+                )}
+                title={"MY ACCOUNT"}
+                styles="w-fit"
+              />
               {userdata?.usertype === "admin" && (
-                <Link href={"/admin"} className="block underlineff">
-                  <Underlineeffect title={"ADMIN DASHBOARD"} />
-                </Link>
+                <Underlineffect
+                  Comp={({ innercomp }) => (
+                    <Link href={"/admin"} className="block underlineff">
+                      {innercomp}
+                    </Link>
+                  )}
+                  title={"ADMIN DASHBOARD"}
+                  styles="w-fit"
+                />
               )}
 
               <button

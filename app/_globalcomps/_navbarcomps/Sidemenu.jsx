@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import Link from "next/link";
-import Underlineeffect from "../Underlineeffect";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import Categories from "./Categories";
 import { logout } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
+import Underlineffect from "../Underlineffect";
 
 const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
   const { setmessagefn, cart } = AppContextfn();
@@ -35,51 +35,72 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
       }`}
     >
       <div className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
-        <Link
-          href={"/collections/custom/Last-Chance"}
-          className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
-          onClick={() => {
-            setsidemenutoggle(false);
-          }}
-        >
-          <Underlineeffect title={"LAST CHANCE"} />
-        </Link>
+        <Underlineffect
+          Comp={({ innercomp }) => (
+            <Link
+              href={"/collections/custom/Last-Chance"}
+              className="h-full w-full py-4 lg:py-0 flex items-center px-3"
+              onClick={() => {
+                setsidemenutoggle(false);
+              }}
+            >
+              {innercomp}
+            </Link>
+          )}
+          title="LAST CHANCE"
+        />
       </div>
       <div className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
-        <Link
-          href={"/collections/special/new"}
-          className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
-          onClick={() => {
-            setsidemenutoggle(false);
-          }}
-        >
-          <Underlineeffect title={"NEW!"} />
-        </Link>
+        <Underlineffect
+          Comp={({ innercomp }) => (
+            <Link
+              href={"/collections/special/new"}
+              className="h-full w-full py-4 lg:py-0 flex items-center px-3"
+              onClick={() => {
+                setsidemenutoggle(false);
+              }}
+            >
+              {innercomp}
+            </Link>
+          )}
+          title={"NEW!"}
+        />
       </div>
-      <div className="shophover py-4 lg:py-0 px-3 cursor-pointer relative flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
-        <div
-          className="underlineff h-full w-full flex items-center"
-          onClick={() => setopen((pre) => !pre)}
-        >
-          <Underlineeffect title={"SHOP"} />
-          <MdKeyboardArrowDown
-            className={`ml-5 duration-300 text-lg lg:hidden ${
-              open && "rotate-180"
-            }`}
-          />
-        </div>
+      <div className="group/shop cursor-pointer relative flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
+        <Underlineffect
+          Comp={({ innercomp }) => (
+            <div
+              className="h-full w-full flex items-center px-3 py-4 lg:py-0"
+              onClick={() => setopen((pre) => !pre)}
+            >
+              {innercomp}
+              <MdKeyboardArrowDown
+                className={`ml-5 duration-300 text-lg lg:hidden ${
+                  open && "rotate-180"
+                }`}
+              />
+            </div>
+          )}
+          title={"SHOP"}
+        />
+
         <Categories open={open} />
       </div>
       <div className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
-        <Link
-          href={"/collections/custom/Ready-To-Ship"}
-          className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
-          onClick={() => {
-            setsidemenutoggle(false);
-          }}
-        >
-          <Underlineeffect title={"READY TO SHIP"} />
-        </Link>
+        <Underlineffect
+          Comp={({ innercomp }) => (
+            <Link
+              href={"/collections/custom/Ready-To-Ship"}
+              className="h-full w-full py-4 lg:py-0 flex items-center px-3"
+              onClick={() => {
+                setsidemenutoggle(false);
+              }}
+            >
+              {innercomp}
+            </Link>
+          )}
+          title="READY TO SHIP"
+        />
       </div>
       <div
         className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"
@@ -87,12 +108,17 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
           setsidemenutoggle(false);
         }}
       >
-        <Link
-          href={"/customization"}
-          className="underlineff h-full w-full py-4 lg:py-0 flex items-center px-3"
-        >
-          <Underlineeffect title={"CUSTOMISATION"} />
-        </Link>
+        <Underlineffect
+          Comp={({ innercomp }) => (
+            <Link
+              href={"/customization"}
+              className="h-full w-full py-4 lg:py-0 flex items-center px-3"
+            >
+              {innercomp}
+            </Link>
+          )}
+          title="CUSTOMISATION"
+        />
       </div>
       {/* mobile only div */}
       <div className="lg:hidden mt-auto pb-10 w-full">

@@ -93,17 +93,6 @@ body {
   }
 }
 
-@media (min-width: 1024px) {
-  /* navbar classes */
-  .shophover:hover > .shopcategoriesblock {
-    display: block;
-  }
-
-  .shopcategories:hover > .shopsubcat {
-    display: flex;
-  }
-}
-
 /* blinkingdot */
 .blinkingdot {
   animation: blinkingdot 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;

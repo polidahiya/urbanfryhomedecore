@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import Underlineeffect from "./Underlineeffect";
+import Underlineffect from "./Underlineffect";
 import { mobile, mail } from "../commondata";
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
@@ -8,7 +8,7 @@ import Quicklinks from "./_footerclientcomps/Quicklinks";
 
 function Footer() {
   const whatwedolinks = [
-    { title: "ABOUT US", link: "/" },
+    { title: "ABOUT US", link: "/aboutus" },
     { title: "THE ALT METHOD", link: "/" },
     { title: "THE JOURNEY TO ORGANISATION", link: "/" },
   ];
@@ -26,9 +26,14 @@ function Footer() {
           <h3 className="mb-4 tracking-wider">ABOUT</h3>
           <div className="flex flex-col gap-3">
             {whatwedolinks.map((item, i) => (
-              <Link href={item?.link} key={i}>
-                <Underlineeffect title={item?.title} />
-              </Link>
+              <Underlineffect
+                key={i}
+                Comp={({ innercomp }) => (
+                  <Link href={item?.link}>{innercomp}</Link>
+                )}
+                title={item?.title}
+                styles="w-fit"
+              />
             ))}
           </div>
           <div className="flex gap-5 text-3xl text-theme mt-10">
@@ -43,12 +48,20 @@ function Footer() {
       </div>
       <div className="w-full h-px bg-theme opacity-50 my-10" />
       <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-10 mt-10 text-theme">
-        <Link href={`tel:${mobile}`}>
-          <Underlineeffect title={mobile} />
-        </Link>
-        <Link href={`mailto:${mail}`}>
-          <Underlineeffect title={mail} />
-        </Link>
+        <Underlineffect
+          Comp={({ innercomp }) => (
+            <Link href={`tel:${mobile}`}>{innercomp}</Link>
+          )}
+          title={mobile}
+          styles="w-fit"
+        />
+        <Underlineffect
+          Comp={({ innercomp }) => (
+            <Link href={`mailto:${mail}`}>{innercomp}</Link>
+          )}
+          title={mail}
+          styles="w-fit"
+        />
         <p className="lg:ml-auto">
           © Copyright, AltOrganisers, {new Date().getFullYear()}
         </p>

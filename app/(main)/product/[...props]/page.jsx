@@ -2,7 +2,6 @@ import React from "react";
 import Details from "./_comps/Details";
 import Imagescomp from "./_comps/Imagescomp";
 import Newarrivals from "../../../_comps/Newarrivals";
-import Underlineeffect from "../../../_globalcomps/Underlineeffect";
 import Link from "next/link";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 import Commentcomp from "./_comps/_commentcomp/Commentcomp";
@@ -11,6 +10,7 @@ import { cookies } from "next/headers";
 import Faqs from "@/app/_comps/Faqs";
 import { notFound } from "next/navigation";
 import { MdModeEditOutline } from "react-icons/md";
+import Underlineffect from "@/app/_globalcomps/Underlineffect";
 
 async function page({ params }) {
   const allcookies = await cookies();
@@ -46,13 +46,21 @@ async function page({ params }) {
           />
           {/* routes */}
           <div className="text-sm mt-10 ">
-            <Link href={"/"}>
-              <Underlineeffect title={"Home"} />
-            </Link>{" "}
+            <Underlineffect
+              Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}
+              title="Home"
+              styles="w-fit"
+            />{" "}
             /{" "}
-            <Link href={`/collections/categories/${product?.categories}`}>
-              <Underlineeffect title={product?.categories.replace(/-/g, " ")} />
-            </Link>{" "}
+            <Underlineffect
+              Comp={({ innercomp }) => (
+                <Link href={`/collections/categories/${product?.categories}`}>
+                  {innercomp}
+                </Link>
+              )}
+              title={product?.categories.replace(/-/g, " ")}
+              styles="w-fit"
+            />{" "}
             /{" "}
             <span className="capitalize text-[#a7a5a2]">
               {product?.productName.replace(/-/g, " ")}

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
+import Underlineffect from "@/app/_globalcomps/Underlineffect";
 import Productcard from "@/app/_globalcomps/_productcard/Productcard";
 import { staticdata } from "@/app/commondata";
 import SortSelector from "./_comps/Sorting";
@@ -35,9 +35,11 @@ async function page({ params, searchParams }) {
         <div className="py-36 text-white tracking-wider">
           {/* routes */}
           <div className="flex items-center gap-2 text-sm">
-            <Link href={"/"} className="">
-              <Underlineeffect title={"Home"} />
-            </Link>{" "}
+            <Underlineffect
+              Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}
+              title="Home"
+              styles="w-fit"
+            />{" "}
             /{" "}
             <p className="capitalize text-[#a7a5a2]">
               {category?.replace(/-/g, " ")}

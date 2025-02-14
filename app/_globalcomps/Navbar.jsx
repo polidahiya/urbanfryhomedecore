@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 // import { LuMoon } from "react-icons/lu";
 import { LuSearch } from "react-icons/lu";
-import Underlineeffect from "./Underlineeffect";
+import Underlineffect from "./Underlineffect";
 import { AppContextfn } from "../Context";
 import Accountbutton from "./_navbarcomps/Accountbutton";
 import { RiShoppingCartLine } from "react-icons/ri";
@@ -84,31 +84,40 @@ const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
       {/* <button>
         <LuMoon className="text-2xl" />
       </button> */}
-      <button
-        className=" flex items-center gap-2"
-        onClick={() => setshowsearchbar(true)}
-      >
-        <LuSearch className="text-2xl lg:text-base" />
-        <span className="hidden lg:block underlineff">
-          <Underlineeffect title={"SEARCH"} />
-        </span>
-      </button>
+      <Underlineffect
+        Comp={({ innercomp }) => (
+          <button
+            className=" flex items-center gap-2"
+            onClick={() => setshowsearchbar(true)}
+          >
+            <LuSearch className="text-2xl lg:text-base" />
+            <span className="hidden lg:block underlineff">{innercomp}</span>
+          </button>
+        )}
+        title={"SEARCH"}
+        styles="w-fit"
+      />
+
       <Accountbutton token={token} userdata={userdata} />
-      <button
-        className="flex items-center"
-        onClick={() => {
-          setshowsidecart((pre) => ({ ...pre, show: true }));
-          setTimeout(() => {
-            setshowsidecart((pre) => ({ ...pre, effect: true }));
-          }, 100);
-        }}
-      >
-        <span className="hidden lg:block underlineff">
-          <Underlineeffect title={"CART"} />
-        </span>
-        <RiShoppingCartLine className="text-2xl lg:hidden" />
-        {`(${totalQuantity})`}
-      </button>
+      <Underlineffect
+        Comp={({ innercomp }) => (
+          <button
+            className="flex items-center"
+            onClick={() => {
+              setshowsidecart((pre) => ({ ...pre, show: true }));
+              setTimeout(() => {
+                setshowsidecart((pre) => ({ ...pre, effect: true }));
+              }, 100);
+            }}
+          >
+            <span className="hidden lg:block underlineff">{innercomp}</span>
+            <RiShoppingCartLine className="text-2xl lg:hidden" />
+            {`(${totalQuantity})`}
+          </button>
+        )}
+        title="CART"
+        styles="w-fit"
+      />
     </div>
   );
 };

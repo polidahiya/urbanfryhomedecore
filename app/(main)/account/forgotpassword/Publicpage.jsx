@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import Underlineeffect from "../../../_globalcomps/Underlineeffect";
+import Underlineffect from "@/app/_globalcomps/Underlineffect";
 import { AppContextfn } from "@/app/Context";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { RiEye2Line } from "react-icons/ri";
@@ -51,9 +51,11 @@ function Publicpage({ user }) {
         <div className="flex-1">
           {/* navigations */}
           <div className="flex items-center gap-2 text-sm">
-            <Link href={"/"} className="">
-              <Underlineeffect title={"Home"} />
-            </Link>{" "}
+            <Underlineffect
+              Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}
+              title="Home"
+              styles="w-fit"
+            />{" "}
             / <p className="capitalize text-theme">Forgot Password</p>
           </div>
           <h1 className="font-tenor text-7xl capitalize py-6">

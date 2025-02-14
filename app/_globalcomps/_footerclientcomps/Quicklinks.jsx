@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import Underlineeffect from "../Underlineeffect";
+import Underlineffect from "../Underlineffect";
 import { RiArrowDownSLine } from "react-icons/ri";
 
 function Quicklinks() {
@@ -35,9 +35,16 @@ function Quicklinks() {
         className={`flex-col gap-3 ${showlinks ? "flex" : "hidden lg:flex"}`}
       >
         {quicklink1.map((item, i) => (
-          <Link key={i} href={item.link} className="underlineff">
-            <Underlineeffect title={item?.title} />
-          </Link>
+          <Underlineffect
+            key={i}
+            Comp={({ innercomp }) => (
+              <Link href={item.link} className="underlineff">
+                {innercomp}
+              </Link>
+            )}
+            title={item?.title}
+            styles="w-fit"
+          />
         ))}
       </div>
     </div>

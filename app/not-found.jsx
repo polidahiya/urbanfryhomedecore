@@ -2,12 +2,12 @@ import React from "react";
 import Navbar from "./_globalcomps/Navbar";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import Underlineeffect from "./_globalcomps/Underlineeffect";
 import Footer from "./_globalcomps/Footer";
 import Image from "next/image";
 import { IoMdHome } from "react-icons/io";
 import Searchbarsection from "./_globalcomps/_navbarcomps/Searchbarsection";
 import Sidecart from "./_globalcomps/Sidecart";
+import Underlineffect from "./_globalcomps/Underlineffect";
 
 async function notfound() {
   const allcookies = await cookies();
@@ -23,9 +23,14 @@ async function notfound() {
       <div className="px-8">
         {/* navigations */}
         <div className="flex items-center gap-2 text-sm">
-          <Link href={"/"} className="">
-            <Underlineeffect title={"Home"} />
-          </Link>{" "}
+          <Underlineffect
+            Comp={({ innercomp }) => (
+              <Link href={"/"} className="">
+                {innercomp}
+              </Link>
+            )}
+            title="Home"
+          />{" "}
           / <p className="capitalize text-theme">404 Not Found</p>
         </div>
         <h1 className="font-tenor text-3xl md:text-7xl capitalize py-6 tracking-tighter">

@@ -5,7 +5,7 @@ import { IoLogoFacebook, IoLogoPinterest } from "react-icons/io5";
 import { TbLink } from "react-icons/tb";
 import { RiTwitterXLine } from "react-icons/ri";
 import { GoShareAndroid } from "react-icons/go";
-import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
+import Underlineffect from "@/app/_globalcomps/Underlineffect";
 import useDomain from "@/app/_globalcomps/_helperfunctions/Origin";
 import copytoclipboard from "@/app/_globalcomps/_helperfunctions/Copytoclipboard";
 import { AppContextfn } from "@/app/Context";
@@ -53,25 +53,35 @@ function Sharebutton({ sku, description, image }) {
       <div className="absolute top-0 right-0 w-full hidden group-hover:block">
         <div className="w-44 mt-10 float-right px-5 py-4 bg-white text-theme text-sm border border-theme">
           {list.map((item, i) => (
-            <Link
+            <Underlineffect
               key={i}
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="py-2 flex items-center gap-3"
-            >
-              <span className="text-lg">{item.icon}</span>
-              <span className="text-black">
-                <Underlineeffect title={item.title} />
-              </span>
-            </Link>
+              Comp={({ innercomp }) => (
+                <Link
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2 flex items-center gap-3"
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="text-black">{innercomp}</span>
+                </Link>
+              )}
+              title={item.title}
+              styles="w-fit"
+            />
           ))}
-          <div className="py-2 flex items-center gap-3">
-            <TbLink  className="text-lg"/>
-            <button className="text-black" onClick={handleSharePage}>
-              <Underlineeffect title={"Copy Link"} />
-            </button>
-          </div>
+          <Underlineffect
+            Comp={({ innercomp }) => (
+              <div className="py-2 flex items-center gap-3">
+                <TbLink className="text-lg" />
+                <button className="text-black" onClick={handleSharePage}>
+                  {innercomp}
+                </button>
+              </div>
+            )}
+            title="Copy Link"
+            styles="w-fit"
+          />
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import Imagescomp from "@/app/(main)/product/[...props]/_comps/Imagescomp";
 import Link from "next/link";
-import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
+import Underlineffect from "@/app/_globalcomps/Underlineffect";
 import Details from "@/app/(main)/product/[...props]/_comps/Details";
 
 function Previewproducts({ previewdata, setpreviewdata }) {
@@ -16,13 +16,21 @@ function Previewproducts({ previewdata, setpreviewdata }) {
         />
         {/* routes */}
         <div className="text-sm mt-10 ">
-          <Link href={"/"}>
-            <Underlineeffect title={"Home"} />
-          </Link>{" "}
+          <Underlineffect
+            Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}
+            title="Home"
+            styles="w-fit"
+          />{" "}
           /{" "}
-          <Link href={"/"}>
-            <Underlineeffect title={product?.categories.replace(/-/g, " ")} />
-          </Link>{" "}
+          <Underlineffect
+            Comp={({ innercomp }) => (
+              <Link href={`/collections/categories/${product?.categories}`}>
+                {innercomp}
+              </Link>
+            )}
+            title={product?.categories.replace(/-/g, " ")}
+            styles="w-fit"
+          />{" "}
           /{" "}
           <span className="capitalize text-[#a7a5a2]">
             {product?.productName.replace(/-/g, " ")}

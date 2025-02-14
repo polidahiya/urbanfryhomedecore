@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Underlineeffect from "@/app/_globalcomps/Underlineeffect";
 import { AppContextfn } from "@/app/Context";
 import Product from "./_comps/Product";
 import Upioptions from "@/app/_svgs/Upioptions";
@@ -15,6 +14,7 @@ import Couponcomp from "./_comps/Couponcomp";
 import Cookies from "js-cookie";
 import PaymentMethod from "./_comps/Paymentmethod";
 import Addressbar from "./_comps/Addressbar";
+import Underlineffect from "@/app/_globalcomps/Underlineffect";
 
 function Publicpage({ userdata, token }) {
   const [paymentMethod, setPaymentMethod] = useState("online");
@@ -140,9 +140,11 @@ function Publicpage({ userdata, token }) {
     <div className="pt-32 px-5 md:px-8">
       {/* navigations */}
       <div className="flex items-center gap-2 text-sm">
-        <Link href={"/"} className="">
-          <Underlineeffect title={"Home"} />
-        </Link>{" "}
+        <Underlineffect
+          Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}
+          title="Home"
+          styles="w-fit"
+        />{" "}
         / <p className="capitalize text-theme">Your Shopping Cart</p>
       </div>
       <div>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import Underlineeffect from "../../../_globalcomps/Underlineeffect";
+import Underlineffect from "@/app/_globalcomps/Underlineffect";
 import Closeeffectlink from "@/app/_globalcomps/Closeeffectlink";
 import { login } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
@@ -37,9 +37,11 @@ function Publicpage() {
         <div className="flex-1">
           {/* navigations */}
           <div className="flex items-center gap-2 text-sm">
-            <Link href={"/"} className="">
-              <Underlineeffect title={"Home"} />
-            </Link>{" "}
+            <Underlineffect
+              Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}
+              title="Home"
+              styles="w-fit"
+            />{" "}
             / <p className="capitalize text-theme">Account</p>
           </div>
           <h1 className="font-tenor text-7xl capitalize py-6">LOGIN</h1>
