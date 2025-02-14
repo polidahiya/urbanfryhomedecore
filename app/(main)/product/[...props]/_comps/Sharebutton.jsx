@@ -51,7 +51,7 @@ function Sharebutton({ sku, description, image }) {
       <GoShareAndroid className="text-2xl" />
       <p className="relative">Share</p>
       <div className="absolute top-0 right-0 w-full hidden group-hover:block">
-        <div className="w-44 mt-10 float-right px-5 py-4 bg-white text-theme text-sm border border-theme">
+        <div className="w-44 mt-10 float-left px-5 py-4 bg-white text-theme text-sm border border-theme">
           {list.map((item, i) => (
             <Underlineffect
               key={i}
@@ -67,20 +67,18 @@ function Sharebutton({ sku, description, image }) {
                 </Link>
               )}
               title={item.title}
-              styles="w-fit"
             />
           ))}
           <Underlineffect
             Comp={({ innercomp }) => (
               <div className="py-2 flex items-center gap-3">
                 <TbLink className="text-lg" />
-                <button className="text-black" onClick={handleSharePage}>
+                <button className="text-black w-full" onClick={handleSharePage}>
                   {innercomp}
                 </button>
               </div>
             )}
             title="Copy Link"
-            styles="w-fit"
           />
         </div>
       </div>

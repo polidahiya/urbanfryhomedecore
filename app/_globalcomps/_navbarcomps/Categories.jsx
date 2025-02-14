@@ -97,7 +97,7 @@ const Categories = ({ open }) => {
 
 const Subcats = ({ item, type, togglecategories }) => (
   <div
-    className={`lg:group-hover/subcat:flex flex-col lg:absolute top-0 left-full w-full lg:w-fit test min-w-52 py-2 bg-white lg:border lg:border-slate-200 ${
+    className={`lg:group-hover/subcat:flex flex-col lg:absolute top-0 left-full w-full lg:w-fit  min-w-52 pl-5 lg:pl-0 py-2 bg-white lg:border lg:border-slate-200 lg:max-h-96 lg:overflow-y-scroll themescroll ${
       togglecategories ? "flex lg:hidden" : "hidden"
     }`}
   >

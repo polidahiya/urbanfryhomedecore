@@ -22,7 +22,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <Appwrapper token={token} userdata={userdata} allproducts={allproducts}>
-        <body className={`antialiased themescroll lg:max-w-[1920px] mx-auto overflow-x-hidden`}>
+        <body className={`dark antialiased themescroll lg:max-w-[1920px] mx-auto overflow-x-hidden`}>
           <Message />
           <Quickview />
           {children}

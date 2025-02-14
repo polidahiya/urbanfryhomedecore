@@ -45,7 +45,7 @@ async function page({ params }) {
             name={product?.productName}
           />
           {/* routes */}
-          <div className="text-sm mt-10 ">
+          <div className="text-sm mt-10">
             <Underlineffect
               Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}
               title="Home"

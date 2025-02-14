@@ -2,7 +2,7 @@ import React from "react";
 
 function Underlineffect({ Comp, title, styles = "w-full h-full" }) {
   return (
-    <div className={`group/underline ${styles}`}>
+    <div className={`group/underline inline-block ${styles}`}>
       <Comp
         innercomp={
           <span className="flex items-center  w-full h-full">
