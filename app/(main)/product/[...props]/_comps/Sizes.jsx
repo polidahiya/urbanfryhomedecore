@@ -28,7 +28,7 @@ function Sizes({ dimensions, cartproductname }) {
             id="menu"
             value={cart[cartproductname]?.dimension}
             onChange={handleChange}
-            className="relative p-5 pr-10   outline-none  appearance-none cursor-pointer"
+            className="relative p-5 pr-10 w-full test outline-none  appearance-none cursor-pointer"
           >
             {dimensions?.map((dimension, index) => (
               <option key={index} value={dimension} className="text-sm">
