@@ -4,6 +4,7 @@ import Message from "./_globalcomps/Message";
 import Quickview from "./_globalcomps/Quickview";
 import { Cachedproducts } from "./_connections/Getcachedata";
 import { cookies } from "next/headers";
+import Googleanayltics from "./_connections/Googleanalytics";
 
 export const metadata = {
   title: "AltOrganisers",
@@ -21,8 +22,13 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        <Googleanayltics />
+      </head>
       <Appwrapper token={token} userdata={userdata} allproducts={allproducts}>
-        <body className={`dark antialiased themescroll lg:max-w-[1920px] mx-auto overflow-x-hidden`}>
+        <body
+          className={`antialiased themescroll lg:max-w-[1920px] mx-auto overflow-x-hidden`}
+        >
           <Message />
           <Quickview />
           {children}
