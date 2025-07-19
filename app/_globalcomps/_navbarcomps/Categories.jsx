@@ -41,6 +41,17 @@ const Categories = ({ open }) => {
               }`}
               style={{ top: `${i * 40}px` }}
             >
+              <Underlineffect
+                Comp={({ innercomp }) => (
+                  <Link
+                    href={`/collections/${categorykey}`}
+                    className="relative block px-5 py-3 whitespace-nowrap"
+                  >
+                    {innercomp}
+                  </Link>
+                )}
+                title={`All ${categorykey.replace(/-/g, " ")}`}
+              />
               {Object.keys(category?.subcat).map((subcat, i) => (
                 <Underlineffect
                   key={i}
