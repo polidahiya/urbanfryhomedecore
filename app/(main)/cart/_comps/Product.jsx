@@ -55,8 +55,8 @@ function Product({ item, cartproductname }) {
               <Nextimage
                 src={item?.image}
                 alt={item?.productName}
-                height={500}
-                width={500}
+                height={100}
+                width={100}
                 className="h-full w-full object-contain"
               ></Nextimage>
             </div>

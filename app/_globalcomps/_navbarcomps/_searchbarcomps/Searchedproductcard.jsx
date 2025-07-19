@@ -22,8 +22,8 @@ const Searchedproductcard = ({ searchedproducts }) => {
               <Nextimage
                 src={item?.variants[0]?.images[0]}
                 alt={item?.productName}
-                height={500}
-                width={500}
+                height={100}
+                width={100}
                 className="w-full h-full lg:group-hover:scale-110 duration-300"
               ></Nextimage>
             </span>

@@ -5,8 +5,6 @@ import { AppContextfn } from "../Context";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import Sidecarteditbuttons from "./_sidecart/Sidecarteditbuttons";
 import Link from "next/link";
-import Upioptions from "../_svgs/Upioptions";
-import { FiChevronRight } from "react-icons/fi";
 import { BsCartX } from "react-icons/bs";
 
 function Sidecart() {
@@ -62,8 +60,8 @@ function Sidecart() {
                     <Nextimage
                       src={value?.image}
                       alt={value?.productName}
-                      height={500}
-                      width={500}
+                      height={100}
+                      width={100}
                       className="h-full w-full object-contain"
                     ></Nextimage>
                   </div>

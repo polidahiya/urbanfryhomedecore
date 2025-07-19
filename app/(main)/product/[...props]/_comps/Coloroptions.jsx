@@ -18,8 +18,8 @@ function Coloroptions({ variants, color, sku, name }) {
             <Nextimage
               src={variant.images[0] || "/uiimages/404.avif"}
               alt={`${name}-${variant.finish}`}
-              width={500}
-              height={500}
+              height={100}
+              width={100}
               loading="lazy"
               className="w-24 aspect-square"
             ></Nextimage>

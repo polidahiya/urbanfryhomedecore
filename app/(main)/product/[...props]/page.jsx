@@ -36,7 +36,7 @@ async function page({ params }) {
   return (
     <div className="min-h-screen">
       <div className="mt-20 md:mt-28 flex flex-col lg:flex-row gap-10 px-5 md:px-10">
-        <div className="flex-[3]">
+        <div className="w-full md:w-1/2">
           <Imagescomp
             images={product?.variants[color].images}
             name={product?.productName}
@@ -76,7 +76,9 @@ async function page({ params }) {
             </span>
           </div>
         </div>
-        <Details product={product} color={color} />
+        <div className="w-full md:w-1/2">
+          <Details product={product} color={color} />
+        </div>
       </div>
       {/* comments */}
       <div>

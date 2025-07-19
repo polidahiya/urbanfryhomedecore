@@ -31,7 +31,7 @@ function Details({ product, color }) {
   }, []);
 
   return (
-    <div className="flex-[2] min-h-28">
+    <div className="min-h-28">
       {/* name */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="text-3xl font-tenor">{product?.productName}</h1>
