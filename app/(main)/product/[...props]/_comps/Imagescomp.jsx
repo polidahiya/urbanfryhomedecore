@@ -31,20 +31,24 @@ function Imagescomp({ images, name }) {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-1">
-      {images?.map((image, i) => (
-        <Nextimage
-          src={image || "/uiimages/404.avif"}
-          alt={name.replace(/-/g, " ")}
-          key={i}
-          height={800}
-          width={800}
-          className={`${
-            images.length <= 7 ? imageclasses[images.length][i] : " col-span-2"
-          } w-full aspect-square object-cover  border cursor-zoom-in`}
-          onClick={() => setshowfullimage({ show: true, index: i })}
-        />
-      ))}
+    <>
+      <div className="grid grid-cols-4 gap-1">
+        {images?.map((image, i) => (
+          <Nextimage
+            src={image || "/uiimages/404.avif"}
+            alt={name.replace(/-/g, " ")}
+            key={i}
+            height={500}
+            width={500}
+            className={`${
+              images.length <= 7
+                ? imageclasses[images.length][i]
+                : " col-span-2"
+            } w-full aspect-square object-cover  border cursor-zoom-in`}
+            onClick={() => setshowfullimage({ show: true, index: i })}
+          />
+        ))}
+      </div>
       {/* fullimage preview */}
       {showfullimage.show && (
         <Fullimage
@@ -54,7 +58,7 @@ function Imagescomp({ images, name }) {
           setshowfullimage={setshowfullimage}
         />
       )}
-    </div>
+    </>
   );
 }
 

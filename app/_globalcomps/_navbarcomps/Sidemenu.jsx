@@ -84,7 +84,7 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
           title={"SHOP"}
         />
 
-        <Categories open={open} />
+        <Categories open={open} setsidemenutoggle={setsidemenutoggle} />
       </div>
       <div
         className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"

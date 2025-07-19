@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Nextimage from "@/app/_globalcomps/Nextimage";
+import Image from "next/image";
 import Quickviewbutton from "./Quickviewbutton";
 
 function Productcard({ product }) {
@@ -12,22 +12,22 @@ function Productcard({ product }) {
           className="w-full aspect-square relative block overflow-hidden"
           href={`/product/${product?.sku}`}
         >
-          <Nextimage
+          <Image
             src={firstimage}
             alt={product?.productName}
             className="h-full w-full absolute  object-cover lg:group-hover:scale-105 lg:group-hover:opacity-0 duration-300"
             height={500}
             width={500}
             loading="lazy"
-          ></Nextimage>
-          <Nextimage
+          ></Image>
+          <Image
             src={product?.variants[0]?.images[1] || firstimage}
             alt={product?.productName}
             className="h-full w-full absolute  object-cover opacity-0 lg:group-hover:scale-110 lg:group-hover:opacity-100 duration-300"
             height={500}
             width={500}
             loading="lazy"
-          ></Nextimage>
+          ></Image>
         </Link>
         {/* quick view button */}
         <Quickviewbutton product={product} />

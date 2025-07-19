@@ -4,7 +4,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { staticdata } from "@/app/commondata";
 import Underlineffect from "../Underlineffect";
 
-const Categories = ({ open }) => {
+const Categories = ({ open, setsidemenutoggle }) => {
   const [togglecategories, settogglecategories] = useState(0);
   return (
     <div
@@ -45,6 +45,7 @@ const Categories = ({ open }) => {
                 Comp={({ innercomp }) => (
                   <Link
                     href={`/collections/${categorykey}`}
+                    onClick={() => setsidemenutoggle(false)}
                     className="relative block px-5 py-3 whitespace-nowrap"
                   >
                     {innercomp}
@@ -58,6 +59,7 @@ const Categories = ({ open }) => {
                   Comp={({ innercomp }) => (
                     <Link
                       href={`/collections/${categorykey}/${subcat}`}
+                      onClick={() => setsidemenutoggle(false)}
                       className="relative block px-5 py-3 whitespace-nowrap"
                     >
                       {innercomp}

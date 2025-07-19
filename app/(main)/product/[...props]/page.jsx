@@ -23,14 +23,11 @@ async function page({ params }) {
   const color = props[1] || 0;
   const products = await Cachedproducts();
 
-  const filteredproducts = products.filter((product) => product?.sku === sku);
-  if (filteredproducts.length == 0) notFound();
-  const product = filteredproducts[0];
+  const product = products.find((product) => product?.sku === sku);
+  if (!product) notFound();
 
   const similarproducts = products.filter(
-    (similarproduct) =>
-      similarproduct?.categories === product?.categories &&
-      similarproduct?.sku !== product?.sku
+    (item) => item?.category === product?.category && item?.sku !== product?.sku
   );
 
   const allreviews = await Cachedreviews();
