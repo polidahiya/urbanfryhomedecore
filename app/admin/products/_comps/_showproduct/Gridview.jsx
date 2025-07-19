@@ -2,7 +2,7 @@ import React from "react";
 import { GrUpdate } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import { IoCopy } from "react-icons/io5";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import { Deleteproduct } from "@/app/_serveractions/_admin/adminAddproduct";
 import { AppContextfn } from "@/app/Context";
 
@@ -52,14 +52,14 @@ const Productcard = ({
   return (
     <div className="relative max-w-72">
       {product?.variants && (
-        <Image
+        <Nextimage
           src={product?.variants[0]?.images[0] || "/uiimages/404.avif"}
           alt={product?.productName}
           className="w-full aspect-square object-cover"
           height={500}
           width={500}
           loading="lazy"
-        ></Image>
+        ></Nextimage>
       )}
       <p className="mt-1 text-center">{product?.productName}</p>
       <button

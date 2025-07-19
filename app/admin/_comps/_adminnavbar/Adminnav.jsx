@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import { FaDollyFlatbed } from "react-icons/fa";
 import { IoBagAdd } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
@@ -86,7 +86,7 @@ function Adminnav({ userdata }) {
   return (
     <nav className="sticky top-0 w-fit flex flex-col h-screen px-1 py-5 md:p-5  md:w-64 bg-adminbg">
       <Link href="/" className="md:px-5 flex items-center justify-center">
-        <Image
+        <Nextimage
           src="/uiimages/logo.png"
           alt="logo"
           className="w-16 aspect-square mr-2"

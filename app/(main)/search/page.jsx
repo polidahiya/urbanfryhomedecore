@@ -5,7 +5,7 @@ import Searchbar from "./_comps/Searchbar";
 import Searchedproductsfn from "@/app/_globalcomps/_helperfunctions/Searchedproductsfn";
 import Productcard from "@/app/_globalcomps/_productcard/Productcard";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
 async function page({ searchParams }) {
   const allsearchParams = await searchParams;
@@ -46,12 +46,12 @@ async function page({ searchParams }) {
       ) : (
         <>
           <div className="flex flex-col items-center justify-center py-10 ">
-            <Image
+            <Nextimage
               src="/uiimages/notfoundimage.jpg"
               alt="notfound image"
               width={480}
               height={410}
-            ></Image>
+            ></Nextimage>
             <h3 className="text-2xl">No search found</h3>
           </div>
         </>

@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Roomsearchproducts } from "@/app/_serveractions/_admin/Getliveproducts";
 import { AppContextfn } from "@/app/Context";
 import Importexportmenu from "./_comps/Importexportmenu";
+import { staticdata } from "@/app/commondata";
 
 function Page() {
   const searchParams = useSearchParams();
@@ -13,8 +14,8 @@ function Page() {
   const { setmessagefn } = AppContextfn();
 
   const initialState = {
-    categories: "Pantry-Organizers",
-    rooms: "Living-Room",
+    category: Object.keys(staticdata)[0],
+    subcat: Object.keys(Object.values(staticdata)[0]?.subcat)[0],
     productName: "",
     sku: "",
     handlingtime: "",

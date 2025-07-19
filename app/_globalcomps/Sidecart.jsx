@@ -2,7 +2,7 @@
 import React from "react";
 import { RxCross1 } from "react-icons/rx";
 import { AppContextfn } from "../Context";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import Sidecarteditbuttons from "./_sidecart/Sidecarteditbuttons";
 import Link from "next/link";
 import Upioptions from "../_svgs/Upioptions";
@@ -59,13 +59,13 @@ function Sidecart() {
               {cartitems.map(([key, value], i) => (
                 <div key={i} className="p-5 w-full flex items-center">
                   <div className="min-w-[100px] aspect-square">
-                    <Image
+                    <Nextimage
                       src={value?.image}
                       alt={value?.productName}
                       height={500}
                       width={500}
                       className="h-full w-full object-contain"
-                    ></Image>
+                    ></Nextimage>
                   </div>
 
                   <div className="w-full pl-5">

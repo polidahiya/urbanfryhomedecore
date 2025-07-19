@@ -5,33 +5,40 @@ import Productcard from "@/app/_globalcomps/_productcard/Productcard";
 import { staticdata } from "@/app/commondata";
 import SortSelector from "./_comps/Sorting";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import { collections } from "@/app/commondata";
 
 async function page({ params, searchParams }) {
-  const [type, category] = (await params).category;
+  const [category, subcat] = (await params).category;
   const { sort = 0 } = await searchParams;
 
-  const renderdata = {
-    desc:
-      type == "custom"
-        ? collections[category].desc
-        : staticdata[type][category]?.desc,
-    image:
-      type == "custom"
-        ? collections[category].img
-        : staticdata[type][category]?.img,
-  };
+  let desc, image, title;
+  if (category === "custom") {
+    desc = collections[subcat]?.desc;
+    image = collections[subcat]?.img;
+    title = category?.replace(/-/g, " ");
+  } else if (subcat) {
+    desc = staticdata[category]?.subcat?.[subcat]?.desc;
+    image = staticdata[category]?.subcat?.[subcat]?.img;
+    title = subcat?.replace(/-/g, " ");
+  } else {
+    desc = staticdata[category]?.desc;
+    image = staticdata[category]?.img;
+    title = category?.replace(/-/g, " ");
+  }
+
+  const renderdata = { desc, image };
+
   const products = await Cachedproducts();
 
   // filter
-  const filteredproducts = filterProducts(products, type, category);
+  const filteredproducts = filterProducts(products, category, subcat);
   const sortedproducts = getSortedProducts(filteredproducts, sort);
 
   return (
     <div>
       {/* theme */}
-      <div className="relative px-5 md:px-8 overflow-hidden h-fit">
+      <div className="relative px-5 md:px-8 overflow-hidden h-fit lg:min-h-dvh">
         <div className="py-36 text-white tracking-wider">
           {/* routes */}
           <div className="flex items-center gap-2 text-sm">
@@ -41,26 +48,36 @@ async function page({ params, searchParams }) {
               styles="w-fit"
             />{" "}
             /{" "}
-            <p className="capitalize text-[#a7a5a2]">
-              {category?.replace(/-/g, " ")}
-            </p>
+            {subcat && (
+              <>
+                <Underlineffect
+                  Comp={({ innercomp }) => (
+                    <Link href={`/collections/${category}`}>{innercomp}</Link>
+                  )}
+                  title={category.replace(/-/g, " ")}
+                  styles="w-fit"
+                />{" "}
+                /{" "}
+              </>
+            )}
+            <p className="capitalize text-[#a7a5a2]">{title}</p>
           </div>
           {/*  */}
           <h1 className="text-white mt-10 text-6xl font-tenor capitalize">
-            {category?.replace(/-/g, " ")}
+            {title}
           </h1>
-          <p className="mt-6 w-full max-w-[500px] text-sm text-justify">
+          <p className="mt-6 w-full max-w-[500px] text-sm text-justify md:text-start">
             {renderdata?.desc}
           </p>
         </div>
         {/* background */}
-        <Image
+        <Nextimage
           height={1000}
           width={1000}
           src={renderdata.image}
-          alt={category}
+          alt={title}
           quality={100}
-          className="block absolute top-0 left-0 w-full min-h-screen brightness-[0.35] object-cover -z-10"
+          className="block absolute top-0 left-0 w-full h-full brightness-[0.35] object-cover -z-10"
         />
       </div>
       {/* body */}
@@ -72,12 +89,12 @@ async function page({ params, searchParams }) {
         {/* products  */}
         {sortedproducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 ">
-            <Image
+            <Nextimage
               src="/uiimages/notfoundimage.jpg"
               alt="notfound image"
               width={480}
               height={410}
-            ></Image>
+            ></Nextimage>
             <h3 className="text-2xl">No products found</h3>
           </div>
         ) : (
@@ -91,18 +108,18 @@ async function page({ params, searchParams }) {
     </div>
   );
 }
-function filterProducts(products, type, category) {
-  if (type === "custom") {
-    return products.filter((product) =>
-      product?.collections?.includes(category)
-    );
-  } else if (category === "all") {
+function filterProducts(products, category, subcat) {
+  if (category === "custom") {
+    return products.filter((product) => product?.collections?.includes(subcat));
+  } else if (subcat === "all") {
     return products;
-  } else if (category === "new") {
+  } else if (subcat === "new") {
     const lastWeek = Date.now() - 7 * 24 * 60 * 60 * 1000;
     return products.filter((item) => item.lastupdated > lastWeek);
+  } else if (subcat) {
+    return products.filter((product) => product?.subcat == subcat);
   } else {
-    return products.filter((product) => product[type] === category);
+    return products.filter((product) => product?.category == category);
   }
 }
 

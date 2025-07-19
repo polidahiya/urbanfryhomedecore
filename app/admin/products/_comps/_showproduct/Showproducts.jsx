@@ -19,8 +19,8 @@ function Showproducts({
 }) {
   const { setmessagefn } = AppContextfn();
   const [filterdata, setfilterdata] = useState({
-    categories: "",
-    rooms: "",
+    categories: Object.keys(staticdata)[0],
+    subcat: Object.keys(Object.values(staticdata)[0]?.subcat)[0],
   });
   const [search, setsearch] = useState("");
   const [products, setproducts] = useState([]);
@@ -57,7 +57,7 @@ function Showproducts({
           + <span className="hidden md:inline">Add New</span>
         </button>
         <button
-          className="px-5 py-2 rounded-md bg-theme text-white"
+          className="px-5 py-2 rounded-md bg-theme text-white hidden"
           onClick={() => {
             setshowimportmenu(true);
           }}
@@ -71,31 +71,41 @@ function Showproducts({
         onsubmit={() => handlesearch("search", search)}
         placeholder="Search Categories, Rooms, Product Name, Sku, Material or Theme"
       />
-      <div className="flex items-end gap-5 mt-5">
-        <button
-          className="bg-theme text-white px-5 py-2 rounded-md"
-          onClick={() => handlesearch("all", "")}
-        >
-          All
-        </button>
-        <Dropdownmenu
-          title={"Categories"}
-          state={filterdata.categories}
-          onchange={(value) => {
-            setfilterdata((pre) => ({ ...pre, categories: value }));
-            handlesearch("category", value);
-          }}
-          options={["", ...Object.keys(staticdata.categories)]}
-        />
-        <Dropdownmenu
-          title={"Rooms"}
-          state={filterdata.rooms}
-          onchange={(value) => {
-            setfilterdata((pre) => ({ ...pre, rooms: value }));
-            handlesearch("rooms", value);
-          }}
-          options={["", ...Object.keys(staticdata.rooms)]}
-        />
+      <div className="flex flex-col md:flex-row gap-2 md:gap-5 mt-5">
+        <div className="flex items-end gap-5">
+          <Dropdownmenu
+            title={"Categories"}
+            state={filterdata?.categories}
+            onchange={(value) => {
+              setfilterdata((pre) => ({ ...pre, categories: value }));
+              handlesearch("category", value);
+            }}
+            options={Object.keys(staticdata)}
+          />
+          <Dropdownmenu
+            title={"Sub-category"}
+            state={filterdata?.subcat}
+            onchange={(value) => {
+              setfilterdata((pre) => ({ ...pre, subcat: value }));
+              handlesearch("subcat", value);
+            }}
+            options={Object.keys(staticdata[filterdata?.categories].subcat)}
+          />
+        </div>
+        <div className="flex items-end gap-5">
+          <button
+            className="bg-theme text-white px-5 py-2 rounded-md"
+            onClick={() => handlesearch("subcat", filterdata?.subcat)}
+          >
+            Show Products
+          </button>
+          <button
+            className="bg-theme text-white px-5 py-2 rounded-md"
+            onClick={() => handlesearch("all", "")}
+          >
+            All
+          </button>
+        </div>
       </div>
       <div className="flex justify-end gap-2 w-full mt-5">
         <button

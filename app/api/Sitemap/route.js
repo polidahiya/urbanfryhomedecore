@@ -99,10 +99,10 @@ export async function GET() {
       ${
         url.image
           ? `
-      <image:image>
-        <image:loc>${xmlEscape(url.image)}</image:loc>
-        <image:caption>${xmlEscape(url.name)}</image:caption>
-        <image:title>${xmlEscape(url.name)}</image:title>
+      <Nextimage:image>
+        <Nextimage:loc>${xmlEscape(url.image)}</image:loc>
+        <Nextimage:caption>${xmlEscape(url.name)}</image:caption>
+        <Nextimage:title>${xmlEscape(url.name)}</image:title>
       </image:image>
       `
           : ""

@@ -9,7 +9,7 @@ import Accountbutton from "./_navbarcomps/Accountbutton";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Menubutton from "./_navbarcomps/Menubutton";
 import Sidemenu from "./_navbarcomps/Sidemenu";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
 function Navbar({ navtype, token, userdata }) {
   const { setshowsearchbar } = AppContextfn();
@@ -32,12 +32,8 @@ function Navbar({ navtype, token, userdata }) {
   return (
     <nav
       className={`fixed navhover top-0 left-1/2 -translate-x-1/2 w-full lg:max-w-[1920px] flex items-center px-5 md:px-10 h-20 lg:hover:text-inherit hover:bg-white tracking-wider text-xs z-20 duration-300
-        ${navtype && transparentnav ? "text-black" : "bg-white text-inherit"}`}
+        ${navtype && transparentnav ? "text-white hover:text-inherit" : "bg-white text-inherit"}`}
     >
-      <Menubutton
-        sidemenutoggle={sidemenutoggle}
-        setsidemenutoggle={setsidemenutoggle}
-      />
       <Link
         href={"/"}
         className="scale-125"
@@ -45,7 +41,7 @@ function Navbar({ navtype, token, userdata }) {
           setsidemenutoggle(false);
         }}
       >
-        <Image
+        <Nextimage
           src="/uiimages/logo.png"
           alt="logo"
           className="w-16 aspect-square mr-2"
@@ -65,12 +61,20 @@ function Navbar({ navtype, token, userdata }) {
         setshowsearchbar={setshowsearchbar}
         token={token}
         userdata={userdata}
+        sidemenutoggle={sidemenutoggle}
+        setsidemenutoggle={setsidemenutoggle}
       />
     </nav>
   );
 }
 
-const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
+const Moreoptions = ({
+  setshowsearchbar,
+  token,
+  userdata,
+  sidemenutoggle,
+  setsidemenutoggle,
+}) => {
   const { cart, setshowsidecart } = AppContextfn();
   const cartitems = Object.values(cart).filter((item) => item.added);
 
@@ -117,6 +121,10 @@ const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
         )}
         title="CART"
         styles="w-fit"
+      />
+      <Menubutton
+        sidemenutoggle={sidemenutoggle}
+        setsidemenutoggle={setsidemenutoggle}
       />
     </div>
   );

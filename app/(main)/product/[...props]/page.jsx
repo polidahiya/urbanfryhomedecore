@@ -51,17 +51,29 @@ async function page({ params }) {
               title="Home"
               styles="w-fit"
             />{" "}
-            /{" "}
+            <span className="select-none pointer-events-none">/ </span>
             <Underlineffect
               Comp={({ innercomp }) => (
-                <Link href={`/collections/categories/${product?.categories}`}>
+                <Link href={`/collections/${product?.category}`}>
                   {innercomp}
                 </Link>
               )}
-              title={product?.categories.replace(/-/g, " ")}
+              title={product?.category.replace(/-/g, " ")}
               styles="w-fit"
             />{" "}
-            /{" "}
+            <span className="select-none pointer-events-none">/ </span>
+            <Underlineffect
+              Comp={({ innercomp }) => (
+                <Link
+                  href={`/collections/${product?.category}/${product?.subcat}`}
+                >
+                  {innercomp}
+                </Link>
+              )}
+              title={product?.subcat.replace(/-/g, " ")}
+              styles="w-fit"
+            />{" "}
+            <span className="select-none pointer-events-none">/ </span>
             <span className="capitalize text-[#a7a5a2]">
               {product?.productName.replace(/-/g, " ")}
             </span>

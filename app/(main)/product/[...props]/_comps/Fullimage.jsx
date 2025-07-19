@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import { RxCross1 } from "react-icons/rx";
 
 function Fullimage({ images, name, showfullimage, setshowfullimage }) {
@@ -69,7 +69,7 @@ function Fullimage({ images, name, showfullimage, setshowfullimage }) {
         ref={scrollRef}
       >
         {images.map((image, i) => (
-          <Image
+          <Nextimage
             key={i}
             src={image}
             alt={name.replace(/-/g, " ")}

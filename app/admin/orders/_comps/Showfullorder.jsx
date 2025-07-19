@@ -5,7 +5,7 @@ import {
 } from "@/app/_serveractions/_admin/getorders";
 import { AppContextfn } from "@/app/Context";
 import { useState } from "react";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
 const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
   const orderData = showfullorder.data;
@@ -76,14 +76,14 @@ const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
         <div className="space-y-2 mt-5">
           {orderData.products.map((product, index) => (
             <div key={index} className="flex items-center border p-2 rounded">
-              <Image
+              <Nextimage
                 src={product?.image}
                 alt={product?.productName}
                 className="w-32 aspect-square object-cover rounded-sm mr-2"
                 height={500}
                 width={500}
                 loading="lazy"
-              ></Image>
+              ></Nextimage>
               <div className="text-sm">
                 <h3 className="font-semibold text-gray-800">
                   {product.productName}

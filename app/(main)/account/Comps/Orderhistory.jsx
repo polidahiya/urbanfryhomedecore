@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import Showfullorder from "./Showfullorder";
 import { FaAngleRight } from "react-icons/fa6";
 import { Statuslists } from "@/app/commondata";
@@ -41,14 +41,14 @@ const Orders = ({ order, setshowfullorder }) => {
         {order?.products?.map((product, i) => {
           return (
             <div key={i} className="flex gap-5 my-2  p-2">
-              <Image
+              <Nextimage
                 src={product?.image}
                 alt={product.productName}
                 className="w-24 h-w-24 aspect-square object-cover"
                 height={500}
                 width={500}
                 loading="lazy"
-              ></Image>
+              ></Nextimage>
               <div>
                 <p className="line-clamp-2">{product?.productName}</p>
 

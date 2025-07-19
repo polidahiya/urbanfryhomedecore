@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import Link from "next/link";
 
 function Coloroptions({ variants, color, sku, name }) {
@@ -15,14 +15,14 @@ function Coloroptions({ variants, color, sku, name }) {
               index == color ? "outline" : "lg:hover:outline"
             }`}
           >
-            <Image
+            <Nextimage
               src={variant.images[0] || "/uiimages/404.avif"}
               alt={`${name}-${variant.finish}`}
               width={500}
               height={500}
               loading="lazy"
               className="w-24 aspect-square"
-            ></Image>
+            ></Nextimage>
           </Link>
         ))}
       </div>

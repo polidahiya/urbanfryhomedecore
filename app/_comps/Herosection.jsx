@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Pagination,
@@ -75,7 +75,7 @@ function ImageSwiper() {
       >
         {slides.map((slide, i) => (
           <SwiperSlide key={i}>
-            <Image
+            <Nextimage
               height={600}
               width={600}
               src={slide.image}
@@ -83,7 +83,7 @@ function ImageSwiper() {
               priority={i == 0 ? true : false}
               loading={i == 0 ? "eager" : "lazy"}
               className="h-full min-w-full object-cover"
-            ></Image>
+            ></Nextimage>
           </SwiperSlide>
         ))}
       </Swiper>

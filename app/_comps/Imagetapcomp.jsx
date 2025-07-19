@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import Productcard from "../_globalcomps/_productcard/Productcard";
 import Link from "next/link";
 import { Cachedproducts } from "../_connections/Getcachedata";
@@ -10,13 +10,13 @@ async function Imagetapcomp() {
   return (
     <div className="flex flex-col lg:flex-row">
       <div className="flex-1 relative">
-        <Image
+        <Nextimage
           src="/uiimages/imagetapimage.jpg"
           alt="imagetapimage"
           height="800"
           width="800"
           className="w-full h-full"
-        ></Image>
+        ></Nextimage>
         {/* link 1 */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-28 aspect-square">
           <Link

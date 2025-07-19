@@ -7,7 +7,7 @@ import Link from "next/link";
 import { staticdata } from "@/app/commondata";
 import Searchbox from "./_searchbarcomps/Searchbox";
 import Searchedproductcard from "./_searchbarcomps/Searchedproductcard";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
 function Searchbarsection() {
   const { showsearchbar, setshowsearchbar, allproducts } = AppContextfn();
@@ -25,7 +25,7 @@ function Searchbarsection() {
         return;
       }
 
-      const searched = await Searchedproductsfn(allproducts,searchtext);
+      const searched = await Searchedproductsfn(allproducts, searchtext);
       setsearchedproducts(searched);
     };
 
@@ -49,7 +49,7 @@ function Searchbarsection() {
         <div
           className={`w-full flex items-center justify-between  h-20 text-inherit text-xs`}
         >
-          <Image
+          <Nextimage
             src="/uiimages/logo.png"
             alt="logo"
             className="w-16 aspect-square mr-2"
@@ -75,21 +75,22 @@ function Searchbarsection() {
         <div className="mt-5 max-h-[calc(100dvh-160px)] overflow-y-scroll themescroll pb-5">
           {searchedproducts.length === 0 ? (
             <>
-              <div>
-                <Categoriesoptions
-                  title="Categories"
-                  linkto="categories"
-                  data={staticdata.categories}
-                  setshowsearchbar={setshowsearchbar}
-                />
+              <div className="underline text-theme font-semibold ml-5">
+                Categories
               </div>
-              <div className="mt-5">
-                <Categoriesoptions
-                  title="Rooms"
-                  linkto="rooms"
-                  data={staticdata.rooms}
-                  setshowsearchbar={setshowsearchbar}
-                />
+              <div className="flex flex-wrap gap-2 mt-2">
+                {Object.keys(staticdata).map((categorykey, index) => (
+                  <Link
+                    href={`/collections/${categorykey}`}
+                    key={index}
+                    className="px-5 py-2 border text-xs rounded-full"
+                    onClick={() => {
+                      setshowsearchbar(false);
+                    }}
+                  >
+                    {categorykey.replace(/-/g, " ")}
+                  </Link>
+                ))}
               </div>
             </>
           ) : (

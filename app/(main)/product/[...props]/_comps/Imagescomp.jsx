@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import Fullimage from "./Fullimage";
 
 function Imagescomp({ images, name }) {
@@ -33,7 +33,7 @@ function Imagescomp({ images, name }) {
   return (
     <div className="grid grid-cols-4 gap-1">
       {images?.map((image, i) => (
-        <Image
+        <Nextimage
           src={image || "/uiimages/404.avif"}
           alt={name.replace(/-/g, " ")}
           key={i}

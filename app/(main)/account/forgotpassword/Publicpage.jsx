@@ -7,7 +7,7 @@ import { RiEyeCloseFill } from "react-icons/ri";
 import { RiEye2Line } from "react-icons/ri";
 import { sendforgotmail } from "@/app/_serveractions/forgotpass";
 import { resetpassword } from "@/app/_serveractions/forgotpass";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
 function Publicpage({ user }) {
   const { setmessagefn } = AppContextfn();
@@ -158,7 +158,7 @@ function Publicpage({ user }) {
         </div>
         {/* image */}
         <div className="flex-1">
-          <Image
+          <Nextimage
             src="/uiimages/loginimage.jpg"
             height={1000}
             width={1000}

@@ -7,7 +7,7 @@ import { login } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { RiEye2Line } from "react-icons/ri";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
 function Publicpage() {
   const { setmessagefn } = AppContextfn();
@@ -117,7 +117,7 @@ function Publicpage() {
         </div>
         {/* image */}
         <div className="flex-1">
-          <Image
+          <Nextimage
             src="/uiimages/loginimage.jpg"
             height={1000}
             width={1000}

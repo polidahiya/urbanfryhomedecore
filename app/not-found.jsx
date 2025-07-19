@@ -3,11 +3,12 @@ import Navbar from "./_globalcomps/Navbar";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import Footer from "./_globalcomps/Footer";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import { IoMdHome } from "react-icons/io";
 import Searchbarsection from "./_globalcomps/_navbarcomps/Searchbarsection";
 import Sidecart from "./_globalcomps/Sidecart";
 import Underlineffect from "./_globalcomps/Underlineffect";
+
 
 async function notfound() {
   const allcookies = await cookies();
@@ -40,13 +41,13 @@ async function notfound() {
           The page you were looking for could not be found. It might have been
           removed, renamed, or did not exist in the first place.
         </p>
-        <Image
+        <Nextimage
           src="/uiimages/404.avif"
           alt="not found image"
           height={400}
           width={400}
           className="mx-auto"
-        ></Image>
+        ></Nextimage>
         <Link
           href="/"
           className="w-full max-w-xs flex items-center justify-center gap-1 px-10 py-3 bg-theme text-white mx-auto mb-10 lg:hover:opacity-75"

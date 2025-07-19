@@ -13,17 +13,17 @@ export const Roomsearchproducts = async (ordertype = "all", search) => {
 
     const queries = {
       all: {},
-      rooms: {
-        rooms: search,
+      subcat: {
+        subcat: search,
       },
       category: {
-        categories: search,
+        category: search,
       },
       sku: { sku: search },
       search: {
         $or: [
-          { categories: { $regex: new RegExp(search, "i") } },
-          { rooms: { $regex: new RegExp(search, "i") } },
+          { category: { $regex: new RegExp(search, "i") } },
+          { subcat: { $regex: new RegExp(search, "i") } },
           { productName: { $regex: new RegExp(search, "i") } },
           { sku: { $regex: new RegExp(search, "i") } },
           { Material: { $regex: new RegExp(search, "i") } },

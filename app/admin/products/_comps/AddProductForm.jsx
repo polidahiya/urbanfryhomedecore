@@ -74,19 +74,22 @@ const AddProductForm = ({
         }
         clear={() => setdata((pre) => ({ ...pre, productName: "" }))}
       />
-      {/* rooms */}
-      <Dropdownmenu
-        title={"Rooms"}
-        state={data?.rooms}
-        onchange={(value) => setdata((pre) => ({ ...pre, rooms: value }))}
-        options={Object.keys(staticdata?.rooms)}
-      />
-      {/* categories */}
+
+      {/* category */}
       <Dropdownmenu
         title={"Category"}
-        state={data?.categories}
-        onchange={(value) => setdata((pre) => ({ ...pre, categories: value }))}
-        options={Object.keys(staticdata?.categories)}
+        state={data?.category || initialState?.category}
+        onchange={(value) => setdata((pre) => ({ ...pre, category: value }))}
+        options={Object.keys(staticdata)}
+      />
+      {/* subcat*/}
+      <Dropdownmenu
+        title={"Sub-category"}
+        state={data?.subcat || initialState?.subcat}
+        onchange={(value) => setdata((pre) => ({ ...pre, subcat: value }))}
+        options={Object.keys(
+          staticdata[data?.category || initialState?.category].subcat
+        )}
       />
       {/* sku id */}
       <Standardinputfield
@@ -215,13 +218,22 @@ const AddProductForm = ({
 
       {/* Description */}
       <Standardinputfield
-        titlename="Description"
+        titlename={`Description ${
+          data?.seodescription
+            ? 160 - data?.seodescription.length
+            : "(160 characters max)"
+        }`}
         isRequired={false}
         value={data?.seodescription}
         setState={setdata}
-        onchange={(e) =>
-          setdata((pre) => ({ ...pre, seodescription: e.target.value }))
-        }
+        onchange={(e) => {
+          const value = e.target.value;
+          if (value.length <= 160) {
+            setdata((pre) => ({ ...pre, seodescription: value }));
+          } else {
+            setdata((pre) => ({ ...pre, seodescription: value.slice(0, 160) }));
+          }
+        }}
         clear={() => setdata((pre) => ({ ...pre, seodescription: "" }))}
       />
 

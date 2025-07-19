@@ -1,6 +1,6 @@
 import React from "react";
 import { Statuslists } from "@/app/commondata";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
 function Showfullorder({ orderData, setshowfullorder }) {
   return (
@@ -34,14 +34,14 @@ function Showfullorder({ orderData, setshowfullorder }) {
         <div className="space-y-2 mt-5">
           {orderData.products.map((product, index) => (
             <div key={index} className="flex items-center border p-2 rounded">
-              <Image
+              <Nextimage
                 src={product?.image}
                 alt={product?.productName}
                 className="w-32 aspect-square object-cover rounded-sm mr-2"
                 height={500}
                 width={500}
                 loading="lazy"
-              ></Image>
+              ></Nextimage>
               <div className="text-sm">
                 <h3 className="font-semibold text-gray-800">
                   {product.productName}

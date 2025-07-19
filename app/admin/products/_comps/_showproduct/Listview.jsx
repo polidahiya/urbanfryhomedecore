@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 import { GrUpdate } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import { IoCopy } from "react-icons/io5";
@@ -54,14 +54,14 @@ function Listview({
           {products.map((product, index) => (
             <tr key={index} className="group relative hover:bg-gray-100">
               <td className="border border-gray-300 px-4 py-2">
-                <Image
+                <Nextimage
                   src={product?.variants[0]?.images[0] || "/uiimages/404.avif"}
                   alt={product?.productName}
                   className="w-full aspect-square object-cover"
                   height={500}
                   width={500}
                   loading="lazy"
-                ></Image>
+                ></Nextimage>
               </td>
               <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
                 {product?.productName}

@@ -10,7 +10,7 @@ import Underlineffect from "../Underlineffect";
 
 const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
   const { setmessagefn, cart } = AppContextfn();
-  const [open, setopen] = useState(false);
+  const [open, setopen] = useState(true);
   const cartitems = Object.values(cart).filter((item) => item.added);
 
   const totalQuantity = cartitems.reduce(
@@ -85,22 +85,6 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
         />
 
         <Categories open={open} />
-      </div>
-      <div className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit">
-        <Underlineffect
-          Comp={({ innercomp }) => (
-            <Link
-              href={"/collections/custom/Ready-To-Ship"}
-              className="h-full w-full py-4 lg:py-0 flex items-center px-3"
-              onClick={() => {
-                setsidemenutoggle(false);
-              }}
-            >
-              {innercomp}
-            </Link>
-          )}
-          title="READY TO SHIP"
-        />
       </div>
       <div
         className="relative flex lg:flex-row items-center justify-start lg:justify-center lg:h-full border-t border-theme border-opacity-50 lg:border-none w-full lg:w-fit"

@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AppContextfn } from "@/app/Context";
 import Link from "next/link";
-import Image from "next/image";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
 function Product({ item, cartproductname }) {
   const { cart, setcart, setmessagefn } = AppContextfn();
@@ -52,13 +52,13 @@ function Product({ item, cartproductname }) {
         <Link href={`/product/${item?.sku}/${item?.color}`} className="block">
           <div className="w-full flex items-start lg:items-center">
             <div className="min-w-24 w-24 aspect-square">
-              <Image
+              <Nextimage
                 src={item?.image}
                 alt={item?.productName}
                 height={500}
                 width={500}
                 className="h-full w-full object-contain"
-              ></Image>
+              ></Nextimage>
             </div>
 
             <div className="w-full pl-5">
