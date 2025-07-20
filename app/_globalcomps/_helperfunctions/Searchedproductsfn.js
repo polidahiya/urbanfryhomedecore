@@ -1,4 +1,9 @@
-const Searchedproductsfn = async (allproducts, searchQuery) => {
+"use server";
+import { Cachedproducts } from "@/app/_connections/Getcachedata";
+const Searchedproductsfn = async (searchQuery) => {
+  console.log(searchQuery);
+  
+  let allproducts = await Cachedproducts();
   const words = searchQuery?.split(" ") || [];
 
   // Filtering products based on the search query
@@ -17,11 +22,11 @@ const Searchedproductsfn = async (allproducts, searchQuery) => {
           ?.toLowerCase()
           .includes(word.toLowerCase());
 
-        const categoryMatch = product?.categories
+        const categoryMatch = product?.category
           ?.toLowerCase()
           .includes(word.toLowerCase());
 
-        const roomsMatch = product?.rooms
+        const subcatMatch = product?.subcat
           ?.toLowerCase()
           .includes(word.toLowerCase());
 
@@ -34,7 +39,7 @@ const Searchedproductsfn = async (allproducts, searchQuery) => {
           keyfeaturesMatch ||
           keywordsMatch ||
           categoryMatch ||
-          roomsMatch ||
+          subcatMatch ||
           skuMatch
         );
       });

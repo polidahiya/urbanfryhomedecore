@@ -3,7 +3,7 @@ import { RxCross1 } from "react-icons/rx";
 
 const Menubutton = ({ sidemenutoggle, setsidemenutoggle }) => (
   <button
-    className="relative h-full w-5 text-2xl  lg:hidden"
+    className="relative h-full w-5 text-2xl  lg:hidden mr-5"
     onClick={() => {
       setsidemenutoggle((pre) => !pre);
     }}

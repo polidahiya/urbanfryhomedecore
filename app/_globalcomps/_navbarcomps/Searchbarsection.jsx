@@ -1,46 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { AppContextfn } from "@/app/Context";
-import Searchedproductsfn from "../_helperfunctions/Searchedproductsfn";
-import Link from "next/link";
-import { staticdata } from "@/app/commondata";
 import Searchbox from "./_searchbarcomps/Searchbox";
-import Searchedproductcard from "./_searchbarcomps/Searchedproductcard";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 
 function Searchbarsection() {
-  const { showsearchbar, setshowsearchbar, allproducts } = AppContextfn();
-  const [searchtext, setsearchtext] = useState("");
-  const [searchedproducts, setsearchedproducts] = useState([]);
-  const [isfocused, setisfocused] = useState(false);
-
-  // Add debounce logic
-  useEffect(() => {
-    let debounceTimeout;
-
-    const fetchSearchedProducts = async () => {
-      if (searchtext.trim() === "") {
-        setsearchedproducts([]);
-        return;
-      }
-
-      const searched = await Searchedproductsfn(allproducts, searchtext);
-      setsearchedproducts(searched);
-    };
-
-    if (showsearchbar) {
-      // Clear the previous timer and set a new one
-      debounceTimeout = setTimeout(() => {
-        fetchSearchedProducts();
-      }, 500); // 500ms debounce delay
-    }
-
-    return () => {
-      // Cleanup the timeout when searchtext or showsearchbar changes
-      clearTimeout(debounceTimeout);
-    };
-  }, [searchtext, showsearchbar]);
+  const { showsearchbar, setshowsearchbar } = AppContextfn();
 
   if (showsearchbar)
     return (
@@ -65,62 +30,9 @@ function Searchbarsection() {
           </button>
         </div>
         {/* searchbox */}
-        <Searchbox
-          searchtext={searchtext}
-          setsearchtext={setsearchtext}
-          isfocused={isfocused}
-          setisfocused={setisfocused}
-        />
-        {/* category subcat */}
-        <div className="mt-5 max-h-[calc(100dvh-160px)] overflow-y-scroll themescroll pb-5">
-          {searchedproducts.length === 0 ? (
-            <>
-              <div className="underline text-theme font-semibold ml-5">
-                Categories
-              </div>
-              <div className="flex flex-wrap gap-2 mt-2">
-                {Object.keys(staticdata).map((categorykey, index) => (
-                  <Link
-                    href={`/collections/${categorykey}`}
-                    key={index}
-                    className="px-5 py-2 border text-xs rounded-full"
-                    onClick={() => {
-                      setshowsearchbar(false);
-                    }}
-                  >
-                    {categorykey.replace(/-/g, " ")}
-                  </Link>
-                ))}
-              </div>
-            </>
-          ) : (
-            <Searchedproductcard searchedproducts={searchedproducts} />
-          )}
-        </div>
+        <Searchbox />
       </div>
     );
 }
-
-const Categoriesoptions = ({ title, data, linkto, setshowsearchbar }) => {
-  return (
-    <>
-      <div className="underline text-theme font-semibold ml-5">{title}</div>
-      <div className="flex flex-wrap gap-2 mt-2">
-        {Object.keys(data).map((category, index) => (
-          <Link
-            href={`/collections/${linkto}/${category}`}
-            key={index}
-            className="px-5 py-2 border text-xs rounded-full"
-            onClick={() => {
-              setshowsearchbar(false);
-            }}
-          >
-            {category.replace(/-/g, " ")}
-          </Link>
-        ))}
-      </div>
-    </>
-  );
-};
 
 export default Searchbarsection;

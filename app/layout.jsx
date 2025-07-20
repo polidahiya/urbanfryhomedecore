@@ -18,14 +18,12 @@ export default async function RootLayout({ children }) {
   const parseduserdata = allcookies.get("userdata")?.value;
   const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
 
-  const allproducts = await Cachedproducts();
-
   return (
     <html lang="en">
       <head>
         <Googleanayltics />
       </head>
-      <Appwrapper token={token} userdata={userdata} allproducts={allproducts}>
+      <Appwrapper token={token} userdata={userdata}>
         <body
           className={`antialiased themescroll lg:max-w-[1920px] mx-auto overflow-x-hidden`}
         >

@@ -36,10 +36,14 @@ function Navbar({ navtype, token, userdata }) {
           navtype && transparentnav
             ? sidemenutoggle
               ? "bg-white text-inherit"
-              : "text-white"
+              : "text-black" //changed to black
             : "bg-white text-inherit"
         }`}
     >
+      <Menubutton
+        sidemenutoggle={sidemenutoggle}
+        setsidemenutoggle={setsidemenutoggle}
+      />
       <Link
         href={"/"}
         className="scale-125"
@@ -67,20 +71,12 @@ function Navbar({ navtype, token, userdata }) {
         setshowsearchbar={setshowsearchbar}
         token={token}
         userdata={userdata}
-        sidemenutoggle={sidemenutoggle}
-        setsidemenutoggle={setsidemenutoggle}
       />
     </nav>
   );
 }
 
-const Moreoptions = ({
-  setshowsearchbar,
-  token,
-  userdata,
-  sidemenutoggle,
-  setsidemenutoggle,
-}) => {
+const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
   const { cart, setshowsidecart } = AppContextfn();
   const cartitems = Object.values(cart).filter((item) => item.added);
 
@@ -127,10 +123,6 @@ const Moreoptions = ({
         )}
         title="CART"
         styles="w-fit"
-      />
-      <Menubutton
-        sidemenutoggle={sidemenutoggle}
-        setsidemenutoggle={setsidemenutoggle}
       />
     </div>
   );

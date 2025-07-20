@@ -1,17 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import Underlineffect from "@/app/_globalcomps/Underlineffect";
-import Searchbar from "./_comps/Searchbar";
 import Searchedproductsfn from "@/app/_globalcomps/_helperfunctions/Searchedproductsfn";
 import Productcard from "@/app/_globalcomps/_productcard/Productcard";
-import { Cachedproducts } from "@/app/_connections/Getcachedata";
 import Nextimage from "@/app/_globalcomps/Nextimage";
+import Searchbox from "@/app/_globalcomps/_navbarcomps/_searchbarcomps/Searchbox";
 
 async function page({ searchParams }) {
   const allsearchParams = await searchParams;
   const searchtext = allsearchParams?.q || "";
-  const allproducts = await Cachedproducts();
-  const searched = await Searchedproductsfn(allproducts, searchtext);
+  const searched = await Searchedproductsfn(searchtext);
 
   return (
     <div className="pt-32 px-5 md:px-8">
@@ -34,7 +32,7 @@ async function page({ searchParams }) {
         </h1>
       </div>
       <div className="mt-10">
-        <Searchbar />
+        <Searchbox />
       </div>
       {/* products */}
       {searched.length != 0 ? (
@@ -44,17 +42,15 @@ async function page({ searchParams }) {
           ))}
         </div>
       ) : (
-        <>
-          <div className="flex flex-col items-center justify-center py-10 ">
-            <Nextimage
-              src="/uiimages/notfoundimage.jpg"
-              alt="notfound image"
-              width={480}
-              height={410}
-            ></Nextimage>
-            <h3 className="text-2xl">No search found</h3>
-          </div>
-        </>
+        <div className="flex flex-col items-center justify-center py-10 ">
+          <Nextimage
+            src="/uiimages/notfoundimage.jpg"
+            alt="notfound image"
+            width={480}
+            height={410}
+          ></Nextimage>
+          <h3 className="text-2xl">No search found</h3>
+        </div>
       )}
     </div>
   );
