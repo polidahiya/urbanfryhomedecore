@@ -11,7 +11,7 @@ export const staticdata = {
     img: "/Categoriesimages/images.jpeg",
     desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
     subcat: {
-      "Sofas": {
+      Sofas: {
         img: "/Categoriesimages/images.jpeg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
@@ -19,7 +19,7 @@ export const staticdata = {
         img: "/Categoriesimages/images.jpeg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
-      "Ottomans-&-Benches": {
+      "Ottomans-and-Benches": {
         img: "/Categoriesimages/images.jpeg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
@@ -45,7 +45,7 @@ export const staticdata = {
     img: "/Categoriesimages/images.jpeg",
     desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
     subcat: {
-      "Beds": {
+      Beds: {
         img: "/Categoriesimages/images.jpeg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
@@ -85,7 +85,7 @@ export const staticdata = {
     img: "/Categoriesimages/images.jpeg",
     desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
     subcat: {
-      "Bookshelves": {
+      Bookshelves: {
         img: "/Categoriesimages/images.jpeg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
@@ -99,7 +99,7 @@ export const staticdata = {
     img: "/Categoriesimages/images.jpeg",
     desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
     subcat: {
-      "Sideboard": {
+      Sideboard: {
         img: "/Categoriesimages/images.jpeg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
@@ -120,18 +120,19 @@ export const staticdata = {
     },
   },
 };
-//  special: {
-//     all: {
-//       img: "/Categoriesimages/images.jpeg",
-//       desc: "Keep your home and office clutter-free with our range of storage solutions. From pantry, cabinet, and drawer organizers for a tidy kitchen to shoe racks and under-bed storage for maximizing space, we have it all. Enhance your workspace with office storage and supplies, simplify your beauty routine with makeup organizers & mirrors, and keep your bathroom neat with shower & bathtub storage. Add function and style with wall shelves, toy storage, and home decor to complete your space. Stay organized effortlessly with solutions designed for every corner of your home!",
-//     },
-//     new: {
-//       img: "/Categoriesimages/images.jpeg",
-//       desc: "Upgrade your space with our newest arrivals! From pantry, cabinet, and drawer organizers to shoe storage and under-bed solutions, explore fresh ways to declutter. Find the latest office storage, makeup organizers, and shower storage for a more functional home. Enhance your decor with wall shelves, toy storage, and stylish home accents—all designed to keep your space neat and stylish. Stay ahead with innovative storage solutions that make organizing effortless!",
-//     },
-//   },
+export const specialcategories = {
+  all: {
+    img: "/Categoriesimages/images.jpeg",
+    desc: "Keep your home and office clutter-free with our range of storage solutions. From pantry, cabinet, and drawer organizers for a tidy kitchen to shoe racks and under-bed storage for maximizing space, we have it all. Enhance your workspace with office storage and supplies, simplify your beauty routine with makeup organizers & mirrors, and keep your bathroom neat with shower & bathtub storage. Add function and style with wall shelves, toy storage, and home decor to complete your space. Stay organized effortlessly with solutions designed for every corner of your home!",
+  },
+  new: {
+    img: "/Categoriesimages/images.jpeg",
+    desc: "Upgrade your space with our newest arrivals! From pantry, cabinet, and drawer organizers to shoe storage and under-bed solutions, explore fresh ways to declutter. Find the latest office storage, makeup organizers, and shower storage for a more functional home. Enhance your decor with wall shelves, toy storage, and stylish home accents—all designed to keep your space neat and stylish. Stay ahead with innovative storage solutions that make organizing effortless!",
+  },
+};
 
 export const collections = {
+  //custom collection
   "Last-Chance": {
     img: "/Categoriesimages/images.jpeg",
     desc: "Don’t miss out on these final pieces! Our Last Chance collection features limited-stock items at unbeatable prices. Whether you’re looking for unique finds or timeless favorites, this is your opportunity to grab high-quality products before they’re gone for good. Hurry—once they’re sold out, they’re gone forever!",

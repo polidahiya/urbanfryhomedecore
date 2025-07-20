@@ -38,7 +38,7 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
         <Underlineffect
           Comp={({ innercomp }) => (
             <Link
-              href={"/collections/custom/Last-Chance"}
+              href={"/collections/Last-Chance"}
               className="h-full w-full py-4 lg:py-0 flex items-center px-3"
               onClick={() => {
                 setsidemenutoggle(false);
@@ -54,7 +54,7 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
         <Underlineffect
           Comp={({ innercomp }) => (
             <Link
-              href={"/collections/special/new"}
+              href={"/collections/new"}
               className="h-full w-full py-4 lg:py-0 flex items-center px-3"
               onClick={() => {
                 setsidemenutoggle(false);

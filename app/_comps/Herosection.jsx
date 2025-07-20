@@ -12,7 +12,7 @@ const slides = [
     heading: "Altorganisers : Redefining Spaces",
     para: "Get ready to organize your space like never before",
     image: "/heroimages/1.jpg",
-    link: "/collections/special/all",
+    link: "/collections/all",
   },
   {
     heading: "Nursery, Crafted with love",

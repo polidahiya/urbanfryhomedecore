@@ -2,32 +2,34 @@ import React from "react";
 import Link from "next/link";
 import Underlineffect from "@/app/_globalcomps/Underlineffect";
 import Productcard from "@/app/_globalcomps/_productcard/Productcard";
-import { staticdata } from "@/app/commondata";
 import SortSelector from "./_comps/Sorting";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 import Nextimage from "@/app/_globalcomps/Nextimage";
-import { collections } from "@/app/commondata";
+import { staticdata, collections, specialcategories } from "@/app/commondata";
+
+const metadata = (category, subcat) => {
+  if (Object.keys(collections).includes(category)) {
+    return { title: category?.replace(/-/g, " "), ...collections[category] };
+  } else if (Object.keys(specialcategories).includes(category)) {
+    return {
+      title: category?.replace(/-/g, " "),
+      ...specialcategories[category],
+    };
+  } else if (subcat) {
+    return {
+      title: subcat?.replace(/-/g, " "),
+      ...staticdata[category]?.subcat?.[subcat],
+    };
+  } else {
+    return { title: category?.replace(/-/g, " "), ...staticdata[category] };
+  }
+};
 
 async function page({ params, searchParams }) {
   const [category, subcat] = (await params).category;
   const { sort = 0 } = await searchParams;
 
-  let desc, image, title;
-  if (category === "custom") {
-    desc = collections[subcat]?.desc;
-    image = collections[subcat]?.img;
-    title = category?.replace(/-/g, " ");
-  } else if (subcat) {
-    desc = staticdata[category]?.subcat?.[subcat]?.desc;
-    image = staticdata[category]?.subcat?.[subcat]?.img;
-    title = subcat?.replace(/-/g, " ");
-  } else {
-    desc = staticdata[category]?.desc;
-    image = staticdata[category]?.img;
-    title = category?.replace(/-/g, " ");
-  }
-
-  const renderdata = { desc, image };
+  const { title, desc, img } = metadata(category, subcat);
 
   const products = await Cachedproducts();
 
@@ -67,14 +69,14 @@ async function page({ params, searchParams }) {
             {title}
           </h1>
           <p className="mt-6 w-full max-w-[500px] text-sm text-justify md:text-start">
-            {renderdata?.desc}
+            {desc}
           </p>
         </div>
         {/* background */}
         <Nextimage
           height={1000}
           width={1000}
-          src={renderdata.image}
+          src={img}
           alt={title}
           quality={100}
           className="block absolute top-0 left-0 w-full h-full brightness-[0.35] object-cover -z-10"
@@ -109,13 +111,13 @@ async function page({ params, searchParams }) {
   );
 }
 function filterProducts(products, category, subcat) {
-  if (category === "custom") {
-    return products.filter((product) => product?.collections?.includes(subcat));
-  } else if (subcat === "all") {
+  if (Object.keys(collections).includes(category)) {
+    return products.filter((product) => product?.collections?.includes(category));
+  } else if (category === "all") {
     return products;
-  } else if (subcat === "new") {
-    const lastWeek = Date.now() - 7 * 24 * 60 * 60 * 1000;
-    return products.filter((item) => item.lastupdated > lastWeek);
+  } else if (category === "new") {
+    const lastmonth = Date.now() - 30 * 24 * 60 * 60 * 1000;
+    return products.filter((item) => item.lastupdated > lastmonth);
   } else if (subcat) {
     return products.filter((product) => product?.subcat == subcat);
   } else {

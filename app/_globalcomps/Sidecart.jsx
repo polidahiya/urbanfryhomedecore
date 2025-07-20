@@ -111,7 +111,7 @@ function Sidecart() {
               You haven’t added <br /> anything to cart.
             </p>
             <Link
-              href="/collections/special/all"
+              href="/collections/all"
               onClick={closemenu}
               className="py-3 px-10 mt-5 bg-white text-theme lg:hover:text-white lg:hover:bg-transparent duration-300 lg:hover:opacity-75"
             >
