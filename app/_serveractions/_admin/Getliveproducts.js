@@ -35,7 +35,9 @@ export const Roomsearchproducts = async (ordertype = "all", search) => {
     const allproducts = await Productscollection.find(
       queries[ordertype]
     ).toArray();
-    allproducts.map((item) => (item._id = item._id.toString()));
+    allproducts.forEach((item) => {
+      item._id = item._id.toString();
+    });
 
     return { status: 200, message: "", data: allproducts };
   } catch (error) {

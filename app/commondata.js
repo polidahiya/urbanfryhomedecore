@@ -12,31 +12,31 @@ export const staticdata = {
     desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
     subcat: {
       Sofas: {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/sofa.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Accent-Chairs": {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/AccentsChairs.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Ottomans-and-Benches": {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/OttomansBenches.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Coffee-Tables": {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/CoffeeTables.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Side-Tables": {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/ConsoleTables.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "TV-Unit": {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/TVCabinets.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Shoe-Storage": {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/ShoeStorage.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
     },
@@ -46,11 +46,11 @@ export const staticdata = {
     desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
     subcat: {
       Beds: {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/Beds.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Bedside-Tables": {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/BedsideTables.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Chest-of-Drawers": {
@@ -64,15 +64,15 @@ export const staticdata = {
     desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
     subcat: {
       "Dining-Tables": {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/DiningTables.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Dining-Chairs": {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/DiningChairs.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Dining-Sets": {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/DiningSets.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Bar-Unit": {
@@ -100,7 +100,7 @@ export const staticdata = {
     desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
     subcat: {
       Sideboard: {
-        img: "/Categoriesimages/images.jpeg",
+        img: "/Categoriesimages/Sideboard.jpg",
         desc: "Photo frames are a timeless way to showcase your cherished memories while adding a personal touch to your decor. Available in various styles, sizes, and finishes, they can complement any room in your home. Whether placed on shelves, mantels, or hung on walls, photo frames enhance the aesthetic of your space. Create a gallery wall with different frame designs for a striking visual impact or use them to accentuate specific areas like the bedside or living room. Perfect for preserving moments, photo frames bring warmth and character to your home.",
       },
       "Crockery-Unit": {
@@ -171,7 +171,14 @@ export const permissions = [
   "Reviews_permission",
 ];
 
-export const Statuslists = ["Pending", "Processing", "Shipped", "Delivered"];
+export const Statuslists = [
+  "Pending",
+  "Processing",
+  "Shipped",
+  "Delivered",
+  "Cancelled",
+  "Refunded",
+];
 
 // materialoptions
 export const materialoptions = [

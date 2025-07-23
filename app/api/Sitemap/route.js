@@ -62,7 +62,7 @@ const generateProductUrls = (products, today) =>
   products.flatMap((product) =>
     product?.variants?.map((variant, index) => ({
       loc: `${domain}/${urlEncode(product.categories)}/${
-        product?.sku
+        product?._id
       }/${index}`,
       lastmod: today.toISOString(),
       changefreq: "weekly",

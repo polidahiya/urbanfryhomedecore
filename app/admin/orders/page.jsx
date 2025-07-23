@@ -65,7 +65,7 @@ function Page() {
               className={`border rounded-md px-5 py-1`}
               onClick={() => {
                 setrefresher((pre) => !pre);
-                setmessagefn("Update successful");
+                setmessagefn("Refresh successful");
               }}
             >
               <BiRefresh />

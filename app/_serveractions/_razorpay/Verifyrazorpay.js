@@ -1,10 +1,11 @@
 "use server";
 import { getcollection } from "@/app/_connections/Mongodb";
 import crypto from "crypto";
-import sendEmail from "@/app/_connections/Sendmail";
-import order_confiramtion_mail_template from "@/app/_mailtemplate/orderconfirmationmail";
+import { Updatecouponusage } from "../addorders";
+import { Send_mail_to_payment_group_id } from "../addorders";
+import { Clear_cart_coupon_cookies } from "../addorders";
 
-async function Verifyrazorpay(razorpaydata, id) {
+async function Verifyrazorpay(razorpaydata, paymentGroupId) {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
       razorpaydata;
@@ -16,20 +17,25 @@ async function Verifyrazorpay(razorpaydata, id) {
 
     if (generatedSignature === razorpay_signature) {
       // do payment verification
-      const { orderscollection, ObjectId } = await getcollection();
-      const orderdata = await orderscollection.findOneAndUpdate(
-        { _id: new ObjectId(id) },
-        { $set: { payment: "successful" } }
+      const { orderscollection } = await getcollection();
+
+      // Update all orders with this paymentGroupId
+      const orderdata = await orderscollection.updateMany(
+        { paymentGroupId },
+        { $set: { paymentStatus: "success" } }
       );
 
-      // send mail
-      const mailtemplate = order_confiramtion_mail_template(
-        orderdata?.products,
-        orderdata?.totalPrice,
-        orderdata?.username
-      );
+      // update coupon usage
+      if (orderdata?.coupondata)
+        await Updatecouponusage(
+          orderdata?.userdata?.email,
+          orderdata?.coupondata?.code
+        );
 
-      sendEmail("Order Confirmation!", orderdata?.email, mailtemplate);
+      // Send mail
+      await Send_mail_to_payment_group_id(paymentGroupId);
+      // clear cart cookies
+      await Clear_cart_coupon_cookies();
 
       return { status: 200, message: "Payment verified successfully" };
     } else {

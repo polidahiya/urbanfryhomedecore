@@ -20,21 +20,23 @@ export const Getorders = async (
       all: {},
       search: {
         $or: [
-          { username: { $regex: new RegExp(search, "i") } },
-          { email: { $regex: new RegExp(search, "i") } },
-          { date: { $regex: new RegExp(search, "i") } },
+          { [`userdata.username`]: { $regex: new RegExp(search, "i") } },
+          { [`userdata.email`]: { $regex: new RegExp(search, "i") } },
+          { createdAt: { $regex: new RegExp(search, "i") } },
         ],
       },
     };
 
     const allorders = await orderscollection
       .find(queries[ordertype])
-      .sort({ date: -1 })
+      .sort({ createdAt: -1 })
       .limit(limit)
       .skip((pagenumber - 1) * limit)
       .toArray();
 
-    allorders.map((item) => (item._id = item._id.toString()));
+    allorders.forEach((item) => {
+      item._id = item?._id.toString();
+    });
 
     const totalOrders = await orderscollection.countDocuments(
       queries[ordertype]
@@ -57,9 +59,25 @@ export const updateorderstatus = async (id, value) => {
 
     await orderscollection.updateOne(
       { _id: new ObjectId(id) },
-      { $set: { orderstage: value } }
+      { $set: { status: value } }
     );
     return { status: 200, message: "Update successful" };
+  } catch (error) {
+    return { status: 500, message: "Server error" };
+  }
+};
+export const Deleteorder = async (id) => {
+  try {
+    const res = await Verification("Order_permission");
+    if (!res?.verified) {
+      return { status: 400, message: "Invalid user" };
+    }
+
+    const { orderscollection, ObjectId } = await getcollection();
+
+    await orderscollection.deleteOne({ _id: new ObjectId(id) });
+
+    return { status: 200, message: "Deleted successfully" };
   } catch (error) {
     return { status: 500, message: "Server error" };
   }

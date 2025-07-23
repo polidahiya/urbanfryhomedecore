@@ -1,3 +1,4 @@
+import formatDate from "@/app/_globalcomps/_helperfunctions/formateddate";
 const Couponminicard = ({ coupon, setdata, setshowform }) => {
   return (
     <div
@@ -16,9 +17,17 @@ const Couponminicard = ({ coupon, setdata, setshowform }) => {
         {coupon?.discountType == "percentage" && "%"}
         {coupon?.discountType == "fixed amount" && "/-"}
       </p>
-      <p className="flex-1 text-center text-sm">{coupon?.usagetimes}</p>
       <p className="flex-1 text-center text-sm">
-        {coupon?.validFrom} to {coupon?.validTo}
+        {coupon?.usageLimit == -1 ? "Unlimited" : coupon?.usageLimit}
+      </p>
+      <p className="flex-1 text-center text-sm">
+        {coupon?.usageLimitperuser == -1
+          ? "Unlimited"
+          : coupon?.usageLimitperuser}
+      </p>
+      <p className="flex-1 text-center text-sm">
+        {formatDate(coupon?.validFrom, true)} to{" "}
+        {formatDate(coupon?.validTo, true)}
       </p>
     </div>
   );

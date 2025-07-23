@@ -10,7 +10,7 @@ function Productcard({ product }) {
       <div className="relative">
         <Link
           className="w-full aspect-square relative block overflow-hidden"
-          href={`/product/${product?.sku}`}
+          href={`/product/${product?._id}`}
         >
           <Image
             src={firstimage}

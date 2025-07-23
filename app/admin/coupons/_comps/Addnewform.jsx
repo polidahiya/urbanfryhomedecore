@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import Standardinputfield from "../../products/_comps/_comps/Standardinputfield";
 import Dropdownmenu from "../../products/_comps/_comps/Dropdownmenu";
 import Togglebuttons from "../../products/_comps/_comps/Togglebuttons";
-import { addcoupon, deletecoupon } from "@/app/_serveractions/_admin/coupon";
+import {
+  Addcoupon,
+  Deletecoupon,
+} from "@/app/_serveractions/_admin/Serveraction";
 import { AppContextfn } from "@/app/Context";
+import Dateselector from "../../_comps/Dateselector";
 
 function Addnewform({ data, setdata, setshowform, resetState, setrefresher }) {
   const { setmessagefn, setshowdialog } = AppContextfn();
@@ -12,7 +16,7 @@ function Addnewform({ data, setdata, setshowform, resetState, setrefresher }) {
   const handlesubmit = async (e) => {
     e.preventDefault();
     setloading(true);
-    const res = await addcoupon(data);
+    const res = await Addcoupon(data);
     setloading(false);
     setmessagefn(res?.message);
     if (res?.status == 200) {
@@ -23,7 +27,7 @@ function Addnewform({ data, setdata, setshowform, resetState, setrefresher }) {
   };
 
   const handledelete = async () => {
-    const res = await deletecoupon(data?._id);
+    const res = await Deletecoupon(data?._id);
     setmessagefn(res?.message);
     if (res?.status == 200) {
       resetState();
@@ -63,35 +67,53 @@ function Addnewform({ data, setdata, setshowform, resetState, setrefresher }) {
           }
           clear={() => setdata((pre) => ({ ...pre, discountValue: "" }))}
         />
-        <div className="flex items-center">
-          <input
-            className="border rounded-md px-2 py-2 outline-none"
-            type="date"
-            value={data.validFrom}
-            required
-            onChange={(e) =>
-              setdata((pre) => ({ ...pre, validFrom: e.target.value }))
-            }
+        {/* valid from */}
+        <div className="flex flex-col md:flex-row gap-4">
+          <Dateselector
+            label="Valid From"
+            state={data?.validFrom}
+            setstate={(isoDate) => {
+              setdata((prev) => ({
+                ...prev,
+                validFrom: isoDate,
+              }));
+            }}
           />
-          <p className="px-5">to</p>
-          <input
-            className="border rounded-md px-2 py-2 outline-none"
-            type="date"
-            value={data.validTo}
-            required
-            onChange={(e) =>
-              setdata((pre) => ({ ...pre, validTo: e.target.value }))
-            }
+          {/* Valid To */}
+          <Dateselector
+            label="Valid To"
+            state={data?.validTo}
+            setstate={(isoDate) => {
+              setdata((prev) => ({
+                ...prev,
+                validTo: isoDate,
+              }));
+            }}
           />
         </div>
+        {/* Usage limit */}
         <Standardinputfield
-          titlename="Usage Times"
-          value={data.usagetimes}
+          titlename={`Usage Limit : ${
+            data.usageLimit == -1 ? "unlimited " : data.usageLimit
+          } (use -1 for unlimited)`}
           type="number"
+          value={data.usageLimit}
           onchange={(e) =>
-            setdata((pre) => ({ ...pre, usagetimes: e.target.value }))
+            setdata((prev) => ({ ...prev, usageLimit: e.target.value }))
           }
-          clear={() => setdata((pre) => ({ ...pre, usagetimes: "" }))}
+          clear={() => setdata((prev) => ({ ...prev, usageLimit: "" }))}
+        />
+        {/* Usage limit per user*/}
+        <Standardinputfield
+          titlename={`Usage Limit per User : ${
+            data.usageLimitperuser == -1 ? "unlimited " : data.usageLimitperuser
+          } (use -1 for unlimited)`}
+          type="number"
+          value={data.usageLimitperuser}
+          onchange={(e) =>
+            setdata((prev) => ({ ...prev, usageLimitperuser: e.target.value }))
+          }
+          clear={() => setdata((prev) => ({ ...prev, usageLimitperuser: "" }))}
         />
         <Togglebuttons
           titlename="isActive?"

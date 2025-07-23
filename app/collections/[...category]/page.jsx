@@ -6,6 +6,13 @@ import SortSelector from "./_comps/Sorting";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import { staticdata, collections, specialcategories } from "@/app/commondata";
+import DeviceDetector from "@/app/_globalcomps/_helperfunctions/Devicedetector";
+
+const imageDimensions = {
+  mobile: { width: 390, height: 844 },
+  tablet: { width: 800, height: 1280 },
+  desktop: { width: 1920, height: 1080 },
+};
 
 const metadata = (category, subcat) => {
   if (Object.keys(collections).includes(category)) {
@@ -26,6 +33,8 @@ const metadata = (category, subcat) => {
 };
 
 async function page({ params, searchParams }) {
+  const device = await DeviceDetector();
+
   const [category, subcat] = (await params).category;
   const { sort = 0 } = await searchParams;
 
@@ -74,8 +83,8 @@ async function page({ params, searchParams }) {
         </div>
         {/* background */}
         <Nextimage
-          height={1000}
-          width={1000}
+          height={imageDimensions[device].height}
+          width={imageDimensions[device].width}
           src={img}
           alt={title}
           quality={100}
@@ -112,7 +121,9 @@ async function page({ params, searchParams }) {
 }
 function filterProducts(products, category, subcat) {
   if (Object.keys(collections).includes(category)) {
-    return products.filter((product) => product?.collections?.includes(category));
+    return products.filter((product) =>
+      product?.collections?.includes(category)
+    );
   } else if (category === "all") {
     return products;
   } else if (category === "new") {

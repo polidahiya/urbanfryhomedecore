@@ -26,7 +26,7 @@ function Userdetails({ userdata }) {
   };
 
   return (
-    <div className="lg:flex-[3] w-full">
+    <div className="lg:flex-[3] w-full h-fit lg:sticky top-32">
       <h2>User Details</h2>
       <form
         onSubmit={submitform}

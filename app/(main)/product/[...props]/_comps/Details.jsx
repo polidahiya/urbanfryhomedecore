@@ -9,7 +9,7 @@ import Coloroptions from "./Coloroptions";
 import { AppContextfn } from "@/app/Context";
 
 function Details({ product, color }) {
-  const cartproductname = `${product?.sku}-${color}`;
+  const cartproductname = `${product?._id}-${color}`;
   const { cart, setcart } = AppContextfn();
 
   useEffect(() => {
@@ -20,12 +20,6 @@ function Details({ product, color }) {
           added: false,
           dimension: product?.dimensions?.[0] || null,
           quantity: 1,
-          color,
-          sku: product?.sku,
-          mrp: product?.mrp,
-          sellingprice: product?.sellingprice,
-          productName: product?.productName,
-          image: product?.variants[color].images[0],
         },
       }));
   }, []);

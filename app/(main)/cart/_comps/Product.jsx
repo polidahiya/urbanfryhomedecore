@@ -1,47 +1,56 @@
+"use client";
 import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AppContextfn } from "@/app/Context";
 import Link from "next/link";
 import Nextimage from "@/app/_globalcomps/Nextimage";
+import { usePathname } from "next/navigation";
+import Revalidatepathfn from "@/app/_serveractions/Revalidatepathpn";
 
-function Product({ item, cartproductname }) {
+function Product({ item, cartproductid }) {
+  const pathname = usePathname();
   const { cart, setcart, setmessagefn } = AppContextfn();
   const MAX_QUANTITY = 10; // Define the maximum quantity
 
-  const handleIncrement = () => {
-    if (cart[cartproductname]?.quantity < MAX_QUANTITY)
-      setcart((pre) => {
-        const updatedcart = { ...pre };
-        updatedcart[cartproductname] = {
-          ...updatedcart[cartproductname],
-          quantity: updatedcart[cartproductname].quantity + 1,
-        };
-        return updatedcart;
-      });
-  };
+  const color = cartproductid.split("-")[1];
+  const image = item?.variants[color]?.images[0];
 
-  const handleDecrement = () => {
-    if (cart[cartproductname]?.quantity > 1)
-      setcart((pre) => {
-        const updatedcart = { ...pre };
-        updatedcart[cartproductname] = {
-          ...updatedcart[cartproductname],
-          quantity: updatedcart[cartproductname].quantity - 1,
+  const handleQuantityChange = async (slug) => {
+    let dorevalidate = false;
+    setcart((pre) => {
+      const updatedcart = { ...pre };
+      const currentItem = updatedcart[cartproductid];
+      const newquantity = item.quantity + slug;
+
+      if (newquantity >= 1 && newquantity <= MAX_QUANTITY) {
+        dorevalidate = true;
+        updatedcart[cartproductid] = {
+          ...currentItem,
+          quantity: newquantity,
         };
-        return updatedcart;
-      });
+      } else if (newquantity > MAX_QUANTITY) {
+        setmessagefn("Maximum quantity reached");
+      }
+
+      return updatedcart;
+    });
+
+    if (dorevalidate) {
+      await Revalidatepathfn(pathname);
+    }
   };
 
   // add to cart button
-  const handleremovefromcart = () => {
+  const handleRemoveProduct = async () => {
     setcart((pre) => {
       const updatedcart = { ...pre };
-      updatedcart[cartproductname] = {
-        ...updatedcart[cartproductname],
+      updatedcart[cartproductid] = {
+        ...updatedcart[cartproductid],
         added: false,
       };
       return updatedcart;
     });
+    await Revalidatepathfn(pathname);
     setmessagefn("Removed from cart");
   };
 
@@ -49,11 +58,11 @@ function Product({ item, cartproductname }) {
     <div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 lg:gap-0 border-b py-5">
       {/* product */}
       <div className="text-left  lg:flex-[3] ">
-        <Link href={`/product/${item?.sku}/${item?.color}`} className="block">
+        <Link href={`/product/${item?._id}/${item?.color}`} className="block">
           <div className="w-full flex items-start lg:items-center">
             <div className="min-w-24 w-24 aspect-square">
               <Nextimage
-                src={item?.image}
+                src={image || "/uiimages/404.avif"}
                 alt={item?.productName}
                 height={100}
                 width={100}
@@ -86,24 +95,24 @@ function Product({ item, cartproductname }) {
         <div className="flex items-stretch h-10 lg:h-16 w-fit border border-theme mx-auto">
           {/* Decrement Button */}
           <button
-            onClick={handleDecrement}
-            disabled={cart[cartproductname]?.quantity <= 1}
+            onClick={() => handleQuantityChange(-1)}
+            disabled={cart[cartproductid]?.quantity <= 1}
             className={`flex items-center justify-center h-full aspect-square text-xl ${
-              cart[cartproductname]?.quantity <= 1 && "opacity-50"
+              cart[cartproductid]?.quantity <= 1 && "opacity-50"
             }`}
           >
             -
           </button>
           {/* display quantity */}
           <p className="flex items-center justify-center h-full w-5">
-            {cart[cartproductname]?.quantity}
+            {cart[cartproductid]?.quantity}
           </p>
           {/* Increment Button */}
           <button
-            onClick={handleIncrement}
-            disabled={cart[cartproductname]?.quantity >= MAX_QUANTITY}
+            onClick={() => handleQuantityChange(1)}
+            disabled={cart[cartproductid]?.quantity >= MAX_QUANTITY}
             className={`flex items-center justify-center h-full aspect-square text-xl ${
-              cart[cartproductname]?.quantity >= MAX_QUANTITY && "opacity-50"
+              cart[cartproductid]?.quantity >= MAX_QUANTITY && "opacity-50"
             }`}
           >
             +
@@ -121,7 +130,7 @@ function Product({ item, cartproductname }) {
       <div className="absolute lg:static bottom-7 right-5 lg:flex-1">
         <button
           className=" text-theme text-xl lg:px-10"
-          onClick={handleremovefromcart}
+          onClick={handleRemoveProduct}
         >
           <AiOutlineDelete className="inline-block" />
           <span className="text-sm ml-1">Remove</span>

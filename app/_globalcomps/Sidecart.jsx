@@ -30,30 +30,29 @@ function Sidecart() {
   if (!showsidecart.show) return null;
 
   return (
-    <div className="w-full h-screen fixed top-0 left-0 bg-black bg-opacity-0 z-30">
+    <div className="w-full h-dvh fixed top-0 left-0 bg-black bg-opacity-0 z-30">
       <div
-        className={`w-full max-w-[500px] h-full  absolute top-0 right-0  bg-theme text-white z-30 duration-300 ease-out md:border-l border-white overflow-y-scroll
+        className={`w-full max-w-[500px] h-full flex flex-col  absolute top-0 right-0  bg-theme text-white z-30 duration-300 ease-out md:border-l border-white overflow-y-scroll themescroll
         ${showsidecart?.effect ? "translate-x-0" : "translate-x-full"}`}
       >
-        <button
-          className="group absolute top-0 right-0 p-5"
-          onClick={closemenu}
-        >
-          <RxCross1 className="text-2xl lg:group-hover:rotate-90 duration-300" />
-        </button>
-        <p className="text-5xl p-10 font-tenor italic">
+        <div className="sticky top-0 text-5xl p-10 font-tenor italic border-b border-white border-opacity-15 bg-theme">
           Cart
           <span className="text-2xl pl-3 italic font-serif">
             {"("}
             {totalQuantity}
             {")"}
           </span>
-        </p>
-        <hr className="opacity-15" />
+          <button
+            className="group absolute top-0 right-0 p-5"
+            onClick={closemenu}
+          >
+            <RxCross1 className="text-2xl lg:group-hover:rotate-90 duration-300" />
+          </button>
+        </div>
         {cartitems.length != 0 ? (
           <>
             {/* products */}
-            <div className="w-full flex flex-col gap-1">
+            <div className="w-full flex-1 flex flex-col gap-1">
               {cartitems.map(([key, value], i) => (
                 <div key={i} className="p-5 w-full flex items-center">
                   <div className="min-w-[100px] aspect-square">
@@ -83,9 +82,8 @@ function Sidecart() {
                 </div>
               ))}
             </div>
-            <hr className="opacity-15" />
             {/* bottom section */}
-            <div className="px-5 mt-5 font-semibold">
+            <div className="sticky bottom-0 px-5 pt-5 font-semibold border-t border-white border-opacity-15 bg-theme">
               <div className="flex items-center justify-center gap-10">
                 <p className="font-tenor tracking-widest">Total</p>
                 <p className="font-tenor tracking-widest">:</p>

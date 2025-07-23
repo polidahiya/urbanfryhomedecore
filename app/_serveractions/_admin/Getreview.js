@@ -42,7 +42,9 @@ export const Getreviews = async (
       .skip((pagenumber - 1) * limit)
       .toArray();
 
-    allreviews.map((item) => (item._id = item._id.toString()));
+    allreviews.forEach((item) => {
+      item._id = item?._id.toString();
+    });
 
     const totalreviews = await reviewscollection.countDocuments(
       queries[reviewtype]

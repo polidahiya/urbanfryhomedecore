@@ -1,13 +1,17 @@
+"use client";
 import { useEffect } from "react";
+import { Usecartcontext } from "../Cartcontext";
 
-const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
+const PaymentMethod = ({ totalPrice, maxcashpaymentavailable }) => {
+  const { paymentMethod, setPaymentMethod } = Usecartcontext();
+
   const handleToggle = (method) => {
-    if (method === "cod" && totalPrice >= 5000) return;
+    if (method === "cod" && totalPrice >= maxcashpaymentavailable) return;
     setPaymentMethod(method);
   };
 
   useEffect(() => {
-    if (paymentMethod === "cod" && totalPrice >= 5000)
+    if (paymentMethod === "cod" && totalPrice >= maxcashpaymentavailable)
       setPaymentMethod("online");
   }, [totalPrice]);
 
@@ -40,7 +44,11 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
             paymentMethod === "cod"
               ? "bg-white border-theme"
               : "bg-gray-100 border-gray-300"
-          } ${totalPrice >= 5000 ? "opacity-50 cursor-not-allowed" : ""}`}
+          } ${
+            totalPrice >= maxcashpaymentavailable
+              ? "opacity-50 cursor-not-allowed"
+              : ""
+          }`}
         >
           <input
             type="radio"
@@ -48,7 +56,7 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
             value="cod"
             checked={paymentMethod === "cod"}
             onChange={() => handleToggle("cod")}
-            disabled={totalPrice >= 5000}
+            disabled={totalPrice >= maxcashpaymentavailable}
             className="w-5 h-5 accent-theme cursor-pointer"
           />
           <span className="text-gray-700">Cash on Delivery (COD)</span>
@@ -56,7 +64,7 @@ const PaymentMethod = ({ paymentMethod, setPaymentMethod, totalPrice }) => {
       </div>
 
       {/* Disabled Message */}
-      {totalPrice >= 5000 && (
+      {totalPrice >= maxcashpaymentavailable && (
         <p className="text-xs text-gray-500">
           * COD is available only for orders below ₹5,000.
         </p>

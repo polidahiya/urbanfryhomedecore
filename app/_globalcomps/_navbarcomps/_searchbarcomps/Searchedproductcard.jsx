@@ -12,7 +12,7 @@ const Searchedproductcard = ({ searchedproducts }) => {
         {searchedproducts.map((item, i) => (
           <Link
             key={i}
-            href={`/product/${item?.sku}`}
+            href={`/product/${item?._id}`}
             className="group w-full md:w-48 overflow-hidden"
             onClick={() => {
               setshowsearchbar(false);

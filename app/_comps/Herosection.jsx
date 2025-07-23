@@ -9,38 +9,44 @@ import "swiper/css";
 
 const slides = [
   {
-    heading: "Altorganisers : Redefining Spaces",
-    para: "Get ready to organize your space like never before",
+    heading: "Sleep Light, Live Lighter",
+    para: "Non-storage beds crafted for those who crave calm, clarity, and clutter-free comfort.",
     image: "/heroimages/1.jpg",
-    link: "/collections/all",
+    link: "/collections/Bedroom/Beds",
   },
   {
-    heading: "Nursery, Crafted with love",
-    para: "Keep your little one’s space tidy and adorable with our wooden nursery organizers",
+    heading: "Urbanfry Homes Debut: The Organised Home Sale",
+    para: "We’re live and celebrating with exclusive launch offers on all our Furniture Range.",
     image: "/heroimages/2.jpg",
-    link: "/collections/rooms/Nursery",
+    link: "/collections/Last-Chance",
   },
   {
-    heading: "Brew in Style with Our Coffee Organizers",
-    para: "Stylish wooden organizers for the ultimate home coffee bar.",
+    heading: "The Camille Shelf",
+    para: "Your Home’s Most Stylish Storyteller",
     image: "/heroimages/3.jpg",
-    link: "/collections/rooms/Living-Room",
+    link: "/collections/AltOrganisers",
   },
   {
-    heading: "AltOrganisers Wall Art",
-    para: "Minimalist art that speaks volumes",
+    heading: "Beyond the Basics",
+    para: "Shoe racks that double as decor. Crafted for homes that love looking neat.",
     image: "/heroimages/4.jpg",
-    link: "/collections/categories/Photo-Frames",
+    link: "/collections/Living-Room/Shoe-Storage",
   },
   {
-    heading: "Style up with our shelves",
-    para: "Bring home pieces that bring joy to everyday moments",
+    heading: "Freshly Served: Dining Goals",
+    para: "Warning: May cause spontaneous dinner parties and excessive compliments.",
     image: "/heroimages/5.jpg",
-    link: "/collections/categories/Wall-Shelves",
+    link: "/collections/Dining/Dining-Tables",
   },
 ];
 
-function ImageSwiper() {
+const imageDimensions = {
+  mobile: { width: 390, height: 390 },
+  tablet: { width: 600, height: 600 },
+  desktop: { width: 1000, height: 1000 },
+};
+
+function ImageSwiper({ device }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const textSwiperRef = useRef(null);
   const imageSwiperRef = useRef(null);
@@ -69,8 +75,9 @@ function ImageSwiper() {
           {slides.map((slide, i) => (
             <SwiperSlide key={i}>
               <Nextimage
-                height={600}
-                width={600}
+                height={imageDimensions[device].height}
+                width={imageDimensions[device].width}
+                quality={100}
                 src={slide.image}
                 alt={slide.heading}
                 priority={i == 0 ? true : false}
@@ -93,13 +100,13 @@ function ImageSwiper() {
           speed={1300}
           parallax={true}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-          className="w-full h-full"
+          className="w-full h-full bg-theme"
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <div
                 key={index}
-                className="w-full h-full px-14 flex flex-col items-center justify-center bg-theme text-white"
+                className="w-full h-full px-14 flex flex-col items-center justify-center bg-theme text-white "
               >
                 <h2 className="text-4xl lg:text-6xl font-tenor w-full min-w-full text-center">
                   {slide.heading}

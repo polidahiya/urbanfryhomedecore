@@ -15,12 +15,12 @@ const order_confiramtion_mail_template = (products, totalPrice, username) => {
           >
             <img
               src="${product.image}"
-              alt="${product.productName}"
+              alt="${product?.name}"
               width="50"
               height="50"
               style="display: inline-block; margin-right: 10px;"
             />
-            ${product.productName}
+            ${product?.name}
           </td>
           <td
             align="center"
@@ -32,7 +32,7 @@ const order_confiramtion_mail_template = (products, totalPrice, username) => {
             align="right"
             style="padding: 12px; font-size: 14px; color: #555"
           >
-            ₹${product.sellingprice}
+            ₹${product.price}
           </td>
         </tr>
       `;

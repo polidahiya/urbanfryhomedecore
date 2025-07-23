@@ -10,8 +10,10 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import Menubutton from "./_navbarcomps/Menubutton";
 import Sidemenu from "./_navbarcomps/Sidemenu";
 import Nextimage from "@/app/_globalcomps/Nextimage";
+import { usePathname } from "next/navigation";
 
 function Navbar({ navtype, token, userdata }) {
+  const path = usePathname();
   const { setshowsearchbar } = AppContextfn();
   const [transparentnav, settransparentnav] = useState(true);
   const [sidemenutoggle, setsidemenutoggle] = useState(false);
@@ -29,6 +31,8 @@ function Navbar({ navtype, token, userdata }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [transparentnav]);
 
+  const ishome = path == "/";
+
   return (
     <nav
       className={`fixed navhover top-0 left-1/2 -translate-x-1/2 w-full lg:max-w-[1920px] flex items-center px-5 md:px-10 h-20 lg:hover:text-inherit lg:hover:bg-white tracking-wider text-xs z-20 duration-300
@@ -36,7 +40,9 @@ function Navbar({ navtype, token, userdata }) {
           navtype && transparentnav
             ? sidemenutoggle
               ? "bg-white text-inherit"
-              : "text-black" //changed to black
+              : ishome
+              ? "text-black"
+              : "text-white" //changed to black
             : "bg-white text-inherit"
         }`}
     >
@@ -107,19 +113,24 @@ const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
       <Accountbutton token={token} userdata={userdata} />
       <Underlineffect
         Comp={({ innercomp }) => (
-          <button
-            className="flex items-center"
-            onClick={() => {
-              setshowsidecart((pre) => ({ ...pre, show: true }));
-              setTimeout(() => {
-                setshowsidecart((pre) => ({ ...pre, effect: true }));
-              }, 100);
-            }}
-          >
+          <Link href="/cart"  className="flex items-center">
             <span className="hidden lg:block underlineff">{innercomp}</span>
             <RiShoppingCartLine className="text-2xl lg:hidden" />
             {`(${totalQuantity})`}
-          </button>
+          </Link>
+          // <button
+          //   className="flex items-center"
+          //   onClick={() => {
+          //     setshowsidecart((pre) => ({ ...pre, show: true }));
+          //     setTimeout(() => {
+          //       setshowsidecart((pre) => ({ ...pre, effect: true }));
+          //     }, 100);
+          //   }}
+          // >
+          //   <span className="hidden lg:block underlineff">{innercomp}</span>
+          //   <RiShoppingCartLine className="text-2xl lg:hidden" />
+          //   {`(${totalQuantity})`}
+          // </button>
         )}
         title="CART"
         styles="w-fit"

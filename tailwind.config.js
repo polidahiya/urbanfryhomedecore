@@ -8,12 +8,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        // theme: "#cd834c", new logo color
-        theme: "#8e766e",
-        footercolor: "#e7e2de",
-        adminbg: "#f9fafa",
+        text: "var(--text)",
+        theme: "var(--theme)",
+        footercolor: "var(--footercolor)",
+        adminbg: "var(--adminbg)",
       },
       fontFamily: {
         tenor: ['"Tenor Sans"', "sans-serif"],

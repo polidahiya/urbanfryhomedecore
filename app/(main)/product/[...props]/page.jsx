@@ -19,19 +19,19 @@ async function page({ params }) {
   const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
 
   const props = (await params).props;
-  const sku = props[0];
+  const productid = props[0];
   const color = props[1] || 0;
   const products = await Cachedproducts();
 
-  const product = products.find((product) => product?.sku === sku);
+  const product = products.find((product) => product?._id === productid);
   if (!product) notFound();
 
   const similarproducts = products.filter(
-    (item) => item?.category === product?.category && item?.sku !== product?.sku
+    (item) => item?.category === product?.category && item?._id !== productid
   );
 
   const allreviews = await Cachedreviews();
-  const filteredreviews = allreviews.filter((item) => item.sku == sku);
+  const filteredreviews = allreviews.filter((item) => item.sku == productid);
 
   return (
     <div className="min-h-screen">

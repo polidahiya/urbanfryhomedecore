@@ -33,7 +33,9 @@ export const Getusers = async (
       .skip((pagenumber - 1) * limit)
       .toArray();
 
-    allusers.map((item) => (item._id = item._id.toString()));
+    allusers.forEach((item) => {
+      item._id = item?._id.toString();
+    });
 
     const totalusers = await userscollection.countDocuments(queries[userstype]);
 

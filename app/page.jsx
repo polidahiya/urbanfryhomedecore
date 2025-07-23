@@ -18,8 +18,10 @@ import Sidecart from "./_globalcomps/Sidecart";
 import Imagetapcomp from "./_comps/Imagetapcomp";
 import Madeinindia from "./_comps/Madeinindia";
 import { Cachedreviews } from "./_connections/Getcachedata";
+import DeviceDetector from "./_globalcomps/_helperfunctions/Devicedetector";
 
 async function page() {
+  const device=await DeviceDetector();
   const allcookies = await cookies();
   const token = allcookies.get("token");
   const parseduserdata = allcookies.get("userdata")?.value;
@@ -37,7 +39,7 @@ async function page() {
   return (
     <div className="overflow-x-hidden">
       <Navbar navtype={true} token={token} userdata={userdata} />
-      <Herosection />
+      <Herosection device={device}/>
       {/* marque section */}
       <section className="w-full bg-footercolor text-[#56473e] overflow-hidden relative flex items-center">
         <Marquebanner

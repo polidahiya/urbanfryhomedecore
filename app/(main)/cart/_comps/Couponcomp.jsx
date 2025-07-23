@@ -1,56 +1,49 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { BiSolidCoupon } from "react-icons/bi";
-import Applycoupon from "@/app/_serveractions/applycoupons";
+import {
+  Applycoupon,
+  Removecoupon,
+} from "@/app/_serveractions/_admin/Serveraction";
 import { AppContextfn } from "@/app/Context";
-import Cookies from "js-cookie";
 
-function Couponcomp({
-  coupon,
-  setcoupon,
-  settotalPrice,
-  getcouponprice,
-  setappliedcoupondata,
-}) {
+function Couponcomp({ cartitems, totalPrice, couponcode }) {
   const { setmessagefn } = AppContextfn();
+  const [coupon, setcoupon] = useState(couponcode || "");
 
-  const Applycouponfn = async () => {
-    const coupondata = Cookies.get("altcoupon");
-
-    if (coupondata) {
-      setmessagefn("A coupon already applied");
-      return;
-    }
-
-    const res = await Applycoupon(coupon);
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevents page reload
+    const res = couponcode
+      ? await Removecoupon()
+      : await Applycoupon(coupon.trim(), totalPrice, cartitems);
     setmessagefn(res?.message);
-    if (res.status === 200) {
-      settotalPrice((pre) => {
-        const newprice = getcouponprice(pre, res?.coupondata);
-        return newprice || pre;
-      });
-      setappliedcoupondata(res?.coupondata)
-    }
   };
 
   return (
     <div className="w-full md:w-fit flex flex-col gap-4">
       <div className="font-semibold">Coupons</div>
-      <div className="space-y-2">
+      <form onSubmit={handleSubmit} className="space-y-2">
         <input
           type="text"
           value={coupon}
+          required
+          disabled={couponcode}
           onChange={(e) => setcoupon(e.target.value)}
-          className="w-full h-11 border border-theme outline-none px-2"
+          className={`w-full h-11 border border-theme outline-none px-2 ${
+            couponcode && "opacity-50"
+          }`}
           placeholder="Eg : ALT10"
         />
         <button
+          type="submit"
           className="w-full h-11 flex items-center justify-center gap-2 bg-theme text-white opacity-75 lg:hover:opacity-100"
-          onClick={Applycouponfn}
         >
           <BiSolidCoupon />
-          <span className="text-sm">Apply Coupon</span>
+          <span className="text-sm">
+            {couponcode ? "Remove" : "Apply"} Coupon
+          </span>
         </button>
-      </div>
+      </form>
     </div>
   );
 }

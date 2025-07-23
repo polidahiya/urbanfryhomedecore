@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Adminsearchbar from "../_comps/_adminnavbar/Adminsearchbar";
 import { BiRefresh } from "react-icons/bi";
 import Addnewform from "./_comps/Addnewform";
-import { getcoupons } from "@/app/_serveractions/_admin/coupon";
+import { getcoupons } from "@/app/_serveractions/_admin/Serveraction";
 import Couponminicard from "./_comps/Couponminicard";
 import { AppContextfn } from "@/app/Context";
 
@@ -17,7 +17,9 @@ function Page() {
     discountValue: 20,
     validFrom: "",
     validTo: "",
-    usagetimes: 1,
+    usageLimit: 1,
+    usageLimitperuser: 1,
+    minAmount: 0,
     isActive: true,
   };
   const [data, setdata] = useState(initialstate);
@@ -35,7 +37,7 @@ function Page() {
       if (res?.status == 200) {
         setcoupons(res?.data);
       }
-      if (res?.data?.length == 0) setmessagefn("No Orders found");
+      if (res?.data?.length == 0) setmessagefn("No Coupon found");
     })();
   }, [searchtype, refresher]);
 
@@ -99,6 +101,9 @@ function Page() {
           </p>
           <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
             Usage times
+          </p>
+          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
+            Usage limit per User
           </p>
           <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
             Date

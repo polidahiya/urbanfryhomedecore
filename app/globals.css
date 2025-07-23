@@ -14,6 +14,12 @@
   font-optical-sizing: auto;
   font-style: normal;
 }
+html {
+  --text: #56473e;
+  --theme: #a3815d;
+  --footercolor: #e7e2de;
+  --adminbg: #f9fafa;
+}
 
 .test {
   border: 1px solid red;
@@ -35,7 +41,7 @@
 }
 
 body {
-  color: #56473e;
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -98,27 +104,25 @@ body {
 }
 
 /* policies */
-.policies{
+.policies {
   margin: 40px 0;
 }
 .policies div {
 }
-.policies h2{
+.policies h2 {
   font-size: larger;
   font-weight: 600;
   margin-top: 20px;
   margin-bottom: 5px;
-
 }
-.policies ul{
-
+.policies ul {
 }
-.policies li{
+.policies li {
   list-style-type: disc;
   margin-left: 30px;
   font-size: smaller;
 }
-.policies p{
+.policies p {
   margin-top: 10px;
   font-size: small;
 }

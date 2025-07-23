@@ -10,17 +10,17 @@ export default async function Getuserorders() {
     }
 
     const { orderscollection } = await getcollection();
-    const allorders = await orderscollection
+    const orders = await orderscollection
       .find({
         $or: [{ paymentMethod: "cod" }, { payment: "successful" }],
-        email: res?.email,
+        [`userdata.email`]: res.email,
       })
+      .sort({ createdAt: -1 })
       .toArray();
 
-    const orders = allorders.map((order) => ({
-      ...order,
-      _id: order?._id.toString(),
-    }));
+    orders.forEach((order) => {
+      order._id = order?._id.toString();
+    });
 
     return {
       status: 200,

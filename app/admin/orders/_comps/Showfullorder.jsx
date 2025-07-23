@@ -1,17 +1,28 @@
 import { Statuslists } from "@/app/commondata";
 import {
   updateorderstatus,
+  Deleteorder,
   updateordernote,
 } from "@/app/_serveractions/_admin/getorders";
 import { AppContextfn } from "@/app/Context";
 import { useState } from "react";
 import Nextimage from "@/app/_globalcomps/Nextimage";
+import formatDate from "@/app/_globalcomps/_helperfunctions/formateddate";
+import Couponedprice from "@/app/_globalcomps/_helperfunctions/Couponedprice";
 
 const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
   const orderData = showfullorder.data;
-  const { setmessagefn } = AppContextfn();
-  const [status, setstatus] = useState(orderData?.orderstage);
-  const [note, setnote] = useState(orderData?.note);
+  const product = orderData.product;
+  const coupon = orderData.coupondata;
+  const { setmessagefn, setshowdialog } = AppContextfn();
+  const [status, setstatus] = useState(orderData?.status);
+  const [note, setnote] = useState(orderData?.note || "");
+
+  const productprice = product?.price * product?.quantity;
+  const { formattedPrice, originalPriceFormatted } = Couponedprice(
+    productprice,
+    coupon
+  );
 
   const Updatestatus = async (id, value) => {
     const res = await updateorderstatus(id, value);
@@ -35,15 +46,17 @@ const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
       <div className="relative bg-white p-6 max-w-2xl w-full h-full overflow-y-scroll">
         <h1 className="text-xl font-semibold mb-4">Order Details</h1>
         <div className="space-y-2">
-          <p className="text-sm">Order ID: {orderData._id}</p>
-          <p className="text-sm">Date: {orderData.date}</p>
-          <p className="text-sm">Name: {orderData.username}</p>
-          <p className="text-sm">Email: {orderData.email}</p>
+          <p className="text-sm">Order Group ID: {orderData?.paymentGroupId}</p>
+          <p className="text-sm">Order Number: {orderData?.orderNumber}</p>
+          <p className="text-sm">Date: {formatDate(orderData?.createdAt)}</p>
+          <p className="text-sm">Name: {orderData?.userdata?.username}</p>
+          <p className="text-sm">Email: {orderData?.userdata?.email}</p>
+          <p className="text-sm">Address: {orderData?.userdata?.address}</p>
           <p className="text-sm">
             Payment:{" "}
             <span
               className={`flex-1 text-sm ${
-                orderData?.payment == "successful"
+                orderData?.paymentStatus == "success"
                   ? "text-green-500"
                   : orderData?.paymentMethod == "cod"
                   ? "text-yellow-500"
@@ -51,7 +64,7 @@ const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
               }`}
             >
               {orderData?.paymentMethod == "online"
-                ? orderData?.payment
+                ? orderData?.paymentStatus
                 : "Cod"}
             </span>
           </p>
@@ -74,39 +87,52 @@ const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
         </div>
 
         <div className="space-y-2 mt-5">
-          {orderData.products.map((product, index) => (
-            <div key={index} className="flex items-center border p-2 rounded">
-              <Nextimage
-                src={product?.image}
-                alt={product?.productName}
-                className="w-32 aspect-square object-cover rounded-sm mr-2"
-                height={500}
-                width={500}
-                loading="lazy"
-              ></Nextimage>
-              <div className="text-sm">
-                <h3 className="font-semibold text-gray-800">
-                  {product.productName}
-                </h3>
-                <p className="text-gray-600">SKU: {product.sku}</p>
-                <p className="text-gray-600">Dimension: {product.dimension}</p>
-                <p className="text-gray-600">Quantity: {product.quantity}</p>
-                <p className="text-gray-600">Color: {product.color}</p>
-                <p className="text-gray-600">Price: ₹{product.sellingprice}</p>
-                <p className="text-gray-600">
-                  Total: ₹{product.sellingprice * product.quantity}
-                </p>
+          <div className="flex items-center border p-2 rounded">
+            <Nextimage
+              src={product?.image}
+              alt={product?.name}
+              className="w-32 aspect-square object-cover rounded-sm mr-2"
+              height={100}
+              width={100}
+              loading="lazy"
+            ></Nextimage>
+            <div className="text-sm">
+              <h3 className="font-semibold text-gray-800">
+                {product?.productName}
+              </h3>
+              <p className="text-gray-600">SKU: {product?.sku}</p>
+              <p className="text-gray-600">Dimension: {product?.dimension}</p>
+              <p className="text-gray-600">Quantity: {product?.quantity}</p>
+              <p className="text-gray-600">Color: {product?.color}</p>
+              <div>
+                <span className="font-medium">Price:</span>{" "}
+                <span className="text-green-600 font-semibold">
+                  {formattedPrice}
+                </span>
+                {coupon && (
+                  <span className="ml-2 text-gray-500 line-through text-sm">
+                    {originalPriceFormatted}
+                  </span>
+                )}
               </div>
+              {/* Applied Coupon Display */}
+              {coupon && (
+                <div className="text-sm text-orange-600 font-medium mt-2">
+                  Coupon <span className="font-bold">{coupon?.code}</span>{" "}
+                  applied:{" "}
+                  {coupon?.discountType === "percentage"
+                    ? `${coupon?.discountValue}% off`
+                    : `Total ₹${coupon?.discountValue} off in ${
+                        coupon?.share
+                      } products @ ₹${
+                        coupon?.discountValue / coupon?.share
+                      } per product`}
+                </div>
+              )}
             </div>
-          ))}
+          </div>
         </div>
 
-        <div className="mt-4 border-t pt-2">
-          <h2 className="text-lg font-semibold">Order Summary</h2>
-          <p className="text-sm">
-            <strong>Total Price:</strong> ₹{orderData.totalPrice}
-          </p>
-        </div>
         {/* note */}
         <div className="flex flex-col items-start gap-1 border-t mt-5 py-5">
           <h2 className="text-lg font-semibold">Note</h2>
@@ -122,6 +148,26 @@ const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
             Update
           </button>
         </div>
+        <button
+          className="border border-red-500 px-5 py-2 rounded-md text-red-500"
+          onClick={() =>
+            setshowdialog({
+              show: true,
+              title: "Delete Order?",
+              continue: async () => {
+                const res = await Deleteorder(orderData._id);
+                setmessagefn(res?.message);
+                if (res.status == 200) {
+                  setshowfullorder({ show: false, data: {} });
+                  setrefresher((pre) => !pre);
+                }
+              },
+              type: false,
+            })
+          }
+        >
+          Delete
+        </button>
         {/* cancel button */}
         <button
           className="absolute top-2 right-2 bg-gray-200 text-gray-700 rounded-full h-10 aspect-square hover:bg-gray-300"
