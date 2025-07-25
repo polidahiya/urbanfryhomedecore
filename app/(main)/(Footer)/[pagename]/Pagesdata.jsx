@@ -17,14 +17,14 @@ const Pagesdata = {
           <strong>Apoorv and Ruchi Shrivastava</strong>, a duo who chose passion
           over the predictable. Both MBA graduates with thriving corporate
           careers, they set out to build something deeply personal — a brand
-          rooted in the belief that furniture shouldn{"’"}t just fill a space,
+          rooted in the belief that furniture shouldn&apos;t just fill a space,
           it should tell a story, spark emotion, and bring lasting warmth to a
           home.
         </p>
         <p>
           What began as a simple idea — to create timeless, thoughtfully
           designed furniture using solid wood—has evolved into a growing
-          movement of design-conscious living that{"’"}s proudly made in India,
+          movement of design-conscious living that&apos;s proudly made in India,
           and made to last.
         </p>
         <p>
@@ -37,8 +37,8 @@ const Pagesdata = {
         <p>So they set out to change that—with a simple mission:</p>
         <p>
           <strong>
-            "To organise the furniture industry by blending the charm of
-            handcrafted wood with the consistency of a modern brand."
+            &quot;To organise the furniture industry by blending the charm of
+            handcrafted wood with the consistency of a modern brand.&quot;
           </strong>
         </p>
         <p>
@@ -57,7 +57,7 @@ const Pagesdata = {
         </p>
         <p>
           Because to us, furniture is more than form and function. <br /> It
-          {"’"}s a way to turn everyday moments into something a little more
+          &apos;s a way to turn everyday moments into something a little more
           beautiful, one home at a time.
         </p>
       </>
@@ -93,9 +93,10 @@ const Pagesdata = {
           the piece will fit
         </p>
         <p>
-          Make sure there{"’"}s room for movement around it and that it won{"’"}
-          t block doors, windows, or wall fixtures. For items with doors or
-          drawers, check there{"’"}s enough space for them to open comfortably
+          Make sure there&apos;s room for movement around it and that it
+          won&apos; t block doors, windows, or wall fixtures. For items with
+          doors or drawers, check there&apos;s enough space for them to open
+          comfortably
         </p>
         <h2>Make Sure It Can Get In</h2>
         <p>
@@ -103,7 +104,7 @@ const Pagesdata = {
           your item can pass through <strong>doorways</strong>,{" "}
           <strong>hallways</strong>, <strong>lifts</strong>, or{" "}
           <strong>staircases</strong> in your home. Measure the height and width
-          of these access points and compare them with the product{"’"}s size.
+          of these access points and compare them with the product&apos;s size.
         </p>
         <p>
           If you live in an apartment or have tight stairways, we recommend
@@ -112,13 +113,13 @@ const Pagesdata = {
         <h2>How Delivery Works</h2>
         <p>
           We ship across multiple cities in India using trusted logistics
-          partners. While they usually try to call before delivery, we can{"’"}t
-          always guarantee it. You'll receive tracking details once your order
-          is dispatched so you can stay updated.
+          partners. While they usually try to call before delivery, we
+          can&apos;t always guarantee it. You&apos;ll receive tracking details once
+          your order is dispatched so you can stay updated.
         </p>
         <p>
-          If you're not available on the delivery day, just let us know in
-          advance at <strong>{mail}</strong>.comand we{"’"}ll help reschedule.
+          If you&apos;re not available on the delivery day, just let us know in
+          advance at <strong>{mail}</strong>.comand we&apos;ll help reschedule.
           Always ensure that your <strong>address</strong>,{" "}
           <strong>contact number, and pin code</strong> are correct at checkout
           for smooth coordination.
@@ -126,9 +127,9 @@ const Pagesdata = {
         <h2>Delivery to Your Floor</h2>
         <p>
           Furniture is delivered to the{" "}
-          <strong>building entrance or ground floor</strong>. If there{"’"}s a
+          <strong>building entrance or ground floor</strong>. If there&apos;s a
           working lift and the item fits, the delivery person may bring it up to
-          your floor, but this isn{"’"}t a guaranteed service. Delivery
+          your floor, but this isn&apos;t a guaranteed service. Delivery
           personnel are not required to carry furniture up staircases, so please
           arrange extra help if needed.
         </p>
@@ -147,7 +148,7 @@ const Pagesdata = {
         </p>
         <p>
           Once you open the package, please inspect the product carefully. If
-          there{"’"}s any issue, report it to us as soon as possible so we can
+          there&apos;s any issue, report it to us as soon as possible so we can
           assist you quickly.
         </p>
         <h2>Installation Support</h2>
@@ -159,7 +160,7 @@ const Pagesdata = {
         <p>
           For other cities, we do not currently offer installation services.
           However, all our products are designed with{" "}
-          <strong>simple, self-installable steps</strong>. You{"’"}ll find it
+          <strong>simple, self-installable steps</strong>. You&apos;ll find it
           easy to assemble with basic tools—and if needed, a local carpenter can
           help complete the setup in minutes.
         </p>
@@ -308,7 +309,7 @@ const Pagesdata = {
           <li>
             <strong>5. No refunds</strong>: Urbanfry Homes will provide repair
             or replacement only. No cash refunds or credits are offered under
-            this warranty. Urbanfry{"’"}s liability is strictly limited to
+            this warranty. Urbanfry&apos;s liability is strictly limited to
             repairing or replacing the furniture, and in no case will it exceed
             the original purchase price.
           </li>
@@ -373,9 +374,9 @@ const Pagesdata = {
           </li>
           <li>
             <strong>What to Avoid</strong>: Never use strong solvents, bleach or
-            ammonia-based cleaners on wood. Don{"’"}t let liquid sit on the
+            ammonia-based cleaners on wood. Don&apos;t let liquid sit on the
             surface. Avoid abrasive sponges or scouring pads. And remember: don
-            {"’"}t place wood furniture in hot kitchens or steamy bathrooms
+            &apos;t place wood furniture in hot kitchens or steamy bathrooms
             where heat and moisture damage finishes.
           </li>
         </ul>
@@ -392,7 +393,7 @@ const Pagesdata = {
             <strong>Maintain Moisture</strong>: To keep cane flexible, maintain
             indoor humidity around 40–60%. In dry seasons use a humidifier; in
             typical conditions lightly mist cane furniture with diluted wood
-            soap (e.g. Murphy{"’"}s Oil Soap diluted in water) a few times a
+            soap (e.g. Murphy&apos;s Oil Soap diluted in water) a few times a
             year, then wipe off excess. You may also apply a thin coat of
             natural oil (like lemon or mineral oil) on the cane every 6–12
             months to nourish the fibers.
@@ -426,7 +427,7 @@ const Pagesdata = {
           </li>
           <li>
             <strong>What to Avoid</strong>:Avoid harsh chemical cleaners and
-            excessive water. Don{"’"}t use silicone sprays or varnish on cane
+            excessive water. Don&apos;t use silicone sprays or varnish on cane
             (it needs to “breathe”). And like wood furniture, always lift cane
             items when moving them rather than dragging.
           </li>
@@ -441,7 +442,7 @@ const Pagesdata = {
           </li>
           <li>
             <strong>Immediate Spill Care</strong>: Treat spills and stains as
-            soon as they happen. Blot (don{"’"}t rub) with a clean white cloth
+            soon as they happen. Blot (don&apos;t rub) with a clean white cloth
             or paper towel to absorb liquid. For most fabrics, gently dab the
             spot with a slightly damp cloth and mild dish soap solution, then
             blot dry. Always test cleaners on an inconspicuous area first. For
@@ -484,10 +485,10 @@ const Pagesdata = {
           </li>
           <li>
             <strong>What to Avoid</strong>: Never drag upholstered furniture
-            across floors. Don{"’"}t soak fabric with cleaner – more damage
+            across floors. Don&apos;t soak fabric with cleaner – more damage
             comes from over wetting than gentle scrubbing. Avoid bleach or
             strong solvents unless the fabric explicitly permits it. And always
-            check the manufacturer{"’"}s care tag/code before applying any
+            check the manufacturer&apos;s care tag/code before applying any
             cleaning solution (when in doubt, consult a professional cleaner).
           </li>
         </ul>
@@ -549,7 +550,7 @@ const Pagesdata = {
           </li>
         </ul>
         <p>
-          Either way, we will handle the process quickly and make sure you{"’"}
+          Either way, we will handle the process quickly and make sure you&apos;
           re not left empty-handed. (Again, note that we do not provide cash
           refunds; we resolve issues with replacements or credit.)
         </p>
@@ -578,7 +579,7 @@ const Pagesdata = {
         <h2>How to Report a Return</h2>
         <p>
           To report a damaged, defective, or incorrect item, please act promptly
-          (within 48 hours of delivery). Here{"’"}s how:
+          (within 48 hours of delivery). Here&apos;s how:
         </p>
         <ol>
           <li>
@@ -594,9 +595,9 @@ const Pagesdata = {
             directed.
           </li>
           <li>
-            <strong>3. Follow Our Guidance</strong>: After you{"’"}ve submitted
+            <strong>3. Follow Our Guidance</strong>: After you&apos;ve submitted
             your report, our team will review the information and get back to
-            you. We{"’"}ll give you a return shipping label or arrange pick-up
+            you. We&apos;ll give you a return shipping label or arrange pick-up
             (at our expense), and let you know whether a replacement or store
             credit will be issued.
           </li>
