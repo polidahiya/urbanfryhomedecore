@@ -1,9 +1,9 @@
-export const mobile = "+91 99999 99999";
-export const mail = "altorganisers@gmail.com";
+export const mobile = "+91 95603 77827";
+export const mail = "urbanfryhome@gmail.com";
 export const Socialaccounts = {
-  insta: "",
+  insta: "https://www.instagram.com/urbanfryhomes/?hl=en",
   twitter: "",
-  facebook: "",
+  facebook: "https://www.facebook.com/Urbanfryhomes/",
 };
 
 export const staticdata = {

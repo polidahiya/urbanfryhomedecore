@@ -9,6 +9,12 @@ import "swiper/css";
 
 const slides = [
   {
+    heading: "The Camille Shelf",
+    para: "Your Home’s Most Stylish Storyteller",
+    image: "/heroimages/3.jpg",
+    link: "/collections/AltOrganisers",
+  },
+  {
     heading: "Sleep Light, Live Lighter",
     para: "Non-storage beds crafted for those who crave calm, clarity, and clutter-free comfort.",
     image: "/heroimages/1.jpg",
@@ -20,12 +26,7 @@ const slides = [
     image: "/heroimages/2.jpg",
     link: "/collections/Last-Chance",
   },
-  {
-    heading: "The Camille Shelf",
-    para: "Your Home’s Most Stylish Storyteller",
-    image: "/heroimages/3.jpg",
-    link: "/collections/AltOrganisers",
-  },
+
   {
     heading: "Beyond the Basics",
     para: "Shoe racks that double as decor. Crafted for homes that love looking neat.",

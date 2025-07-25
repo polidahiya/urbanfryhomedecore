@@ -5,11 +5,12 @@ import Link from "next/link";
 function Madeinindia() {
   // Array of Instagram post URLs
   const posts = [
-    "https://www.instagram.com/p/C73-KyDvV9g/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    "https://www.instagram.com/p/C7398BtP3U_/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    "https://www.instagram.com/p/C739ulpvyqy/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    "https://www.instagram.com/p/C7uf47AyJ0G/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    "https://www.instagram.com/p/C7t281HP02V/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    "https://www.instagram.com/reel/DJ1PYaWvduu/?utm_source=ig_web_copy_link&igsh=MWNocDdndzU1N3R2dA==",
+    "https://www.instagram.com/reel/DKmW_51Pfz8/?utm_source=ig_web_copy_link&igsh=azZ5NncyOWZyeWdm",
+    "https://www.instagram.com/reel/DLy_adZvUfa/?utm_source=ig_web_copy_link&igsh=bW1iODltZXA4cXh6",
+    "https://www.instagram.com/reel/DLo17A9P9fG/?utm_source=ig_web_copy_link&igsh=MTR4NTlqNjNwdzVyOA==",
+    "https://www.instagram.com/reel/DLmSVUdvxG8/?utm_source=ig_web_copy_link&igsh=aTNuYjFmajY5enM4",
+    "https://www.instagram.com/reel/DLZr10fv9-Y/?utm_source=ig_web_copy_link&igsh=d2FjcGgzZGQzeHlh",
   ];
 
   // Function to load Instagram Embed Script
@@ -49,10 +50,10 @@ function Madeinindia() {
         <div className="flex items-center justify-center gap-1 w-full text-white font-semibold p-10">
           Follow us on instagram{" "}
           <Link
-            href="https://www.instagram.com/altorganisers/"
+            href="https://www.instagram.com/urbanfryhomes?utm_source=ig_web_button_share_sheet&igsh=NW0wdGx5NXVoYzZm"
             className="underline"
           >
-            @AltOrganisers
+            @urbanfryhomes
           </Link>
         </div>
         <div className="flex items-start gap-5 px-5 w-full overflow-x-scroll snap-mandatory snap-x snap-always">

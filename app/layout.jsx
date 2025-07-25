@@ -2,7 +2,6 @@ import "./globals.css";
 import { Appwrapper } from "./Context";
 import Message from "./_globalcomps/Message";
 import Quickview from "./_globalcomps/Quickview";
-import { Cachedproducts } from "./_connections/Getcachedata";
 import { cookies } from "next/headers";
 import Googleanayltics from "./_connections/Googleanalytics";
 

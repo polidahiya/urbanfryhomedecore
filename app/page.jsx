@@ -20,8 +20,114 @@ import Madeinindia from "./_comps/Madeinindia";
 import { Cachedreviews } from "./_connections/Getcachedata";
 import DeviceDetector from "./_globalcomps/_helperfunctions/Devicedetector";
 
+export const faqlist = [
+  {
+    question: "1. What is Urbanfry Homes?",
+    answer: [
+      "Urbanfry Homes is a premium furniture brand based in Gurugram, specializing in solid wood furniture crafted for modern Indian homes. We offer high-quality, design-led, and customizable pieces that are both functional and timeless.",
+    ],
+  },
+  {
+    question: "2. Where is Urbanfry Homes located?",
+    answer: [
+      `Our design studio and warehouse are located in Gurugram, Haryana. We ship PAN India and cater to
+custom orders as well. We have an experience center in Gurugram where you can explore our collections
+by appointment.
+`,
+    ],
+  },
+  {
+    question: "3. Do you ship to my location?",
+    answer: [
+      `We currently deliver to over 40+ cities in India. You can check service availability by entering your pin
+code on any product page. The delivery timeline is clearly mentioned on each product page. Most
+products are delivered in 8–20 working days, while customized pieces may take longer based on
+complexity. Delivery is free and inclusive in the prices.
+`,
+    ],
+  },
+  {
+    question: "4. What type of wood does Urbanfry Homes use in its furniture?",
+    answer: [
+      `Urbanfry Homes uses 100% solid wood for all its furniture pieces. We primarily work with Sheesham
+wood (Indian Rosewood), which is known for its strength, durability, and beautiful natural grain. In
+addition to Sheesham, we also craft select pieces using Mango wood and Acacia wood—both are sturdy,
+sustainable hardwoods that offer a warm, textured finish. All our materials are carefully chosen to ensure
+that every product is long-lasting, termite-resistant, and full of character, showcasing the richness and
+charm of authentic solid wood furniture
+`,
+    ],
+  },
+  {
+    question: "5. Will the product look exactly as it does on the website?",
+    answer: [
+      `We strive for consistency, but since we use natural solid wood, slight variations in grain, shade, or
+texture may occur — making every piece one-of-a-kind. Lighting and screen resolution may also cause
+minor differences in perceived color.
+`,
+    ],
+  },
+  {
+    question: "6. Can I see real customer photos of Urbanfry products?",
+    answer: [
+      `Absolutely! Check out our “Urbanfry in Homes” section to see real customer setups. You can also
+follow us on Instagram for styling inspiration
+`,
+    ],
+  },
+  {
+    question: "7. What warranty do you provide?",
+    answer: [
+      `All Urbanfry Homes products come with a 1-year warranty against manufacturing defects. This does not
+cover wear and tear, misuse, or damage caused by external factors such as water or sunlight exposure.
+`,
+    ],
+  },
+  {
+    question: "8. What is your refund or replacement policy?",
+    answer: [
+      `Refunds and replacements are only applicable in cases of transit damage or manufacturing defects
+reported within 24–48 hours of delivery. Once approved, refunds are processed within 10–15 business
+days after the product reaches our warehouse.
+`,
+    ],
+  },
+  {
+    question: "9. Is assembly required for Urbanfry Homes products?",
+    answer: [
+      `For Delhi NCR, doorstep installation support is available at the time of delivery. For other cities,
+installation services are not currently provided. However, our products are thoughtfully designed for easy
+self-installation with clear instructions. In case any help is needed, most customers find that a local
+carpenter can quickly assist with setup.
+
+`,
+    ],
+  },
+  {
+    question: "10. Will installation be provided?",
+    answer: [
+      `Most of our products are delivered pre-assembled. For items like dining tables, benches, or beds that
+require simple leg attachment, assembly is quick and can be done easily at home or with a local carpenter.
+`,
+    ],
+  },
+  {
+    question: "11. How will I know that you've received my order?",
+    answer: [
+      `Once items have been ordered, a confirmation page will appear on the screen confirming the order. An
+email with the order details will be sent immediately to the registered email ID, provided that we have an
+accurate email address. In case you do not receive the email confirming your order please call us on +91
+8287363394, Monday-Saturday (09:30 AM - 6:00 PM) or drop us an email at urbanfryhome@gmail.com.
+We'll send subsequent email(s) when your product is processed, shipped, including tracking information
+(if available).
+
+`,
+    ],
+  },
+];
+
 async function page() {
-  const device=await DeviceDetector();
+  const device = await DeviceDetector();
   const allcookies = await cookies();
   const token = allcookies.get("token");
   const parseduserdata = allcookies.get("userdata")?.value;
@@ -39,7 +145,7 @@ async function page() {
   return (
     <div className="overflow-x-hidden">
       <Navbar navtype={true} token={token} userdata={userdata} />
-      <Herosection device={device}/>
+      <Herosection device={device} />
       {/* marque section */}
       <section className="w-full bg-footercolor text-[#56473e] overflow-hidden relative flex items-center">
         <Marquebanner
@@ -80,67 +186,7 @@ async function page() {
       <Customerreviews fivestarreviews={fivestarreviews} />
       <Aboutus />
       <Madeinindia />
-      <Faqs
-        faqlist={[
-          {
-            question: "What types of products does Alt Organisers offer?",
-            answer: [
-              "Alt Organisers specializes in premium space organizers designed to bring style and functionality to your home or office. Our range includes drawer organizers, closet solutions, kitchen storage, desk organizers, and much more, crafted with high-quality materials.",
-            ],
-          },
-          {
-            question: "Where does Alt Organisers ship?",
-            answer: [
-              "We ship across India. For international shipping, please contact us via email for options and details.",
-            ],
-          },
-          {
-            question: "How long will it take for my order to arrive?",
-            answer: [
-              "• In-stock items: Typically shipped within 2-4 business days.",
-              "• Made-to-order or customized items: Production and shipping may take 3-4 weeks.",
-              "Once your order is dispatched, we’ll share tracking details so you can monitor the delivery.",
-            ],
-          },
-          {
-            question: " What are the payment options available?",
-            answer: [
-              "• Yes, returns are accepted for defective or damaged items, provided they are reported within 48 hours of delivery. The product must be unused, in its original packaging, and returned within one week of delivery.",
-              "• For returns due to other concerns, a reverse shipping fee of 10% of the product cost will be deducted, and store credit will be issued for the remaining amount.",
-            ],
-          },
-          {
-            question: "Can I return or exchange a product?",
-            answer: [
-              "Consider the size of your dining area and the number of people you want to seat. Round tables are great for smaller spaces, while rectangular tables work well for larger rooms. Choose a material that suits your style and lifestyle, such as wood for a classic look or glass for a modern feel.",
-            ],
-          },
-          {
-            question: "Are there any non-returnable products?",
-            answer: [
-              "Yes, items marked as ‘Final Sale’ or ‘Non-Returnable’ cannot be returned. Custom-made or commissioned items are also non-returnable.",
-            ],
-          },
-          {
-            question: "What if I receive a damaged or defective product?",
-            answer: [
-              "Please inspect your product upon delivery. If you find any damage or defect, notify us within 48 hours of receipt. We will arrange a return or replacement free of charge.",
-            ],
-          },
-          {
-            question: "How do refunds work?",
-            answer: [
-              "Refunds are evaluated on a case-by-case basis. Once approved, refunds or store credits will be processed within 15 working days after we receive and inspect the returned product. Please note that transaction fees of 5% are non-refundable.",
-            ],
-          },
-          {
-            question: " Can I cancel my order?",
-            answer: [
-              "Orders can only be canceled within 24 hours of placement. Custom-made or commissioned items cannot be canceled once the order is confirmed.",
-            ],
-          },
-        ]}
-      />
+      <Faqs faqlist={faqlist} />
       <Footer />
       {/*  */}
       <Searchbarsection />

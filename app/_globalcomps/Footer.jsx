@@ -8,22 +8,30 @@ import Quicklinks from "./_footerclientcomps/Quicklinks";
 
 function Footer() {
   const whatwedolinks = [
-    { title: "ABOUT US", link: "/aboutus" },
-    { title: "THE ALT METHOD", link: "/" },
-    { title: "THE JOURNEY TO ORGANISATION", link: "/" },
+    { title: "Frequently Asked Questions", link: "/FAQs" },
+    { title: "Care & Maintenance", link: "/CareMaintenance" },
+    { title: "Cancellation & Refund Policy", link: "/CancellationRefund" },
+    { title: "Warranty Information", link: "/Warranty" },
+    { title: "Shipping & Delivery Information", link: "/ShippingDelivery" },
+    { title: "Collaborations & Support", link: "/" },
   ];
 
   return (
     <footer className=" bg-footercolor px-8 py-10">
       <div className="flex flex-col lg:flex-row  lg:gap-24">
         <div className="flex-1">
-          <p className="text-3xl font-tenor">Never Miss a Loop!</p>
+          <p className="text-3xl font-tenor">Style, Delivered Peacefully.</p>
+          <p className="text-sm mt-5">
+            Urbanfry Homes is dedicatedly into wholesale & manufacturing of
+            Solid Wood Items & now online inspiring customers through a unique
+            combination of product, creativity & cultural understanding.
+          </p>
         </div>
         <div className="w-full h-px bg-theme opacity-50 my-5 lg:hidden" />
         <Quicklinks />
         <div className="w-full h-px bg-theme opacity-50 my-5 lg:hidden" />
         <div className="flex-1 text-sm">
-          <h3 className="mb-4 tracking-wider">ABOUT</h3>
+          <h3 className="mb-4 tracking-wider">More Links</h3>
           <div className="flex flex-col gap-3">
             {whatwedolinks.map((item, i) => (
               <Underlineffect
@@ -47,6 +55,7 @@ function Footer() {
         </div>
       </div>
       <div className="w-full h-px bg-theme opacity-50 my-10" />
+      {/* bottom info */}
       <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-10 mt-10 text-theme">
         <Underlineffect
           Comp={({ innercomp }) => (
@@ -63,7 +72,7 @@ function Footer() {
           styles="w-fit"
         />
         <p className="lg:ml-auto">
-          © Copyright, AltOrganisers, {new Date().getFullYear()}
+          © Copyright, UrbanFry, {new Date().getFullYear()}
         </p>
       </div>
     </footer>
