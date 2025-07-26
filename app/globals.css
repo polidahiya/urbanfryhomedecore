@@ -3,10 +3,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@font-face {
-  font-family: Recline;
-  src: url(/Recline.ttf);
-}
 
 * {
   -webkit-tap-highlight-color: transparent;
@@ -115,7 +111,6 @@ body {
   font-weight: normal;
   margin-bottom: 20px;
   text-align: center;
-  font-family: "Recline", sans-serif;
 }
 
 .text strong {
@@ -124,9 +119,8 @@ body {
 
 .text h2 {
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 400;
   margin-top: 10px;
-  font-family: "Recline", sans-serif;
 }
 
 /* Paragraphs */
@@ -162,6 +156,7 @@ body {
 /* Inline Elements */
 .text strong {
   font-weight: bold;
+  color: var(--theme);
 }
 
 .text em {

@@ -1,66 +1,97 @@
 import { mail } from "@/app/commondata";
 import { faqlist } from "@/app/page";
+import Nextimage from "@/app/_globalcomps/Nextimage";
+import { Motiondiv } from "@/app/_globalcomps/Motion/Motiondiv";
 
 const Pagesdata = {
   Aboutus: {
     pagetitle: "About Us",
     content: (
-      <>
-        <p>
-          <strong>
+      <div className="">
+        <div className="relative w-full min-h-96 mt-20 md:mt-20">
+          <Nextimage
+            src="/Categoriesimages/categoryaltorganisers.jpg"
+            alt="aboutus"
+            width={400}
+            height={1920}
+            className="absolute top-0 left-0 w-full h-full object-cover object-center brightness-50"
+          />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+            <Nextimage
+              src="/uiimages/aboutusimage.png"
+              alt="aboutus"
+              width={400}
+              height={400}
+              className="w-64 aspect-square rounded-full object-cover object-center border-4 border-white"
+            />
+          </div>
+          <div className="!text-4xl md:!text-7xl font-tenor text-white text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+            {"URBANFRY HOMES".split("").map((char, index) => (
+              <Motiondiv
+                key={index}
+                className="inline-block"
+                initial={{ filter: "blur(10px)", opacity: 0, scale: 2 }}
+                animate={{ filter: "blur(0px)", opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </Motiondiv>
+            ))}
+          </div>
+        </div>
+        <div className="">
+          <h2>
             Behind every piece at Urbanfry Homes lies a story — not of mass
             production, but of intention, emotion, and home.
-          </strong>
-        </p>
-        <p>
-          Urbanfry Homes was founded by{" "}
-          <strong>Apoorv and Ruchi Shrivastava</strong>, a duo who chose passion
-          over the predictable. Both MBA graduates with thriving corporate
-          careers, they set out to build something deeply personal — a brand
-          rooted in the belief that furniture shouldn&apos;t just fill a space,
-          it should tell a story, spark emotion, and bring lasting warmth to a
-          home.
-        </p>
-        <p>
-          What began as a simple idea — to create timeless, thoughtfully
-          designed furniture using solid wood—has evolved into a growing
-          movement of design-conscious living that&apos;s proudly made in India,
-          and made to last.
-        </p>
-        <p>
-          While Apoorv always had an eye for structure and systems, Ruchi was
-          drawn to aesthetics, stories, and spaces that breathe. Together, they
-          realised there was a massive gap in the Indian furniture space:
-          cookie-cutter MDF pieces dominated the market, and custom work was
-          either overpriced or unpredictable.
-        </p>
-        <p>So they set out to change that—with a simple mission:</p>
-        <p>
-          <strong>
+          </h2>
+          <p>
+            Urbanfry Homes was founded by{" "}
+            <strong>Apoorv and Ruchi Shrivastava</strong>, a duo who chose
+            passion over the predictable. Both MBA graduates with thriving
+            corporate careers, they set out to build something deeply personal —
+            a brand rooted in the belief that furniture shouldn&apos;t just fill
+            a space, it should tell a story, spark emotion, and bring lasting
+            warmth to a home.
+          </p>
+          <p>
+            What began as a simple idea — to create timeless, thoughtfully
+            designed furniture using solid wood—has evolved into a growing
+            movement of design-conscious living that&apos;s proudly made in
+            India, and made to last.
+          </p>
+          <p>
+            While Apoorv always had an eye for structure and systems, Ruchi was
+            drawn to aesthetics, stories, and spaces that breathe. Together,
+            they realised there was a massive gap in the Indian furniture space:
+            cookie-cutter MDF pieces dominated the market, and custom work was
+            either overpriced or unpredictable.
+          </p>
+          <p>So they set out to change that—with a simple mission:</p>
+          <h2>
             &quot;To organise the furniture industry by blending the charm of
             handcrafted wood with the consistency of a modern brand.&quot;
-          </strong>
-        </p>
-        <p>
-          From a small workshop in Gurugram to a full-fledged studio and
-          warehouse setup, Urbanfry grew steadily—fueled by word-of-mouth,
-          designer collaborations, and a growing tribe of customers who believed
-          in <i>slow, solid, and stylish living</i>.
-        </p>
-        <p>
-          Today, Urbanfry Homes works closely with{" "}
-          <strong>
-            interior designers, architects, home stylists, and builders
-          </strong>
-          , providing not just finished pieces but also custom creations,
-          styling support, and collaborative design experiences.
-        </p>
-        <p>
-          Because to us, furniture is more than form and function. <br /> It
-          &apos;s a way to turn everyday moments into something a little more
-          beautiful, one home at a time.
-        </p>
-      </>
+          </h2>
+          <p>
+            From a small workshop in Gurugram to a full-fledged studio and
+            warehouse setup, Urbanfry grew steadily—fueled by word-of-mouth,
+            designer collaborations, and a growing tribe of customers who
+            believed in <i>slow, solid, and stylish living</i>.
+          </p>
+          <p>
+            Today, Urbanfry Homes works closely with{" "}
+            <strong>
+              interior designers, architects, home stylists, and builders
+            </strong>
+            , providing not just finished pieces but also custom creations,
+            styling support, and collaborative design experiences.
+          </p>
+          <p>
+            Because to us, furniture is more than form and function. <br /> It
+            &apos;s a way to turn everyday moments into something a little more
+            beautiful, one home at a time.
+          </p>
+        </div>
+      </div>
     ),
   },
 
@@ -114,8 +145,8 @@ const Pagesdata = {
         <p>
           We ship across multiple cities in India using trusted logistics
           partners. While they usually try to call before delivery, we
-          can&apos;t always guarantee it. You&apos;ll receive tracking details once
-          your order is dispatched so you can stay updated.
+          can&apos;t always guarantee it. You&apos;ll receive tracking details
+          once your order is dispatched so you can stay updated.
         </p>
         <p>
           If you&apos;re not available on the delivery day, just let us know in

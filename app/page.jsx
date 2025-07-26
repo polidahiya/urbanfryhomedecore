@@ -22,13 +22,13 @@ import DeviceDetector from "./_globalcomps/_helperfunctions/Devicedetector";
 
 export const faqlist = [
   {
-    question: "1. What is Urbanfry Homes?",
+    question: "What is Urbanfry Homes?",
     answer: [
       "Urbanfry Homes is a premium furniture brand based in Gurugram, specializing in solid wood furniture crafted for modern Indian homes. We offer high-quality, design-led, and customizable pieces that are both functional and timeless.",
     ],
   },
   {
-    question: "2. Where is Urbanfry Homes located?",
+    question: "Where is Urbanfry Homes located?",
     answer: [
       `Our design studio and warehouse are located in Gurugram, Haryana. We ship PAN India and cater to
 custom orders as well. We have an experience center in Gurugram where you can explore our collections
@@ -37,7 +37,7 @@ by appointment.
     ],
   },
   {
-    question: "3. Do you ship to my location?",
+    question: "Do you ship to my location?",
     answer: [
       `We currently deliver to over 40+ cities in India. You can check service availability by entering your pin
 code on any product page. The delivery timeline is clearly mentioned on each product page. Most
@@ -47,7 +47,7 @@ complexity. Delivery is free and inclusive in the prices.
     ],
   },
   {
-    question: "4. What type of wood does Urbanfry Homes use in its furniture?",
+    question: "What type of wood does Urbanfry Homes use in its furniture?",
     answer: [
       `Urbanfry Homes uses 100% solid wood for all its furniture pieces. We primarily work with Sheesham
 wood (Indian Rosewood), which is known for its strength, durability, and beautiful natural grain. In
@@ -59,7 +59,7 @@ charm of authentic solid wood furniture
     ],
   },
   {
-    question: "5. Will the product look exactly as it does on the website?",
+    question: "Will the product look exactly as it does on the website?",
     answer: [
       `We strive for consistency, but since we use natural solid wood, slight variations in grain, shade, or
 texture may occur — making every piece one-of-a-kind. Lighting and screen resolution may also cause
@@ -68,7 +68,7 @@ minor differences in perceived color.
     ],
   },
   {
-    question: "6. Can I see real customer photos of Urbanfry products?",
+    question: "Can I see real customer photos of Urbanfry products?",
     answer: [
       `Absolutely! Check out our “Urbanfry in Homes” section to see real customer setups. You can also
 follow us on Instagram for styling inspiration
@@ -76,7 +76,7 @@ follow us on Instagram for styling inspiration
     ],
   },
   {
-    question: "7. What warranty do you provide?",
+    question: "What warranty do you provide?",
     answer: [
       `All Urbanfry Homes products come with a 1-year warranty against manufacturing defects. This does not
 cover wear and tear, misuse, or damage caused by external factors such as water or sunlight exposure.
@@ -84,7 +84,7 @@ cover wear and tear, misuse, or damage caused by external factors such as water 
     ],
   },
   {
-    question: "8. What is your refund or replacement policy?",
+    question: "What is your refund or replacement policy?",
     answer: [
       `Refunds and replacements are only applicable in cases of transit damage or manufacturing defects
 reported within 24–48 hours of delivery. Once approved, refunds are processed within 10–15 business
@@ -93,7 +93,7 @@ days after the product reaches our warehouse.
     ],
   },
   {
-    question: "9. Is assembly required for Urbanfry Homes products?",
+    question: "Is assembly required for Urbanfry Homes products?",
     answer: [
       `For Delhi NCR, doorstep installation support is available at the time of delivery. For other cities,
 installation services are not currently provided. However, our products are thoughtfully designed for easy
@@ -104,7 +104,7 @@ carpenter can quickly assist with setup.
     ],
   },
   {
-    question: "10. Will installation be provided?",
+    question: "Will installation be provided?",
     answer: [
       `Most of our products are delivered pre-assembled. For items like dining tables, benches, or beds that
 require simple leg attachment, assembly is quick and can be done easily at home or with a local carpenter.
@@ -112,7 +112,7 @@ require simple leg attachment, assembly is quick and can be done easily at home 
     ],
   },
   {
-    question: "11. How will I know that you've received my order?",
+    question: "How will I know that you've received my order?",
     answer: [
       `Once items have been ordered, a confirmation page will appear on the screen confirming the order. An
 email with the order details will be sent immediately to the registered email ID, provided that we have an
@@ -150,12 +150,8 @@ async function page() {
       <section className="w-full bg-footercolor text-[#56473e] overflow-hidden relative flex items-center">
         <Marquebanner
           list={[
-            "2025 Is Looking A Lot More Organized",
-            'Use code "ALT10" for 10% off on your first order',
-            "2025 Is Looking A Lot More Organized",
-            'Use code "ALT10" for 10% off on your first order',
-            "2025 Is Looking A Lot More Organized",
-            'Use code "ALT10" for 10% off on your first order',
+            "Discover the new Urbanfry Homes — design that feels personal",
+            "Enjoy 20% off your first order with code WELCOME20 — our way of saying hello",
           ]}
         />
       </section>
@@ -173,19 +169,15 @@ async function page() {
       <section className="w-full text-[#56473e] overflow-hidden relative flex items-center">
         <Marquebanner
           list={[
-            "2025 Is Looking A Lot More Organized",
-            'Use code "ALT10" for 10% off on your first order',
-            "2025 Is Looking A Lot More Organized",
-            'Use code "ALT10" for 10% off on your first order',
-            "2025 Is Looking A Lot More Organized",
-            'Use code "ALT10" for 10% off on your first order',
+            "Discover the new Urbanfry Homes — design that feels personal",
+            "Enjoy 20% off your first order with code WELCOME20 — our way of saying hello",
           ]}
         />
       </section>
       <Collections />
       <Customerreviews fivestarreviews={fivestarreviews} />
       <Aboutus />
-      <Madeinindia />
+      <Madeinindia device={device} />
       <Faqs faqlist={faqlist} />
       <Footer />
       {/*  */}

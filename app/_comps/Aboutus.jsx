@@ -17,7 +17,7 @@ function Aboutus() {
       </p>
       <div className="flex items-center justify-center mt-8">
         <Link
-          href={"/"}
+          href={"/Aboutus"}
           className="mx-auto px-10 py-4 bg-theme bg-opacity-80 lg:hover:bg-opacity-100 duration-300 text-white"
         >
           Learn More
