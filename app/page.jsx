@@ -15,7 +15,7 @@ import Footer from "./_globalcomps/Footer";
 import Searchbarsection from "./_globalcomps/_navbarcomps/Searchbarsection";
 import { Cachedproducts } from "./_connections/Getcachedata";
 import Sidecart from "./_globalcomps/Sidecart";
-import Imagetapcomp from "./_comps/Imagetapcomp";
+import Imagetapcomp from "./_comps/Searchbyview/Imagetapcomp";
 import Madeinindia from "./_comps/Madeinindia";
 import { Cachedreviews } from "./_connections/Getcachedata";
 import DeviceDetector from "./_globalcomps/_helperfunctions/Devicedetector";

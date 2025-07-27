@@ -1,5 +1,6 @@
 import { MdAccountCircle } from "react-icons/md";
 import RatingStars from "./RatingStars";
+import formatDate from "@/app/_globalcomps/_helperfunctions/formateddate";
 
 const Reviews = ({ Comments }) => {
   return (
@@ -9,7 +10,7 @@ const Reviews = ({ Comments }) => {
           <div key={i} className="border-y py-8">
             <div className="flex items-center justify-between">
               <RatingStars rating={comment?.star} />
-              <span className="text-sm">{comment?.date}</span>
+              <span className="text-sm">{formatDate(comment?.date)}</span>
             </div>
             <div className="flex items-center gap-2 mt-5">
               <MdAccountCircle className="text-xl" /> {comment?.name}

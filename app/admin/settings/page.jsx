@@ -1,9 +1,6 @@
 "use client";
 import React from "react";
-import {
-  refreshproductsnow,
-  refreshreviewsnow,
-} from "@/app/_connections/Getcachedata";
+import { refreshproductsnow } from "@/app/_connections/Getcachedata";
 import { AppContextfn } from "@/app/Context";
 
 function Page() {
@@ -20,15 +17,6 @@ function Page() {
           className="border px-5 py-2 rounded-md bg-white"
         >
           Refresh Products
-        </button>
-        <button
-          onClick={async () => {
-            const res = await refreshreviewsnow();
-            setmessagefn(res?.message);
-          }}
-          className="border px-5 py-2 rounded-md bg-white"
-        >
-          Refresh Reviews
         </button>
       </div>
     </div>

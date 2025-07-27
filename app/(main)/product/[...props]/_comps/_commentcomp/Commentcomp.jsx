@@ -5,7 +5,7 @@ import Noreviews from "./Noreviews";
 import Writereview from "./Writereview";
 import Reviews from "./Reviews";
 
-function Commentcomp({ sku, Comments, token, userdata }) {
+function Commentcomp({ productid, Comments, token, userdata }) {
   const [showwritereview, setshowwritereview] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ function Commentcomp({ sku, Comments, token, userdata }) {
           {showwritereview && (
             <Writereview
               setshowwritereview={setshowwritereview}
-              sku={sku}
+              productid={productid}
               userdata={userdata}
             />
           )}
@@ -37,7 +37,7 @@ function Commentcomp({ sku, Comments, token, userdata }) {
           {showwritereview && (
             <Writereview
               setshowwritereview={setshowwritereview}
-              sku={sku}
+              productid={productid}
               userdata={userdata}
             />
           )}

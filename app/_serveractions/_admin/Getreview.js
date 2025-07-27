@@ -1,6 +1,7 @@
 "use server";
 import { getcollection } from "@/app/_connections/Mongodb";
 import Verification from "@/app/_connections/Verifytoken";
+import { refreshreviewsnow } from "@/app/_connections/Getcachedata";
 
 export const Getreviews = async (
   reviewtype = "all",
@@ -56,7 +57,7 @@ export const Getreviews = async (
   }
 };
 
-export const Updatereview = async (id, value) => {
+export const Updatereview = async (id, value, productid) => {
   try {
     const res = await Verification("Reviews_permission");
     if (!res?.verified) {
@@ -69,13 +70,14 @@ export const Updatereview = async (id, value) => {
       { _id: new ObjectId(id) },
       { $set: { verified: value } }
     );
+    await refreshreviewsnow(productid);
     return { status: 200, message: "Update successfully" };
   } catch (error) {
     return { status: 500, message: "Server error" };
   }
 };
 
-export const Deletereview = async (id) => {
+export const Deletereview = async (id, productid) => {
   try {
     const res = await Verification("Reviews_permission");
     if (!res?.verified) {
@@ -85,6 +87,8 @@ export const Deletereview = async (id) => {
     const { reviewscollection, ObjectId } = await getcollection();
 
     await reviewscollection.deleteOne({ _id: new ObjectId(id) });
+    await refreshreviewsnow(productid);
+
     return { status: 200, message: "Deleted successful" };
   } catch (error) {
     return { status: 500, message: "Server error" };

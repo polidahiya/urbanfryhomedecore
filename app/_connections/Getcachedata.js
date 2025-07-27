@@ -28,25 +28,27 @@ export async function refreshproductsnow() {
 }
 
 // reviews
-export const Cachedreviews = unstable_cache(
-  async () => {
-    const { reviewscollection } = await getcollection();
-    const reviewslist = await reviewscollection
-      .find({ verified: true })
-      .toArray();
-    return reviewslist.map((item) => ({
-      ...item,
-      _id: item._id.toString(),
-    }));
-  },
-  ["reviews"],
-  { revalidate: CACHE_TIME, tags: ["reviews"] }
-);
+export async function Cachedreviews(productid) {
+  return unstable_cache(
+    async () => {
+      const { reviewscollection } = await getcollection();
+      const reviewslist = await reviewscollection
+        .find({ verified: true, productid })
+        .toArray();
 
-export async function refreshreviewsnow() {
+      reviewslist.forEach((item) => {
+        item._id = item._id.toString();
+      });
+      return reviewslist;
+    },
+    [`reviews-${productid}`],
+    { revalidate: CACHE_TIME, tags: [`reviews-${productid}`] }
+  )();
+}
+export async function refreshreviewsnow(productid) {
   try {
-    revalidateTag("reviews");
-    return { status: 200, message: "Reviews Refreshed on site" };
+    revalidateTag(`reviews-${productid}`);
+    return { status: 200, message: "Reviews refreshed for product." };
   } catch (error) {
     console.log(error);
     return { status: 500, message: "Server Error!" };

@@ -8,7 +8,7 @@ import ProductDetailsTable from "./ProductDetailsTable";
 import Coloroptions from "./Coloroptions";
 import { AppContextfn } from "@/app/Context";
 
-function Details({ product, color }) {
+function Details({ product, color, productid, token }) {
   const cartproductname = `${product?._id}-${color}`;
   const { cart, setcart } = AppContextfn();
 
@@ -50,15 +50,27 @@ function Details({ product, color }) {
       <hr className="my-5" />
 
       <ProductDetailsTable
-        data={[
-          // { label: "SKU", value: product?.sku },
-          { label: "Theme", value: product?.theme },
-          { label: "Material", value: product?.Material },
-          { label: "Finish", value: product?.variants[color].finish },
-          { label: "Weight", value: product?.weight + " Kg" },
-          { label: "Handling Time", value: product?.handlingtime },
-          { label: "Warranty", value: product?.Warranty + " Months" },
-        ]}
+        data={
+          token
+            ? [
+                { label: "SKU", value: product?.sku },
+                { label: "P-id", value: productid },
+                { label: "Theme", value: product?.theme },
+                { label: "Material", value: product?.Material },
+                { label: "Finish", value: product?.variants[color].finish },
+                { label: "Weight", value: product?.weight + " Kg" },
+                { label: "Handling Time", value: product?.handlingtime },
+                { label: "Warranty", value: product?.Warranty + " Months" },
+              ]
+            : [
+                { label: "Theme", value: product?.theme },
+                { label: "Material", value: product?.Material },
+                { label: "Finish", value: product?.variants[color].finish },
+                { label: "Weight", value: product?.weight + " Kg" },
+                { label: "Handling Time", value: product?.handlingtime },
+                { label: "Warranty", value: product?.Warranty + " Months" },
+              ]
+        }
       />
       {/* color options */}
       <Coloroptions

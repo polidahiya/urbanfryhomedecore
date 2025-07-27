@@ -3,14 +3,14 @@ import StarRating from "./StarRating";
 import { AppContextfn } from "@/app/Context";
 import addreview from "@/app/_serveractions/addreview";
 
-const WriteReview = ({ setshowwritereview, sku, userdata }) => {
+const WriteReview = ({ setshowwritereview, productid, userdata }) => {
   const { setmessagefn } = AppContextfn();
   const [data, setData] = useState({
     name: "",
     email: userdata?.email,
     comment: "",
     star: 0,
-    sku,
+    productid,
   });
 
   const handleSubmit = async (e) => {

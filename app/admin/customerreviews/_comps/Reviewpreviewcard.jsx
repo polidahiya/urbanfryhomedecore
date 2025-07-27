@@ -6,11 +6,13 @@ import {
   Deletereview,
   Updatereview,
 } from "@/app/_serveractions/_admin/Getreview";
+import formatDate from "@/app/_globalcomps/_helperfunctions/formateddate";
+import Link from "next/link";
 
 function Reviewpreviewcard({ review, setrefresher }) {
   const { setmessagefn, setshowdialog } = AppContextfn();
   const handledelete = async () => {
-    const res = await Deletereview(review?._id);
+    const res = await Deletereview(review?._id, review?.productid);
     setmessagefn(res?.message);
     if (res?.status == 200) {
       setrefresher((pre) => !pre);
@@ -18,7 +20,11 @@ function Reviewpreviewcard({ review, setrefresher }) {
   };
 
   const handleverification = async () => {
-    const res = await Updatereview(review?._id, !review?.verified);
+    const res = await Updatereview(
+      review?._id,
+      !review?.verified,
+      review?.productid
+    );
     setmessagefn(res?.message);
     if (res?.status == 200) {
       setrefresher((pre) => !pre);
@@ -31,7 +37,7 @@ function Reviewpreviewcard({ review, setrefresher }) {
         <p>
           <RatingStars rating={review?.star} />
         </p>
-        <p>{review?.date}</p>
+        <p>{formatDate(review?.date)}</p>
       </div>
       <div className="my-5 flex items-center gap-5">
         <div
@@ -49,7 +55,16 @@ function Reviewpreviewcard({ review, setrefresher }) {
 
       <p className="text-theme font-bold">{review?.name}</p>
       <p className="text-theme">{review?.email}</p>
-      <p>Sku : {review?.sku}</p>
+      <p>
+        Product id : {review?.productid}{" "}
+        <Link
+          href={`/product/${review?.productid}`}
+          target="_blank"
+          className="text-theme ml-5"
+        >
+          View
+        </Link>
+      </p>
 
       <p>Comment : {review?.comment}</p>
       <button

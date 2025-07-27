@@ -36,7 +36,7 @@ const Faq = ({ faq, i, open, setopen }) => {
       </p>
       <div
         className={`font-tenor mt-5 ${
-          open == i ? "max-h-screen duration-1000" : "max-h-0 duration-500"
+          open == i ? "max-h-screen duration-1000" : "max-h-0"
         }  overflow-hidden`}
       >
         {faq?.answer.map((item, i) => {

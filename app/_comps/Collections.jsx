@@ -12,7 +12,7 @@ function Collections() {
           <Link
             key={i}
             href={`/collections/${key}`}
-            className="group relative aspect-[2/1] overflow-hidden"
+            className="group relative aspect-[4/3] md:aspect-[2/1] overflow-hidden"
           >
             <Nextimage
               src={value.img}
