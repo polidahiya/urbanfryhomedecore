@@ -9,7 +9,7 @@ export const Roomsearchproducts = async (ordertype = "all", search) => {
       return { status: 400, message: "Invalid user" };
     }
 
-    const { Productscollection } = await getcollection();
+    const { Productscollection, ObjectId } = await getcollection();
 
     const queries = {
       all: {},
@@ -20,6 +20,7 @@ export const Roomsearchproducts = async (ordertype = "all", search) => {
         category: search,
       },
       sku: { sku: search },
+      pid: { _id: ordertype == "pid" ? new ObjectId(search) : "" },
       search: {
         $or: [
           { category: { $regex: new RegExp(search, "i") } },
@@ -41,6 +42,7 @@ export const Roomsearchproducts = async (ordertype = "all", search) => {
 
     return { status: 200, message: "", data: allproducts };
   } catch (error) {
+    console.log(error);
     return { status: 500, message: "Server Error!" };
   }
 };

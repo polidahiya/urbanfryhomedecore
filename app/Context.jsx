@@ -19,6 +19,7 @@ export function Appwrapper({ children, token, userdata }) {
   };
   const [showdialog, setshowdialog] = useState(showdialoginitialvalues);
   const [quickview, setquickview] = useState({ show: false, data: {} });
+  const [shownewsletter, setshownewsletter] = useState(false);
   //admin states
 
   // message function
@@ -67,6 +68,8 @@ export function Appwrapper({ children, token, userdata }) {
         showdialoginitialvalues,
         quickview,
         setquickview,
+        shownewsletter,
+        setshownewsletter,
       }}
     >
       {children}

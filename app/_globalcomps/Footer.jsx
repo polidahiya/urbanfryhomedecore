@@ -5,6 +5,7 @@ import { mobile, mail } from "../commondata";
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import Quicklinks from "./_footerclientcomps/Quicklinks";
+import Newslettersubscriblebutton from "./_footerclientcomps/Newslettersubscriblebutton";
 
 function Footer() {
   const whatwedolinks = [
@@ -19,13 +20,14 @@ function Footer() {
   return (
     <footer className=" bg-footercolor px-8 py-10">
       <div className="flex flex-col lg:flex-row  lg:gap-24">
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col">
           <p className="text-3xl font-tenor">Style, Delivered Peacefully.</p>
           <p className="text-sm mt-5">
             Urbanfry Homes is dedicatedly into wholesale & manufacturing of
             Solid Wood Items & now online inspiring customers through a unique
             combination of product, creativity & cultural understanding.
           </p>
+          <Newslettersubscriblebutton />
         </div>
         <div className="w-full h-px bg-theme opacity-50 my-5 lg:hidden" />
         <Quicklinks />

@@ -76,7 +76,7 @@ function Details({ product, color, productid, token }) {
       <Coloroptions
         variants={product?.variants}
         color={color}
-        sku={product?.sku}
+        pid={product?._id}
         name={product?.name}
       />
       {/* sizes */}

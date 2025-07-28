@@ -6,16 +6,19 @@ import { MdAddToPhotos } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 
 const ProductVariants = ({
-  varientstructure,
+  initialvarientstate,
   variants,
   setstate,
-  deletedimages,
   setdeletedimages,
 }) => {
   const handleAddVariant = () => {
     setstate((pre) => {
       const updatedstate = { ...pre };
-      updatedstate.variants = [...updatedstate.variants, ...varientstructure];
+      updatedstate.variants = [
+        ...updatedstate.variants,
+        { ...JSON.parse(JSON.stringify(initialvarientstate)) },
+      ];
+
       return updatedstate;
     });
   };

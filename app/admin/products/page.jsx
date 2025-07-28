@@ -1,96 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import AddProductForm from "./_comps/AddProductForm";
+import React, { useState } from "react";
 import Showproducts from "./_comps/_showproduct/Showproducts";
-import { useSearchParams } from "next/navigation";
-import { Roomsearchproducts } from "@/app/_serveractions/_admin/Getliveproducts";
-import { AppContextfn } from "@/app/Context";
 import Importexportmenu from "./_comps/Importexportmenu";
-import { staticdata } from "@/app/commondata";
 
 function Page() {
-  const searchParams = useSearchParams();
-  const productsku = searchParams.get("sku");
-  const { setmessagefn } = AppContextfn();
-
-  const initialState = {
-    category: Object.keys(staticdata)[0],
-    subcat: Object.keys(Object.values(staticdata)[0]?.subcat)[0],
-    productName: "",
-    sku: "",
-    handlingtime: "",
-    mrp: "",
-    sellingprice: "",
-    Material: "Acacia Wood",
-    Warranty: "",
-    theme: "",
-    dimensions: [""],
-    weight: "",
-    keyfeatures: [""],
-    descriptions: [""],
-    collections: [],
-    variants: [{ finish: "Honey Oak", images: [] }],
-    seotitle: "",
-    seodescription: "",
-    seokeywords: "",
-    available: true,
-  };
-  const [data, setdata] = useState(initialState);
-  const [deletedimages, setdeletedimages] = useState([]);
-  const resetState = () => {
-    setdata(initialState);
-  };
-  const [showform, setshowform] = useState(false);
   const [showimportmenu, setshowimportmenu] = useState(false);
-
-  useEffect(() => {
-    if (productsku) {
-      (async () => {
-        const res = await Roomsearchproducts("sku", productsku);
-        if (res?.status == 200) {
-          if (res?.data?.length != 0) {
-            setdata(res?.data[0]);
-            setshowform(true);
-          } else {
-            setmessagefn("Product not found");
-          }
-        }
-      })();
-    }
-  }, [productsku]);
 
   return (
     <div>
-      <div className="relative">
-        {showform && (
-          <>
-            <AddProductForm
-              data={data}
-              setdata={setdata}
-              initialState={initialState}
-              resetState={resetState}
-              deletedimages={deletedimages}
-              setdeletedimages={setdeletedimages}
-              setshowform={setshowform}
-            />
-            <button
-              className="fixed top-1 right-1 md:top-5 md:right-5 w-10 aspect-square bg-slate-300"
-              onClick={() => setshowform(false)}
-            >
-              x
-            </button>
-          </>
-        )}
-      </div>
-      {!showform && (
-        <Showproducts
-          setdata={setdata}
-          setdeletedimages={setdeletedimages}
-          setshowform={setshowform}
-          resetState={resetState}
-          setshowimportmenu={setshowimportmenu}
-        />
-      )}
+      <Showproducts setshowimportmenu={setshowimportmenu} />
       {showimportmenu && (
         <Importexportmenu setshowimportmenu={setshowimportmenu} />
       )}

@@ -4,19 +4,13 @@ import Dropdownmenu from "../_comps/Dropdownmenu";
 import { Roomsearchproducts } from "@/app/_serveractions/_admin/Getliveproducts";
 import { AppContextfn } from "@/app/Context";
 import Adminsearchbar from "@/app/admin/_comps/_adminnavbar/Adminsearchbar";
-import Previewproducts from "../Previewproducts";
 import { PiListBold } from "react-icons/pi";
 import { BiSolidGrid } from "react-icons/bi";
 import Gridview from "./Gridview";
 import Listview from "./Listview";
+import Link from "next/link";
 
-function Showproducts({
-  setdata,
-  setdeletedimages,
-  setshowform,
-  resetState,
-  setshowimportmenu,
-}) {
+function Showproducts({ setshowimportmenu }) {
   const { setmessagefn } = AppContextfn();
   const [filterdata, setfilterdata] = useState({
     categories: Object.keys(staticdata)[0],
@@ -25,7 +19,6 @@ function Showproducts({
   const [search, setsearch] = useState("");
   const [products, setproducts] = useState([]);
   const [loading, setloading] = useState(false);
-  const [previewdata, setpreviewdata] = useState({ show: false, data: {} });
   const [viewtype, setviewtype] = useState("grid"); //grid ,list
 
   const handlesearch = async (ordertype, search) => {
@@ -46,16 +39,12 @@ function Showproducts({
     <div className="px-5 md:px-10">
       <div className="my-10  flex items-center gap-2">
         <span className="font-semibold text-2xl">Products</span>{" "}
-        <button
+        <Link
+          href={"/admin/products/add"}
           className="px-5 py-2 rounded-md bg-theme text-white ml-auto"
-          onClick={() => {
-            setshowform(true);
-            resetState();
-            setdeletedimages([]);
-          }}
         >
           + <span className="hidden md:inline">Add New</span>
-        </button>
+        </Link>
         <button
           className="px-5 py-2 rounded-md bg-theme text-white hidden"
           onClick={() => {
@@ -127,35 +116,14 @@ function Showproducts({
       </div>
       {!loading ? (
         viewtype == "grid" ? (
-          <Gridview
-            products={products}
-            setproducts={setproducts}
-            setdata={setdata}
-            setdeletedimages={setdeletedimages}
-            setshowform={setshowform}
-            setpreviewdata={setpreviewdata}
-          />
+          <Gridview products={products} setproducts={setproducts} />
         ) : (
-          <Listview
-            products={products}
-            setproducts={setproducts}
-            setdata={setdata}
-            setdeletedimages={setdeletedimages}
-            setshowform={setshowform}
-            setpreviewdata={setpreviewdata}
-          />
+          <Listview products={products} setproducts={setproducts} />
         )
       ) : (
         <div className="mt-32">
           <div className="border-y-4 border-theme w-10 aspect-square rounded-full mx-auto animate-spin duration-300"></div>
         </div>
-      )}
-      {/* preview  */}
-      {previewdata?.show && (
-        <Previewproducts
-          previewdata={previewdata}
-          setpreviewdata={setpreviewdata}
-        />
       )}
     </div>
   );

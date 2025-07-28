@@ -19,6 +19,8 @@ import Imagetapcomp from "./_comps/Searchbyview/Imagetapcomp";
 import Madeinindia from "./_comps/Madeinindia";
 import { Cachedreviews } from "./_connections/Getcachedata";
 import DeviceDetector from "./_globalcomps/_helperfunctions/Devicedetector";
+import Instaposts from "./_comps/Instaposts";
+import Newsletter from "./_globalcomps/Newsletter/Newsletter";
 
 export const faqlist = [
   {
@@ -178,11 +180,13 @@ async function page() {
       <Customerreviews fivestarreviews={fivestarreviews} />
       <Aboutus />
       <Madeinindia device={device} />
+      <Instaposts />
       <Faqs faqlist={faqlist} />
       <Footer />
       {/*  */}
       <Searchbarsection />
       <Sidecart />
+      <Newsletter />
     </div>
   );
 }

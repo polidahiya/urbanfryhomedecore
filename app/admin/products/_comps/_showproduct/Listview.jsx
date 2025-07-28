@@ -5,16 +5,11 @@ import { AiFillDelete } from "react-icons/ai";
 import { IoCopy } from "react-icons/io5";
 import { HiViewfinderCircle } from "react-icons/hi2";
 import { AppContextfn } from "@/app/Context";
+import Link from "next/link";
+import { Deleteproduct } from "@/app/_serveractions/_admin/adminAddproduct";
 
-function Listview({
-  products,
-  setproducts,
-  setdata,
-  setdeletedimages,
-  setshowform,
-  setpreviewdata,
-}) {
-  const { setshowdialog, setmessagefn } = AppContextfn();
+function Listview({ products, setproducts }) {
+  const { setshowdialog, setmessagefn, setquickview } = AppContextfn();
   const handledeleteproduct = async (product) => {
     const res = await Deleteproduct(product?.variants, product?._id);
 
@@ -146,41 +141,25 @@ function Listview({
               </td>
               <td className="absolute top-0 left-0 bg-white hidden p-1 group-hover:flex gap-1">
                 {/* update button */}
-                <button
+                <Link
+                  href={`/admin/products/add?edit=${product?._id}`}
+                  target="_blank"
                   className="text-xs bg-green-500 text-white rounded-full p-2"
-                  onClick={() => {
-                    setdata(product);
-                    setdeletedimages([]);
-                    setshowform(true);
-                  }}
-                  title="Update"
                 >
                   <GrUpdate />
-                </button>
+                </Link>
                 {/* copy */}
-                <button
+                <Link
+                  href={`/admin/products/add?copy=${product?._id}`}
+                  target="_blank"
                   className="text-xs bg-sky-600 text-white rounded-full p-2"
-                  onClick={() => {
-                    const updateddata = { ...product };
-                    delete updateddata._id;
-                    updateddata.sku = "";
-                    updateddata.variants.forEach((variant) => {
-                      variant.images = [];
-                    });
-                    console.log(updateddata);
-
-                    setdata(updateddata);
-                    setdeletedimages([]);
-                    setshowform(true);
-                  }}
-                  title="Create Copy"
                 >
                   <IoCopy />
-                </button>
+                </Link>
                 {/* view */}
                 <button
                   className="text-xs bg-sky-600 text-white rounded-full p-2"
-                  onClick={() => setpreviewdata({ show: true, data: product })}
+                  onClick={() => setquickview({ show: true, data: product })}
                   title="View"
                 >
                   <HiViewfinderCircle />
