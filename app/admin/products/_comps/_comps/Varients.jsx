@@ -5,18 +5,13 @@ import { BiSolidImageAdd } from "react-icons/bi";
 import { MdAddToPhotos } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 
-const ProductVariants = ({
-  initialvarientstate,
-  variants,
-  setstate,
-  setdeletedimages,
-}) => {
+const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
   const handleAddVariant = () => {
     setstate((pre) => {
       const updatedstate = { ...pre };
       updatedstate.variants = [
         ...updatedstate.variants,
-        { ...JSON.parse(JSON.stringify(initialvarientstate)) },
+        { finish: "Honey Oak", images: [] },
       ];
 
       return updatedstate;

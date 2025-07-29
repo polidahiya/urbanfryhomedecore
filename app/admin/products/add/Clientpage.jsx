@@ -11,40 +11,36 @@ import Togglebuttons from "../_comps/_comps/Togglebuttons";
 import Multiselectmenu from "../_comps/_comps/Multiselectmenu";
 import Link from "next/link";
 
-const initialvarientstate = { finish: "Honey Oak", images: [] };
-const initialState = {
-  category: Object.keys(staticdata)[0],
-  subcat: Object.keys(Object.values(staticdata)[0]?.subcat)[0],
-  productName: "",
-  sku: "",
-  handlingtime: "",
-  mrp: "",
-  sellingprice: "",
-  Material: "Acacia Wood",
-  Warranty: "",
-  theme: "",
-  dimensions: [""],
-  weight: "",
-  keyfeatures: [""],
-  descriptions: [""],
-  collections: [],
-  stocks: 0,
-  variants: [JSON.parse(JSON.stringify(initialvarientstate))],
-  seotitle: "",
-  seodescription: "",
-  seokeywords: "",
-  available: true,
-};
-
 function Clientpage({ productdata }) {
+  const initialState = {
+    category: Object.keys(staticdata)[0],
+    subcat: Object.keys(Object.values(staticdata)[0]?.subcat)[0],
+    productName: "",
+    sku: "",
+    handlingtime: "",
+    mrp: "",
+    sellingprice: "",
+    Material: "Acacia Wood",
+    Warranty: "",
+    theme: "",
+    dimensions: [""],
+    weight: "",
+    keyfeatures: [""],
+    descriptions: [""],
+    collections: [],
+    stocks: 0,
+    variants: [{ finish: "Honey Oak", images: [] }],
+    seotitle: "",
+    seodescription: "",
+    seokeywords: "",
+    available: true,
+  };
   const { setmessagefn } = AppContextfn();
   const [data, setdata] = useState(
     productdata ? { ...initialState, ...productdata } : initialState
   );
   const [deletedimages, setdeletedimages] = useState([]);
   const [loading, setloading] = useState(false);
-  console.log(data);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setloading(true);
@@ -63,11 +59,7 @@ function Clientpage({ productdata }) {
     });
 
     try {
-      console.log(data, formData, deletedimages);
-
       const res = await Addproduct(data, formData, deletedimages);
-      console.log(res);
-
       setdata(initialState);
       setmessagefn(res?.message);
       setloading(false);
@@ -90,6 +82,7 @@ function Clientpage({ productdata }) {
       </Link>
       <form
         onSubmit={handleSubmit}
+        method="post"
         className="px-1 py-6 md:p-6 bg-white shadow-lg rounded-md space-y-6"
       >
         <h2 className="text-2xl text-center font-semibold text-gray-800">
@@ -242,7 +235,6 @@ function Clientpage({ productdata }) {
         {/* variants */}
         <ProductVariants
           data={data}
-          initialvarientstate={initialvarientstate}
           variants={data?.variants}
           setstate={setdata}
           deletedimages={deletedimages}
