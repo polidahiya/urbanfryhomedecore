@@ -4,7 +4,6 @@ import { staticdata, materialoptions, collections } from "@/app/commondata";
 import Standardinputfield from "../_comps/_comps/Standardinputfield";
 import Multiplevaluesfield from "../_comps/_comps/Multiplevaluesfield";
 import ProductVariants from "../_comps/_comps/Varients";
-import { Addproduct } from "@/app/_serveractions/_admin/adminAddproduct";
 import Dropdownmenu from "../_comps/_comps/Dropdownmenu";
 import { AppContextfn } from "@/app/Context";
 import Togglebuttons from "../_comps/_comps/Togglebuttons";
@@ -57,11 +56,17 @@ function Clientpage({ productdata }) {
         }
       });
     });
+    formData.append("data", JSON.stringify(data));
+    formData.append("deletedimages", JSON.stringify(deletedimages));
 
     try {
-      const res = await Addproduct(data, formData, deletedimages);
+      const res = await fetch("/api/admin/addproduct", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await res.json();
       setdata(initialState);
-      setmessagefn(res?.message);
+      setmessagefn(result?.message);
       setloading(false);
       setdeletedimages([]);
     } catch (error) {
