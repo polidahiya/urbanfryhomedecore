@@ -18,7 +18,7 @@
     "next": "^15.4.4",
     "next-auth": "^4.24.11",
     "nextjs-google-analytics": "^2.3.7",
-    "nodemailer": "^7.0.5",
+    "nodemailer": "^6.9.16",
     "papaparse": "^5.5.3",
     "razorpay": "^2.9.6",
     "react": "^19.1.1",
