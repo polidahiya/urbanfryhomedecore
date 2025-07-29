@@ -43,6 +43,7 @@ function Clientpage({ productdata }) {
   );
   const [deletedimages, setdeletedimages] = useState([]);
   const [loading, setloading] = useState(false);
+  console.log(data);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,7 +63,11 @@ function Clientpage({ productdata }) {
     });
 
     try {
+      console.log(data, formData, deletedimages);
+
       const res = await Addproduct(data, formData, deletedimages);
+      console.log(res);
+
       setdata(initialState);
       setmessagefn(res?.message);
       setloading(false);
@@ -312,17 +317,23 @@ function Clientpage({ productdata }) {
             )}
             {data?._id ? "Update Product" : "Add Product"}
           </button>
+          <button
+            className="flex items-center justify-center gap-2  px-4 py-2 bg-white  border  rounded-md"
+            type="button"
+            onClick={() => {
+              setdata(initialState);
+              setdeletedimages([]);
+            }}
+          >
+            Reset
+          </button>
           {data?._id && (
-            <button
+            <Link
+              href={"/admin/products"}
               className="flex items-center justify-center gap-2  px-4 py-2 bg-white  border  rounded-md"
-              type="button"
-              onClick={() => {
-                setdata(initialdata);
-                setdeletedimages([]);
-              }}
             >
               Cancel Update
-            </button>
+            </Link>
           )}
         </div>
       </form>
