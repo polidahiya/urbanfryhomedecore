@@ -4,8 +4,10 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { MdAddToPhotos } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
+import { AppContextfn } from "@/app/Context";
 
 const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
+  const { setmessagefn } = AppContextfn();
   const handleAddVariant = () => {
     setstate((pre) => {
       const updatedstate = { ...pre };
@@ -35,6 +37,10 @@ const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
   };
 
   const handleAddImage = (variantIndex, file) => {
+    if (file.size > MAX_FILE_SIZE) {
+      setmessagefn(`Image exceeds 1 MB of size`);
+      return;
+    }
     const updatedVariants = [...variants];
     if (file) {
       updatedVariants[variantIndex].images.push(file);
@@ -67,8 +73,12 @@ const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
       setstate((pre) => ({ ...pre, variants: updatedVariants }));
     }
   };
-
+  const MAX_FILE_SIZE = 1 * 1024 * 1024;
   const handleupdateimage = (index, imgIndex, file) => {
+    if (file.size > MAX_FILE_SIZE) {
+      setmessagefn(`Image exceeds 1 MB of size`);
+      return;
+    }
     const updatedVariants = [...variants];
     updatedVariants[index].images[imgIndex] = file;
     setstate((pre) => ({ ...pre, variants: updatedVariants }));
@@ -163,9 +173,9 @@ const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
                   accept="image/*"
                   multiple
                   onChange={(e) => {
-                    Array.from(e.target.files).forEach((file) =>
-                      handleAddImage(index, file)
-                    );
+                    Array.from(e.target.files).forEach((file) => {
+                      handleAddImage(index, file);
+                    });
                     e.target.value = null;
                   }}
                   className="absolute inset-0 mt-2 opacity-0 z-10 cursor-pointer"
