@@ -51,7 +51,6 @@ const Productcard = ({ product, setproducts }) => {
         {/* update button */}
         <Link
           href={`/admin/products/add?edit=${product?._id}`}
-          target="_blank"
           className="text-xs bg-green-500 text-white rounded-full p-2"
         >
           <GrUpdate />
@@ -59,7 +58,6 @@ const Productcard = ({ product, setproducts }) => {
         {/* copy */}
         <Link
           href={`/admin/products/add?copy=${product?._id}`}
-          target="_blank"
           className="text-xs bg-sky-600 text-white rounded-full p-2"
         >
           <IoCopy />

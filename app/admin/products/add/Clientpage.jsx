@@ -28,6 +28,7 @@ const initialState = {
   keyfeatures: [""],
   descriptions: [""],
   collections: [],
+  stocks: 0,
   variants: [JSON.parse(JSON.stringify(initialvarientstate))],
   seotitle: "",
   seodescription: "",
@@ -37,14 +38,14 @@ const initialState = {
 
 function Clientpage({ productdata }) {
   const { setmessagefn } = AppContextfn();
-  const [data, setdata] = useState(productdata || initialState);
+  const [data, setdata] = useState(
+    productdata ? { ...initialState, ...productdata } : initialState
+  );
   const [deletedimages, setdeletedimages] = useState([]);
   const [loading, setloading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setdata(initialState);
-    return;
     setloading(true);
 
     const formData = new FormData();
@@ -222,6 +223,16 @@ function Clientpage({ productdata }) {
           setState={setdata}
           title={"Collections"}
           options={Object.keys(collections)}
+        />
+        {/* mrp */}
+        <Standardinputfield
+          titlename="Stocks"
+          type="number"
+          value={data?.stocks}
+          onchange={(e) =>
+            setdata((pre) => ({ ...pre, stocks: e.target.value }))
+          }
+          clear={() => setdata((pre) => ({ ...pre, stocks: "" }))}
         />
         {/* variants */}
         <ProductVariants
