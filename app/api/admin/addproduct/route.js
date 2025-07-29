@@ -4,6 +4,7 @@ import Verification from "@/app/_connections/Verifytoken";
 import { getcollection } from "@/app/_connections/Mongodb";
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 export const maxRequestBodySize = "25mb";
 export async function POST(req) {
   try {

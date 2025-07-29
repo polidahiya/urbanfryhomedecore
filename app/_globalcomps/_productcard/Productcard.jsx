@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import Quickviewbutton from "./Quickviewbutton";
+import Nextimage from "../Nextimage";
 
 function Productcard({ product }) {
   const firstimage = product?.variants[0]?.images[0] || "/uiimages/404.avif";
@@ -12,22 +12,22 @@ function Productcard({ product }) {
           className="w-full aspect-square relative block overflow-hidden"
           href={`/product/${product?._id}`}
         >
-          <Image
+          <Nextimage
             src={firstimage}
             alt={product?.productName}
             className="h-full w-full absolute  object-cover lg:group-hover:scale-105 lg:group-hover:opacity-0 duration-300"
             height={500}
             width={500}
             loading="lazy"
-          ></Image>
-          <Image
+          ></Nextimage>
+          <Nextimage
             src={product?.variants[0]?.images[1] || firstimage}
             alt={product?.productName}
             className="h-full w-full absolute  object-cover opacity-0 lg:group-hover:scale-110 lg:group-hover:opacity-100 duration-300"
             height={500}
             width={500}
             loading="lazy"
-          ></Image>
+          ></Nextimage>
         </Link>
         {/* quick view button */}
         <Quickviewbutton product={product} />
