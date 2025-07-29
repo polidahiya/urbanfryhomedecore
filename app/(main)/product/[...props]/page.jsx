@@ -40,7 +40,7 @@ async function page({ params }) {
       <div className="mt-20 md:mt-28 flex flex-col lg:flex-row gap-10 px-5 md:px-10">
         <div className="w-full md:w-1/2">
           <Imagescomp
-            images={product?.variants[color].images}
+            images={product?.variants[color]?.images}
             name={product?.productName}
           />
           {/* routes */}

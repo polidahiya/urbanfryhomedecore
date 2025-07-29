@@ -12,14 +12,6 @@ function Newsletter() {
     email: "",
   });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setshownewsletter(true);
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({

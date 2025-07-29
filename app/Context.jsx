@@ -20,6 +20,13 @@ export function Appwrapper({ children, token, userdata }) {
   const [showdialog, setshowdialog] = useState(showdialoginitialvalues);
   const [quickview, setquickview] = useState({ show: false, data: {} });
   const [shownewsletter, setshownewsletter] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setshownewsletter(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
   //admin states
 
   // message function

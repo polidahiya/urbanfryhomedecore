@@ -43,6 +43,8 @@ function Clientpage({ productdata }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setdata(initialState);
+    return;
     setloading(true);
 
     const formData = new FormData();
@@ -60,24 +62,18 @@ function Clientpage({ productdata }) {
 
     try {
       const res = await Addproduct(data, formData, deletedimages);
-      resetState();
+      setdata(initialState);
       setmessagefn(res?.message);
       setloading(false);
       setdeletedimages([]);
-      if (res.status == 200) {
-        setshowform(false);
-      }
     } catch (error) {
-      resetState();
+      setdata(initialState);
       setloading(false);
       setmessagefn("Error!");
       console.error("Error:", error);
     }
   };
 
-  const resetState = () => {
-    setdata(initialState);
-  };
   return (
     <>
       <Link
@@ -310,7 +306,7 @@ function Clientpage({ productdata }) {
               className="flex items-center justify-center gap-2  px-4 py-2 bg-white  border  rounded-md"
               type="button"
               onClick={() => {
-                resetState();
+                setdata(initialdata);
                 setdeletedimages([]);
               }}
             >

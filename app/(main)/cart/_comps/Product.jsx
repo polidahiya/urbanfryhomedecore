@@ -11,6 +11,7 @@ function Product({ item, cartproductid }) {
   const pathname = usePathname();
   const { cart, setcart, setmessagefn } = AppContextfn();
   const MAX_QUANTITY = 10; // Define the maximum quantity
+  console.log(cartproductid);
 
   const color = cartproductid.split("-")[1];
   const image = item?.variants[color]?.images[0];
@@ -58,7 +59,7 @@ function Product({ item, cartproductid }) {
     <div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 lg:gap-0 border-b py-5">
       {/* product */}
       <div className="text-left  lg:flex-[3] ">
-        <Link href={`/product/${item?._id}/${item?.color}`} className="block">
+        <Link href={`/product/${item?._id}/${color}`} className="block">
           <div className="w-full flex items-start lg:items-center">
             <div className="min-w-24 w-24 aspect-square">
               <Nextimage

@@ -121,23 +121,23 @@ const ProductVariants = ({
                     alt={`Variant ${index} Image ${imgIndex}`}
                     className="w-32 aspect-square object-cover border"
                   />
-                  <div className="flex gap-1 h-8">
+                  <div className="flex h-8 w-full">
                     <button
                       type="button"
                       onClick={() => handleMoveImage(index, imgIndex, -1)}
-                      className="h-full aspect-square text-sm border rounded-md"
+                      className="flex-1 aspect-square text-sm border rounded-md"
                     >
                       <BsArrowLeftShort className="inline-block" />
                     </button>
                     <button
                       type="button"
                       onClick={() => handleMoveImage(index, imgIndex, 1)}
-                      className="h-full aspect-square text-sm border rounded-md"
+                      className="flex-1 aspect-square text-sm border rounded-md"
                     >
                       <BsArrowLeftShort className="inline-block rotate-180" />
                     </button>
                     {/* Replace Image Button */}
-                    <label className="h-full aspect-square text-blue-500 border rounded-md flex items-center justify-center cursor-pointer">
+                    <label className="flex-1 aspect-square text-blue-500 border rounded-md flex items-center justify-center cursor-pointer">
                       <input
                         type="file"
                         accept="image/*"
@@ -155,7 +155,7 @@ const ProductVariants = ({
                     <button
                       type="button"
                       onClick={() => handleDeleteImage(index, imgIndex)}
-                      className="h-full aspect-square text-sm border rounded-md"
+                      className="flex-1 aspect-square text-sm border rounded-md"
                     >
                       <MdDeleteOutline className="inline-block" />
                     </button>
