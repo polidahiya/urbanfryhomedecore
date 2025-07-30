@@ -8,7 +8,7 @@ const Adminsearchbar = ({ search, setsearch, onsubmit, placeholder="Search" }) =
         e.preventDefault();
         onsubmit();
       }}
-      className="flex gap-2 border h-10 rounded-md overflow-hidden"
+      className="flex gap-2 border min-h-10 rounded-md overflow-hidden"
     >
       <input
         type="text"

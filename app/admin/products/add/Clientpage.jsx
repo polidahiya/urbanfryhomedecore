@@ -9,8 +9,14 @@ import { AppContextfn } from "@/app/Context";
 import Togglebuttons from "../_comps/_comps/Togglebuttons";
 import Multiselectmenu from "../_comps/_comps/Multiselectmenu";
 import Link from "next/link";
+import {
+  Addproduct,
+  Deleteimages,
+} from "@/app/_serveractions/_admin/adminAddproduct";
+import { useRouter } from "next/navigation";
 
 function Clientpage({ productdata }) {
+  const router = useRouter();
   const initialState = {
     category: Object.keys(staticdata)[0],
     subcat: Object.keys(Object.values(staticdata)[0]?.subcat)[0],
@@ -38,37 +44,20 @@ function Clientpage({ productdata }) {
   const [data, setdata] = useState(
     productdata ? { ...initialState, ...productdata } : initialState
   );
+
   const [deletedimages, setdeletedimages] = useState([]);
+  const [newadded, setnewadded] = useState([]);
   const [loading, setloading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setloading(true);
-
-    const formData = new FormData();
-
-    // images
-    data?.variants?.forEach((variant, i) => {
-      variant.images.forEach((image, j) => {
-        if (image instanceof File) {
-          const imagename = "image" + i + j;
-          formData.append(imagename, image);
-          data.variants[i].images[j] = imagename;
-        }
-      });
-    });
-    formData.append("data", JSON.stringify(data));
-    formData.append("deletedimages", JSON.stringify(deletedimages));
-
     try {
-      const res = await fetch("/api/admin/addproduct", {
-        method: "POST",
-        body: formData,
-      });
-      const result = await res.json();
+      const res = await Addproduct(data, deletedimages);
       setdata(initialState);
-      setmessagefn(result?.message);
+      setmessagefn(res?.message);
       setloading(false);
       setdeletedimages([]);
+      setnewadded([]);
     } catch (error) {
       setdata(initialState);
       setloading(false);
@@ -81,6 +70,14 @@ function Clientpage({ productdata }) {
     <>
       <Link
         href={"/admin/products"}
+        onClick={async (e) => {
+          e.preventDefault();
+          if (newadded.length > 0) {
+            setmessagefn("Cleaning up...");
+            await Deleteimages(newadded);
+          }
+          router.push("/admin/products");
+        }}
         className="fixed top-1 right-1 md:top-5 md:right-5 flex items-center justify-center w-10 aspect-square bg-slate-300"
       >
         x
@@ -244,6 +241,7 @@ function Clientpage({ productdata }) {
           setstate={setdata}
           deletedimages={deletedimages}
           setdeletedimages={setdeletedimages}
+          setnewadded={setnewadded}
         />
         {/* seo */}
         <h2 className="my-2 font-bold text-lg">SEO</h2>
@@ -317,7 +315,11 @@ function Clientpage({ productdata }) {
           <button
             className="flex items-center justify-center gap-2  px-4 py-2 bg-white  border  rounded-md"
             type="button"
-            onClick={() => {
+            onClick={async () => {
+              if (newadded.length > 0) {
+                setmessagefn("Cleaning up...");
+                await Deleteimages(newadded);
+              }
               setdata(initialState);
               setdeletedimages([]);
             }}
@@ -327,6 +329,14 @@ function Clientpage({ productdata }) {
           {data?._id && (
             <Link
               href={"/admin/products"}
+              onClick={async (e) => {
+                e.preventDefault();
+                if (newadded.length > 0) {
+                  setmessagefn("Cleaning up...");
+                  await Deleteimages(newadded);
+                }
+                router.push("/admin/products");
+              }}
               className="flex items-center justify-center gap-2  px-4 py-2 bg-white  border  rounded-md"
             >
               Cancel Update

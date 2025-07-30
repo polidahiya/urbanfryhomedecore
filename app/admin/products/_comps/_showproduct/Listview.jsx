@@ -19,14 +19,14 @@ function Listview({ products, setproducts }) {
   };
 
   return (
-    <div className="mt-5 overflow-x-scroll max-w-[calc(100vw-104px)] md:max-w-[calc(100vw-336px)] max-h-screen overflow-y-scroll">
+    <div className="relative mt-5 overflow-x-scroll max-w-[calc(100vw-104px)] md:max-w-[calc(100vw-336px)] max-h-screen overflow-y-scroll">
       <table className="border-collapse border border-gray-300">
         <thead>
-          <tr className="bg-gray-200 ">
+          <tr className="bg-gray-200 sticky top-0 z-20">
             <th className="border border-gray-300 px-4">Image</th>
             <th className="border border-gray-300 px-4">Product Name</th>
             <th className="border border-gray-300 px-4">Category</th>
-            <th className="border border-gray-300 px-4">Room</th>
+            <th className="border border-gray-300 px-4">Subcat</th>
             <th className="border border-gray-300 px-4">Sku</th>
             <th className="border border-gray-300 px-4">Price(MRP)</th>
             <th className="border border-gray-300 px-4">Price(SP)</th>
@@ -39,6 +39,7 @@ function Listview({ products, setproducts }) {
             <th className="border border-gray-300 px-4">Handling Time</th>
             <th className="border border-gray-300 px-4">Key Features</th>
             <th className="border border-gray-300 px-4">Descriptions</th>
+            <th className="border border-gray-300 px-4">Stocks</th>
             <th className="border border-gray-300 px-4">Seo Title</th>
             <th className="border border-gray-300 px-4">Seo Description</th>
             <th className="border border-gray-300 px-4">Seo Keywords</th>
@@ -62,10 +63,10 @@ function Listview({ products, setproducts }) {
                 {product?.productName}
               </td>
               <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
-                {product?.categories}
+                {product?.category}
               </td>
               <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
-                {product?.rooms}
+                {product?.subcat}
               </td>
               <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
                 {product?.sku}
@@ -126,6 +127,9 @@ function Listview({ products, setproducts }) {
                     </li>
                   ))}
                 </ul>
+              </td>
+              <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
+                {product?.stocks}
               </td>
               <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
                 {product?.seotitle}

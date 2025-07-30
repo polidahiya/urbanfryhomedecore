@@ -9,7 +9,7 @@ import Link from "next/link";
 
 function Gridview({ products, setproducts }) {
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-2 gap-y-16 my-10">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-2 gap-y-16 my-10 h-full overflow-y-scroll">
       {products.map((product, i) => (
         <Productcard key={i} product={product} setproducts={setproducts} />
       ))}

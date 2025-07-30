@@ -23,10 +23,15 @@ export const uploadImage = (buffer, folder = "Altorganizer") => {
 };
 
 // delete image from url
-export const Deleteiamgefromurl = (url, folder = "Altorganizer") => {
-  const parts = url.split("/");
-  const fileName = parts[parts.length - 1];
-  const publicId = fileName.split(".")[0];
-  const file = folder + "/" + publicId;
-  cloudinary.uploader.destroy(file);
+export const Deleteiamgefromurl = async (url, folder = "Altorganizer") => {
+  try {
+    const parts = url.split("/");
+    const fileName = parts[parts.length - 1];
+    const publicId = fileName.split(".")[0];
+    const file = `${folder}/${publicId}`;
+    const result = await cloudinary.uploader.destroy(file);
+    return result;
+  } catch (error) {
+    throw error;
+  }
 };

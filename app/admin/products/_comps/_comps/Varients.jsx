@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Dropdownmenu from "./Dropdownmenu";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { MdAddToPhotos } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 import { AppContextfn } from "@/app/Context";
+import { Addimages } from "@/app/_serveractions/_admin/adminAddproduct";
 
-const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
+const ProductVariants = ({
+  variants,
+  setstate,
+  setdeletedimages,
+  setnewadded,
+}) => {
   const { setmessagefn } = AppContextfn();
+  const [imageloading, setimageloading] = useState(false);
   const handleAddVariant = () => {
     setstate((pre) => {
       const updatedstate = { ...pre };
@@ -23,7 +30,7 @@ const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
   const handleDeleteVariant = (index) => {
     // store deleted images
     variants[index].images.forEach((image) => {
-      if (!(image instanceof File)) setdeletedimages((pre) => [...pre, image]);
+      setdeletedimages((pre) => [...pre, image]);
     });
 
     // delete variant
@@ -36,23 +43,10 @@ const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
     });
   };
 
-  const handleAddImage = (variantIndex, file) => {
-    if (file.size > MAX_FILE_SIZE) {
-      setmessagefn(`Image exceeds 1 MB of size`);
-      return;
-    }
-    const updatedVariants = [...variants];
-    if (file) {
-      updatedVariants[variantIndex].images.push(file);
-      setstate((pre) => ({ ...pre, variants: updatedVariants }));
-    }
-  };
-
   const handleDeleteImage = (variantIndex, imageIndex) => {
     // Store deleted images
     const image = variants[variantIndex].images[imageIndex];
-    if (!(image instanceof File)) setdeletedimages((pre) => [...pre, image]);
-
+    setdeletedimages((pre) => [...pre, image]);
     // remove image
     const updatedVariants = [...variants];
     updatedVariants[variantIndex].images = updatedVariants[
@@ -61,6 +55,47 @@ const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
     setstate((pre) => ({ ...pre, variants: updatedVariants }));
   };
 
+  const MAX_FILE_SIZE = 1 * 1024 * 1024;
+  const handleaddimage = async (varientindex, file, imgIndex) => {
+    try {
+      setimageloading(true);
+      if (!file) {
+        setmessagefn(`Please select an image`);
+        return;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        setmessagefn(`Image exceeds 1 MB of size`);
+        return;
+      }
+      const formdata = new FormData();
+      formdata.append("image", file);
+      const res = await Addimages(formdata);
+      if (res.status == 200) {
+        const imageurl = res?.imageurl;
+        const updatedVariants = [...variants];
+
+        if (imgIndex !== undefined && imgIndex !== null) {
+          setdeletedimages((pre) => [
+            ...pre,
+            variants[varientindex].images[imgIndex],
+          ]);
+          updatedVariants[varientindex].images[imgIndex] = imageurl;
+        } else {
+          updatedVariants[varientindex].images.push(imageurl);
+        }
+
+        setstate((pre) => ({ ...pre, variants: updatedVariants }));
+        setnewadded((pre) => [...pre, imageurl]);
+      } else {
+        setmessagefn(`Unable to update image`);
+      }
+      setimageloading(false);
+    } catch (error) {
+      console.log(error);
+      setmessagefn(`Unable to update image`);
+      setimageloading(false);
+    }
+  };
   const handleMoveImage = (variantIndex, imageIndex, direction) => {
     const updatedVariants = [...variants];
     const images = updatedVariants[variantIndex].images;
@@ -72,16 +107,6 @@ const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
       ];
       setstate((pre) => ({ ...pre, variants: updatedVariants }));
     }
-  };
-  const MAX_FILE_SIZE = 1 * 1024 * 1024;
-  const handleupdateimage = (index, imgIndex, file) => {
-    if (file.size > MAX_FILE_SIZE) {
-      setmessagefn(`Image exceeds 1 MB of size`);
-      return;
-    }
-    const updatedVariants = [...variants];
-    updatedVariants[index].images[imgIndex] = file;
-    setstate((pre) => ({ ...pre, variants: updatedVariants }));
   };
 
   return (
@@ -146,10 +171,11 @@ const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
                       <input
                         type="file"
                         accept="image/*"
+                        disabled={imageloading}
                         onChange={(e) => {
                           const file = e.target.files[0];
                           if (file) {
-                            handleupdateimage(index, imgIndex, file);
+                            handleaddimage(index, file, imgIndex);
                           }
                           e.target.value = null; // Reset input
                         }}
@@ -171,18 +197,25 @@ const ProductVariants = ({ variants, setstate, setdeletedimages }) => {
                 <input
                   type="file"
                   accept="image/*"
+                  disabled={imageloading}
                   multiple
                   onChange={(e) => {
                     Array.from(e.target.files).forEach((file) => {
-                      handleAddImage(index, file);
+                      handleaddimage(index, file);
                     });
                     e.target.value = null;
                   }}
                   className="absolute inset-0 mt-2 opacity-0 z-10 cursor-pointer"
                 />
                 <div className="h-full w-full pointer-events-none flex flex-col gap-2 items-center justify-center">
-                  <BiSolidImageAdd className="text-5xl" />
-                  <p className=" text-center text-sm">Add Image</p>
+                  {imageloading ? (
+                    <span className="text-green-600">Uploading...</span>
+                  ) : (
+                    <>
+                      <BiSolidImageAdd className="text-5xl" />
+                      <p className=" text-center text-sm">Add Image</p>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { staticdata } from "@/app/commondata";
 import Dropdownmenu from "../_comps/Dropdownmenu";
 import { Roomsearchproducts } from "@/app/_serveractions/_admin/Getliveproducts";
@@ -34,9 +34,17 @@ function Showproducts({ setshowimportmenu }) {
       setmessagefn(res?.message);
     }
   };
+  useEffect(() => {
+    console.log(Object.keys(staticdata[filterdata.categories]?.subcat)[0]);
+
+    setfilterdata((pre) => ({
+      ...pre,
+      subcat: Object.keys(staticdata[filterdata.categories]?.subcat)[0],
+    }));
+  }, [filterdata.categories]);
 
   return (
-    <div className="px-5 md:px-10">
+    <div className="px-5 md:px-10 flex flex-col h-dvh">
       <div className="my-10  flex items-center gap-2">
         <span className="font-semibold text-2xl">Products</span>{" "}
         <Link
@@ -67,7 +75,6 @@ function Showproducts({ setshowimportmenu }) {
             state={filterdata?.categories}
             onchange={(value) => {
               setfilterdata((pre) => ({ ...pre, categories: value }));
-              handlesearch("category", value);
             }}
             options={Object.keys(staticdata)}
           />
@@ -76,7 +83,6 @@ function Showproducts({ setshowimportmenu }) {
             state={filterdata?.subcat}
             onchange={(value) => {
               setfilterdata((pre) => ({ ...pre, subcat: value }));
-              handlesearch("subcat", value);
             }}
             options={Object.keys(staticdata[filterdata?.categories].subcat)}
           />
