@@ -4,6 +4,7 @@ import { AppContextfn } from "../Context";
 import { RxCross1 } from "react-icons/rx";
 import Details from "../(main)/product/[...props]/_comps/Details";
 import Imagescomp from "../(main)/product/[...props]/_comps/Imagescomp";
+import Link from "next/link";
 
 function Quickview() {
   const { quickview, setquickview } = AppContextfn();
@@ -31,6 +32,13 @@ function Quickview() {
           >
             <RxCross1 className="text-2xl lg:group-hover:rotate-90 duration-300" />
           </button>
+          <Link
+            href={`/product/${product._id}`}
+            onClick={() => setquickview({ show: false, data: {} })}
+            className="absolute bottom-5 left-1/2 -translate-x-1/2 px-10 py-4 bg-theme text-white"
+          >
+            View Full
+          </Link>
         </div>
 
         <button

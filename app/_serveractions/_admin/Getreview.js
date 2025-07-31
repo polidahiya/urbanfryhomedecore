@@ -57,7 +57,7 @@ export const Getreviews = async (
   }
 };
 
-export const Updatereview = async (id, value, productid) => {
+export const Updatereview = async (id, value, productid, stars) => {
   try {
     const res = await Verification("Reviews_permission");
     if (!res?.verified) {
@@ -71,13 +71,16 @@ export const Updatereview = async (id, value, productid) => {
       { $set: { verified: value } }
     );
     await refreshreviewsnow(productid);
+    if (stars == 5) {
+      await refreshreviewsnow("5stars");
+    }
     return { status: 200, message: "Update successfully" };
   } catch (error) {
     return { status: 500, message: "Server error" };
   }
 };
 
-export const Deletereview = async (id, productid) => {
+export const Deletereview = async (id, productid, stars) => {
   try {
     const res = await Verification("Reviews_permission");
     if (!res?.verified) {
@@ -88,6 +91,9 @@ export const Deletereview = async (id, productid) => {
 
     await reviewscollection.deleteOne({ _id: new ObjectId(id) });
     await refreshreviewsnow(productid);
+    if (stars == 5) {
+      await refreshreviewsnow("5stars");
+    }
 
     return { status: 200, message: "Deleted successful" };
   } catch (error) {

@@ -7,7 +7,7 @@ import { staticdata } from "@/app/commondata";
 import Searchedproductcard from "./Searchedproductcard";
 import Searchedproductsfn from "../../_helperfunctions/Searchedproductsfn";
 
-const Searchbox = ({}) => {
+const Searchbox = ({ autoFocus = false }) => {
   const router = useRouter();
   const { showsearchbar, setshowsearchbar } = AppContextfn();
   const [searchedproducts, setsearchedproducts] = useState([]);
@@ -57,6 +57,7 @@ const Searchbox = ({}) => {
             className="forminput h-full w-full px-4 border border-theme outline-none"
             value={searchtext}
             required
+            autoFocus={autoFocus}
             onChange={(e) => {
               setisfocused(true);
               setsearchtext(e.target.value);

@@ -2,8 +2,6 @@ import React from "react";
 import Herosection from "./_comps/Herosection";
 import Marquebanner from "./_comps/Marquebanner";
 import Newarrivals from "./_comps/Newarrivals";
-// import Imagegallery from "./_comps/Imagegallery";
-// import Featuredin from "./_comps/Featuredin";
 // import Blogs from "./_comps/Blogs";
 import Collections from "./_comps/Collections";
 import Customerreviews from "./_comps/Customerreviews";
@@ -141,8 +139,7 @@ async function page() {
   const newarrivals = data.filter((item) => item.lastupdated > lastweek);
 
   // Cachedreviews
-  const allrewiews = await Cachedreviews();
-  const fivestarreviews = allrewiews.filter((item) => item.star == 5);
+  const fivestarreviews = await Cachedreviews("5stars");
 
   return (
     <div className="overflow-x-hidden">

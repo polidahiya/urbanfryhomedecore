@@ -29,11 +29,14 @@ export async function refreshproductsnow() {
 
 // reviews
 export async function Cachedreviews(productid) {
+  const quersies = {
+    "5stars": { verified: true, star: 5 },
+  };
   return unstable_cache(
     async () => {
       const { reviewscollection } = await getcollection();
       const reviewslist = await reviewscollection
-        .find({ verified: true, productid })
+        .find(quersies[productid] || { verified: true, productid })
         .toArray();
 
       reviewslist.forEach((item) => {

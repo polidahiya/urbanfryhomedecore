@@ -12,7 +12,11 @@ import Link from "next/link";
 function Reviewpreviewcard({ review, setrefresher }) {
   const { setmessagefn, setshowdialog } = AppContextfn();
   const handledelete = async () => {
-    const res = await Deletereview(review?._id, review?.productid);
+    const res = await Deletereview(
+      review?._id,
+      review?.productid,
+      review?.star
+    );
     setmessagefn(res?.message);
     if (res?.status == 200) {
       setrefresher((pre) => !pre);
@@ -23,7 +27,8 @@ function Reviewpreviewcard({ review, setrefresher }) {
     const res = await Updatereview(
       review?._id,
       !review?.verified,
-      review?.productid
+      review?.productid,
+      review?.star
     );
     setmessagefn(res?.message);
     if (res?.status == 200) {

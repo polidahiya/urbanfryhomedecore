@@ -63,7 +63,7 @@ function Imagescomp({ images, name }) {
             <button
               key={i}
               className={`flex items-center justify-center p-1`}
-              onClick={() => swiperRef.current.swiper.slideTo(i)}
+              onClick={() => swiperRef.current.swiper.slideToLoop(i)}
               aria-label="Index"
               title="Index"
             >
@@ -88,7 +88,7 @@ function Imagescomp({ images, name }) {
             className={`w-full aspect-square object-cover border cursor-pointer ${
               activeIndex === i && "border-theme"
             }`}
-            onClick={() => swiperRef.current.swiper.slideTo(i)}
+            onClick={() => swiperRef.current.swiper.slideToLoop(i)}
           />
         ))}
       </div>

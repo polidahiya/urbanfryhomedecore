@@ -161,9 +161,7 @@ function ImageSwiper({ device }) {
               key={i}
               className={`flex items-center justify-center p-1`}
               onClick={() => {
-                if (textSwiperRef.current) {
-                  textSwiperRef.current.slideTo(i);
-                }
+                if (textSwiperRef.current) textSwiperRef.current.slideToLoop(i);
               }}
               aria-label="Index"
               title="Index"

@@ -90,12 +90,6 @@ function Details({ product, color, productid, token }) {
       {/* descriptions */}
       <div className="mt-10 border-b border-theme ">
         <Descriptionitem
-          heading="Please Note"
-          details={[
-            "Due to light and screen differences, colors may vary slightly from the image online and the actual product",
-          ]}
-        />
-        <Descriptionitem
           heading="Key Features"
           details={product?.keyfeatures}
         />
