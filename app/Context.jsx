@@ -19,14 +19,19 @@ export function Appwrapper({ children, token, userdata }) {
   };
   const [showdialog, setshowdialog] = useState(showdialoginitialvalues);
   const [quickview, setquickview] = useState({ show: false, data: {} });
+  // newsletter
   const [shownewsletter, setshownewsletter] = useState(false);
   useEffect(() => {
+    const alreadySubscribed = localStorage.getItem("isSubscribed");
+    if (alreadySubscribed) return;
+
     const timer = setTimeout(() => {
       setshownewsletter(true);
     }, 10000);
 
     return () => clearTimeout(timer);
   }, []);
+
   //admin states
 
   // message function

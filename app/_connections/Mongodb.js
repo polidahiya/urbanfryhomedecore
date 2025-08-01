@@ -20,7 +20,14 @@ async function connectToDatabase() {
       reviewscollection: db.collection("reviews"),
       contactmessages: db.collection("contactmessages"),
       couponscollection: db.collection("couponscollection"),
+      Newslettersubscriberscollection: db.collection("Newslettersubscribers"),
     };
+
+    // Create unique index on email for newsletter collection
+    await collections.Newslettersubscriberscollection.createIndex(
+      { email: 1 },
+      { unique: true }
+    );
   }
 
   return collections;

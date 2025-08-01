@@ -4,12 +4,12 @@ import { AppContextfn } from "@/app/Context";
 import Nextimage from "../Nextimage";
 import { RxCross1 } from "react-icons/rx";
 import { motion, AnimatePresence } from "framer-motion";
+import { Adduser } from "./Serveraction";
 
 function Newsletter() {
   const { setmessagefn, shownewsletter, setshownewsletter } = AppContextfn();
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
+    name: "",
     email: "",
   });
 
@@ -23,8 +23,18 @@ function Newsletter() {
 
   const submitform = async (e) => {
     e.preventDefault();
-    const res = await login(formData);
+    const alreadySubscribed = localStorage.getItem("isSubscribed");
+    if (alreadySubscribed) {
+      setmessagefn("You are already subscribed");
+      return;
+    }
+    //
+    const res = await Adduser(formData);
     setmessagefn(res?.message);
+    if (res?.status === 200 || res?.status === 409) {
+      localStorage.setItem("isSubscribed", "true");
+      setshownewsletter(false); // hide popup
+    }
   };
 
   return (
