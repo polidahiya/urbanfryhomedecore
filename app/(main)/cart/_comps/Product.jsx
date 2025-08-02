@@ -63,7 +63,7 @@ function Product({ item, cartproductid }) {
           <div className="w-full flex items-start lg:items-center">
             <div className="min-w-24 w-24 aspect-square">
               <Nextimage
-                src={image || "/uiimages/404.avif"}
+                src={image || "/uiimages/404.jpg"}
                 alt={item?.productName}
                 height={100}
                 width={100}

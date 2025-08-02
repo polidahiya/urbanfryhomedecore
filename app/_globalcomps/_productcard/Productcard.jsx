@@ -4,7 +4,7 @@ import Quickviewbutton from "./Quickviewbutton";
 import Nextimage from "../Nextimage";
 
 function Productcard({ product }) {
-  const firstimage = product?.variants[0]?.images[0] || "/uiimages/404.avif";
+  const firstimage = product?.variants[0]?.images[0] || "/uiimages/404.jpg";
   return (
     <div className="group relative w-full h-full md:max-w-80">
       <div className="relative">

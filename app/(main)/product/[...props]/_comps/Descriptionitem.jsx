@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
-const Descriptionitem = ({ heading, details }) => {
+const Descriptionitem = ({ heading, details, firstisdesc = false }) => {
   const [open, setopen] = useState(false);
   return (
     <div
@@ -25,8 +25,11 @@ const Descriptionitem = ({ heading, details }) => {
       >
         {details?.map((detail, index) => (
           <p key={index} className="text-sm pb-3">
-            <IoIosArrowRoundForward className="inline-block mr-2" />
-            {detail}
+            {!(firstisdesc && index == 0) && (
+              <IoIosArrowRoundForward className="inline-block mr-2" />
+            )}
+            <span dangerouslySetInnerHTML={{ __html: detail }}></span>
+            {/* {detail} */}
           </p>
         ))}
       </div>

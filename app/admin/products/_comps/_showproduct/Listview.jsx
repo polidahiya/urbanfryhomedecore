@@ -51,7 +51,7 @@ function Listview({ products, setproducts }) {
             <tr key={index} className="group relative hover:bg-gray-100">
               <td className="border border-gray-300 px-4 py-2">
                 <Nextimage
-                  src={product?.variants[0]?.images[0] || "/uiimages/404.avif"}
+                  src={product?.variants[0]?.images[0] || "/uiimages/404.jpg"}
                   alt={product?.productName}
                   className="w-full aspect-square object-cover"
                   height={500}

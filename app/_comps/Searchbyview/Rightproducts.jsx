@@ -34,7 +34,7 @@ function Rightproducts({ selectedproducts }) {
 
       {/* Custom Navigation Buttons */}
       <button
-        className="hidden absolute left-5 top-1/2 transform -translate-y-1/2 w-12 aspect-square text-theme md:flex items-center justify-center z-10"
+        className="hidden absolute left-5 top-1/2 transform -translate-y-1/2 w-12 aspect-square bg-white rounded-full text-theme md:flex items-center justify-center z-10"
         onClick={() => swiperRef.current?.slidePrev()}
         aria-label="Scroll Left"
         title="Scroll Left"
@@ -42,7 +42,7 @@ function Rightproducts({ selectedproducts }) {
         <FaAngleLeft />
       </button>
       <button
-        className="hidden absolute right-5 top-1/2 transform -translate-y-1/2 w-12 aspect-square text-theme md:flex items-center justify-center rotate-180 z-10"
+        className="hidden absolute right-5 top-1/2 transform -translate-y-1/2 w-12 aspect-square bg-white rounded-full text-theme md:flex items-center justify-center rotate-180 z-10"
         onClick={() => swiperRef.current?.slideNext()}
         aria-label="Scroll Right"
         title="Scroll Right"

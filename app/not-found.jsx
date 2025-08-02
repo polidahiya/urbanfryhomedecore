@@ -2,13 +2,11 @@ import React from "react";
 import Navbar from "./_globalcomps/Navbar";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import Footer from "./_globalcomps/Footer";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import { IoMdHome } from "react-icons/io";
 import Searchbarsection from "./_globalcomps/_navbarcomps/Searchbarsection";
 import Sidecart from "./_globalcomps/Sidecart";
 import Underlineffect from "./_globalcomps/Underlineffect";
-
 
 async function notfound() {
   const allcookies = await cookies();
@@ -25,12 +23,9 @@ async function notfound() {
         {/* navigations */}
         <div className="flex items-center gap-2 text-sm">
           <Underlineffect
-            Comp={({ innercomp }) => (
-              <Link href={"/"} className="">
-                {innercomp}
-              </Link>
-            )}
+            Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}
             title="Home"
+            styles="w-fit"
           />{" "}
           / <p className="capitalize text-theme">404 Not Found</p>
         </div>
@@ -42,7 +37,7 @@ async function notfound() {
           removed, renamed, or did not exist in the first place.
         </p>
         <Nextimage
-          src="/uiimages/404.avif"
+          src="/uiimages/404.jpg"
           alt="not found image"
           height={400}
           width={400}
@@ -55,7 +50,6 @@ async function notfound() {
           <IoMdHome /> <span className="text-sm">Back to home page</span>
         </Link>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -19,6 +19,7 @@ import { Cachedreviews } from "./_connections/Getcachedata";
 import DeviceDetector from "./_globalcomps/_helperfunctions/Devicedetector";
 import Instaposts from "./_comps/Instaposts";
 import Newsletter from "./_globalcomps/Newsletter/Newsletter";
+import Fixedbuttons from "./_globalcomps/Fixedbuttons";
 
 export const faqlist = [
   {
@@ -184,6 +185,7 @@ async function page() {
       <Searchbarsection />
       <Sidecart />
       <Newsletter />
+      <Fixedbuttons />
     </div>
   );
 }

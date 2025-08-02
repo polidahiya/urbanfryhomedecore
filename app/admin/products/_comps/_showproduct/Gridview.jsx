@@ -32,7 +32,7 @@ const Productcard = ({ product, setproducts }) => {
     <div className="relative max-w-72">
       {product?.variants && (
         <Nextimage
-          src={product?.variants[0]?.images[0] || "/uiimages/404.avif"}
+          src={product?.variants[0]?.images[0] || "/uiimages/404.jpg"}
           alt={product?.productName}
           className="w-full aspect-square object-cover"
           height={500}

@@ -4,11 +4,7 @@ import { cookies } from "next/headers";
 import Footer from "../_globalcomps/Footer";
 import Sidecart from "../_globalcomps/Sidecart";
 import Newsletter from "../_globalcomps/Newsletter/Newsletter";
-
-export const metadata = {
-  title: "",
-  description: "",
-};
+import Fixedbuttons from "../_globalcomps/Fixedbuttons";
 
 export default async function RootLayout({ children }) {
   const allcookies = await cookies();
@@ -20,6 +16,7 @@ export default async function RootLayout({ children }) {
     <>
       <Navbar navtype={false} token={token} userdata={userdata} />
       <Newsletter />
+      <Fixedbuttons />
       <Sidecart />
       <Searchbarsection />
       {children}

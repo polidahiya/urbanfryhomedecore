@@ -5,6 +5,13 @@ import { Cachedproducts } from "../../_connections/Getcachedata";
 import { unstable_cache } from "next/cache";
 import { CACHE_TIME } from "../../commondata";
 import Rightproducts from "./Rightproducts";
+import DeviceDetector from "@/app/_globalcomps/_helperfunctions/Devicedetector";
+
+const imageDimensions = {
+  mobile: { width: 390, height: 390 },
+  tablet: { width: 600, height: 600 },
+  desktop: { width: 1000, height: 1000 },
+};
 
 const itemlist = [
   { productid: "67a1f588f947d97235b59bc7", pos: "top-[35%] left-[40%]" },
@@ -29,6 +36,7 @@ const getFilteredCachedProducts = unstable_cache(
 );
 
 async function Imagetapcomp() {
+  const device = await DeviceDetector();
   const selectedproducts = await getFilteredCachedProducts();
 
   return (
@@ -37,8 +45,8 @@ async function Imagetapcomp() {
         <Nextimage
           src="/uiimages/imagetapimage.jpg"
           alt="imagetapimage"
-          height="800"
-          width="800"
+          height={imageDimensions[device].height}
+          width={imageDimensions[device].width}
           className="w-full h-full"
         ></Nextimage>
         {itemlist.map((item, i) => (
@@ -53,7 +61,14 @@ async function Imagetapcomp() {
           </div>
         ))}
       </div>
-      <div className="flex-1 w-full md:w-1/2 flex items-center justify-center bg-footercolor p-10 lg:p-0">
+      <div className="relative flex-1 w-full md:w-1/2 flex items-center justify-center bg-footercolor p-10 lg:p-0">
+        <Nextimage
+          className="absolute top-0 left-0 w-full h-full object-cover mix-blend-color-burn"
+          src="/uiimages/shopthelookrightbackground.jpg"
+          alt="background image"
+          height={imageDimensions[device].height}
+          width={imageDimensions[device].width}
+        />
         <Rightproducts selectedproducts={selectedproducts} />
       </div>
     </div>

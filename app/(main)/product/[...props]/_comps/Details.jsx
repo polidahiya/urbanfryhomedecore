@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Sizes from "./Sizes";
 import Cartbutton from "./Cartbutton";
 import Descriptionitem from "./Descriptionitem";
@@ -7,10 +7,14 @@ import Sharebutton from "./Sharebutton";
 import ProductDetailsTable from "./ProductDetailsTable";
 import Coloroptions from "./Coloroptions";
 import { AppContextfn } from "@/app/Context";
+import Pincodecomp from "./Pincodecomp";
+
 
 function Details({ product, color, productid, token }) {
   const cartproductname = `${product?._id}-${color}`;
   const { cart, setcart } = AppContextfn();
+  const [pincode, setpincode] = useState("");
+  const [pincodemsg, setpincodemsg] = useState(null);
 
   useEffect(() => {
     if (!cart[cartproductname]?.added)
@@ -22,6 +26,15 @@ function Details({ product, color, productid, token }) {
           quantity: 1,
         },
       }));
+    // local storage pin storage
+    const pin = localStorage.getItem("pin");
+    if (pin) {
+      setpincode(pin);
+      setpincodemsg({
+        status: 200,
+        message: "Available at this pincode",
+      });
+    }
   }, []);
 
   return (
@@ -79,12 +92,19 @@ function Details({ product, color, productid, token }) {
         pid={product?._id}
         name={product?.name}
       />
+      {/* pincodes */}
+      <Pincodecomp
+        pincode={pincode}
+        setpincode={setpincode}
+        pincodemsg={pincodemsg}
+        setpincodemsg={setpincodemsg}
+      />
+
       {/* sizes */}
       <Sizes
         dimensions={product?.dimensions}
         cartproductname={cartproductname}
       />
-
       <hr className="my-5" />
       <Cartbutton product={product} cartproductname={cartproductname} />
       {/* descriptions */}
@@ -100,14 +120,17 @@ function Details({ product, color, productid, token }) {
         <Descriptionitem
           heading="Care & Maintenance"
           details={[
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam dignissimos eaque nulla neque consequuntur! Provident magnam et at nisi illum nam molestias inventore, totam facere libero dolorem ducimus quaerat vitae sapiente? Aspernatur possimus itaque laudantium delectus. Fugit, excepturi? Perferendis fugit, nostrum saepe quia nemo praesentium repudiandae obcaecati eum placeat aspernatur.",
+            "You've put a lot of care into choosing your furnishings. And with continued care at home, they should share your address for many years to come. Now for your owner's manual...",
+            "Color and natural veining will vary with each piece.",
+            "Dust with soft dry cloth.",
+            "Do not use abrasive cleaners.",
+            "Do not leave spills unattended.",
+            "Wipe with soft cloth.",
+            "Use of coasters is recommended.",
+            "MARBLE/STONE is a porous, natural material and prone to stains.",
+            "Wipe spills immediately to reduce staining and water marks.",
           ]}
-        />
-        <Descriptionitem
-          heading="Shipping / Delivery Timeline"
-          details={[
-            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam dignissimos eaque nulla neque consequuntur! Provident magnam et at nisi illum nam molestias inventore, totam facere libero dolorem ducimus quaerat vitae sapiente? Aspernatur possimus itaque laudantium delectus. Fugit, excepturi? Perferendis fugit, nostrum saepe quia nemo praesentium repudiandae obcaecati eum placeat aspernatur.",
-          ]}
+          firstisdesc={true}
         />
       </div>
     </div>

@@ -16,7 +16,7 @@ function Coloroptions({ variants, color, pid, name }) {
             }`}
           >
             <Nextimage
-              src={variant.images[0] || "/uiimages/404.avif"}
+              src={variant.images[0] || "/uiimages/404.jpg"}
               alt={`${name}-${variant.finish}`}
               height={100}
               width={100}

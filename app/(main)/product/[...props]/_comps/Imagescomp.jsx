@@ -28,7 +28,7 @@ function Imagescomp({ images, name }) {
           {images.map((image, i) => (
             <SwiperSlide key={i}>
               <Nextimage
-                src={image || "/uiimages/404.avif"}
+                src={image || "/uiimages/404.jpg"}
                 alt={name.replace(/-/g, " ") + i}
                 height={500}
                 width={500}
@@ -81,7 +81,7 @@ function Imagescomp({ images, name }) {
         {images.map((image, i) => (
           <Nextimage
             key={i}
-            src={image || "/uiimages/404.avif"}
+            src={image || "/uiimages/404.jpg"}
             alt={name.replace(/-/g, " ") + i}
             height={100}
             width={100}

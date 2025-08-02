@@ -61,7 +61,7 @@ function ImageSwiper({ device }) {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row w-full h-svh">
+    <div className="flex flex-col md:flex-row w-full h-screen md:h-svh">
       <div className="w-full md:w-1/2 h-full">
         <Swiper
           onSwiper={(swiper) => (imageSwiperRef.current = swiper)}
@@ -90,7 +90,7 @@ function ImageSwiper({ device }) {
         </Swiper>
       </div>
       {/* Second Swiper (with controls) */}
-      <div className="relative w-full md:w-1/2 h-full">
+      <div className="relative w-full md:w-1/2 h-full min-h-[50vh]">
         <Swiper
           onSwiper={(swiper) => (textSwiperRef.current = swiper)}
           modules={[Navigation, Autoplay, Parallax, Controller]}

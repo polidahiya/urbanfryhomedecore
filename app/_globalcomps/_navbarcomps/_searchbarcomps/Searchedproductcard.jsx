@@ -20,7 +20,7 @@ const Searchedproductcard = ({ searchedproducts }) => {
           >
             <span className="block w-full aspect-square border border-slate-200 overflow-hidden">
               <Nextimage
-                src={item?.variants[0]?.images[0] || "/uiimages/404.avif"}
+                src={item?.variants[0]?.images[0] || "/uiimages/404.jpg"}
                 alt={item?.productName}
                 height={100}
                 width={100}
