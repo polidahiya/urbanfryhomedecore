@@ -8,6 +8,8 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 
 function Imagescomp({ images, name }) {
+  images.length == 0 ? (images = ["/uiimages/404.jpg"]) : images;
+
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
   const [showfullimage, setshowfullimage] = useState({ show: false, index: 0 });

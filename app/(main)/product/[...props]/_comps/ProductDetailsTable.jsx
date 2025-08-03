@@ -3,7 +3,7 @@ import React from "react";
 const ProductDetailsTable = ({ data }) => {
   return (
     <div className="overflow-x-auto">
-      <div className="min-w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-x-5">
+      <div className="min-w-full grid grid-cols-1 gap-x-5">
         {data.map((row, index) => {
           if (row?.value?.trim() != "")
             return (

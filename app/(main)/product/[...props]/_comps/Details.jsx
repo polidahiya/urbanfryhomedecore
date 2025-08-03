@@ -9,7 +9,6 @@ import Coloroptions from "./Coloroptions";
 import { AppContextfn } from "@/app/Context";
 import Pincodecomp from "./Pincodecomp";
 
-
 function Details({ product, color, productid, token }) {
   const cartproductname = `${product?._id}-${color}`;
   const { cart, setcart } = AppContextfn();
@@ -66,8 +65,8 @@ function Details({ product, color, productid, token }) {
         data={
           token
             ? [
-                { label: "SKU", value: product?.sku },
-                { label: "P-id", value: productid },
+                { label: "SKU(admin-only)", value: product?.sku },
+                { label: "P-id(admin-only)", value: productid },
                 { label: "Theme", value: product?.theme },
                 { label: "Material", value: product?.Material },
                 { label: "Finish", value: product?.variants[color].finish },

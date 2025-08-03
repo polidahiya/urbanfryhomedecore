@@ -23,7 +23,7 @@ function Productcard({ product }) {
           <Nextimage
             src={product?.variants[0]?.images[1] || firstimage}
             alt={product?.productName}
-            className="h-full w-full absolute  object-cover opacity-0 lg:group-hover:scale-110 lg:group-hover:opacity-100 duration-300"
+            className="hidden lg:block h-full w-full absolute  object-cover opacity-0 lg:group-hover:scale-110 lg:group-hover:opacity-100 duration-300"
             height={500}
             width={500}
             loading="lazy"
