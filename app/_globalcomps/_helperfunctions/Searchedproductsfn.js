@@ -1,8 +1,6 @@
 "use server";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 const Searchedproductsfn = async (searchQuery) => {
-  console.log(searchQuery);
-  
   let allproducts = await Cachedproducts();
   const words = searchQuery?.split(" ") || [];
 

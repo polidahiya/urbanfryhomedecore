@@ -53,7 +53,11 @@ const Searchbox = ({ autoFocus = false }) => {
           <input
             type="text"
             onFocus={() => setisfocused(true)}
-            onBlur={() => setisfocused(false)}
+            onBlur={() => {
+              setTimeout(() => {
+                setisfocused(false);
+              }, 100);
+            }}
             className="forminput h-full w-full px-4 border border-theme outline-none"
             value={searchtext}
             required
@@ -88,7 +92,9 @@ const Searchbox = ({ autoFocus = false }) => {
                   key={index}
                   className="px-5 py-2 border text-xs rounded-full"
                   onClick={() => {
-                    setshowsearchbar(false);
+                    setTimeout(() => {
+                      setshowsearchbar(false);
+                    }, 100);
                   }}
                 >
                   {categorykey.replace(/-/g, " ")}

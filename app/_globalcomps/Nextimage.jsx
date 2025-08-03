@@ -2,18 +2,18 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-function Nextimage({ ...props }) {
+function Nextimage({ blurDataURL = "/uiimages/loadingimage.gif", ...props }) {
   const [imgError, setImgError] = useState(false);
 
   return (
     <Image
+      {...props}
+      onError={() => setImgError(true)}
       loading={!props.priority ? "lazy" : "eager"}
-      onError={() => {
-        setImgError(true);
-      }}
       title={props?.alt || "Image"}
       unoptimized={imgError}
-      {...props}
+      placeholder="blur"
+      blurDataURL={blurDataURL}
     />
   );
 }
