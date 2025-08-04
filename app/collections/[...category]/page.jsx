@@ -57,6 +57,7 @@ async function page({ params, searchParams }) {
               Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}
               title="Home"
               styles="w-fit"
+              linecolor="bg-white"
             />{" "}
             /{" "}
             {subcat && (
@@ -67,6 +68,7 @@ async function page({ params, searchParams }) {
                   )}
                   title={category.replace(/-/g, " ")}
                   styles="w-fit"
+                  linecolor="bg-white"
                 />{" "}
                 /{" "}
               </>
@@ -74,7 +76,7 @@ async function page({ params, searchParams }) {
             <p className="capitalize text-[#a7a5a2]">{title}</p>
           </div>
           {/*  */}
-          <h1 className="text-white mt-10 text-6xl font-tenor capitalize">
+          <h1 className="text-white mt-10 text-5xl md:text-7xl font-tenor capitalize">
             {title}
           </h1>
           <p className="mt-6 w-full max-w-[500px] text-sm text-justify md:text-start">

@@ -25,7 +25,7 @@ const SortSelector = ({ sort, numberofproduct }) => {
         id="sort"
         value={selectedSort}
         onChange={handleSortChange}
-        className="p-2 text-sm border-none outline-none cursor-pointer"
+        className="p-2 text-sm border-none outline-none cursor-pointer bg-white"
       >
         <option value={0}>Default</option>
         <option value={1}>Newest First</option>

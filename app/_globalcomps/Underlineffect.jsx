@@ -1,6 +1,11 @@
 import React from "react";
 
-function Underlineffect({ Comp, title, styles = "w-full h-full" }) {
+function Underlineffect({
+  Comp,
+  title,
+  styles = "w-full h-full",
+  linecolor = "bg-[#56473e]",
+}) {
   return (
     <div className={`group/underline inline-block ${styles}`}>
       <Comp
@@ -8,7 +13,9 @@ function Underlineffect({ Comp, title, styles = "w-full h-full" }) {
           <span className="flex items-center  w-full h-full">
             <span className="relative w-fit">
               {title}
-              <span className="absolute bottom-0 right-0 h-px w-0 bg-[#56473e] lg:group-hover/underline:left-0 lg:group-hover/underline:w-full duration-300"></span>
+              <span
+                className={`absolute bottom-0 right-0 h-px w-0  lg:group-hover/underline:left-0 lg:group-hover/underline:w-full duration-300 ${linecolor}`}
+              ></span>
             </span>
           </span>
         }

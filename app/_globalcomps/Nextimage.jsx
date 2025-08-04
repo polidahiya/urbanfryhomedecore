@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-function Nextimage({ blurDataURL = "/uiimages/loadingimage.gif", ...props }) {
+function Nextimage({ blurDataURL = "/uiimages/loadingimage.png", ...props }) {
   const [imgError, setImgError] = useState(false);
 
   return (
