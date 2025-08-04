@@ -99,7 +99,7 @@ async function page({ params }) {
       {/* similar products */}
       <div>
         {similarproducts.length != 0 && (
-          <Newarrivals heading="Similar Products" data={similarproducts} />
+          <Newarrivals heading="Customers also loved" data={similarproducts} />
         )}
       </div>
       {/* faq */}
