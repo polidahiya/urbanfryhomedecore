@@ -8,7 +8,7 @@ import Quicklinks from "./_footerclientcomps/Quicklinks";
 import Newslettersubscriblebutton from "./_footerclientcomps/Newslettersubscriblebutton";
 
 function Footer() {
-  const whatwedolinks = [
+  const morelinks = [
     { title: "Frequently Asked Questions", link: "/FAQs" },
     { title: "Care & Maintenance", link: "/CareMaintenance" },
     { title: "Cancellation & Refund Policy", link: "/CancellationRefund" },
@@ -35,7 +35,7 @@ function Footer() {
         <div className="flex-1 text-sm">
           <h3 className="mb-4 tracking-wider">More Links</h3>
           <div className="flex flex-col gap-3">
-            {whatwedolinks.map((item, i) => (
+            {morelinks.map((item, i) => (
               <Underlineffect
                 key={i}
                 Comp={({ innercomp }) => (

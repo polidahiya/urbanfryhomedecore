@@ -63,7 +63,7 @@ function Fullimage({ images, name, showfullimage, setshowfullimage }) {
   }, []);
 
   return (
-    <div className="fixed inset-0 top-0 left-0 z-20 bg-white">
+    <>
       <div
         className="flex items-center h-screen w-full overflow-x-scroll snap-x snap-mandatory hidescroll"
         ref={scrollRef}
@@ -104,28 +104,25 @@ function Fullimage({ images, name, showfullimage, setshowfullimage }) {
         &gt; {/* Right Arrow */}
       </button>
       {/* dots */}
-      <div className="absolute bottom-5 left-0 w-full flex items-center justify-center gap-4">
+      <div className="absolute bottom-5 left-0 w-full flex items-center justify-center">
         {images.map((_, i) => (
-          <div
+          <button
             key={i}
-            className={`relative group w-6 aspect-square cursor-pointer flex items-center justify-center`}
+            className={`flex items-center justify-center p-1`}
             onClick={() => {
               setCurrentIndex(i);
               scrollToImage(i);
             }}
           >
-            <div
-              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-full  rounded-full bg-theme duration-500 lg:group-hover:scale-100 lg:group-hover:bg-opacity-50 ${
-                currentIndex == i
-                  ? "bg-opacity-50 scale-100"
-                  : "bg-opacity-0 scale-0"
+            <span
+              className={`block h-1 rounded-full bg-white duration-150 ${
+                i === currentIndex ? "w-8" : "w-1"
               }`}
-            ></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 aspect-square bg-theme rounded-full"></div>
-          </div>
+            ></span>
+          </button>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 

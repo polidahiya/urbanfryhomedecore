@@ -10,7 +10,7 @@ function Quicklinks() {
     { title: "About Us", link: "/Aboutus" },
     { title: "Core Values", link: "/" },
     { title: "RETURNS", link: "/" },
-    { title: "Urbanfry in Homes", link: "/" },
+    { title: "Urbanfry in Homes", link: "/Urbanfryinhomes" },
     { title: "Blog", link: "/" },
   ];
 

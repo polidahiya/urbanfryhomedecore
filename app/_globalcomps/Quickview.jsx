@@ -29,7 +29,7 @@ function Quickview() {
             className="relative h-full w-full max-w-5xl mx-auto"
           >
             <div className="w-full h-full flex flex-col md:flex-row p-1 bg-white overflow-y-scroll themescroll">
-              <div className="w-full md:w-1/2 md:sticky top-0">
+              <div className="w-full md:w-1/2 md:sticky top-0 z-10">
                 <Imagescomp
                   images={product.variants[0].images}
                   name={product.productName}

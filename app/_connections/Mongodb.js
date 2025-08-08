@@ -21,6 +21,7 @@ async function connectToDatabase() {
       contactmessages: db.collection("contactmessages"),
       couponscollection: db.collection("couponscollection"),
       Newslettersubscriberscollection: db.collection("Newslettersubscribers"),
+      inhomecollection: db.collection("inhomecollection"),
     };
 
     // Create unique index on email for newsletter collection

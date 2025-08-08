@@ -14,6 +14,7 @@ import {
   Deleteimages,
 } from "@/app/_serveractions/_admin/adminAddproduct";
 import { useRouter } from "next/navigation";
+// import Moreoptions from "../_comps/_comps/Moreoptions";
 
 function Clientpage({ productdata }) {
   const router = useRouter();
@@ -35,6 +36,10 @@ function Clientpage({ productdata }) {
     collections: [],
     stocks: 0,
     variants: [{ finish: "Honey Oak", images: [] }],
+    // moreoptions: {
+    //   name: "",
+    //   options: [{ name: "", image: "", pid: "" }],
+    // },
     seotitle: "",
     seodescription: "",
     seokeywords: "",
@@ -243,6 +248,7 @@ function Clientpage({ productdata }) {
           setdeletedimages={setdeletedimages}
           setnewadded={setnewadded}
         />
+        {/* <Moreoptions data={data} setdata={setdata} /> */}
         {/* seo */}
         <h2 className="my-2 font-bold text-lg">SEO</h2>
         {/* title */}

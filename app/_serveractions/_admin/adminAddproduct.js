@@ -70,16 +70,14 @@ export const Deleteproduct = async (variants, id) => {
   }
 };
 
-export const Addimages = async (formdata) => {
+export const Addimages = async (
+  formdata,
+  foldername = "Altorganizer/products"
+) => {
   try {
-    const res = await Verification("Products_permission");
-    if (!res?.verified) {
-      return { status: 400, message: "Invalid user" };
-    }
-
     const arrayBuffer = await formdata.get("image").arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-    const cloudinaryres = await uploadImage(buffer, "Altorganizer/products");
+    const cloudinaryres = await uploadImage(buffer, foldername);
     const imageurl = cloudinaryres.secure_url;
 
     return { status: 200, message: "successfully", imageurl };
@@ -89,14 +87,13 @@ export const Addimages = async (formdata) => {
   }
 };
 
-export const Deleteimages = async (images) => {
+export const Deleteimages = async (
+  images,
+  foldername = "Altorganizer/products"
+) => {
   try {
-    const res = await Verification("Products_permission");
-    if (!res?.verified) {
-      return { status: 400, message: "Invalid user" };
-    }
     images.forEach(async (image) => {
-      await Deleteiamgefromurl(image, "Altorganizer/products");
+      await Deleteiamgefromurl(image, foldername);
     });
     return { status: 200, message: "Cleanup successfully" };
   } catch (error) {

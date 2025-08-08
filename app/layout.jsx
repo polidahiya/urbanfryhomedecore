@@ -4,6 +4,7 @@ import Message from "./_globalcomps/Message";
 import Quickview from "./_globalcomps/Quickview";
 import { cookies } from "next/headers";
 import Googleanayltics from "./_connections/Googleanalytics";
+import Confirmdialogbox from "./admin/_comps/Confirmdialogbox";
 
 export const metadata = {
   title: "AltOrganisers",
@@ -29,6 +30,7 @@ export default async function RootLayout({ children }) {
           <Message />
           <Quickview />
           {children}
+          <Confirmdialogbox />
         </body>
       </Appwrapper>
     </html>

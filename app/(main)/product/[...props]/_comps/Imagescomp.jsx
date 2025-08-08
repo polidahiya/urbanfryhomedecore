@@ -5,6 +5,8 @@ import Fullimage from "./Fullimage";
 import { FaAngleLeft } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
+import { motion, AnimatePresence } from "framer-motion";
+
 import "swiper/css";
 
 function Imagescomp({ images, name }) {
@@ -95,14 +97,24 @@ function Imagescomp({ images, name }) {
         ))}
       </div>
       {/* fullimage preview */}
-      {showfullimage.show && (
-        <Fullimage
-          images={images}
-          name={name}
-          showfullimage={showfullimage}
-          setshowfullimage={setshowfullimage}
-        />
-      )}
+      <AnimatePresence>
+        {showfullimage?.show && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 top-0 left-0 z-20 bg-white"
+          >
+            <Fullimage
+              images={images}
+              name={name}
+              showfullimage={showfullimage}
+              setshowfullimage={setshowfullimage}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
