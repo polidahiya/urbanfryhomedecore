@@ -40,7 +40,7 @@ async function Imagetapcomp() {
   const selectedproducts = await getFilteredCachedProducts();
 
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="flex flex-col md:flex-row">
       <div className="flex-1 w-full md:w-1/2 relative">
         <Nextimage
           src="/uiimages/imagetapimage.jpg"
