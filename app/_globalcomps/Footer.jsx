@@ -6,6 +6,7 @@ import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import Quicklinks from "./_footerclientcomps/Quicklinks";
 import Newslettersubscriblebutton from "./_footerclientcomps/Newslettersubscriblebutton";
+import Pwaprompt from "./Pwaprompt";
 
 function Footer() {
   const morelinks = [
@@ -53,6 +54,7 @@ function Footer() {
             <Link href={"/"}>
               <RiInstagramFill />
             </Link>
+            <Pwaprompt />
           </div>
         </div>
       </div>

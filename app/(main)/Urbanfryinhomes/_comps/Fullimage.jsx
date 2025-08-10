@@ -7,6 +7,7 @@ import { EffectCards } from "swiper/modules";
 import { Inhomecontextfn } from "../Context";
 import { RxCross1 } from "react-icons/rx";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaAngleLeft } from "react-icons/fa6";
 
 export default function Fullimage() {
   const { fullimage, setfullimage, initialfullimagestate } = Inhomecontextfn();
@@ -42,6 +43,7 @@ export default function Fullimage() {
             grabCursor
             modules={[EffectCards]}
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
             className="w-full max-w-96 overflow-hidden"
           >
             {fullimage.data.images.map((item, i) => (
@@ -57,6 +59,23 @@ export default function Fullimage() {
               </SwiperSlide>
             ))}
           </Swiper>
+          {/* Custom Navigation Buttons */}
+          <button
+            className="hidden absolute left-5 top-1/2 transform -translate-y-1/2 w-12 aspect-square text-white md:flex items-center justify-center z-10"
+            onClick={() => swiperRef.current?.slidePrev()}
+            aria-label="Scroll Left"
+            title="Scroll Left"
+          >
+            <FaAngleLeft />
+          </button>
+          <button
+            className="hidden absolute right-5 top-1/2 transform -translate-y-1/2 w-12 aspect-square text-white md:flex items-center justify-center rotate-180 z-10"
+            onClick={() => swiperRef.current?.slideNext()}
+            aria-label="Scroll Right"
+            title="Scroll Right"
+          >
+            <FaAngleLeft />
+          </button>
 
           {/* Custom Pagination Dots */}
           <div className="flex space-x-2 z-10 mt-5">
@@ -66,7 +85,9 @@ export default function Fullimage() {
                 className={`h-[5px] rounded-full transition-all ${
                   i === activeIndex ? "bg-white w-8" : "bg-white/50 w-[5px]"
                 }`}
-                onClick={() => swiperRef.current.swiper.slideTo(i)}
+                onClick={() => {
+                  if (swiperRef.current) swiperRef.current.slideToLoop(i);
+                }}
               ></button>
             ))}
           </div>
