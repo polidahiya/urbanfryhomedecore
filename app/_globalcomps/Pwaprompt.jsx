@@ -7,7 +7,6 @@ const Pwaprompt = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   console.log(isVisible);
-  
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
@@ -42,7 +41,7 @@ const Pwaprompt = () => {
 
   return (
     <>
-      {/* {isVisible && ( */}
+      {isVisible && (
         <button
           onClick={handleInstallClick}
           className="flex items-end gap-1"
@@ -53,7 +52,7 @@ const Pwaprompt = () => {
           <MdInstallMobile className="text-theme md:hidden" />
           <span className="text-sm">Install App</span>
         </button>
-      {/* )} */}
+      )}
     </>
   );
 };

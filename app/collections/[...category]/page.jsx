@@ -5,8 +5,16 @@ import Productcard from "@/app/_globalcomps/_productcard/Productcard";
 import SortSelector from "./_comps/Sorting";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 import Nextimage from "@/app/_globalcomps/Nextimage";
-import { staticdata, collections, specialcategories } from "@/app/commondata";
+import {
+  staticdata,
+  collections,
+  specialcategories,
+  CACHE_TIME,
+} from "@/app/commondata";
 import DeviceDetector from "@/app/_globalcomps/_helperfunctions/Devicedetector";
+import { unstable_cache } from "next/cache";
+import Filtercomp from "./_comps/Filtercomp";
+import { notFound } from "next/navigation";
 
 const imageDimensions = {
   mobile: { width: 390, height: 844 },
@@ -36,15 +44,48 @@ async function page({ params, searchParams }) {
   const device = await DeviceDetector();
 
   const [category, subcat] = (await params).category;
-  const { sort = 0 } = await searchParams;
+  const { sort = 0, pricerange = "0-100000" } = await searchParams;
+  const { min, max } = parseAndValidatePriceRange(pricerange);
 
-  const { title, desc, img } = metadata(category, subcat);
+  const metadatares = metadata(category, subcat);
+  const { title, desc, img } = metadatares;
 
-  const products = await Cachedproducts();
+  // const products = await Cachedproducts();
+  // const filteredproducts = filterProducts(products, category, subcat);
+  // const sortedproducts = getSortedProducts(filteredproducts, sort);
 
-  // filter
-  const filteredproducts = filterProducts(products, category, subcat);
-  const sortedproducts = getSortedProducts(filteredproducts, sort);
+  const getCachedSortedProducts = (category, subcat, sort, min, max) =>
+    unstable_cache(
+      async () => {
+        const products = await Cachedproducts();
+        const filteredproducts = filterProducts(
+          products,
+          category,
+          subcat,
+          min,
+          max
+        );
+        const sortedproducts = getSortedProducts(filteredproducts, sort);
+        return sortedproducts;
+      },
+      [
+        `sorted-products-${category || "all"}-${subcat || "all"}-${
+          sort || "default"
+        }-pricerange-${min}-${max}`,
+      ],
+      {
+        revalidate: CACHE_TIME, // cache for 5 minutes
+        tags: ["products"],
+      }
+    )();
+
+  const cachedfilteredproducts = await getCachedSortedProducts(
+    category,
+    subcat,
+    sort,
+    min,
+    max
+  );
 
   return (
     <div>
@@ -96,11 +137,21 @@ async function page({ params, searchParams }) {
       {/* body */}
       <div className="px-2 md:px-8  py-8">
         {/* sort */}
-        <div>
-          <SortSelector sort={sort} numberofproduct={sortedproducts.length} />
+        <div className="flex items-center justify-between">
+          <SortSelector
+            sort={sort}
+            numberofproduct={cachedfilteredproducts.length}
+          />
+          <Filtercomp
+            category={category}
+            subcat={subcat}
+            metadatares={metadatares}
+            min={min}
+            max={max}
+          />
         </div>
         {/* products  */}
-        {sortedproducts.length === 0 ? (
+        {cachedfilteredproducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 ">
             <Nextimage
               src="/uiimages/notfoundimage.jpg"
@@ -112,7 +163,7 @@ async function page({ params, searchParams }) {
           </div>
         ) : (
           <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] place-items-center gap-x-2 gap-y-16 my-10">
-            {sortedproducts.map((product, i) => (
+            {cachedfilteredproducts.map((product, i) => (
               <Productcard key={i} product={product} />
             ))}
           </div>
@@ -121,21 +172,38 @@ async function page({ params, searchParams }) {
     </div>
   );
 }
-function filterProducts(products, category, subcat) {
+function filterProducts(products, category, subcat, min, max) {
+  // Helper to check price range
+  const inPriceRange = (p) => {
+    const price = Number(p?.sellingprice) || 0;
+    return price >= min && price <= max;
+  };
+
+  let filtered = [];
+
   if (Object.keys(collections).includes(category)) {
-    return products.filter((product) =>
-      product?.collections?.includes(category)
+    filtered = products.filter(
+      (product) =>
+        product?.collections?.includes(category) && inPriceRange(product)
     );
   } else if (category === "all") {
-    return products;
+    filtered = products.filter(inPriceRange);
   } else if (category === "new") {
     const lastmonth = Date.now() - 30 * 24 * 60 * 60 * 1000;
-    return products.filter((item) => item.lastupdated > lastmonth);
+    filtered = products.filter(
+      (item) => item.lastupdated > lastmonth && inPriceRange(item)
+    );
   } else if (subcat) {
-    return products.filter((product) => product?.subcat == subcat);
+    filtered = products.filter(
+      (product) => product?.subcat == subcat && inPriceRange(product)
+    );
   } else {
-    return products.filter((product) => product?.category == category);
+    filtered = products.filter(
+      (product) => product?.category == category && inPriceRange(product)
+    );
   }
+
+  return filtered;
 }
 
 function getSortedProducts(products, sort) {
@@ -151,4 +219,16 @@ function getSortedProducts(products, sort) {
   return sortFunctions[sort] ? products.sort(sortFunctions[sort]) : products;
 }
 
+function parseAndValidatePriceRange(pricerange) {
+  // Must be like "5000-100000"
+  if (!/^\d+-\d+$/.test(pricerange)) return notFound();
+
+  const [min, max] = pricerange.split("-").map((n) => parseInt(n, 10));
+
+  if (isNaN(min) || isNaN(max) || min < 0 || max > 1_000_000 || min >= max) {
+    return notFound();
+  }
+
+  return { min, max };
+}
 export default page;
