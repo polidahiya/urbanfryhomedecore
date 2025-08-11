@@ -72,7 +72,7 @@ async function page({ params, searchParams }) {
         }-pricerange-${min}-${max}`,
       ],
       {
-        revalidate: CACHE_TIME, // cache for 5 minutes
+        revalidate: CACHE_TIME,
         tags: ["products"],
       }
     )();
