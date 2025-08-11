@@ -6,8 +6,7 @@ import { MdInstallMobile } from "react-icons/md";
 const Pwaprompt = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
-  console.log(isVisible);
-
+  
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
       e.preventDefault();

@@ -1,5 +1,5 @@
 "use client";
-import React, { use, useState } from "react";
+import React, { useState, useMemo } from "react";
 import { TbFilterSearch } from "react-icons/tb";
 import { motion, AnimatePresence } from "framer-motion";
 import { RxCross1 } from "react-icons/rx";
@@ -8,6 +8,7 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import { GiCheckMark } from "react-icons/gi";
+import { useSearchParams } from "next/navigation";
 
 export default function Filtercomp({
   category,
@@ -16,21 +17,25 @@ export default function Filtercomp({
   min,
   max,
 }) {
+  const searchParams = useSearchParams();
   const [open, setopen] = useState(false);
   const minPrice = 0;
   const maxPrice = 100000;
   const [range, setRange] = useState([min || 0, max || 100000]);
   const [selectedsubcat, setselectedsubcat] = useState(null);
 
-  const params = new URLSearchParams();
-  params.set("pricerange", `${range[0]}-${range[1]}`);
+  // Compute final URL dynamically
+  const finalurl = useMemo(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("min", range[0]);
+    params.set("max", range[1]);
 
-  let basePath = `/collections/${category}`;
-  if (selectedsubcat) {
-    basePath += `/${selectedsubcat}`;
-  }
-
-  const finalurl = `${basePath}?${params.toString()}`;
+    let basePath = `/collections/${category}`;
+    if (selectedsubcat) {
+      basePath += `/${selectedsubcat}`;
+    }
+    return `${basePath}?${params.toString()}`;
+  }, [searchParams, range, category, selectedsubcat]);
 
   return (
     <div>
@@ -60,13 +65,10 @@ export default function Filtercomp({
               <div className="w-full h-full overflow-y-scroll py-10 px-5 md:px-10 md:py-10 themescroll">
                 <p className="text-2xl font-semibold text-center">Filter</p>
                 <div className="w-full max-w-md mx-auto p-4">
-                  {/* Labels */}
                   <div className="flex justify-between mb-4">
                     <span>₹{range[0].toLocaleString()}</span>
                     <span>₹{range[1].toLocaleString()}</span>
                   </div>
-
-                  {/* Slider */}
                   <Slider
                     range
                     min={minPrice}
@@ -81,7 +83,7 @@ export default function Filtercomp({
                       80000: "₹80k",
                       100000: "₹100k",
                     }}
-                    onChange={(val) => setRange(val)}
+                    onChange={setRange}
                   />
                 </div>
                 {metadatares.subcat && (
@@ -91,33 +93,31 @@ export default function Filtercomp({
                     </p>
                     <div className="grid grid-cols-2 gap-2 mt-2">
                       {Object.entries(metadatares.subcat).map(
-                        ([subcatkey, subcatvalue], i) => {
-                          return (
-                            <button
-                              key={i}
-                              className="group relative aspect-[4/3] md:aspect-[2/1] overflow-hidden"
-                              onClick={() => setselectedsubcat(subcatkey)}
-                            >
-                              <Nextimage
-                                src={subcatvalue.img}
-                                alt={subcatkey}
-                                width={240}
-                                height={120}
-                                className="h-full w-full object-cover lg:group-hover:scale-110 duration-500"
-                              />
-                              <p className="absolute bottom-0 left-0 w-full text-xl md:text-xl font-tenor text-white p-2 md:p-4 bg-gradient-to-b from-transparent to-black/75 text-start">
-                                {subcatkey.replace(/-/g, " ")}
-                              </p>
-                              {selectedsubcat === subcatkey && (
-                                <div className="absolute top-0 left-0 h-full w-full bg-black/50 flex items-center justify-center">
-                                  <div className="bg-theme text-white p-5 rounded-full">
-                                    <GiCheckMark />
-                                  </div>
+                        ([subcatkey, subcatvalue], i) => (
+                          <button
+                            key={i}
+                            className="group relative aspect-[4/3] md:aspect-[2/1] overflow-hidden"
+                            onClick={() => setselectedsubcat(subcatkey)}
+                          >
+                            <Nextimage
+                              src={subcatvalue.img}
+                              alt={subcatkey}
+                              width={240}
+                              height={120}
+                              className="h-full w-full object-cover lg:group-hover:scale-110 duration-500"
+                            />
+                            <p className="absolute bottom-0 left-0 w-full text-xl font-tenor text-white p-2 md:p-4 bg-gradient-to-b from-transparent to-black/75">
+                              {subcatkey.replace(/-/g, " ")}
+                            </p>
+                            {selectedsubcat === subcatkey && (
+                              <div className="absolute top-0 left-0 h-full w-full bg-black/50 flex items-center justify-center">
+                                <div className="bg-theme text-white p-5 rounded-full">
+                                  <GiCheckMark />
                                 </div>
-                              )}
-                            </button>
-                          );
-                        }
+                              </div>
+                            )}
+                          </button>
+                        )
                       )}
                     </div>
                   </div>
@@ -132,7 +132,6 @@ export default function Filtercomp({
                   </Link>
                 </div>
               </div>
-              {/* cancel button */}
               <button
                 className="group h-14 aspect-square absolute top-0 right-0 flex items-center justify-center z-10"
                 onClick={() => setopen(false)}

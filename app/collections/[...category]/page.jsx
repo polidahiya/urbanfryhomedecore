@@ -44,15 +44,13 @@ async function page({ params, searchParams }) {
   const device = await DeviceDetector();
 
   const [category, subcat] = (await params).category;
-  const { sort = 0, pricerange = "0-100000" } = await searchParams;
-  const { min, max } = parseAndValidatePriceRange(pricerange);
+  const { sort = 0, min = 0, max = 100000 } = await searchParams;
+  if (isNaN(min) || isNaN(max) || min < 0 || max > 1000000 || min >= max) {
+    return notFound();
+  }
 
   const metadatares = metadata(category, subcat);
   const { title, desc, img } = metadatares;
-
-  // const products = await Cachedproducts();
-  // const filteredproducts = filterProducts(products, category, subcat);
-  // const sortedproducts = getSortedProducts(filteredproducts, sort);
 
   const getCachedSortedProducts = (category, subcat, sort, min, max) =>
     unstable_cache(
@@ -219,16 +217,4 @@ function getSortedProducts(products, sort) {
   return sortFunctions[sort] ? products.sort(sortFunctions[sort]) : products;
 }
 
-function parseAndValidatePriceRange(pricerange) {
-  // Must be like "5000-100000"
-  if (!/^\d+-\d+$/.test(pricerange)) return notFound();
-
-  const [min, max] = pricerange.split("-").map((n) => parseInt(n, 10));
-
-  if (isNaN(min) || isNaN(max) || min < 0 || max > 1_000_000 || min >= max) {
-    return notFound();
-  }
-
-  return { min, max };
-}
 export default page;

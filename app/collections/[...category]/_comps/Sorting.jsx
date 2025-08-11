@@ -1,17 +1,22 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 const SortSelector = ({ sort, numberofproduct }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams(); // ✅ get current search params
   const [selectedSort, setSelectedSort] = useState(sort);
 
   const handleSortChange = (event) => {
     const value = event.target.value;
     setSelectedSort(value);
-    router.replace(`${pathname}?sort=${value}`, {
+
+    // clone existing params
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("sort", value);
+
+    router.replace(`${pathname}?${params.toString()}`, {
       scroll: false,
     });
   };
