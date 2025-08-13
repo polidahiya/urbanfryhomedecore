@@ -39,7 +39,7 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
           Comp={({ innercomp }) => (
             <Link
               href={"/collections/Last-Chance"}
-              className="h-full w-full py-4 lg:py-0 flex items-center px-3"
+              className="h-full w-full py-4 lg:py-0 flex items-center px-3 md:px-0 md:pr-3"
               onClick={() => {
                 setsidemenutoggle(false);
               }}

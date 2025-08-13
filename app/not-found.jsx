@@ -18,7 +18,7 @@ async function notfound() {
     <div className="min-h-screen mt-36">
       <Sidecart />
       <Searchbarsection />
-      <Navbar navtype={false} token={token} userdata={userdata} />
+      <Navbar token={token} userdata={userdata} />
       <div className="px-8">
         {/* navigations */}
         <div className="flex items-center gap-2 text-sm">

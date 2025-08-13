@@ -88,7 +88,7 @@ async function page({ params, searchParams }) {
   return (
     <div>
       {/* theme */}
-      <div className="relative px-5 md:px-8 overflow-hidden h-fit lg:min-h-dvh">
+      <div className="relative px-5 md:px-8 overflow-hidden h-fit lg:min-h-[calc(100dvh-80px)]">
         <div className="py-36 text-white tracking-wider">
           {/* routes */}
           <div className="flex items-center gap-2 text-sm">

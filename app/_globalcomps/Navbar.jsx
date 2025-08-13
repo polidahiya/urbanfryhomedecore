@@ -10,41 +10,30 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import Menubutton from "./_navbarcomps/Menubutton";
 import Sidemenu from "./_navbarcomps/Sidemenu";
 import Nextimage from "@/app/_globalcomps/Nextimage";
-import { usePathname } from "next/navigation";
 
-function Navbar({ navtype, token, userdata }) {
-  const path = usePathname();
+function Navbar({ token, userdata }) {
   const { setshowsearchbar } = AppContextfn();
-  const [transparentnav, settransparentnav] = useState(true);
+  const [shodow, setshodow] = useState(true);
   const [sidemenutoggle, setsidemenutoggle] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        if (transparentnav) settransparentnav(false);
+        if (!shodow) setshodow(true);
       } else {
-        if (!transparentnav) settransparentnav(true);
+        if (shodow) setshodow(false);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [transparentnav]);
-
-  const ishome = path == "/";
+  }, [shodow]);
 
   return (
     <nav
-      className={`fixed navhover top-0 left-1/2 -translate-x-1/2 w-full lg:max-w-[1920px] flex items-center px-5 md:px-10 h-20 lg:hover:text-inherit lg:hover:bg-white tracking-wider text-xs z-20 duration-300
-        ${
-          navtype && transparentnav
-            ? sidemenutoggle
-              ? "bg-white text-inherit"
-              : ishome
-              ? "text-black"
-              : "text-white" //changed to black
-            : "bg-white text-inherit"
-        }`}
+      className={`sticky top-0 w-full lg:max-w-[1920px] flex items-center px-5 md:px-8 h-20 bg-white tracking-wider text-xs z-20 duration-300 ${
+        shodow && "shadow-md"
+      }`}
     >
       <Menubutton
         sidemenutoggle={sidemenutoggle}
@@ -52,7 +41,7 @@ function Navbar({ navtype, token, userdata }) {
       />
       <Link
         href={"/"}
-        className="scale-125"
+        className="scale-125 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
         onClick={() => {
           setsidemenutoggle(false);
         }}
@@ -60,7 +49,7 @@ function Navbar({ navtype, token, userdata }) {
         <Nextimage
           src="/uiimages/logo.png"
           alt="logo"
-          className="w-16 aspect-square mr-2"
+          className="w-16 aspect-square"
           width={200}
           height={200}
           quality={100}
@@ -113,7 +102,7 @@ const Moreoptions = ({ setshowsearchbar, token, userdata }) => {
       <Accountbutton token={token} userdata={userdata} />
       <Underlineffect
         Comp={({ innercomp }) => (
-          <Link href="/cart"  className="flex items-center">
+          <Link href="/cart" className="flex items-center">
             <span className="hidden lg:block underlineff">{innercomp}</span>
             <RiShoppingCartLine className="text-2xl lg:hidden" />
             {`(${totalQuantity})`}

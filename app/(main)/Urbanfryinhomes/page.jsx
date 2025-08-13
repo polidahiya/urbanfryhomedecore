@@ -45,7 +45,7 @@ async function page() {
 
   return (
     <Inhomecontextwrapper>
-      <div className="pt-32 px-5 md:px-8">
+      <div className="pt-12 px-5 md:px-8">
         <div className="flex items-center gap-2 text-sm">
           <Underlineffect
             Comp={({ innercomp }) => <Link href="/">{innercomp}</Link>}

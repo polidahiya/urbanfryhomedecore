@@ -14,7 +14,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <>
-      <Navbar navtype={false} token={token} userdata={userdata} />
+      <Navbar  token={token} userdata={userdata} />
       <Newsletter />
       <Fixedbuttons />
       <Sidecart />

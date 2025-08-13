@@ -143,8 +143,8 @@ async function page() {
   const fivestarreviews = await Cachedreviews("5stars");
 
   return (
-    <div className="overflow-x-hidden">
-      <Navbar navtype={true} token={token} userdata={userdata} />
+    <div>
+      <Navbar token={token} userdata={userdata} />
       <Herosection device={device} />
       {/* marque section */}
       <section className="w-full bg-footercolor text-[#56473e] overflow-hidden relative flex items-center">

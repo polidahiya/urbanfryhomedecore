@@ -37,7 +37,7 @@ async function page({ params }) {
 
   return (
     <div className="min-h-screen">
-      <div className="mt-20 md:mt-28 flex flex-col lg:flex-row gap-10 px-5 md:px-10">
+      <div className="md:mt-8 flex flex-col lg:flex-row gap-10 px-5 md:px-10">
         <div className="w-full lg:w-1/2">
           <Imagescomp
             images={product?.variants[color]?.images}

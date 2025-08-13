@@ -61,7 +61,7 @@ function ImageSwiper({ device }) {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row w-full h-screen md:h-svh">
+    <div className="flex flex-col md:flex-row w-full h-[calc(100vh-80px)] md:h-[calc(100svh-80px)]">
       <div className="w-full md:w-1/2 h-full">
         <Swiper
           onSwiper={(swiper) => (imageSwiperRef.current = swiper)}

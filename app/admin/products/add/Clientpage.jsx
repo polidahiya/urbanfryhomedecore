@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { staticdata, materialoptions, collections } from "@/app/commondata";
 import Standardinputfield from "../_comps/_comps/Standardinputfield";
 import Multiplevaluesfield from "../_comps/_comps/Multiplevaluesfield";
@@ -16,35 +16,37 @@ import {
 import { useRouter } from "next/navigation";
 // import Moreoptions from "../_comps/_comps/Moreoptions";
 
+const initialState = {
+  category: Object.keys(staticdata)[0],
+  subcat: Object.keys(Object.values(staticdata)[0]?.subcat)[0],
+  productName: "",
+  sku: "",
+  handlingtime: "",
+  mrp: "",
+  sellingprice: "",
+  Material: "Acacia Wood",
+  Warranty: "",
+  theme: "",
+  dimensions: [""],
+  weight: "",
+  keyfeatures: [""],
+  descriptions: [""],
+  collections: [],
+  stocks: 0,
+  variants: [{ finish: "Honey Oak", images: [] }],
+  // moreoptions: {
+  //   name: "",
+  //   options: [{ name: "", image: "", pid: "" }],
+  // },
+  seotitle: "",
+  seodescription: "",
+  seokeywords: "",
+  available: true,
+};
+
 function Clientpage({ productdata }) {
   const router = useRouter();
-  const initialState = {
-    category: Object.keys(staticdata)[0],
-    subcat: Object.keys(Object.values(staticdata)[0]?.subcat)[0],
-    productName: "",
-    sku: "",
-    handlingtime: "",
-    mrp: "",
-    sellingprice: "",
-    Material: "Acacia Wood",
-    Warranty: "",
-    theme: "",
-    dimensions: [""],
-    weight: "",
-    keyfeatures: [""],
-    descriptions: [""],
-    collections: [],
-    stocks: 0,
-    variants: [{ finish: "Honey Oak", images: [] }],
-    // moreoptions: {
-    //   name: "",
-    //   options: [{ name: "", image: "", pid: "" }],
-    // },
-    seotitle: "",
-    seodescription: "",
-    seokeywords: "",
-    available: true,
-  };
+
   const { setmessagefn } = AppContextfn();
   const [data, setdata] = useState(
     productdata ? { ...initialState, ...productdata } : initialState
@@ -53,6 +55,14 @@ function Clientpage({ productdata }) {
   const [deletedimages, setdeletedimages] = useState([]);
   const [newadded, setnewadded] = useState([]);
   const [loading, setloading] = useState(false);
+
+  useEffect(() => {
+    setdata((pre) => ({
+      ...pre,
+      subcat: Object.keys(staticdata[data.category]?.subcat)[0],
+    }));
+  }, [data.category]);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setloading(true);
@@ -108,18 +118,16 @@ function Clientpage({ productdata }) {
         {/* category */}
         <Dropdownmenu
           title={"Category"}
-          state={data?.category || initialState?.category}
+          state={data?.category}
           onchange={(value) => setdata((pre) => ({ ...pre, category: value }))}
           options={Object.keys(staticdata)}
         />
         {/* subcat*/}
         <Dropdownmenu
           title={"Sub-category"}
-          state={data?.subcat || initialState?.subcat}
+          state={data?.subcat}
           onchange={(value) => setdata((pre) => ({ ...pre, subcat: value }))}
-          options={Object.keys(
-            staticdata[data?.category || initialState?.category].subcat
-          )}
+          options={Object.keys(staticdata[data?.category].subcat)}
         />
         {/* sku id */}
         <Standardinputfield
