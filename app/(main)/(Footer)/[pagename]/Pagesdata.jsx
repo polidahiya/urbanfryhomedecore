@@ -46,7 +46,7 @@ const Pagesdata = {
           </h2>
           <p>
             Urbanfry Homes was founded by{" "}
-            <strong>Apoorv and Ruchi Shrivastava</strong>, a duo who chose
+            <strong>Ruchi & Apoorv Singhal</strong>, a duo who chose
             passion over the predictable. Both MBA graduates with thriving
             corporate careers, they set out to build something deeply personal —
             a brand rooted in the belief that furniture shouldn&apos;t just fill

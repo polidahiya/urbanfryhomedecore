@@ -41,19 +41,20 @@ function Navbar({ token, userdata }) {
       />
       <Link
         href={"/"}
-        className="scale-125 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 md:w-64"
         onClick={() => {
           setsidemenutoggle(false);
         }}
       >
-        <Nextimage
-          src="/uiimages/logo.png"
+        <img src="/uiimages/logotext.png" alt="" />
+        {/* <Nextimage
+          src="/uiimages/logotext.png"
           alt="logo"
-          className="w-16 aspect-square"
-          width={200}
-          height={200}
+          className=""
+          width={174}
+          height={17}
           quality={100}
-        />
+        /> */}
       </Link>
       {/* side menu */}
       <Sidemenu

@@ -60,7 +60,7 @@ function Footer() {
       </div>
       <div className="w-full h-px bg-theme opacity-50 my-10" />
       {/* bottom info */}
-      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-10 mt-10 text-theme">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-5 lg:gap-10 mt-10 text-text">
         <Underlineffect
           Comp={({ innercomp }) => (
             <Link href={`tel:${mobile}`}>{innercomp}</Link>

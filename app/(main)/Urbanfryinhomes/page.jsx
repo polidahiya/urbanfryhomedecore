@@ -60,7 +60,7 @@ async function page() {
           </h1>
         </div>
         <div className="py-10 min-h-96 mt-10">
-          <div className="grid grid-cols-[repeat(auto-fill,_minmax(180px,_1fr))] gap-4">
+          <div className="grid grid-cols-[repeat(auto-fill,_minmax(150px,_1fr))] md:grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-4">
             {haveaccess && <Newbutton />}
             {posts.map((post, i) => (
               <Card key={i} haveaccess={haveaccess} post={post} />

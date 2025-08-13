@@ -90,7 +90,7 @@ function ImageSwiper({ device }) {
         </Swiper>
       </div>
       {/* Second Swiper (with controls) */}
-      <div className="relative w-full md:w-1/2 h-full min-h-[50vh]">
+      <div className="relative w-full md:w-1/2 h-full min-h-[calc(50vh-40px)]">
         <Swiper
           onSwiper={(swiper) => (textSwiperRef.current = swiper)}
           modules={[Navigation, Autoplay, Parallax, Controller]}

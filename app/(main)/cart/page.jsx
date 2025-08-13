@@ -17,7 +17,7 @@ async function page() {
 
   const { userdata, cartitems, valuebeforecoupon, coupondata, totalPrice } =
     await Getcart();
-  const maxcashpaymentavailable = 25000;
+  const maxcashpaymentavailable = 10000;
 
   return (
     <Cartcontextwrapper
