@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "./_globalcomps/Navbar";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import { IoMdHome } from "react-icons/io";
@@ -9,16 +7,10 @@ import Sidecart from "./_globalcomps/Sidecart";
 import Underlineffect from "./_globalcomps/Underlineffect";
 
 async function notfound() {
-  const allcookies = await cookies();
-  const token = allcookies.get("token");
-  const parseduserdata = allcookies.get("userdata")?.value;
-  const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
-
   return (
-    <div className="min-h-screen mt-36">
+    <div className="min-h-screen mt-12">
       <Sidecart />
       <Searchbarsection />
-      <Navbar token={token} userdata={userdata} />
       <div className="px-8">
         {/* navigations */}
         <div className="flex items-center gap-2 text-sm">

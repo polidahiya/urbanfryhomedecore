@@ -12,7 +12,6 @@ async function connectToDatabase() {
     db = client.db("Altorgainzers");
 
     collections = {
-      blogscollection: db.collection("blogs"),
       Admindatacollection: db.collection("Admindata"),
       Productscollection: db.collection("Products"),
       userscollection: db.collection("users"),
@@ -22,6 +21,7 @@ async function connectToDatabase() {
       couponscollection: db.collection("couponscollection"),
       Newslettersubscriberscollection: db.collection("Newslettersubscribers"),
       inhomecollection: db.collection("inhomecollection"),
+      blogscollection: db.collection("blogscollection"),
     };
 
     // Create unique index on email for newsletter collection

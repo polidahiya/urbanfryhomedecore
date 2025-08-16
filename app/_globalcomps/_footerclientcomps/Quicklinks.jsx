@@ -9,9 +9,9 @@ function Quicklinks() {
   const quicklink1 = [
     { title: "About Us", link: "/Aboutus" },
     { title: "Core Values", link: "/" },
-    { title: "RETURNS", link: "/" },
+    { title: "Returns", link: "/" },
     { title: "Urbanfry in Homes", link: "/Urbanfryinhomes" },
-    { title: "Blog", link: "/" },
+    { title: "Blogs", link: "/Blogs" },
   ];
 
   return (

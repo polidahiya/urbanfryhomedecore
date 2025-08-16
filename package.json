@@ -20,11 +20,13 @@
     "nextjs-google-analytics": "^2.3.7",
     "nodemailer": "^6.9.16",
     "papaparse": "^5.5.3",
+    "quill-delta-to-html": "^0.12.1",
     "razorpay": "^2.9.6",
     "rc-slider": "^11.1.8",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",
+    "react-quill": "^2.0.0",
     "sharp": "^0.34.3",
     "swiper": "^11.2.10",
     "ua-parser-js": "^2.0.4"

@@ -13,7 +13,7 @@ import Nextimage from "@/app/_globalcomps/Nextimage";
 
 function Navbar({ token, userdata }) {
   const { setshowsearchbar } = AppContextfn();
-  const [shodow, setshodow] = useState(true);
+  const [shodow, setshodow] = useState(false);
   const [sidemenutoggle, setsidemenutoggle] = useState(false);
 
   useEffect(() => {
@@ -56,6 +56,7 @@ function Navbar({ token, userdata }) {
           quality={100}
         /> */}
       </Link>
+
       {/* side menu */}
       <Sidemenu
         sidemenutoggle={sidemenutoggle}

@@ -24,7 +24,7 @@ function Card({ haveaccess, post }) {
           className="w-full aspect-[3/4] object-cover cursor-zoom-in"
         />
       </div>
-      <p className="text-center py-2 line-clamp-2">{post?.title}</p>
+      <p className="text-center my-2 line-clamp-2">{post?.title}</p>
       {haveaccess && (
         <div className="absolute top-0 right-0 flex flex-col gap-2 lg:hidden lg:group-hover:flex p-1">
           <button

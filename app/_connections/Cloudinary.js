@@ -29,8 +29,7 @@ export const Deleteiamgefromurl = async (url, folder = "Altorganizer") => {
     const fileName = parts[parts.length - 1];
     const publicId = fileName.split(".")[0];
     const file = `${folder}/${publicId}`;
-    const result = await cloudinary.uploader.destroy(file);
-    return result;
+    await cloudinary.uploader.destroy(file);
   } catch (error) {
     throw error;
   }

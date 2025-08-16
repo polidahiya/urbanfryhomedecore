@@ -212,6 +212,7 @@ export const permissions = [
   "Users_permission",
   "Reviews_permission",
   "Urbanfry_in_homes_permission",
+  "Blogs_permission",
 ];
 
 export const Statuslists = [
