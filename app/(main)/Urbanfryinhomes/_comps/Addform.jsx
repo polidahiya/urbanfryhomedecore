@@ -92,6 +92,8 @@ export default function Inhomeform() {
       await Revalidatepathfn("/Urbanfryinhomes");
       setshowinhomeform(false);
       setdata(initialdatastate);
+      setnewadded([]);
+      setdeletedimages([]);
     }
   };
 

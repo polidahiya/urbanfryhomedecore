@@ -92,6 +92,8 @@ export default function Clientpage({ editdata }) {
           { insert: "Start writing your blog here...\n" },
         ],
       });
+      setnewadded([]);
+      setdeletedimages([]);
     }
   };
 
