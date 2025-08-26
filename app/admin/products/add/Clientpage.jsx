@@ -14,7 +14,7 @@ import {
   Deleteimages,
 } from "@/app/_serveractions/_admin/adminAddproduct";
 import { useRouter } from "next/navigation";
-// import Moreoptions from "../_comps/_comps/Moreoptions";
+import Moreoptions from "../_comps/_comps/Moreoptions";
 
 const initialState = {
   category: Object.keys(staticdata)[0],
@@ -34,10 +34,12 @@ const initialState = {
   collections: [],
   stocks: 0,
   variants: [{ finish: "Honey Oak", images: [] }],
-  // moreoptions: {
-  //   name: "",
-  //   options: [{ name: "", image: "", pid: "" }],
-  // },
+  moreoptions: [
+    // {
+    //   name: "test",
+    //   options: [{ name: "", image: "[], imageindex: 0, price: "", mrp: "" }],
+    // },
+  ],
   seotitle: "",
   seodescription: "",
   seokeywords: "",
@@ -62,7 +64,7 @@ function Clientpage({ productdata }) {
       subcat: Object.keys(staticdata[data.category]?.subcat)[0],
     }));
   }, [data.category]);
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setloading(true);
@@ -93,7 +95,7 @@ function Clientpage({ productdata }) {
           }
           router.push("/admin/products");
         }}
-        className="fixed top-1 right-1 md:top-5 md:right-5 flex items-center justify-center w-10 aspect-square bg-slate-300"
+        className="fixed top-1 right-1 md:top-5 md:right-5 flex items-center justify-center w-10 aspect-square bg-slate-300 z-10"
       >
         x
       </Link>
@@ -256,7 +258,12 @@ function Clientpage({ productdata }) {
           setdeletedimages={setdeletedimages}
           setnewadded={setnewadded}
         />
-        {/* <Moreoptions data={data} setdata={setdata} /> */}
+        <Moreoptions
+          data={data}
+          setdata={setdata}
+          setdeletedimages={setdeletedimages}
+          setnewadded={setnewadded}
+        />
         {/* seo */}
         <h2 className="my-2 font-bold text-lg">SEO</h2>
         {/* title */}

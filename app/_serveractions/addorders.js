@@ -27,18 +27,16 @@ async function addorder(paymentMethod) {
         { $inc: { orderNumber: 1 } },
         { returnDocument: "after", upsert: true }
       );
-      const pid = key.split("-")[0];
-      const color = key.split("-")[1];
-
+      const pid = product?._id;
       const finalproductdata = {
         pid,
-        color: product.variants[color].finish,
-        sku: product.sku,
-        price: product.sellingprice,
+        color: product.selectedvariant?.finish,
+        price: product.rawprice,
         quantity: product.quantity,
-        dimension: product.dimension,
         name: product.productName,
-        image: product.variants[color]?.images[0],
+        image: product.selectedvariant?.image,
+        moreoptions: product.moreoptions,
+        selecteddata: product.selecteddata,
       };
 
       let order = {

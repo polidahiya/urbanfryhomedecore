@@ -3,7 +3,6 @@ import React, { useRef, useState, useEffect } from "react";
 import Editor from "./Editor";
 import Standardinputfield from "@/app/admin/products/_comps/_comps/Standardinputfield";
 //
-import { RxCross1 } from "react-icons/rx";
 import { LuCloudUpload } from "react-icons/lu";
 import { AppContextfn } from "@/app/Context";
 import {
@@ -116,6 +115,7 @@ export default function Clientpage({ editdata }) {
         <div className="flex items-center">
           <div className="flex-1">
             <button
+              type="button"
               className="border px-5 py-1 rounded-md"
               onClick={handlecancel}
             >

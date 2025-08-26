@@ -47,7 +47,7 @@ function Sharebutton({ sku, description, image }) {
   };
 
   return (
-    <div className="group relative flex items-center gap-2 text-theme lg:hover:text-black cursor-pointer">
+    <div className="group relative flex items-center gap-2 text-theme lg:hover:text-black cursor-pointer mt-4 w-fit">
       <GoShareAndroid className="text-2xl" />
       <p className="relative">Share</p>
       <div className="absolute top-0 right-0 w-full hidden group-hover:block">

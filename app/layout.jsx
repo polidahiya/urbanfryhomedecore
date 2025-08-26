@@ -18,13 +18,15 @@ export default async function RootLayout({ children }) {
   const token = allcookies.get("token");
   const parseduserdata = allcookies.get("userdata")?.value;
   const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
+  const cookiecart = allcookies.get("cart")?.value;
+  const parsedCart = cookiecart ? JSON.parse(cookiecart) : {};
 
   return (
     <html lang="en">
       <head>
         <Googleanayltics />
       </head>
-      <Appwrapper token={token} userdata={userdata}>
+      <Appwrapper token={token} userdata={userdata} parsedCart={parsedCart}>
         <body
           className={`antialiased themescroll lg:max-w-[1920px] mx-auto overflow-x-hidden`}
         >

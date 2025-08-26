@@ -11,17 +11,13 @@ function Product({ item, cartproductid }) {
   const pathname = usePathname();
   const { cart, setcart, setmessagefn } = AppContextfn();
   const MAX_QUANTITY = 10; // Define the maximum quantity
-  console.log(cartproductid);
-
-  const color = cartproductid.split("-")[1];
-  const image = item?.variants[color]?.images[0];
 
   const handleQuantityChange = async (slug) => {
     let dorevalidate = false;
     setcart((pre) => {
       const updatedcart = { ...pre };
       const currentItem = updatedcart[cartproductid];
-      const newquantity = item.quantity + slug;
+      const newquantity = item?.quantity + slug;
 
       if (newquantity >= 1 && newquantity <= MAX_QUANTITY) {
         dorevalidate = true;
@@ -55,15 +51,17 @@ function Product({ item, cartproductid }) {
     setmessagefn("Removed from cart");
   };
 
+  const params = new URLSearchParams(item?.selecteddata || {}).toString();
+
   return (
     <div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 lg:gap-0 border-b py-5">
       {/* product */}
       <div className="text-left  lg:flex-[3] ">
-        <Link href={`/product/${item?._id}/${color}`} className="block">
+        <Link href={`/product/${item?._id}?${params}`} className="block">
           <div className="w-full flex items-start lg:items-center">
             <div className="min-w-24 w-24 aspect-square">
               <Nextimage
-                src={image || "/uiimages/404.jpg"}
+                src={item?.selectedvariant.image}
                 alt={item?.productName}
                 height={100}
                 width={100}
@@ -72,8 +70,19 @@ function Product({ item, cartproductid }) {
             </div>
 
             <div className="w-full pl-5">
-              <p>{item.productName}</p>
-              <p className="opacity-60 mt-1">Size : {item?.dimension}</p>
+              <p>{item?.productName}</p>
+              <p className="opacity-60 mt-1">
+                {item?.moreoptions?.map((opti, i) => (
+                  <React.Fragment key={i}>
+                    <span>
+                      {opti?.name} :{" "}
+                      {opti?.options[item?.selecteddata[opti?.name]]?.name}
+                    </span>
+                    <span> | </span>
+                  </React.Fragment>
+                ))}
+                <span>Color : {item?.selectedvariant?.finish}</span>
+              </p>
             </div>
           </div>
         </Link>
@@ -82,11 +91,11 @@ function Product({ item, cartproductid }) {
       <div className="flex items-center justify-center gap-5 lg:flex-1 mt-5 lg:mt-0">
         <div>
           <span className="lg:hidden">Price : </span> ₹{" "}
-          {parseInt(item.sellingprice, 10).toLocaleString("en-IN")}
+          {parseInt(item?.rawprice, 10).toLocaleString("en-IN")}
         </div>
         <div className="font-medium lg:hidden">
           <span>Total : </span>₹{" "}
-          {parseInt(item.sellingprice * item.quantity, 10).toLocaleString(
+          {parseInt(item?.rawprice * item?.quantity, 10).toLocaleString(
             "en-IN"
           )}
         </div>
@@ -123,9 +132,7 @@ function Product({ item, cartproductid }) {
       {/*total price */}
       <div className="lg:flex-1 hidden lg:block">
         ₹{" "}
-        {parseInt(item.sellingprice * item.quantity, 10).toLocaleString(
-          "en-IN"
-        )}
+        {parseInt(item?.rawprice * item?.quantity, 10).toLocaleString("en-IN")}
       </div>
       {/* delete button */}
       <div className="absolute lg:static bottom-7 right-5 lg:flex-1">

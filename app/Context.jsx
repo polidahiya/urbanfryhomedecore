@@ -3,8 +3,8 @@ import Cookies from "js-cookie";
 import { createContext, useContext, useState, useEffect } from "react";
 const AppContext = createContext({});
 
-export function Appwrapper({ children, token, userdata }) {
-  const [cart, setcart] = useState({});
+export function Appwrapper({ children, token, userdata, parsedCart }) {
+  const [cart, setcart] = useState(parsedCart || {});
   const [showsearchbar, setshowsearchbar] = useState(false);
   const [showsidecart, setshowsidecart] = useState({
     show: false,
@@ -42,23 +42,11 @@ export function Appwrapper({ children, token, userdata }) {
     ]);
   };
 
-  // get cookies cart
-  useEffect(() => {
-    const cookieCart = Cookies.get("cart");
-    if (cookieCart) {
-      const parsedCart = JSON.parse(cookieCart);
-      setcart(parsedCart);
-    }
-  }, []);
-
   //  update cookies when cart change
   useEffect(() => {
     if (cart && Object.keys(cart).length > 0) {
-      Cookies.set("cart", JSON.stringify(cart));
-    } else {
-      // Remove the cookie if the cart is empty
-      Cookies.remove("cart");
-    }
+      Cookies.set("cart", JSON.stringify(cart), { expires: 1 });
+    } 
   }, [cart]);
 
   return (

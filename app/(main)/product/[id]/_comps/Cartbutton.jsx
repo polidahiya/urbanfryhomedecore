@@ -4,7 +4,7 @@ import { AppContextfn } from "@/app/Context";
 import { useRouter } from "next/navigation";
 import { PiSmileySad } from "react-icons/pi";
 
-function Cartbutton({ product, cartproductname }) {
+function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
   const router = useRouter();
   const { cart, setcart, setmessagefn, setquickview } = AppContextfn();
   const MAX_QUANTITY = 10; // Define the maximum quantity
@@ -58,36 +58,46 @@ function Cartbutton({ product, cartproductname }) {
   };
 
   return (
-    <div className="flex gap-4 h-16">
-      <div className="flex items-stretch h-full w-fit border border-theme lg:hover:border-black">
-        {/* Decrement Button */}
-        <button
-          onClick={handleDecrement}
-          disabled={cart[cartproductname]?.quantity <= 1}
-          className={`flex items-center justify-center h-full aspect-square text-xl ${
-            cart[cartproductname]?.quantity <= 1 && "opacity-50"
-          }`}
-        >
-          -
-        </button>
-        {/* display quantity */}
-        <p className="flex items-center justify-center h-full w-5">
-          {cart[cartproductname]?.quantity}
-        </p>
-        {/* Increment Button */}
-        <button
-          onClick={handleIncrement}
-          disabled={cart[cartproductname]?.quantity >= MAX_QUANTITY}
-          className={`flex items-center justify-center h-full aspect-square text-xl ${
-            cart[cartproductname]?.quantity >= MAX_QUANTITY && "opacity-50"
-          }`}
-        >
-          +
-        </button>
+    <div className="sticky bottom-0 bg-white py-1">
+      <div className="flex items-center justify-between">
+        <div className="h-14 flex items-stretch  w-fit border border-theme lg:hover:border-black bg-white">
+          {/* Decrement Button */}
+          <button
+            onClick={handleDecrement}
+            disabled={cart[cartproductname]?.quantity <= 1}
+            className={`flex items-center justify-center h-full aspect-square text-xl ${
+              cart[cartproductname]?.quantity <= 1 && "opacity-50"
+            }`}
+          >
+            -
+          </button>
+          {/* display quantity */}
+          <p className="flex items-center justify-center h-full w-5">
+            {cart[cartproductname]?.quantity}
+          </p>
+          {/* Increment Button */}
+          <button
+            onClick={handleIncrement}
+            disabled={cart[cartproductname]?.quantity >= MAX_QUANTITY}
+            className={`flex items-center justify-center h-full aspect-square text-xl ${
+              cart[cartproductname]?.quantity >= MAX_QUANTITY && "opacity-50"
+            }`}
+          >
+            +
+          </button>
+        </div>
+        <div className="flex flex-col items-end gap-1">
+          <span className="text-sm text-gray-500 line-through">
+            ₹{finalmrp?.toLocaleString("en-IN")}
+          </span>
+          <span className="text-xl">
+            ₹{finalprice?.toLocaleString("en-IN")}
+          </span>
+        </div>
       </div>
       {/* add to cart button */}
       <button
-        className="w-full h-full text-white bg-theme text-sm "
+        className="h-14 w-full text-white bg-theme text-sm mt-2"
         onClick={handleAddToCart}
       >
         {product?.available ? (

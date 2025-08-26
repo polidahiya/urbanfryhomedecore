@@ -7,7 +7,7 @@ const Descriptionitem = ({ heading, details, firstisdesc = false }) => {
   const [open, setopen] = useState(false);
   return (
     <div
-      className={`pt-5 cursor-pointer border-t border-theme px-2`}
+      className={`pt-5 cursor-pointer border-t border-theme last:border-b px-2`}
       onClick={() => {
         setopen((pre) => !pre);
       }}

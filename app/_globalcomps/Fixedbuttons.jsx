@@ -4,9 +4,13 @@ import { FaWhatsapp } from "react-icons/fa";
 import { IoArrowUpOutline } from "react-icons/io5";
 import { mobile } from "../commondata";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export default function Fixedbuttons() {
+  const path = usePathname();
   const [showScroll, setShowScroll] = useState(false);
+
+  const isproductpage = path.includes("/product/");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +34,11 @@ export default function Fixedbuttons() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 flex flex-col gap-4 z-50">
+    <div
+      className={`fixed  flex flex-col gap-4 z-50 ${
+        isproductpage ? "bottom-36 right-6" : "bottom-6 right-6"
+      }`}
+    >
       <AnimatePresence>
         {showScroll && (
           <motion.button

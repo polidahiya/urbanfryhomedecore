@@ -6,7 +6,7 @@ import { Navigation, Controller, Parallax } from "swiper/modules"; // Import mod
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import RatingStars from "../(main)/product/[...props]/_comps/_commentcomp/RatingStars";
+import RatingStars from "../(main)/product/[id]/_comps/_commentcomp/RatingStars";
 
 function Customerreviews({ fivestarreviews }) {
   const prevRef = useRef(null);

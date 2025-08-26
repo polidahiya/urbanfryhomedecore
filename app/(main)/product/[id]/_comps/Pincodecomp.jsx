@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 const indianPincodes = [
@@ -50,7 +51,7 @@ const indianPincodes = [
 
 function Pincodecomp({ pincode, setpincode, pincodemsg, setpincodemsg }) {
   return (
-    <div className="mt-10">
+    <div className="mb-10">
       <form
         className=" w-full flex items-center gap-2"
         onSubmit={(e) => {
@@ -83,14 +84,14 @@ function Pincodecomp({ pincode, setpincode, pincodemsg, setpincodemsg }) {
         <input
           type="submit"
           value="Check"
-          className="px-4 py-2 text-sm bg-theme text-white hover:bg-theme/90 cursor-pointer"
+          className="px-4 py-2 text-sm  text-theme border-b cursor-pointer"
         />
       </form>
       {pincodemsg && (
         <p
           className={`${
             pincodemsg?.status === 200 ? "text-green-600" : "text-red-600"
-          } text-sm mt-2`}
+          } text-xs mt-2`}
         >
           {pincodemsg?.message}
         </p>

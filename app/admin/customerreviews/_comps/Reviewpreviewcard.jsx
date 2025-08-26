@@ -1,5 +1,5 @@
 import React from "react";
-import RatingStars from "@/app/(main)/product/[...props]/_comps/_commentcomp/RatingStars";
+import RatingStars from "@/app/(main)/product/[id]/_comps/_commentcomp/RatingStars";
 import { AiFillDelete } from "react-icons/ai";
 import { AppContextfn } from "@/app/Context";
 import {

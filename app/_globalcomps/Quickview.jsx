@@ -2,14 +2,33 @@
 import React from "react";
 import { AppContextfn } from "../Context";
 import { RxCross1 } from "react-icons/rx";
-import Details from "../(main)/product/[...props]/_comps/Details";
-import Imagescomp from "../(main)/product/[...props]/_comps/Imagescomp";
+import Details from "../(main)/product/[id]/_comps/Details";
+import Imagescomp from "../(main)/product/[id]/_comps/Imagescomp";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 function Quickview() {
   const { quickview, setquickview } = AppContextfn();
+
   const product = quickview?.data;
+  const cartproductname =
+    `_id:${product?._id}|vcolor:${0}|` +
+    (product?.moreoptions || [])
+      .sort()
+      .map((moreoption) => `${moreoption?.name}:${0}`)
+      .join("|");
+
+  let rawprice = Number(product?.sellingprice);
+  let rawmrp = Number(product?.mrp);
+  product?.moreoptions?.forEach((moreoption) => {
+    const selectedoption = moreoption?.options[0];
+    rawprice += Number(selectedoption?.price);
+    rawmrp += Number(selectedoption?.mrp);
+  });
+
+  const allsearchparams = product?.moreoptions?.map((moreoption) => {
+    return { [moreoption?.name]: 0 };
+  });
 
   return (
     <AnimatePresence>
@@ -36,7 +55,15 @@ function Quickview() {
                 />
               </div>
               <div className="w-full md:w-1/2 px-2 md:px-8 py-8">
-                <Details product={product} color="0" />
+                <Details
+                  product={product}
+                  color={0}
+                  productid={product?._id}
+                  cartproductname={cartproductname}
+                  allsearchparams={allsearchparams}
+                  rawprice={rawprice}
+                  rawmrp={rawmrp}
+                />
                 {/* view full button */}
                 <div className="pb-2 md:pb-8 pt-5">
                   <Link

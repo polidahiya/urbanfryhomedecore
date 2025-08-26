@@ -1,3 +1,4 @@
+import React from "react";
 import { Statuslists } from "@/app/commondata";
 import {
   updateorderstatus,
@@ -13,6 +14,7 @@ import Couponedprice from "@/app/_globalcomps/_helperfunctions/Couponedprice";
 const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
   const orderData = showfullorder.data;
   const product = orderData.product;
+
   const coupon = orderData.coupondata;
   const { setmessagefn, setshowdialog } = AppContextfn();
   const [status, setstatus] = useState(orderData?.status);
@@ -97,13 +99,22 @@ const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
               loading="lazy"
             ></Nextimage>
             <div className="text-sm">
-              <h3 className="font-semibold text-gray-800">
-                {product?.productName}
-              </h3>
-              <p className="text-gray-600">SKU: {product?.sku}</p>
-              <p className="text-gray-600">Dimension: {product?.dimension}</p>
+              <h3 className="font-semibold text-gray-800">{product?.name}</h3>
               <p className="text-gray-600">Quantity: {product?.quantity}</p>
               <p className="text-gray-600">Color: {product?.color}</p>
+              {/*  */}
+              <p className="text-gray-600">
+                {product?.moreoptions?.map((opti, i) => (
+                  <React.Fragment key={i}>
+                    <span>
+                      {opti?.name} :{" "}
+                      {opti?.options[product?.selecteddata[opti?.name]]?.name}
+                    </span>
+                    <span className="last:hidden"> | </span>
+                  </React.Fragment>
+                ))}
+              </p>
+              {/*  */}
               <div>
                 <span className="font-medium">Price:</span>{" "}
                 <span className="text-green-600 font-semibold">

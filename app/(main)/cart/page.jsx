@@ -17,7 +17,7 @@ async function page() {
 
   const { userdata, cartitems, valuebeforecoupon, coupondata, totalPrice } =
     await Getcart();
-  const maxcashpaymentavailable = 10000;
+  const maxcashpaymentavailable = 100000;
 
   return (
     <Cartcontextwrapper
@@ -25,7 +25,7 @@ async function page() {
       verified={verified}
       userdata={userdata}
     >
-      <div className="pt-32 px-5 md:px-8">
+      <div className="pt-16 px-5 md:px-8">
         {/* navigations */}
         <div className="flex items-center gap-2 text-sm">
           <Underlineffect

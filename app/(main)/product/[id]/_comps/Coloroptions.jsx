@@ -3,19 +3,37 @@ import React from "react";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import Link from "next/link";
 import { AppContextfn } from "@/app/Context";
+import { useSearchParams } from "next/navigation";
 
-function Coloroptions({ variants, color, pid, name }) {
+function Coloroptions({ variants, color, name, productid }) {
+  const searchParams = useSearchParams();
   const { setquickview } = AppContextfn();
+
+  function getLink(newParams) {
+    const params = new URLSearchParams(searchParams.toString());
+
+    // Add/Update params
+    Object.entries(newParams).forEach(([key, value]) => {
+      if (value === null || value === undefined) {
+        params.delete(key); // remove param if value is null
+      } else {
+        params.set(key, value); // update/add param
+      }
+    });
+
+    return `/product/${productid}?${params.toString()}`;
+  }
+
   return (
     <div className="mt-5">
       <p className="block text-sm">Color Options</p>
       <div className="flex gap-2 mt-2">
         {variants?.map((variant, index) => (
           <Link
-            href={`/product/${pid}/${index}`}
+            href={getLink({ vcolor: index })}
             key={index}
-            className={`border  outline-2 outline-theme overflow-hidden ${
-              index == color ? "outline" : "lg:hover:outline"
+            className={`border overflow-hidden ${
+              index == color && "border-theme"
             }`}
             onClick={() => {
               setquickview({ show: false, data: {} });

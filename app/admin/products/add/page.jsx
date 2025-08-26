@@ -18,6 +18,9 @@ async function page({ searchParams }) {
         data.variants.forEach((variant) => {
           variant.images = [];
         });
+        data.moreoptions.forEach((option) => {
+          option.options.forEach((item) => (item.image = []));
+        });
         productdata = data;
       }
     }

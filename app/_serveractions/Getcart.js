@@ -19,14 +19,44 @@ export default async function Getcart() {
     const productMap = new Map(
       products.map((product) => [product._id, product])
     );
+
     const cartitems = filteredcart.map(([key, item]) => {
-      const productid = key.split("-")[0];
-      const productData = productMap.get(productid) || {};
-      return [key, { ...item, ...productData }];
+      const { _id, ...rest } = key.split("|").reduce((acc, part) => {
+        const [key, value] = part.split(":");
+        acc[key] = value;
+        return acc;
+      }, {});
+
+      const productData = productMap.get(_id) || {};
+      //
+      let rawprice = Number(productData?.sellingprice);
+      productData?.moreoptions?.forEach((moreoption) => {
+        const selectedoption = moreoption?.options[rest[moreoption?.name] || 0];
+        rawprice += Number(selectedoption?.price);
+      });
+      const { productName, moreoptions, variants } = productData;
+      //
+      return [
+        key,
+        {
+          ...item,
+          _id,
+          productName,
+          moreoptions,
+          selectedvariant: {
+            image:
+              variants[rest?.vcolor || 0]?.images[0] || "/uiimages/404.jpg",
+            finish: variants[rest?.vcolor || 0]?.finish,
+          },
+          rawprice,
+          selecteddata: { ...rest },
+        },
+      ];
     });
+
     // total price
     let totalPrice = cartitems.reduce(
-      (total, [key, value]) => total + value.quantity * value.sellingprice,
+      (total, [key, value]) => total + value.quantity * Number(value.rawprice),
       0
     );
 
