@@ -3,8 +3,10 @@ import React from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AppContextfn } from "@/app/Context";
+import { Productctxfn } from "../Productcontext";
 
-function Options({ moreoptions, allsearchparams, productid }) {
+function Options({ moreoptions, allsearchparams, productid, quickview }) {
+  const { setSelectedImageIndex } = Productctxfn();
   const searchParams = useSearchParams();
   const { setquickview } = AppContextfn();
 
@@ -41,6 +43,7 @@ function Options({ moreoptions, allsearchparams, productid }) {
                 scroll={false}
                 onClick={() => {
                   setquickview({ show: false, data: {} });
+                  if (!quickview) setSelectedImageIndex(option?.imageindex);
                 }}
               >
                 {option?.image[0] && (

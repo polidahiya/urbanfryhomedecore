@@ -19,6 +19,7 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
   };
   const [showdialog, setshowdialog] = useState(showdialoginitialvalues);
   const [quickview, setquickview] = useState({ show: false, data: {} });
+  const [quickviewclosebutton, setquickviewclosebutton] = useState(true);
   // newsletter
   const [shownewsletter, setshownewsletter] = useState(false);
   useEffect(() => {
@@ -46,7 +47,7 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
   useEffect(() => {
     if (cart && Object.keys(cart).length > 0) {
       Cookies.set("cart", JSON.stringify(cart), { expires: 1 });
-    } 
+    }
   }, [cart]);
 
   return (
@@ -70,6 +71,8 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
         setquickview,
         shownewsletter,
         setshownewsletter,
+        quickviewclosebutton,
+        setquickviewclosebutton,
       }}
     >
       {children}

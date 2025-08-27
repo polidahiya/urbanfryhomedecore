@@ -122,7 +122,7 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
               }}
             >
               <span className="underline">Shopping cart</span>
-              <span className="px-5">{totalQuantity}</span>
+              <span className="px-5">{totalQuantity || 0}</span>
             </Link>
             <Link
               href={"/account"}

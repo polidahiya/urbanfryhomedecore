@@ -79,7 +79,7 @@ function Pincodecomp({ pincode, setpincode, pincodemsg, setpincodemsg }) {
           max={999999}
           value={pincode}
           onChange={(e) => setpincode(e.target.value)}
-          className="px-3 py-2 text-sm border-b border-gray-300 focus:outline-none focus:border-theme placeholder:text-gray-400"
+          className="max-w-28 px-3 py-2 text-sm border-b border-gray-300 focus:outline-none focus:border-theme placeholder:text-gray-400"
         />
         <input
           type="submit"

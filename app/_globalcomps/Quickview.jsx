@@ -8,7 +8,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 function Quickview() {
-  const { quickview, setquickview } = AppContextfn();
+  const { quickview, setquickview, quickviewclosebutton } = AppContextfn();
 
   const product = quickview?.data;
   const cartproductname =
@@ -63,9 +63,10 @@ function Quickview() {
                   allsearchparams={allsearchparams}
                   rawprice={rawprice}
                   rawmrp={rawmrp}
+                  quickview={true}
                 />
                 {/* view full button */}
-                <div className="pb-2 md:pb-8 pt-5">
+                <div className="pb-0 md:pb-8 pt-5 px-5 md:px-0">
                   <Link
                     href={`/product/${product._id}`}
                     onClick={() => setquickview({ show: false, data: {} })}
@@ -77,12 +78,14 @@ function Quickview() {
               </div>
             </div>
             {/* cancel button */}
-            <button
-              className="group h-14 aspect-square absolute top-0 right-0 flex items-center justify-center z-10"
-              onClick={() => setquickview({ show: false, data: {} })}
-            >
-              <RxCross1 className="text-2xl lg:group-hover:rotate-90 duration-300" />
-            </button>
+            {quickviewclosebutton && (
+              <button
+                className="group h-14 aspect-square absolute top-0 right-0 flex items-center justify-center z-10"
+                onClick={() => setquickview({ show: false, data: {} })}
+              >
+                <RxCross1 className="text-2xl lg:group-hover:rotate-90 duration-300" />
+              </button>
+            )}
           </motion.div>
 
           <button

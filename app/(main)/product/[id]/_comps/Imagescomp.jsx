@@ -1,20 +1,33 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import Fullimage from "./Fullimage";
 import { FaAngleLeft } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { AppContextfn } from "@/app/Context";
+import { Productctxfn } from "../Productcontext";
 import "swiper/css";
 
 function Imagescomp({ images, name }) {
+  const { setquickviewclosebutton } = AppContextfn();
+  const { selectedImageIndex } = Productctxfn();
   images.length == 0 ? (images = ["/uiimages/404.jpg"]) : images;
-
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
   const [showfullimage, setshowfullimage] = useState({ show: false, index: 0 });
+
+  useEffect(() => {
+    if (swiperRef.current?.swiper) {
+      swiperRef.current.swiper.slideToLoop(selectedImageIndex);
+      setActiveIndex(selectedImageIndex);
+    }
+  }, [selectedImageIndex]);
+
+  useEffect(() => {
+    setquickviewclosebutton(!showfullimage.show);
+  }, [showfullimage.show]);
 
   return (
     <>
@@ -22,11 +35,10 @@ function Imagescomp({ images, name }) {
         <div className="relative w-full group ">
           <Swiper
             ref={swiperRef}
-            modules={[Navigation, Autoplay]}
+            modules={[Navigation]}
             spaceBetween={0}
             slidesPerView={1}
             speed={1000}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
             loop
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           >

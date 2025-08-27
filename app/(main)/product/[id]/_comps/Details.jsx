@@ -19,6 +19,7 @@ function Details({
   allsearchparams,
   rawprice,
   rawmrp,
+  quickview = false,
 }) {
   const { cart, setcart } = AppContextfn();
   const [pincode, setpincode] = useState("");
@@ -27,12 +28,12 @@ function Details({
   useEffect(() => {
     setcart((pre) => {
       let updateddata = { ...pre };
-
-      updateddata = Object.fromEntries(
-        Object.entries(updateddata).filter(
-          ([key, value]) => value.added || key == cartproductname
-        )
-      );
+      if (!quickview)
+        updateddata = Object.fromEntries(
+          Object.entries(updateddata).filter(
+            ([key, value]) => value.added || key == cartproductname
+          )
+        );
 
       if (!updateddata[cartproductname]?.added) {
         updateddata[cartproductname] = {
@@ -61,6 +62,7 @@ function Details({
 
   let finalprice = rawprice * (currentproduct?.quantity || 1);
   let finalmrp = rawmrp * (currentproduct?.quantity || 1);
+
   return (
     <div className="min-h-28 px-5 md:px-0">
       {/* name */}
@@ -107,6 +109,7 @@ function Details({
         moreoptions={product?.moreoptions}
         allsearchparams={allsearchparams}
         productid={productid}
+        quickview={quickview}
       />
       <hr className="my-5" />
       <Pincodecomp
