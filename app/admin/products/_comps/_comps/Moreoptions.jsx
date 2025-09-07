@@ -94,10 +94,8 @@ function Moreoptions({ data, setdata, setdeletedimages, setnewadded }) {
                         <button
                           type="button"
                           onClick={() => {
-                            setdeletedimages((pre) => [
-                              ...pre,
-                              ...data.moreoptions[i].options[j].image,
-                            ]);
+                            const images = data.moreoptions[i].options[j].image;
+                            setdeletedimages((pre) => [...pre, ...images]);
                             //
                             const updateddata = { ...data };
                             updateddata.moreoptions[i].options.splice(j, 1);
