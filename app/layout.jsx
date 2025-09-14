@@ -20,14 +20,14 @@ export default async function RootLayout({ children }) {
   const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
   const cookiecart = allcookies.get("cart")?.value;
   const parsedCart = cookiecart ? JSON.parse(cookiecart) : {};
-  return (
-    <html>
-      <head></head>
-      <body>
-        <p className="text-red-500">server error!</p>
-      </body>
-    </html>
-  );
+  // return (
+  //   <html>
+  //     <head></head>
+  //     <body>
+  //       <p className="text-red-500">server error!</p>
+  //     </body>
+  //   </html>
+  // );
 
   return (
     <html lang="en">
