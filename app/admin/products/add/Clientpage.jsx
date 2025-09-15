@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { staticdata, materialoptions, collections } from "@/app/commondata";
+import { staticdata, materialoptions } from "@/app/commondata";
 import Standardinputfield from "../_comps/_comps/Standardinputfield";
 import Multiplevaluesfield from "../_comps/_comps/Multiplevaluesfield";
 import ProductVariants from "../_comps/_comps/Varients";
@@ -31,7 +31,7 @@ const initialState = {
   weight: "",
   keyfeatures: [""],
   descriptions: [""],
-  collections: [],
+  tags: [],
   stocks: 0,
   variants: [{ finish: "Honey Oak", images: [] }],
   moreoptions: [
@@ -233,11 +233,11 @@ function Clientpage({ productdata }) {
         />
         {/* collections */}
         <Multiselectmenu
-          state={data?.collections || []}
-          statename="collections"
+          state={data?.tags || []}
+          statename="tags"
           setState={setdata}
-          title={"Collections"}
-          options={Object.keys(collections)}
+          title={"Tags"}
+          options={["Best Seller", "Sale"]}
         />
         {/* mrp */}
         <Standardinputfield

@@ -66,7 +66,8 @@ const PaymentMethod = ({ totalPrice, maxcashpaymentavailable }) => {
       {/* Disabled Message */}
       {totalPrice >= maxcashpaymentavailable && (
         <p className="text-xs text-gray-500">
-          * COD is available only for orders below ₹5,000.
+          * COD available in Delhi NCR only or for Orders below{" "}
+          {maxcashpaymentavailable}/-
         </p>
       )}
     </div>

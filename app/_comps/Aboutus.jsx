@@ -8,12 +8,23 @@ function Aboutus() {
         About Us
       </h2>
       <p className="text-justify md:text-center max-w-[900px] mx-auto px-5 mt-5">
-        At Altorganisers, we are passionate about creating beautifully designed,
-        functional storage solutions that enhance the lives of modern Indian
-        women. We are a homegrown brand and we love bringing organization and
-        aesthetic appeal to homes using eco-friendly, sustainable materials.
-        Seeing our products make a positive impact on families and helping them
-        create serene, organized spaces is what drives us every day.
+        At Urbanfry Homes, we believe furniture is more than function—it’s a
+        story of style, craft, and the warmth of a home well-lived. Born from a
+        passion to bring timeless design and everyday utility together, we
+        specialize in premium solid wood furniture that celebrates both
+        durability and beauty.
+      </p>
+      <p className="text-justify md:text-center max-w-[900px] mx-auto px-5 mt-5">
+        Every piece is thoughtfully designed to blend global aesthetics with
+        Indian sensibilities—whether it’s the clean lines of Scandinavian
+        minimalism, the cozy charm of bohemian spaces, or the natural textures
+        of rattan and solid wood. Crafted with care and finished to perfection,
+        our collections are made to last for generations.
+      </p>
+      <p className="text-justify md:text-center max-w-[900px] mx-auto px-5 mt-5">
+        With Urbanfry Homes, you don’t just furnish a space—you curate an
+        experience. From statement sideboards to cozy accent chairs, our designs
+        add character, comfort, and aspiration to modern living.
       </p>
       <div className="flex items-center justify-center mt-8">
         <Link

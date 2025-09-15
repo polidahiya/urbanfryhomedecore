@@ -179,10 +179,9 @@ function filterProducts(products, category, subcat, min, max) {
 
   let filtered = [];
 
-  if (Object.keys(collections).includes(category)) {
+  if (category=="Last-Chance") {
     filtered = products.filter(
-      (product) =>
-        product?.collections?.includes(category) && inPriceRange(product)
+      (product) => product?.stocks == 1 && inPriceRange(product)
     );
   } else if (category === "all") {
     filtered = products.filter(inPriceRange);
