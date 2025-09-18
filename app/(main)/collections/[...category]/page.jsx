@@ -15,6 +15,11 @@ import DeviceDetector from "@/app/_globalcomps/_helperfunctions/Devicedetector";
 import { unstable_cache } from "next/cache";
 import Filtercomp from "./_comps/Filtercomp";
 import { notFound } from "next/navigation";
+import Verification from "@/app/_connections/Verifytoken";
+import Seoeditbutton from "./_comps/Seoeditbutton";
+import { getseodata } from "@/app/_serveractions/Seodata";
+import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
+import PixelCategoryView from "./_comps/Viewcontenttrack";
 
 const imageDimensions = {
   mobile: { width: 390, height: 844 },
@@ -22,6 +27,9 @@ const imageDimensions = {
   desktop: { width: 1920, height: 1080 },
 };
 
+const getseokey = (category, subcat) => {
+  return `${category || "Home"}-${subcat || "All"}`;
+};
 const metadata = (category, subcat) => {
   if (Object.keys(collections).includes(category)) {
     return { title: category?.replace(/-/g, " "), ...collections[category] };
@@ -41,6 +49,7 @@ const metadata = (category, subcat) => {
 };
 
 async function page({ params, searchParams }) {
+  const tokenres = await Verification("Seo_permission");
   const device = await DeviceDetector();
 
   const [category, subcat] = (await params).category;
@@ -50,7 +59,7 @@ async function page({ params, searchParams }) {
   }
 
   const metadatares = metadata(category, subcat);
-  const { title, desc, img } = metadatares;
+  const { title, img } = metadatares;
 
   const getCachedSortedProducts = (category, subcat, sort, min, max) =>
     unstable_cache(
@@ -85,8 +94,17 @@ async function page({ params, searchParams }) {
     max
   );
 
+  const seokey = getseokey(category, subcat);
+  const seodata = await getseodata(seokey);
+  const converter = new QuillDeltaToHtmlConverter(seodata?.delta, {});
+  const html = converter.convert();
+
   return (
     <div>
+      <PixelCategoryView
+        categoryName={seokey}
+        pids={cachedfilteredproducts.map((p) => p?._id)}
+      />
       {/* theme */}
       <div className="relative px-5 md:px-8 overflow-hidden h-fit lg:min-h-[calc(100dvh-80px)]">
         <div className="py-36 text-white tracking-wider">
@@ -119,7 +137,7 @@ async function page({ params, searchParams }) {
             {title}
           </h1>
           <p className="mt-6 w-full max-w-[500px] text-sm text-justify md:text-start">
-            {desc}
+            {seodata?.about}
           </p>
         </div>
         {/* background */}
@@ -131,6 +149,10 @@ async function page({ params, searchParams }) {
           quality={100}
           className="block absolute top-0 left-0 w-full h-full brightness-[0.35] object-cover -z-10"
         />
+        {/* seo edit button */}
+        {tokenres.verified && (
+          <Seoeditbutton editdata={seodata} seokey={seokey} />
+        )}
       </div>
       {/* body */}
       <div className="px-2 md:px-8  py-8">
@@ -166,6 +188,8 @@ async function page({ params, searchParams }) {
             ))}
           </div>
         )}
+        {/* description */}
+        <div dangerouslySetInnerHTML={{ __html: html }} className="mt-10" />
       </div>
     </div>
   );
@@ -179,7 +203,7 @@ function filterProducts(products, category, subcat, min, max) {
 
   let filtered = [];
 
-  if (category=="Last-Chance") {
+  if (category == "Last-Chance") {
     filtered = products.filter(
       (product) => product?.stocks == 1 && inPriceRange(product)
     );
@@ -215,5 +239,52 @@ function getSortedProducts(products, sort) {
 
   return sortFunctions[sort] ? products.sort(sortFunctions[sort]) : products;
 }
+
+export const generateMetadata = async ({ params }) => {
+  const [category, subcat] = (await params).category;
+  const metadatares = metadata(category, subcat);
+  const { title, img } = metadatares;
+
+  const seokey = getseokey(category, subcat);
+  const seodata = await getseodata(seokey);
+
+  const image = img || "/default-image.jpg";
+  const url = `https://urbanfryhomes.com/collections/${category}${
+    subcat ? "/" + subcat : ""
+  }`;
+
+  return {
+    title: seodata?.title || `${title} Collection | Urbanfry Homes`,
+    description: seodata?.metadesc,
+    keywords: seodata?.keywords,
+
+    openGraph: {
+      title: seodata?.title || `${title} Collection | Urbanfry Homes`,
+      description: seodata?.metadesc,
+      type: "website",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: `${title} category preview`,
+        },
+      ],
+      url,
+      siteName: "Urbanfry Homes",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: seodata?.title || `${title} Collection | Urbanfry Homes`,
+      description: seodata?.metadesc,
+      images: [image],
+    },
+
+    alternates: {
+      canonical: url,
+    },
+  };
+};
 
 export default page;

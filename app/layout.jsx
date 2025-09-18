@@ -5,11 +5,12 @@ import Quickview from "./_globalcomps/Quickview";
 import { cookies } from "next/headers";
 import Googleanayltics from "./_connections/Googleanalytics";
 import Confirmdialogbox from "./admin/_comps/Confirmdialogbox";
+import Metapixels from "./_connections/Metapixels";
 
 export const metadata = {
-  title: "AltOrganisers",
+  title: "Urbanfry Homes",
   description:
-    "At Altorganisers, we are dedicated to crafting beautifully designed and functional storage solutions that bring harmony to modern Indian homes. As a homegrown brand, we blend aesthetics with utility, using eco-friendly, sustainable materials to create products that simplify and elevate everyday living. Our passion lies in helping families transform their spaces into serene, clutter-free sanctuaries, making organization effortless and stylish.",
+    "At Urbanfry Homes, we believe furniture is more than function—it’s a story of style, craft, and the warmth of a home well-lived. Born from a passion to bring timeless design and everyday utility together, we specialize in premium solid wood furniture that celebrates both durability and beauty.",
   manifest: "/manifest.json",
 };
 
@@ -20,6 +21,7 @@ export default async function RootLayout({ children }) {
   const userdata = parseduserdata ? JSON.parse(parseduserdata) : null;
   const cookiecart = allcookies.get("cart")?.value;
   const parsedCart = cookiecart ? JSON.parse(cookiecart) : {};
+
   // return (
   //   <html>
   //     <head></head>
@@ -33,6 +35,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <head>
         <Googleanayltics />
+        <Metapixels />
       </head>
       <Appwrapper token={token} userdata={userdata} parsedCart={parsedCart}>
         <body

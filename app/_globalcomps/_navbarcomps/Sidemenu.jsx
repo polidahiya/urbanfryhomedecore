@@ -95,7 +95,8 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
         <Underlineffect
           Comp={({ innercomp }) => (
             <Link
-              href={"/customization"}
+              href={"/"}
+              // href={"/customization"}
               className="h-full w-full py-4 lg:py-0 flex items-center px-3"
             >
               {innercomp}

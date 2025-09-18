@@ -3,6 +3,7 @@ import React from "react";
 import { AppContextfn } from "@/app/Context";
 import { useRouter } from "next/navigation";
 import { PiSmileySad } from "react-icons/pi";
+import { fbq } from "@/app/_connections/Fbpixel";
 
 function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
   const router = useRouter();
@@ -55,6 +56,14 @@ function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
       return updatedcart;
     });
     setmessagefn("Added to cart");
+    // add to cart event
+    fbq("track", "AddToCart", {
+      content_ids: [product?._id],
+      content_name: product?.productName,
+      content_type: "product",
+      value: finalprice,
+      currency: "INR",
+    });
   };
 
   return (

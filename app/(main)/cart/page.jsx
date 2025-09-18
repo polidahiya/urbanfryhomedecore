@@ -11,6 +11,7 @@ import Product from "./_comps/Product";
 import PaymentMethod from "./_comps/Paymentmethod";
 import Couponcomp from "./_comps/Couponcomp";
 import Orderbutton from "./_comps/Orderbutton";
+import Pixelcheckoutmatrix from "./_comps/Pixelcheckoutmatrix";
 
 async function page() {
   const { verified } = await Verification("public");
@@ -19,12 +20,25 @@ async function page() {
     await Getcart();
   const maxcashpaymentavailable = 10000;
 
+  let numberofproducts = 0;
+
+  const ids = cartitems.map(([_, item]) => {
+    numberofproducts += item.quantity;
+    return item._id;
+  });
+
   return (
     <Cartcontextwrapper
+      ids={ids}
       totalPrice={totalPrice}
       verified={verified}
       userdata={userdata}
     >
+      <Pixelcheckoutmatrix
+        ids={ids}
+        numberofproducts={numberofproducts}
+        totalPrice={totalPrice}
+      />
       <div className="pt-16 px-5 md:px-8">
         {/* navigations */}
         <div className="flex items-center gap-2 text-sm">

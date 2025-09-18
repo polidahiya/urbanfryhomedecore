@@ -6,6 +6,7 @@ import Link from "next/link";
 import { staticdata } from "@/app/commondata";
 import Searchedproductcard from "./Searchedproductcard";
 import Searchedproductsfn from "../../_helperfunctions/Searchedproductsfn";
+import { fbq } from "@/app/_connections/Fbpixel";
 
 const Searchbox = ({ autoFocus = false }) => {
   const router = useRouter();
@@ -22,6 +23,10 @@ const Searchbox = ({ autoFocus = false }) => {
         setsearchedproducts([]);
         return;
       }
+      fbq("track", "Search", {
+        search_string: searchtext,
+        content_category: "Furniture",
+      });
 
       const searched = await Searchedproductsfn(searchtext);
       setsearchedproducts(searched);

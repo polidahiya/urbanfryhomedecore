@@ -6,10 +6,12 @@ import addorder from "@/app/_serveractions/addorders";
 import Cookies from "js-cookie";
 import Razorpayidcreate from "@/app/_serveractions/_razorpay/Razorpayidcreate";
 import Verifyrazorpay from "@/app/_serveractions/_razorpay/Verifyrazorpay";
+import { fbq } from "@/app/_connections/Fbpixel";
 
 const Cartcontext = createContext({});
 
 export function Cartcontextwrapper({
+  ids,
   totalPrice,
   verified,
   userdata,
@@ -18,6 +20,14 @@ export function Cartcontextwrapper({
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("online");
   const { setcart, setmessagefn } = AppContextfn();
+
+  const Ordersuccessmeasure = () => {
+    fbq("track", "Purchase", {
+      content_ids: ids,
+      value: totalPrice,
+      currency: "INR",
+    });
+  };
 
   const Order = async () => {
     if (!verified) {
@@ -46,6 +56,7 @@ export function Cartcontextwrapper({
       if (paymentMethod == "online") {
         loadRazorpay(res?.paymentGroupId);
       } else {
+        Ordersuccessmeasure();
         setcart({});
         Cookies.remove("altcoupon");
       }
@@ -63,7 +74,7 @@ export function Cartcontextwrapper({
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
       amount: totalPrice, // Amount in paise
       currency: order.currency || "INR",
-      name: "AltOrganisers",
+      name: "Urbanfry Homes",
       description: "Transaction",
       image: "/uiimages/logo.png",
       order_id: order.id, // Order ID generated from your backend
@@ -71,6 +82,7 @@ export function Cartcontextwrapper({
         const res = await Verifyrazorpay(response, paymentGroupId);
         setmessagefn(res?.message);
         if (res.status == 200) {
+          Ordersuccessmeasure();
           setcart({});
           Cookies.remove("altcoupon");
         }

@@ -15,7 +15,6 @@ import { Cachedproducts } from "./_connections/Getcachedata";
 import Sidecart from "./_globalcomps/Sidecart";
 import Imagetapcomp from "./_comps/Searchbyview/Imagetapcomp";
 import Madeinindia from "./_comps/Madeinindia";
-import { Cachedreviews } from "./_connections/Getcachedata";
 import DeviceDetector from "./_globalcomps/_helperfunctions/Devicedetector";
 import Instaposts from "./_comps/Instaposts";
 import Newsletter from "./_globalcomps/Newsletter/Newsletter";
@@ -139,9 +138,6 @@ async function page() {
   const lastweek = new Date().getTime() - 1000 * 60 * 60 * 24 * 7;
   const newarrivals = data.filter((item) => item.lastupdated > lastweek);
 
-  // Cachedreviews
-  const fivestarreviews = await Cachedreviews("5stars");
-
   return (
     <div>
       <Navbar token={token} userdata={userdata} />
@@ -175,7 +171,7 @@ async function page() {
         />
       </section>
       <Collections />
-      <Customerreviews fivestarreviews={fivestarreviews} />
+      <Customerreviews />
       <Aboutus />
       <Madeinindia device={device} />
       <Instaposts />

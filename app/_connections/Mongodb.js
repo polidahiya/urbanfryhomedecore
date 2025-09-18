@@ -22,6 +22,7 @@ async function connectToDatabase() {
       Newslettersubscriberscollection: db.collection("Newslettersubscribers"),
       inhomecollection: db.collection("inhomecollection"),
       blogscollection: db.collection("blogscollection"),
+      seodata: db.collection("seodata"),
     };
 
     // Create unique index on email for newsletter collection

@@ -9,6 +9,7 @@ import Pincodecomp from "./Pincodecomp";
 import Pricedisplay from "./_commentcomp/Pricedisplay";
 import { AppContextfn } from "@/app/Context";
 import { useState, useEffect } from "react";
+import Pixelviewcount from "./Pixelviewcount";
 
 function Details({
   product,
@@ -65,6 +66,11 @@ function Details({
 
   return (
     <div className="min-h-28 px-5 md:px-0">
+      <Pixelviewcount
+        id={productid}
+        name={product?.productName}
+        price={finalprice}
+      />
       {/* name */}
       <h1 className="text-3xl font-tenor ">{product?.productName}</h1>
       <Sharebutton
