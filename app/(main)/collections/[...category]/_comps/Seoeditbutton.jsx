@@ -10,7 +10,7 @@ import { savedata } from "@/app/_serveractions/Seodata";
 import Revalidatepathfn from "@/app/_serveractions/Revalidatepathpn";
 import { usePathname } from "next/navigation";
 
-function Seoeditbutton({ editdata, seokey }) {
+function Seoeditbutton({ editdata, seokey, showabout = true }) {
   const pathname = usePathname();
   const { setmessagefn } = AppContextfn();
   const [showform, setshowform] = useState(false);
@@ -80,7 +80,7 @@ function Seoeditbutton({ editdata, seokey }) {
               className="relative w-full bg-white py-10 px-5 md:px-10 md:py-10 flex flex-col h-full max-h-full"
             >
               <div className="font-tenor text-3xl text-center mt-5">
-                Edit page data
+                Edit Seo
               </div>
               <div className="h-full overflow-y-scroll">
                 <form
@@ -121,7 +121,9 @@ function Seoeditbutton({ editdata, seokey }) {
                     }}
                   />
                   <Standardinputfield
-                    titlename={"Meta Description (what appear on search engines,  max 150 words)"}
+                    titlename={
+                      "Meta Description (what appear on search engines,  max 150 words)"
+                    }
                     value={formData.metadesc}
                     isRequired={false}
                     type="text"
@@ -138,21 +140,23 @@ function Seoeditbutton({ editdata, seokey }) {
                       }));
                     }}
                   />
-                  <Standardinputfield
-                    titlename={"About"}
-                    value={formData.about}
-                    isRequired={false}
-                    type="text"
-                    onchange={(e) => {
-                      setFormData((prevData) => ({
-                        ...prevData,
-                        about: e.target.value,
-                      }));
-                    }}
-                    clear={() => {
-                      setFormData((prevData) => ({ ...prevData, about: "" }));
-                    }}
-                  />
+                  {showabout && (
+                    <Standardinputfield
+                      titlename={"About"}
+                      value={formData.about}
+                      isRequired={false}
+                      type="text"
+                      onchange={(e) => {
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          about: e.target.value,
+                        }));
+                      }}
+                      clear={() => {
+                        setFormData((prevData) => ({ ...prevData, about: "" }));
+                      }}
+                    />
+                  )}
                   <Editor
                     ref={quillRef}
                     defaultValue={

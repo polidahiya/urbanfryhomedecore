@@ -1,14 +1,12 @@
 "use client";
-import React, { useRef, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Controller, Parallax } from "swiper/modules"; // Import modules
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import RatingStars from "../(main)/product/[id]/_comps/_commentcomp/RatingStars";
+import React, { useState, useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
 
-const fivestarreviews = [
+const Reviewlist = [
   {
     star: 5,
     name: "Aakash Kannauijiya",
@@ -96,70 +94,56 @@ const fivestarreviews = [
 ];
 
 function Customerreviews({}) {
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
 
-  useEffect(() => {
-    if (swiperRef.current) {
-      setTimeout(() => {
-        if (swiperRef.current.navigation) {
-          swiperRef.current.params.navigation.prevEl = prevRef.current;
-          swiperRef.current.params.navigation.nextEl = nextRef.current;
-          swiperRef.current.navigation.init();
-          swiperRef.current.navigation.update();
-        }
-      });
-    }
-  }, []);
-
   return (
-    <div className="my-12 relative max-w-3xl mx-auto">
+    <div className="my-16 relative max-w-4xl mx-auto w-full px-4">
+      {/* Heading */}
       <h2 className="text-4xl md:text-6xl font-tenor text-center">
         Let customers speak for us
       </h2>
-      <p className="flex items-center justify-center mt-10">
-        <RatingStars rating={5} />
-      </p>
-      <p className="text-center">From {fivestarreviews?.length} reviews</p>
 
       {/* Reviews */}
-      <div className="my-8 mx-auto relative">
+      <div className="mt-10 relative">
         <Swiper
-          modules={[Navigation, Controller, Parallax]}
+          ref={swiperRef}
+          modules={[Navigation, Autoplay]}
           spaceBetween={0}
           slidesPerView={1}
-          loop={true}
-          speed={1300}
-          pagination={{ clickable: true }}
-          onSwiper={(swiper) => (swiperRef.current = swiper)} // Store swiper instance
-          parallax={true}
-          className="mySwiper flex-1 w-full"
+          speed={1000}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          loop
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         >
-          {fivestarreviews.map((comment, i) => (
+          {Reviewlist.map((comment, i) => (
             <SwiperSlide key={i}>
-              <div className="flex-1 min-w-full md:min-w-fit flex flex-col items-center gap-2 snap-center">
+              <div className="bg-white px-6 py-8 flex flex-col items-center gap-4 text-center min-h-[240px]">
                 <RatingStars rating={comment?.star} />
-                <p className="text-theme mt-auto">{comment?.name}</p>
-                <p className="text-center">{comment?.comment}</p>
+                <p className="text-lg italic text-gray-700 leading-relaxed">
+                  “{comment?.comment}”
+                </p>
+                <p className="text-theme font-semibold mt-2">
+                  — {comment?.name}
+                </p>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
 
         {/* Custom Navigation Buttons */}
-        <div
-          ref={prevRef}
-          className="custom-prev absolute -left-10 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-2xl text-theme"
+        <button
+          onClick={() => swiperRef.current.swiper.slidePrev()}
+          className="absolute -left-6 top-1/2 -translate-y-1/2 z-10 hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-md text-theme hover:bg-theme hover:text-white transition"
         >
           <FaArrowLeft />
-        </div>
-        <div
-          ref={nextRef}
-          className="custom-next absolute -right-10 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-2xl text-theme"
+        </button>
+        <button
+          onClick={() => swiperRef.current.swiper.slideNext()}
+          className="absolute -right-6 top-1/2 -translate-y-1/2 z-10 hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-md text-theme hover:bg-theme hover:text-white transition"
         >
           <FaArrowRight />
-        </div>
+        </button>
       </div>
     </div>
   );

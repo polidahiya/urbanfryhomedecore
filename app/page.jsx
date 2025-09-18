@@ -19,6 +19,10 @@ import DeviceDetector from "./_globalcomps/_helperfunctions/Devicedetector";
 import Instaposts from "./_comps/Instaposts";
 import Newsletter from "./_globalcomps/Newsletter/Newsletter";
 import Fixedbuttons from "./_globalcomps/Fixedbuttons";
+import Verification from "./_connections/Verifytoken";
+import Seoeditbutton from "./(main)/collections/[...category]/_comps/Seoeditbutton";
+import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
+import { getseodata } from "./_serveractions/Seodata";
 
 export const faqlist = [
   {
@@ -127,6 +131,7 @@ We'll send subsequent email(s) when your product is processed, shipped, includin
 ];
 
 async function page() {
+  const seopermission = await Verification("Seo_permission");
   const device = await DeviceDetector();
   const allcookies = await cookies();
   const token = allcookies.get("token");
@@ -135,11 +140,19 @@ async function page() {
 
   // new arrivals data
   const data = await Cachedproducts();
-  const lastweek = new Date().getTime() - 1000 * 60 * 60 * 24 * 7;
-  const newarrivals = data.filter((item) => item.lastupdated > lastweek);
+  const lastmonth = new Date().getTime() - 1000 * 60 * 60 * 24 * 30;
+  const newarrivals = data.filter((item) => item.lastupdated > lastmonth);
+  // seo
+  const seokey = "Homepage";
+  const seodata = await getseodata(seokey);
+  const converter = new QuillDeltaToHtmlConverter(seodata?.delta, {});
+  const html = converter.convert();
 
   return (
     <div>
+      {seopermission?.verified && (
+        <Seoeditbutton editdata={seodata} seokey={seokey} showabout={false} />
+      )}
       <Navbar token={token} userdata={userdata} />
       <Herosection device={device} />
       {/* marque section */}
@@ -159,7 +172,9 @@ async function page() {
           that are giving a makeover to our rather drab home carpets.
         </p>
       </div> */}
-      <Newarrivals heading="New Arrivals" data={newarrivals} />
+      {newarrivals.length > 0 && (
+        <Newarrivals heading="New Arrivals" data={newarrivals} />
+      )}
       {/* marque section */}
       <Imagetapcomp />
       <section className="w-full text-[#56473e] overflow-hidden relative flex items-center">
@@ -172,10 +187,12 @@ async function page() {
       </section>
       <Collections />
       <Customerreviews />
-      <Aboutus />
       <Madeinindia device={device} />
       <Instaposts />
+      <Aboutus />
       <Faqs faqlist={faqlist} />
+      {/* description */}
+      <div dangerouslySetInnerHTML={{ __html: html }} className="mt-10" />
       <Footer />
       {/*  */}
       <Searchbarsection />

@@ -150,7 +150,7 @@ async function page({ params, searchParams }) {
           className="block absolute top-0 left-0 w-full h-full brightness-[0.35] object-cover -z-10"
         />
         {/* seo edit button */}
-        {tokenres.verified && (
+        {tokenres?.verified && (
           <Seoeditbutton editdata={seodata} seokey={seokey} />
         )}
       </div>
