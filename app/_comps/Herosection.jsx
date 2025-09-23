@@ -9,6 +9,12 @@ import "swiper/css";
 
 const slides = [
   {
+    heading: "Urbanfry Homes Debut: The Organised Home Sale",
+    para: "We’re live and celebrating with exclusive launch offers on all our Furniture Range.",
+    image: "/heroimages/2.png",
+    link: "/collections/Last-Chance",
+  },
+  {
     heading: "The Camille Shelf",
     para: "Your Home’s Most Stylish Storyteller",
     image: "/heroimages/3.jpg",
@@ -19,12 +25,6 @@ const slides = [
     para: "Non-storage beds crafted for those who crave calm, clarity, and clutter-free comfort.",
     image: "/heroimages/1.jpg",
     link: "/collections/Bedroom/Beds",
-  },
-  {
-    heading: "Urbanfry Homes Debut: The Organised Home Sale",
-    para: "We’re live and celebrating with exclusive launch offers on all our Furniture Range.",
-    image: "/heroimages/2.jpg",
-    link: "/collections/Last-Chance",
   },
 
   {
