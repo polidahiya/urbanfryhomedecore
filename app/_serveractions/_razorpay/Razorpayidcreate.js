@@ -16,6 +16,7 @@ async function Razorpayidcreate(amount, currency) {
     const order = await razorpay.orders.create(options);
     return { order, status: 200 };
   } catch (error) {
+    console.log(error);
     return { status: 500 };
   }
 }

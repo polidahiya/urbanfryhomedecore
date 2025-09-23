@@ -42,7 +42,9 @@ async function Verifyrazorpay(razorpaydata, paymentGroupId) {
       return { status: 400, message: "Invalid signature" };
     }
   } catch (error) {
+    console.log(error);
     return { status: 500, message: "Server error" };
+    
   }
 }
 

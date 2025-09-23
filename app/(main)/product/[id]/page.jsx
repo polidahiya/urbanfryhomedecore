@@ -41,13 +41,13 @@ async function page({ params, searchParams }) {
       .join("|");
 
   // prices
-  let rawprice = Number(product?.sellingprice);
   let rawmrp = Number(product?.mrp);
+  let rawprice = Number(product?.sellingprice);
   product?.moreoptions?.forEach((moreoption) => {
     const selectedoption =
       moreoption?.options[allsearchparams[moreoption?.name] || 0];
-    rawprice += Number(selectedoption?.price);
     rawmrp += Number(selectedoption?.mrp);
+    rawprice += Number(selectedoption?.price);
   });
 
   //

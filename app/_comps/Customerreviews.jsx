@@ -121,7 +121,9 @@ function Customerreviews({}) {
               <div className="bg-white px-6 py-8 flex flex-col items-center gap-4 text-center min-h-[240px]">
                 <RatingStars rating={comment?.star} />
                 <p className="text-lg italic text-gray-700 leading-relaxed">
-                  “{comment?.comment}”
+                  {"“"}
+                  {comment?.comment}
+                  {"”"}
                 </p>
                 <p className="text-theme font-semibold mt-2">
                   — {comment?.name}
