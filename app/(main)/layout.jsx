@@ -5,6 +5,7 @@ import Footer from "../_globalcomps/Footer";
 import Sidecart from "../_globalcomps/Sidecart";
 import Newsletter from "../_globalcomps/Newsletter/Newsletter";
 import Fixedbuttons from "../_globalcomps/Fixedbuttons";
+import Tawk from "./_comps/Tawk";
 
 export default async function RootLayout({ children }) {
   const allcookies = await cookies();
@@ -14,13 +15,14 @@ export default async function RootLayout({ children }) {
 
   return (
     <>
-      <Navbar  token={token} userdata={userdata} />
+      <Navbar token={token} userdata={userdata} />
       <Newsletter />
       <Fixedbuttons />
       <Sidecart />
       <Searchbarsection />
       {children}
       <Footer />
+      <Tawk />
     </>
   );
 }
