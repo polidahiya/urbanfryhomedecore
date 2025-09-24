@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import Googleanayltics from "./_connections/Googleanalytics";
 import Confirmdialogbox from "./admin/_comps/Confirmdialogbox";
 import Metapixels from "./_connections/Metapixels";
+import Tawk from "./_globalcomps/Tawk";
 
 export const metadata = {
   title: "Urbanfry Homes",
@@ -22,20 +23,12 @@ export default async function RootLayout({ children }) {
   const cookiecart = allcookies.get("cart")?.value;
   const parsedCart = cookiecart ? JSON.parse(cookiecart) : {};
 
-  // return (
-  //   <html>
-  //     <head></head>
-  //     <body>
-  //       <p className="text-red-500">server error!</p>
-  //     </body>
-  //   </html>
-  // );
-
   return (
     <html lang="en">
       <head>
         <Googleanayltics />
         <Metapixels />
+        <Tawk />
       </head>
       <Appwrapper token={token} userdata={userdata} parsedCart={parsedCart}>
         <body
