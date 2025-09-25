@@ -5,6 +5,7 @@ import { IoArrowUpOutline } from "react-icons/io5";
 import { mobile } from "../commondata";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function Fixedbuttons() {
   const path = usePathname();
@@ -24,14 +25,12 @@ export default function Fixedbuttons() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const openWhatsApp = () => {
-    const phoneNumber = mobile; // Replace with your number (with country code, no +)
-    const message = "Hello, I'm interested in your services!";
-    const url = `https://wa.me/${phoneNumber.trim()}?text=${encodeURIComponent(
-      message
-    )}`;
-    window.open(url, "_blank");
-  };
+  const phoneNumber = mobile;
+  const message = "Hello, I'm interested in your services!";
+  const url = `https://wa.me/${phoneNumber.replace(
+    / /g,
+    ""
+  )}?text=${encodeURIComponent(message)}`;
 
   return (
     <div
@@ -54,13 +53,14 @@ export default function Fixedbuttons() {
           </motion.button>
         )}
       </AnimatePresence>
-      <button
-        onClick={openWhatsApp}
+      <Link
+        href={url}
+        target="_blank"
         className="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg transition"
         aria-label="Contact on WhatsApp"
       >
         <FaWhatsapp size={20} />
-      </button>
+      </Link>
     </div>
   );
 }

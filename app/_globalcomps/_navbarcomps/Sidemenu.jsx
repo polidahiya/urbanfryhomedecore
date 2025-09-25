@@ -135,7 +135,13 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
               My account
             </Link>
             {userdata?.usertype === "admin" && (
-              <Link href={"/admin"} className="underline">
+              <Link
+                href={"/admin"}
+                className="underline"
+                onClick={() => {
+                  setsidemenutoggle(false);
+                }}
+              >
                 Admin Dashboard
               </Link>
             )}
@@ -145,6 +151,9 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
             <Link
               href={"/account/login"}
               className="block px-10 py-3 bg-theme text-white text-center duration-300"
+              onClick={() => {
+                setsidemenutoggle(false);
+              }}
             >
               LOG IN
             </Link>
@@ -153,6 +162,9 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
               <Link
                 href={"/account/signup"}
                 className="relative inline-block underline"
+                onClick={() => {
+                  setsidemenutoggle(false);
+                }}
               >
                 Create Account
               </Link>

@@ -16,7 +16,7 @@ async function page() {
   const orders = await Getuserorders();
 
   return (
-    <div className="pt-32 px-5 md:px-8">
+    <div className="pt-12  px-5 md:px-8">
       {/* navigations */}
       <div className="flex items-center gap-2 text-sm">
         <Underlineffect

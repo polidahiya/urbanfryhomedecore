@@ -14,23 +14,29 @@ const imageDimensions = {
 };
 
 const itemlist = [
-  { productid: "67a1f588f947d97235b59bc7", pos: "top-[35%] left-[40%]" },
-  { productid: "67ac8f21640c912aa1a99ae2", pos: "top-[25%] left-[60%]" },
-  { productid: "67a1fb26326a2c0bccf9b8c7", pos: "top-1/2 left-[5%]" },
-  { productid: "67a3452a6848157c3bed68e2", pos: "top-1/2 left-[30%]" },
-  { productid: "67a8a5767cbae45a5176a6b0", pos: "top-[70%] left-[50%]" },
+  { productid: "68d5135437e5648bc97235f7", pos: "top-[35%] left-[40%]" },
+  { productid: "67ac9fefb04e50a1ab0b7da8", pos: "top-[25%] left-[60%]" },
+  { productid: "6890bae074146d81a3740ca8", pos: "top-1/2 left-[5%]" },
+  { productid: "68d517c0945f4f04d00f7cf2", pos: "top-1/2 left-[30%]" },
+  { productid: "68d521f073e8db9ae70293fd", pos: "top-[70%] left-[50%]" },
 ];
-
-const idsFromList = [...new Set(itemlist.map((item) => item.productid))];
 
 const getFilteredCachedProducts = unstable_cache(
   async () => {
     const allproducts = await Cachedproducts();
-    return allproducts.filter((product) => idsFromList.includes(product._id));
+    const idsFromList = [...new Set(itemlist.map((item) => item.productid))];
+    const filtered = allproducts.filter((p) => idsFromList.includes(p._id));
+
+    // Order them according to itemlist
+    const ordered = itemlist
+      .map((item) => filtered.find((p) => p._id === item.productid))
+      .filter(Boolean);
+
+    return ordered;
   },
-  ["Cache-products-imagetap"], // unique cache key
+  ["Cache-products-imagetap"],
   {
-    revalidate: CACHE_TIME, // 1 hour, or replace with your constant
+    revalidate: CACHE_TIME,
     tags: ["products", "imagetap"],
   }
 );

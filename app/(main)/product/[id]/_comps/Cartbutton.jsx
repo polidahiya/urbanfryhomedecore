@@ -8,7 +8,7 @@ import { fbq } from "@/app/_connections/Fbpixel";
 function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
   const router = useRouter();
   const { cart, setcart, setmessagefn, setquickview } = AppContextfn();
-  const MAX_QUANTITY = 10; // Define the maximum quantity
+  const MAX_QUANTITY = Number(product?.stocks) || 10; // Define the maximum quantity
 
   const handleIncrement = () => {
     if (cart[cartproductname]?.quantity < MAX_QUANTITY)
@@ -96,9 +96,12 @@ function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
           </button>
         </div>
         <div className="flex flex-col items-end gap-1">
-          <span className="text-sm text-gray-500 line-through">
-            ₹{finalmrp?.toLocaleString("en-IN")}
-          </span>
+          {finalmrp != finalprice && (
+            <span className="text-sm text-gray-500 line-through">
+              ₹{finalmrp?.toLocaleString("en-IN")}
+            </span>
+          )}
+
           <span className="text-xl">
             ₹{finalprice?.toLocaleString("en-IN")}
           </span>

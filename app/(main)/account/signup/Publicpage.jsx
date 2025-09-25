@@ -38,7 +38,7 @@ function Publicpage() {
   };
 
   return (
-    <div className="min-h-screen mt-36">
+    <div className="min-h-screen mt-12">
       <div className="flex flex-col lg:flex-row gap-5 px-8 pb-10">
         <div className="flex-1">
           {/* navigations */}

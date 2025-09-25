@@ -1,65 +1,78 @@
 "use client";
 import React from "react";
+import { getpindata } from "@/app/_serveractions/Getpindata";
 
-const indianPincodes = [
-  {
-    pincode: "110001",
-    area: "Connaught Place",
-    city: "New Delhi",
-    state: "Delhi",
-  },
-  { pincode: "400001", area: "Fort", city: "Mumbai", state: "Maharashtra" },
-  {
-    pincode: "560001",
-    area: "Bangalore GPO",
-    city: "Bangalore",
-    state: "Karnataka",
-  },
-  {
-    pincode: "700001",
-    area: "Barabazar Market",
-    city: "Kolkata",
-    state: "West Bengal",
-  },
-  {
-    pincode: "600001",
-    area: "Chennai GPO",
-    city: "Chennai",
-    state: "Tamil Nadu",
-  },
-  {
-    pincode: "500001",
-    area: "Hyderabad GPO",
-    city: "Hyderabad",
-    state: "Telangana",
-  },
-  {
-    pincode: "380001",
-    area: "Ahmedabad GPO",
-    city: "Ahmedabad",
-    state: "Gujarat",
-  },
-  {
-    pincode: "751001",
-    area: "Bhubaneswar GPO",
-    city: "Bhubaneswar",
-    state: "Odisha",
-  },
-  { pincode: "302001", area: "Jaipur GPO", city: "Jaipur", state: "Rajasthan" },
-  { pincode: "682001", area: "Kochi GPO", city: "Kochi", state: "Kerala" },
-];
+const NCR_WHITELIST = new Set([
+  "New Delhi",
+  "Central Delhi",
+  "North Delhi",
+  "South Delhi",
+  "East Delhi",
+  "West Delhi",
+  "North East Delhi",
+  "North West Delhi",
+  "South West Delhi",
+  "Gautam Buddha Nagar",
+  "Noida",
+  "Ghaziabad",
+  "Faridabad",
+  "Gurugram",
+  "Gurgaon",
+  "Sonepat",
+  "Meerut",
+  "Bulandshahr",
+  "Baghpat",
+  "Alwar",
+]);
 
 function Pincodecomp({ pincode, setpincode, pincodemsg, setpincodemsg }) {
+  return null
+  async function isNcrByPincode(pin) {
+    if (!/^\d{6}$/.test(pin)) return { ok: false, reason: "Invalid PIN" };
+    const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+    const json = await res.json();
+    if (!Array.isArray(json) || !json[0])
+      throw new Error("Unexpected API response");
+
+    const record = json[0];
+    if (record.Status !== "Success") {
+      return { ok: false, reason: "PIN not found", api: record };
+    }
+
+    // API returns array of PostOffice objects; take the first one
+    const po = record.PostOffice && record.PostOffice[0];
+    const district = po?.District || record.Message || "UNKNOWN";
+    const state = po?.State || "UNKNOWN";
+
+    // Normalize small differences
+    const normDistrict = district.trim();
+    const isNCR = NCR_WHITELIST.has(normDistrict);
+
+    return {
+      ok: true,
+      pin,
+      district: normDistrict,
+      state,
+      isNCR,
+    };
+  }
   return (
     <div className="mb-10">
       <form
         className=" w-full flex items-center gap-2"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          if (
-            pincode.length === 6 &&
-            indianPincodes.find((pincodeobj) => pincodeobj.pincode === pincode)
-          ) {
+          if (pincode.length != 6) {
+            setpincodemsg({
+              status: 404,
+              message: "Not Available at this pincode",
+            });
+            return;
+          }
+          const res = await getpindata(pincode);
+          if (res.status == 200) {
+            const ncrres = await isNcrByPincode(pincode);
+            console.log(res, ncrres);
             localStorage.setItem("pin", pincode);
             setpincodemsg({
               status: 200,

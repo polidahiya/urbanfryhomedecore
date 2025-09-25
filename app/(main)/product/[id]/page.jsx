@@ -1,10 +1,8 @@
 import React from "react";
 import Details from "./_comps/Details";
 import Imagescomp from "./_comps/Imagescomp";
-import Newarrivals from "../../../_comps/Newarrivals";
 import Link from "next/link";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
-import Commentcomp from "./_comps/_commentcomp/Commentcomp";
 import { Cachedreviews } from "@/app/_connections/Getcachedata";
 import { cookies } from "next/headers";
 import Faqs from "@/app/_comps/Faqs";
@@ -13,6 +11,9 @@ import { MdModeEditOutline } from "react-icons/md";
 import Underlineffect from "@/app/_globalcomps/Underlineffect";
 import { faqlist } from "@/app/page";
 import { Productctxwrapper } from "./Productcontext";
+import dynamic from "next/dynamic";
+const Commentcomp = dynamic(() => import("./_comps/_commentcomp/Commentcomp"));
+const Newarrivals = dynamic(() => import("../../../_comps/Newarrivals"));
 
 async function page({ params, searchParams }) {
   const allcookies = await cookies();
@@ -46,8 +47,8 @@ async function page({ params, searchParams }) {
   product?.moreoptions?.forEach((moreoption) => {
     const selectedoption =
       moreoption?.options[allsearchparams[moreoption?.name] || 0];
-    rawmrp += Number(selectedoption?.mrp);
-    rawprice += Number(selectedoption?.price);
+    rawmrp += Number(selectedoption?.mrp) || 0;
+    rawprice += Number(selectedoption?.price) || 0;
   });
 
   //

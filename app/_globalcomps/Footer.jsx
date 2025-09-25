@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Underlineffect from "./Underlineffect";
-import { mobile, mail } from "../commondata";
+import { mobile, mail, Socialaccounts } from "../commondata";
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import Quicklinks from "./_footerclientcomps/Quicklinks";
@@ -48,10 +48,10 @@ function Footer() {
             ))}
           </div>
           <div className="flex gap-5 text-3xl text-theme mt-10">
-            <Link href={"/"}>
+            <Link href={Socialaccounts?.facebook}>
               <FaFacebook />
             </Link>
-            <Link href={"/"}>
+            <Link href={Socialaccounts?.insta}>
               <RiInstagramFill />
             </Link>
             <Pwaprompt />

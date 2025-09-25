@@ -1,7 +1,6 @@
 import React from "react";
 import Herosection from "./_comps/Herosection";
 import Marquebanner from "./_comps/Marquebanner";
-import Newarrivals from "./_comps/Newarrivals";
 // import Blogs from "./_comps/Blogs";
 import Collections from "./_comps/Collections";
 import Customerreviews from "./_comps/Customerreviews";
@@ -9,20 +8,22 @@ import Aboutus from "./_comps/Aboutus";
 import Faqs from "./_comps/Faqs";
 import Navbar from "./_globalcomps/Navbar";
 import { cookies } from "next/headers";
-import Footer from "./_globalcomps/Footer";
 import Searchbarsection from "./_globalcomps/_navbarcomps/Searchbarsection";
 import { Cachedproducts } from "./_connections/Getcachedata";
 import Sidecart from "./_globalcomps/Sidecart";
 import Imagetapcomp from "./_comps/Searchbyview/Imagetapcomp";
 import Madeinindia from "./_comps/Madeinindia";
 import DeviceDetector from "./_globalcomps/_helperfunctions/Devicedetector";
-import Instaposts from "./_comps/Instaposts";
 import Newsletter from "./_globalcomps/Newsletter/Newsletter";
 import Fixedbuttons from "./_globalcomps/Fixedbuttons";
 import Verification from "./_connections/Verifytoken";
-import Seoeditbutton from "./(main)/collections/[...category]/_comps/Seoeditbutton";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import { getseodata } from "./_serveractions/Seodata";
+import dynamic from "next/dynamic";
+const Newarrivals = dynamic(() => import("./_comps/Newarrivals"));
+const Instaposts = dynamic(() => import("./_comps/Instaposts"));
+const Footer = dynamic(() => import("./_globalcomps/Footer"));
+const Seoeditbutton = dynamic(() => import("./(main)/collections/[...category]/_comps/Seoeditbutton"));
 
 export const faqlist = [
   {

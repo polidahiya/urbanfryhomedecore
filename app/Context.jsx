@@ -23,6 +23,7 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
   // newsletter
   const [shownewsletter, setshownewsletter] = useState(false);
   useEffect(() => {
+    // newsletter
     const alreadySubscribed = localStorage.getItem("isSubscribed");
     if (alreadySubscribed) return;
 
