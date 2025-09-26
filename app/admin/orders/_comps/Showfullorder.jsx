@@ -53,6 +53,7 @@ const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
           <p className="text-sm">Date: {formatDate(orderData?.createdAt)}</p>
           <p className="text-sm">Name: {orderData?.userdata?.username}</p>
           <p className="text-sm">Email: {orderData?.userdata?.email}</p>
+          <p className="text-sm">Phone no: {orderData?.userdata?.phonenum}</p>
           <p className="text-sm">
             Address: {orderData?.userdata?.address} {"("}
             {orderData?.userdata?.pincode}
