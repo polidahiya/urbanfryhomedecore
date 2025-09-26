@@ -8,7 +8,7 @@ import Coloroptions from "./Coloroptions";
 import Pincodecomp from "./Pincodecomp";
 import Pricedisplay from "./_commentcomp/Pricedisplay";
 import { AppContextfn } from "@/app/Context";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Pixelviewcount from "./Pixelviewcount";
 
 function Details({
@@ -23,8 +23,6 @@ function Details({
   quickview = false,
 }) {
   const { cart, setcart } = AppContextfn();
-  const [pincode, setpincode] = useState("");
-  const [pincodemsg, setpincodemsg] = useState(null);
 
   useEffect(() => {
     setcart((pre) => {
@@ -46,18 +44,6 @@ function Details({
       return updateddata;
     });
   }, [cartproductname]);
-
-  useEffect(() => {
-    // local storage pin storage
-    const pin = localStorage.getItem("pin");
-    if (pin) {
-      setpincode(pin);
-      setpincodemsg({
-        status: 200,
-        message: "Available at this pincode",
-      });
-    }
-  }, []);
 
   const currentproduct = cart[cartproductname];
 
@@ -102,6 +88,7 @@ function Details({
             label: "Warranty",
             value: product?.Warranty ? `${product.Warranty} Months` : null,
           },
+          { label: "Dimensions", value: product?.dimensions.join(", ") },
         ]}
       />
       <Coloroptions
@@ -118,12 +105,7 @@ function Details({
         quickview={quickview}
       />
       <hr className="my-5" />
-      <Pincodecomp
-        pincode={pincode}
-        setpincode={setpincode}
-        pincodemsg={pincodemsg}
-        setpincodemsg={setpincodemsg}
-      />
+      <Pincodecomp />
 
       <Cartbutton
         product={product}

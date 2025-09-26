@@ -1,22 +1,29 @@
 "use client";
 import { useEffect } from "react";
 import { Usecartcontext } from "../Cartcontext";
+import { AppContextfn } from "@/app/Context";
 
 const PaymentMethod = ({ totalPrice, maxcashpaymentavailable }) => {
+  const { pincode } = AppContextfn();
   const { paymentMethod, setPaymentMethod } = Usecartcontext();
 
+  // ✅ COD limit check (depends on NCR or not)
+  const codDisabled =
+    !pincode?.isNcr && totalPrice >= maxcashpaymentavailable;
+
   const handleToggle = (method) => {
-    if (method === "cod" && totalPrice >= maxcashpaymentavailable) return;
+    if (method === "cod" && codDisabled) return;
     setPaymentMethod(method);
   };
 
   useEffect(() => {
-    if (paymentMethod === "cod" && totalPrice >= maxcashpaymentavailable)
+    if (paymentMethod === "cod" && codDisabled) {
       setPaymentMethod("online");
-  }, [totalPrice]);
+    }
+  }, [totalPrice, codDisabled]);
 
   return (
-    <div className="w-full md:w-fit flex flex-col gap-4">
+    <div className="w-full md:w-96 flex flex-col gap-4">
       <span className="font-semibold">Payment Method</span>
       <div className="w-full flex flex-col gap-2 text-sm">
         {/* Online Payment Option */}
@@ -44,11 +51,7 @@ const PaymentMethod = ({ totalPrice, maxcashpaymentavailable }) => {
             paymentMethod === "cod"
               ? "bg-white border-theme"
               : "bg-gray-100 border-gray-300"
-          } ${
-            totalPrice >= maxcashpaymentavailable
-              ? "opacity-50 cursor-not-allowed"
-              : ""
-          }`}
+          } ${codDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           <input
             type="radio"
@@ -56,7 +59,7 @@ const PaymentMethod = ({ totalPrice, maxcashpaymentavailable }) => {
             value="cod"
             checked={paymentMethod === "cod"}
             onChange={() => handleToggle("cod")}
-            disabled={totalPrice >= maxcashpaymentavailable}
+            disabled={codDisabled}
             className="w-5 h-5 accent-theme cursor-pointer"
           />
           <span className="text-gray-700">Cash on Delivery (COD)</span>
@@ -64,7 +67,7 @@ const PaymentMethod = ({ totalPrice, maxcashpaymentavailable }) => {
       </div>
 
       {/* Disabled Message */}
-      {totalPrice >= maxcashpaymentavailable && (
+      {codDisabled && (
         <p className="text-xs text-gray-500">
           * COD available in Delhi NCR only or for Orders below{" "}
           {maxcashpaymentavailable}/-

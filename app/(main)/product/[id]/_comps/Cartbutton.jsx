@@ -7,7 +7,8 @@ import { fbq } from "@/app/_connections/Fbpixel";
 
 function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
   const router = useRouter();
-  const { cart, setcart, setmessagefn, setquickview } = AppContextfn();
+  const { cart, setcart, setmessagefn, setquickview, pincode, pincoderef } =
+    AppContextfn();
   const MAX_QUANTITY = Number(product?.stocks) || 10; // Define the maximum quantity
 
   const handleIncrement = () => {
@@ -40,13 +41,28 @@ function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
       setmessagefn("This product is currently unavailable");
       return;
     }
+    // check pincode
+    if (pincode.status != 200) {
+      if (!pincode?.code) {
+        setmessagefn("Enter your Pincode");
+        pincoderef.current.focus();
+        return;
+      }
+      if (!pincode?.available) {
+        setmessagefn("Not available in your area");
+        pincoderef.current.focus();
+        return;
+      }
+    }
 
     if (cart[cartproductname]?.added) {
+      //send to cart
       setquickview({ show: false, data: {} });
       router.push("/cart");
       return;
     }
 
+    // add to cart
     setcart((pre) => {
       const updatedcart = { ...pre };
       updatedcart[cartproductname] = {

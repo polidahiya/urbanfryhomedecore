@@ -8,8 +8,10 @@ import { AppContextfn } from "@/app/Context";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { RiEye2Line } from "react-icons/ri";
 import Nextimage from "@/app/_globalcomps/Nextimage";
+import { useRouter } from "next/navigation";
 
-function Publicpage() {
+function Publicpage({ redirect }) {
+  const router = useRouter();
   const { setmessagefn } = AppContextfn();
   const [formData, setFormData] = useState({
     email: "",
@@ -29,6 +31,9 @@ function Publicpage() {
     e.preventDefault();
     const res = await login(formData);
     setmessagefn(res?.message);
+    if (res?.status == 200) {
+      router.replace(redirect);
+    }
   };
 
   return (

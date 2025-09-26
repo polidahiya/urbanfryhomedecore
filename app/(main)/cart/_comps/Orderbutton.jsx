@@ -8,7 +8,7 @@ function Orderbutton() {
   const { Order, paymentMethod } = Usecartcontext();
   return (
     <button
-      className="w-full flex items-center justify-center gap-2 bg-theme px-6 py-3 text-sm text-white bg-opacity-60 lg:hover:bg-opacity-100 duration-300"
+      className="w-full md:min-w-56 flex items-center justify-center gap-2 bg-theme px-6 py-3 text-sm text-white bg-opacity-60 lg:hover:bg-opacity-100 duration-300"
       onClick={Order}
     >
       {paymentMethod == "online" ? "Pay Now" : "Place Order"}

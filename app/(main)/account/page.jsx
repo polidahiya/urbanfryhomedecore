@@ -1,13 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import Underlineffect from "@/app/_globalcomps/Underlineffect";
-import Orderhistory from "./Comps/Orderhistory";
+import Orderhistory from "./_Comps/Orderhistory";
 import Getuserorders from "@/app/_serveractions/Getuserorders";
-import Userdetails from "./Comps/Userdetails";
+import Userdetails from "./_Comps/Userdetails";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-async function page() {
+async function page({ searchParams }) {
+  const allsearchparams = await searchParams;
+  const redirecturl = allsearchparams?.redirect || "/";
   const allcookies = await cookies();
   const token = allcookies.get("token");
   if (!token) redirect("/account/login");
@@ -35,7 +37,7 @@ async function page() {
         {/* order history */}
         <Orderhistory orders={orders?.orders} />
         {/* accoutn details */}
-        <Userdetails userdata={userdata} />
+        <Userdetails userdata={userdata} redirecturl={redirecturl} />
       </div>
     </div>
   );

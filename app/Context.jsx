@@ -1,6 +1,6 @@
 "use client";
 import Cookies from "js-cookie";
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 const AppContext = createContext({});
 
 export function Appwrapper({ children, token, userdata, parsedCart }) {
@@ -20,9 +20,19 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
   const [showdialog, setshowdialog] = useState(showdialoginitialvalues);
   const [quickview, setquickview] = useState({ show: false, data: {} });
   const [quickviewclosebutton, setquickviewclosebutton] = useState(true);
+  const pincoderef = useRef(null);
+  const [pincode, setpincode] = useState({
+    code: "",
+    available: false,
+    message: "",
+    isNcr: false,
+    status: "",
+  });
   // newsletter
   const [shownewsletter, setshownewsletter] = useState(false);
   useEffect(() => {
+    const pin = localStorage.getItem("pin");
+    if (pin) setpincode(JSON.parse(pin));
     // newsletter
     const alreadySubscribed = localStorage.getItem("isSubscribed");
     if (alreadySubscribed) return;
@@ -74,6 +84,9 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
         setshownewsletter,
         quickviewclosebutton,
         setquickviewclosebutton,
+        pincode,
+        setpincode,
+        pincoderef,
       }}
     >
       {children}

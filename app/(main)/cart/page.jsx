@@ -73,30 +73,32 @@ async function page() {
                 ))}
               </div>
             </div>
-            {/* address */}
-            <Addressbar verified={verified} userdata={userdata} />
-            {/* checkout */}
-            <div className="flex flex-col md:flex-row items-start justify-evenly gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10 my-10">
-              <Couponcomp
-                cartitems={cartitems}
-                totalPrice={totalPrice}
-                couponcode={coupondata?.code}
-              />
-              <PaymentMethod
-                totalPrice={totalPrice}
-                maxcashpaymentavailable={maxcashpaymentavailable}
-              />
-              <div className="w-full md:w-fit flex flex-col gap-4">
-                <div className="font-semibold">
-                  Total :{" "}
-                  {valuebeforecoupon && (
-                    <span className="text-gray-400 line-through mr-3">
-                      ₹{valuebeforecoupon.toLocaleString("en-IN")}
-                    </span>
-                  )}
-                  <span>₹{totalPrice.toLocaleString("en-IN")}/-</span>
+            <div className="flex flex-col md:flex-row  gap-5 my-5">
+              {/* address */}
+              <Addressbar verified={verified} userdata={userdata} />
+              {/* checkout */}
+              <div className="w-full md:w-1/2 flex flex-col items-start justify-evenly gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10">
+                <Couponcomp
+                  cartitems={cartitems}
+                  totalPrice={totalPrice}
+                  couponcode={coupondata?.code}
+                />
+                <PaymentMethod
+                  totalPrice={totalPrice}
+                  maxcashpaymentavailable={maxcashpaymentavailable}
+                />
+                <div className="w-full md:w-fit flex flex-col gap-4">
+                  <div className="font-semibold">
+                    Total :{" "}
+                    {valuebeforecoupon && (
+                      <span className="text-gray-400 line-through mr-3">
+                        ₹{valuebeforecoupon.toLocaleString("en-IN")}
+                      </span>
+                    )}
+                    <span>₹{totalPrice.toLocaleString("en-IN")}/-</span>
+                  </div>
+                  <Orderbutton />
                 </div>
-                <Orderbutton />
               </div>
             </div>
           </>

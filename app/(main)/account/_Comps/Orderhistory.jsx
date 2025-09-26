@@ -58,12 +58,8 @@ const Orders = ({ order }) => {
           />
           <div>
             <p className="line-clamp-2">{product?.name}</p>
-
             <p className="mt-1 text-theme text-sm">
               Quantity : {product?.quantity}
-            </p>
-            <p className="mt-1 text-theme text-sm">
-              Dimension : {product?.dimension}
             </p>
           </div>
         </div>
@@ -116,7 +112,7 @@ const Orders = ({ order }) => {
 
 const Noorders = () => {
   return (
-    <div className="bg-footercolor mt-10 flex flex-col items-center justify-center p-12">
+    <div className="bg-footercolor mt-5 flex flex-col items-center justify-center p-12">
       <HiOutlineShoppingBag className="text-4xl" />
       <p className="text-sm mt-2">You haven{"'"}t placed any orders yet</p>
       <Link

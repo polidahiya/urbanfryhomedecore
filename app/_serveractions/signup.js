@@ -36,6 +36,10 @@ const findUserByEmail = async (email) => {
 
 export const login = async (userdata) => {
   try {
+    if (!userdata.email) {
+      return { status: 400, message: "Email is required" };
+    }
+
     const user = await findUserByEmail(userdata.email);
 
     if (!user) {
@@ -56,10 +60,11 @@ export const login = async (userdata) => {
     }
 
     await generateToken({
-      username: user?.name,
+      username: user?.name || "",
       email: user?.email,
-      usertype: user?.usertype,
-      address: user?.address,
+      usertype: user?.usertype || "user",
+      address: user?.address || "",
+      phonenum: user?.phonenum || "",
       permission: user?.permission || [],
     });
 
@@ -76,12 +81,12 @@ export const signup = async (userdata) => {
     if (existingUser) {
       return { status: 400, message: "User already registered" };
     }
-    
+
     // Hash password
     userdata.password = await bcrypt.hash(userdata.password, 12);
     userdata.usertype = "user";
     userdata.permission = [];
-    
+
     const { userscollection } = await getcollection();
     const insertedUser = await userscollection.insertOne(userdata);
     if (!insertedUser) {
@@ -89,10 +94,11 @@ export const signup = async (userdata) => {
     }
 
     await generateToken({
-      username: userdata?.name,
+      username: userdata?.name || "",
       email: userdata?.email,
       usertype: userdata?.usertype,
-      address: userdata?.address,
+      address: userdata?.address || "",
+      phonenum: userdata?.phonenum || "",
       permission: [],
     });
 
@@ -106,8 +112,8 @@ export const signup = async (userdata) => {
 export const logout = async () => {
   try {
     const cookieStore = await cookies();
-    ["token", "next-auth.csrf-token", "userdata", "cart"].forEach((name) =>
-      cookieStore.delete(name)
+    ["token", "next-auth.csrf-token", "userdata", "cart", "altcoupon"].forEach(
+      (name) => cookieStore.delete(name)
     );
 
     return { status: 200, message: "Logout successfully" };

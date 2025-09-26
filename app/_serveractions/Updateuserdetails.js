@@ -10,17 +10,23 @@ export default async function Updateuserdetails(userdata) {
     if (!res?.verified) {
       return { status: 400, message: "Invalid User" };
     }
+
+    const newdata = {
+      name: userdata.name || "",
+      address: userdata.address || "",
+      phonenum: userdata.phonenum || "",
+    };
+    
     const { userscollection } = await getcollection();
     await userscollection.updateOne(
       { email: res?.email },
       {
         $set: {
-          name: userdata.name,
-          address: userdata.address,
+          ...newdata,
         },
       }
     );
-    
+
     // set cookies
     const cookieStore = await cookies();
     const stringuserdata = cookieStore.get("userdata")?.value;
@@ -29,8 +35,7 @@ export default async function Updateuserdetails(userdata) {
       "userdata",
       JSON.stringify({
         ...parseduserdata,
-        name: userdata.name,
-        address: userdata.address,
+        ...newdata,
       }),
       {
         maxAge: logintime,

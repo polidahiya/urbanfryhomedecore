@@ -3,7 +3,9 @@ import { cookies } from "next/headers";
 import Publicpage from "./Publicpage";
 import { redirect } from "next/navigation";
 
-async function page() {
+async function page({ searchParams }) {
+  const allsearchparams = await searchParams;
+  const redirecturl = allsearchparams?.redirect || "/";
   const allcookies = await cookies();
   const token = allcookies.get("token");
   if (token) {
@@ -11,7 +13,7 @@ async function page() {
   }
   return (
     <div>
-      <Publicpage />
+      <Publicpage redirect={redirecturl} />
     </div>
   );
 }

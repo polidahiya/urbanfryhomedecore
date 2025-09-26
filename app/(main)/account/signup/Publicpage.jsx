@@ -8,14 +8,17 @@ import { AppContextfn } from "@/app/Context";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { RiEye2Line } from "react-icons/ri";
 import Nextimage from "@/app/_globalcomps/Nextimage";
+import { useRouter } from "next/navigation";
 
-function Publicpage() {
+function Publicpage({ redirect }) {
+  const router = useRouter();
   const { setmessagefn } = AppContextfn();
   const initialformvalues = {
     name: "",
     email: "",
     password: "",
     address: "",
+    phonenum: "",
   };
   const [formData, setFormData] = useState(initialformvalues);
   const [showpass, setshowpass] = useState(false);
@@ -33,7 +36,7 @@ function Publicpage() {
     const res = await signup(formData);
     setmessagefn(res?.message);
     if (res?.status == 200) {
-      setFormData(initialformvalues);
+      router.replace(redirect);
     }
   };
 
@@ -89,6 +92,25 @@ function Publicpage() {
                 className="absolute top-0 left-0 py-4 flex items-center px-4 text-sm duration-300 text-theme pointer-events-none"
               >
                 E-mail <span className="text-red-500">*</span>
+              </label>
+            </div>
+            <div className=" relative border border-theme">
+              <input
+                type="tel"
+                id="phonenum"
+                name="phonenum"
+                pattern="[0-9]{10}"
+                maxLength={10}
+                value={formData.phonenum}
+                onChange={handleChange}
+                className="forminput w-full  py-4 px-4 text-gray-700 outline-none"
+                required
+              />
+              <label
+                htmlFor="phonenum"
+                className="absolute top-0 left-0 py-4 flex items-center px-4 text-sm duration-300 text-theme pointer-events-none"
+              >
+                Phone Number <span className="text-red-500">*</span>
               </label>
             </div>
             <div className="relative flex border border-theme">

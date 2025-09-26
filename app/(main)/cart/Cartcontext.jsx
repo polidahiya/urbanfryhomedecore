@@ -8,7 +8,15 @@ import Razorpayidcreate from "@/app/_serveractions/_razorpay/Razorpayidcreate";
 import Verifyrazorpay from "@/app/_serveractions/_razorpay/Verifyrazorpay";
 import { fbq } from "@/app/_connections/Fbpixel";
 
-const Cartcontext = createContext({});
+const Cartcontext = createContext({
+  Order: () => {
+    window.location.reload();
+  },
+  paymentMethod: "online",
+  setPaymentMethod: () => {
+    window.location.reload();
+  },
+});
 
 export function Cartcontextwrapper({
   ids,
@@ -19,7 +27,7 @@ export function Cartcontextwrapper({
 }) {
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("online");
-  const { setcart, setmessagefn } = AppContextfn();
+  const { setcart, setmessagefn, pincode, pincoderef } = AppContextfn();
 
   const Ordersuccessmeasure = () => {
     fbq("track", "Purchase", {
@@ -37,16 +45,29 @@ export function Cartcontextwrapper({
     }
 
     if (
-      // userdata?.phonenum.trim() === "" ||
-      userdata?.address.trim() === "" ||
-      userdata?.username.trim() === ""
+      userdata?.phonenum?.trim() === "" ||
+      userdata?.address?.trim() === "" ||
+      userdata?.username?.trim() === ""
     ) {
       setmessagefn("Update Your Details");
       router.push("/account?redirect=/cart");
       return;
     }
 
-    const res = await addorder(paymentMethod);
+    if (pincode.status != 200) {
+      if (!pincode?.code) {
+        setmessagefn("Enter your Pincode");
+        pincoderef.current.focus();
+        return;
+      }
+      if (!pincode?.available) {
+        setmessagefn("Not available in your area");
+        pincoderef.current.focus();
+        return;
+      }
+    }
+
+    const res = await addorder(paymentMethod, pincode?.code || "");
 
     if (!(res?.status == 200 && paymentMethod == "online")) {
       setmessagefn(res?.message);

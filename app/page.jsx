@@ -23,7 +23,9 @@ import dynamic from "next/dynamic";
 const Newarrivals = dynamic(() => import("./_comps/Newarrivals"));
 const Instaposts = dynamic(() => import("./_comps/Instaposts"));
 const Footer = dynamic(() => import("./_globalcomps/Footer"));
-const Seoeditbutton = dynamic(() => import("./(main)/collections/[...category]/_comps/Seoeditbutton"));
+const Seoeditbutton = dynamic(() =>
+  import("./(main)/collections/[...category]/_comps/Seoeditbutton")
+);
 
 export const faqlist = [
   {
@@ -161,7 +163,7 @@ async function page() {
         <Marquebanner
           list={[
             "Discover the new Urbanfry Homes — design that feels personal",
-            "Enjoy 20% off your first order with code WELCOME20 — our way of saying hello",
+            "Enjoy 10% off your first order with code WELCOME10 — our way of saying hello",
           ]}
         />
       </section>
@@ -182,7 +184,7 @@ async function page() {
         <Marquebanner
           list={[
             "Discover the new Urbanfry Homes — design that feels personal",
-            "Enjoy 20% off your first order with code WELCOME20 — our way of saying hello",
+            "Enjoy 10% off your first order with code WELCOME10 — our way of saying hello",
           ]}
         />
       </section>

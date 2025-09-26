@@ -8,7 +8,7 @@ import Getcart from "./Getcart";
 import { v4 as uuidv4 } from "uuid";
 import { getYYMMDD } from "../_globalcomps/_helperfunctions/Yymmdd";
 
-async function addorder(paymentMethod) {
+async function addorder(paymentMethod, pincode = "") {
   try {
     const res = await Verification("public");
     if (!res?.verified) {
@@ -17,6 +17,7 @@ async function addorder(paymentMethod) {
 
     const { orderscollection, Admindatacollection } = await getcollection();
     const { cartitems, userdata, totalPrice, coupondata } = await Getcart();
+    userdata.pincode = pincode;
 
     const paymentGroupId = uuidv4();
     const createdAt = new Date();
