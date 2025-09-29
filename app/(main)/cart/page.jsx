@@ -1,45 +1,18 @@
 import React from "react";
-import Verification from "@/app/_connections/Verifytoken";
 import Getcart from "@/app/_serveractions/Getcart";
-import { Cartcontextwrapper } from "./Cartcontext";
 import Underlineffect from "@/app/_globalcomps/Underlineffect";
 import { FaOpencart } from "react-icons/fa";
 import { BsCartX } from "react-icons/bs";
 import Link from "next/link";
-import Addressbar from "./_comps/Addressbar";
 import Product from "./_comps/Product";
-import PaymentMethod from "./_comps/Paymentmethod";
-import Couponcomp from "./_comps/Couponcomp";
-import Orderbutton from "./_comps/Orderbutton";
-import Pixelcheckoutmatrix from "./_comps/Pixelcheckoutmatrix";
+import { FaChevronRight } from "react-icons/fa6";
 
 async function page() {
-  const { verified } = await Verification("public");
-
-  const { userdata, cartitems, valuebeforecoupon, coupondata, totalPrice } =
-    await Getcart();
-  const maxcashpaymentavailable = 10000;
-
-  let numberofproducts = 0;
-
-  const ids = cartitems.map(([_, item]) => {
-    numberofproducts += item.quantity;
-    return item._id;
-  });
+  const { cartitems, totalPrice } = await Getcart();
 
   return (
-    <Cartcontextwrapper
-      ids={ids}
-      totalPrice={totalPrice}
-      verified={verified}
-      userdata={userdata}
-    >
-      <Pixelcheckoutmatrix
-        ids={ids}
-        numberofproducts={numberofproducts}
-        totalPrice={totalPrice}
-      />
-      <div className="pt-16 px-5 md:px-8">
+    <div>
+      <div className="pt-12 px-5 md:px-8">
         {/* navigations */}
         <div className="flex items-center gap-2 text-sm">
           <Underlineffect
@@ -73,38 +46,18 @@ async function page() {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col md:flex-row  gap-5 my-5">
-              {/* address */}
-              <Addressbar verified={verified} userdata={userdata} />
-              {/* checkout */}
-              <div className="w-full md:w-1/2 flex flex-col items-start justify-evenly gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10">
-                <Couponcomp
-                  cartitems={cartitems}
-                  totalPrice={totalPrice}
-                  couponcode={coupondata?.code}
-                />
-                <PaymentMethod
-                  totalPrice={totalPrice}
-                  maxcashpaymentavailable={maxcashpaymentavailable}
-                />
-                <div className="w-full md:w-fit flex flex-col gap-4">
-                  <div className="font-semibold">
-                    Total :{" "}
-                    {valuebeforecoupon && (
-                      <span className="text-gray-400 line-through mr-3">
-                        ₹{valuebeforecoupon.toLocaleString("en-IN")}
-                      </span>
-                    )}
-                    <span>₹{totalPrice.toLocaleString("en-IN")}/-</span>
-                  </div>
-                  <Orderbutton />
-                </div>
-              </div>
+            <div className="flex justify-end my-5">
+              <Link
+                href={"/Checkout"}
+                className="w-full md:w-fit py-3 px-10 bg-theme text-white lg:hover:opacity-75 flex items-center gap-2"
+              >
+                Proceed to Checkout <FaChevronRight />
+              </Link>
             </div>
           </>
         )}
       </div>
-    </Cartcontextwrapper>
+    </div>
   );
 }
 
@@ -115,12 +68,20 @@ const Emptycart = () => {
       <p className="mt-5 text-center text-xl">
         You haven’t added <br /> anything to cart.
       </p>
-      <Link
-        href="/collections/all"
-        className="py-3 px-10 mt-5 bg-theme text-white lg:hover:opacity-75"
-      >
-        Explore
-      </Link>
+      <div className="flex items-center gap-2 text-center">
+        <Link
+          href="/collections/all"
+          className="w-full min-w-48 py-3 px-10 mt-5 bg-theme text-white lg:hover:opacity-75"
+        >
+          Explore
+        </Link>
+        <Link
+          href="/account"
+          className="w-full min-w-48 py-3 px-10 mt-5 bg-theme text-white lg:hover:opacity-75"
+        >
+          Order History
+        </Link>
+      </div>
     </div>
   );
 };

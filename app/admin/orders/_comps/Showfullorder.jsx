@@ -14,7 +14,7 @@ import Couponedprice from "@/app/_globalcomps/_helperfunctions/Couponedprice";
 const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
   const orderData = showfullorder.data;
   const product = orderData.product;
-
+  const shippingdetails = orderData?.shippingdetails;
   const coupon = orderData.coupondata;
   const { setmessagefn, setshowdialog } = AppContextfn();
   const [status, setstatus] = useState(orderData?.status);
@@ -75,6 +75,57 @@ const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
                 : "Cod"}
             </span>
           </p>
+          {/*  */}
+          {shippingdetails && (
+            <div className="space-y-2 border-t border-b py-2">
+              <h2 className="text-xl font-semibold mb-4">Shipping Details</h2>
+
+              <p className="text-sm">Full Name: {shippingdetails?.fullName}</p>
+              <p className="text-sm">Email: {shippingdetails?.email}</p>
+              <p className="text-sm">Mobile: {shippingdetails?.mobile}</p>
+              <div className="pl-5 border-t space-y-2">
+                <h3 className="text-lg font-medium">Shipping Address</h3>
+                <p className="text-sm">
+                  Address1: {shippingdetails?.shipping?.address1}
+                </p>
+                {shippingdetails?.shipping?.address2 && (
+                  <p className="text-sm">
+                    Address2: {shippingdetails?.shipping?.address2}
+                  </p>
+                )}
+                <p className="text-sm">
+                  City: {shippingdetails?.shipping?.city}
+                </p>
+                <p className="text-sm">
+                  State: {shippingdetails?.shipping?.state}
+                </p>
+              </div>
+              {!shippingdetails?.billingSame && (
+                <div className="pl-5 border-t space-y-2">
+                  <h3 className="text-lg font-medium">Billing Address</h3>
+                  <p className="text-sm">
+                    Address1: {shippingdetails?.billing?.address1}
+                  </p>
+                  {shippingdetails?.billing?.address2 && (
+                    <p className="text-sm">
+                      Address2: {shippingdetails?.billing?.address2}
+                    </p>
+                  )}
+                  <p className="text-sm">
+                    City: {shippingdetails?.billing?.city}
+                  </p>
+                  <p className="text-sm">
+                    State: {shippingdetails?.billing?.state}
+                  </p>
+                </div>
+              )}
+              {shippingdetails?.shipping?.orderNotes && (
+                <p className="text-sm">
+                  User Order Notes: {shippingdetails?.shipping?.orderNotes}
+                </p>
+              )}
+            </div>
+          )}
           <div>
             <label className="block text-sm">Order Stage</label>
             <div className="mt-1 block w-full px-2 border rounded-md">

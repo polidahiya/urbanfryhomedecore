@@ -1,4 +1,4 @@
-import { mail } from "@/app/commondata";
+import { mail, mobile } from "@/app/commondata";
 import { faqlist } from "@/app/page";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import { Motiondiv } from "@/app/_globalcomps/Motion/Motiondiv";
@@ -46,11 +46,11 @@ const Pagesdata = {
           </h2>
           <p>
             Urbanfry Homes was founded by{" "}
-            <strong>Ruchi & Apoorv Singhal</strong>, a duo who chose
-            passion over the predictable. Both MBA graduates with thriving
-            corporate careers, they set out to build something deeply personal —
-            a brand rooted in the belief that furniture shouldn&apos;t just fill
-            a space, it should tell a story, spark emotion, and bring lasting
+            <strong>Ruchi & Apoorv Singhal</strong>, a duo who chose passion
+            over the predictable. Both MBA graduates with thriving corporate
+            careers, they set out to build something deeply personal — a brand
+            rooted in the belief that furniture shouldn&apos;t just fill a
+            space, it should tell a story, spark emotion, and bring lasting
             warmth to a home.
           </p>
           <p>
@@ -94,7 +94,133 @@ const Pagesdata = {
       </div>
     ),
   },
+  Returns: {
+    pagetitle: "Return & Refund Policy",
+    content: (
+      <>
+        <h2>Urbanfry Homes – Return & Refund Policy (Detailed)</h2>
+        <p>
+          At Urbanfry Homes, every piece of furniture is thoughtfully designed,
+          crafted, and finished with care. Our goal is to deliver timeless,
+          high-quality products that elevate your space and stand the test of
+          time. Because most of our products are custom-made or crafted to
+          order, we follow a transparent and well-defined Return & Refund Policy
+          that protects both our customers and our craftsmanship.
+        </p>
 
+        <h3>Order & Delivery Guidelines</h3>
+        <p>
+          We partner with trusted logistics providers like Bluedart and others
+          to ensure your furniture reaches you safely and securely. Every piece
+          is carefully packed with industry-grade materials to minimise any
+          possibility of transit damage. Despite this, we strongly recommend
+          that you carefully inspect the product at the time of delivery. Any
+          visible damages or concerns should be reported immediately before
+          accepting the delivery.
+        </p>
+
+        <h3>Return Eligibility & Conditions</h3>
+        <p>
+          As a standard policy, Urbanfry Homes does not accept returns once a
+          product has been delivered and accepted by the customer, since each
+          piece is specially crafted for your order. Returns will only be
+          considered under the following rare circumstances:
+        </p>
+        <ul>
+          <li>
+            Major transit damage such as structural breakage or severe cracks
+          </li>
+          <li>Incorrect product delivered (wrong size, finish, or design)</li>
+        </ul>
+        <p>
+          Minor variations in colour, finish, grain, or texture are natural
+          characteristics of solid wood furniture and will not be treated as
+          defects. All return requests must be reported within 48 hours of
+          delivery with unboxing photos or videos clearly showing the issue.
+        </p>
+
+        <h3>Customised & Made-to-Order Products</h3>
+        <p>
+          Most of our furniture is handcrafted or finished specifically for your
+          order. Customised and made-to-order products are strictly
+          non-returnable and non-refundable under all circumstances, except in
+          the case of verified major damage or incorrect delivery.
+        </p>
+
+        <h3>Minor Damage Resolution</h3>
+        <p>
+          In rare cases where minor transit issues like small chip-offs, surface
+          scratches, or hairline cracks occur, we’re here to help. Our dedicated
+          after-sales service teams are available in multiple cities across
+          India to inspect and resolve such issues at your doorstep. Most minor
+          repairs, polish touch-ups, or hinge adjustments are done free of cost,
+          ensuring your furniture remains flawless and beautiful.
+        </p>
+
+        <h3>Unboxing & Documentation Policy</h3>
+        <p>
+          To process any damage-related claim, it is mandatory for customers to
+          record an unboxing video or take clear photographs while opening the
+          packaging. This documentation helps us validate the claim and provide
+          a quick resolution. Claims without supporting documentation may not be
+          eligible for return, repair, or replacement.
+        </p>
+
+        <h3>Assembly & Installation</h3>
+        <p>
+          Not all Urbanfry Homes products require installation, but some may
+          involve minimal assembly such as leg fixing or shelf fitting.
+          Installation services are not included in the product price. Customers
+          are requested to arrange for professional installation locally if
+          required. Our support team can guide you with instructions or suggest
+          reliable service providers in your area.
+        </p>
+
+        <h3>Repair, Replacement & Service Timelines</h3>
+        <p>
+          We aim to resolve all verified damage-related concerns as quickly as
+          possible. Depending on the nature of the issue, location, and
+          availability of replacement parts, repair visits, part replacements,
+          or service appointments typically take between 7 and 20 working days.
+        </p>
+
+        <h3>Refund & Store Credit Policy</h3>
+        <p>
+          Refunds are not applicable once an order has been confirmed and
+          processed. In the event of a verified major defect or incorrect
+          product delivery, we offer the following solutions:
+        </p>
+        <ul>
+          <li>Repair or replacement of the affected part or entire product</li>
+          <li>Store credit redeemable for future purchases</li>
+        </ul>
+        <p>
+          Refunds will only be considered in rare situations where a replacement
+          is not possible, and such decisions are made solely at Urbanfry Homes’
+          discretion.
+        </p>
+
+        <h3>Customer Support & Next Steps</h3>
+        <p>
+          Our relationship doesn’t end at delivery — it begins there. If you
+          have any concerns, our support team is always here to help. Please
+          contact us within 48 hours of delivery at our customer support email
+          or helpline with your order details, unboxing video/photos, and a
+          brief description of the issue. We’ll ensure your concern is addressed
+          promptly and professionally.
+        </p>
+
+        <h3>Our Commitment</h3>
+        <p>
+          Every Urbanfry Homes creation is built to be timeless — designed to
+          last, to be loved, and to grow with your home. While returns are rare,
+          our promise is to stand by our craftsmanship and support you at every
+          step with quick solutions, dedicated service, and complete peace of
+          mind.
+        </p>
+      </>
+    ),
+  },
   FAQs: {
     pagetitle: "FAQs",
     content: (
@@ -110,7 +236,6 @@ const Pagesdata = {
       </>
     ),
   },
-
   ShippingDelivery: {
     pagetitle: "Shipping & Delivery",
     content: (
@@ -198,7 +323,6 @@ const Pagesdata = {
       </>
     ),
   },
-
   Warranty: {
     pagetitle: "Warranty Information",
     content: (
@@ -362,7 +486,6 @@ const Pagesdata = {
       </>
     ),
   },
-
   CareMaintenance: {
     pagetitle: "Care & Maintenance",
     content: (
@@ -526,7 +649,6 @@ const Pagesdata = {
       </>
     ),
   },
-
   CancellationRefund: {
     pagetitle: "Cancellation & Refund Policy",
     content: (
@@ -639,6 +761,213 @@ const Pagesdata = {
           appreciate your trust in our quality and service.
         </p>
       </>
+    ),
+  },
+  Termsandconditions: {
+    pagetitle: "Terms and Conditions",
+    content: (
+      <div>
+        <h2>Urbanfry Homes Terms & Conditions</h2>{" "}
+        <p>
+          <strong>Effective Date:</strong> {new Date().toLocaleDateString()}
+        </p>{" "}
+        <p>
+          {" "}
+          Welcome to Urbanfry Homes (“we,” “us,” or “our”). By accessing or
+          using our website [www.urbanfryhomes.com] (the “Website”) and
+          purchasing products from us, you (“you” or “Customer”) agree to be
+          bound by the following Terms and Conditions. Please read them
+          carefully before using our Website or placing an order.{" "}
+        </p>{" "}
+        <h3>1. General</h3>{" "}
+        <ul>
+          {" "}
+          <li>
+            These Terms & Conditions govern your use of the Website and the
+            purchase of products offered by Urbanfry Homes.
+          </li>{" "}
+          <li>
+            By accessing our Website, you confirm that you are at least 18 years
+            old and legally capable of entering into binding contracts.
+          </li>{" "}
+          <li>
+            We reserve the right to update or modify these Terms at any time
+            without prior notice. The most current version will always be
+            available on this page.
+          </li>{" "}
+        </ul>{" "}
+        <h3>2. Products & Services</h3>{" "}
+        <ul>
+          {" "}
+          <li>
+            All products displayed on our Website are subject to availability.
+            We reserve the right to discontinue any product at any time.
+          </li>{" "}
+          <li>
+            Product images are for representation purposes only. As our
+            furniture is handcrafted from natural materials like solid wood,
+            variations in color, texture, and grain are natural and not
+            considered defects.
+          </li>{" "}
+          <li>
+            Minor variations in finish or dimension (within a tolerance of ±2-3
+            cm) are considered standard in handmade furniture and not grounds
+            for return or refund.
+          </li>{" "}
+        </ul>{" "}
+        <h3>3. Pricing & Payments</h3>{" "}
+        <ul>
+          {" "}
+          <li>
+            All prices listed on our Website are in Indian Rupees (INR) and
+            inclusive of applicable taxes, unless otherwise stated.
+          </li>{" "}
+          <li>
+            We reserve the right to change prices, discounts, or offers at any
+            time without prior notice.
+          </li>{" "}
+          <li>
+            Full payment must be made at the time of placing the order. Orders
+            will not be processed until payment is received.
+          </li>{" "}
+        </ul>{" "}
+        <h3>4. Orders & Customisation</h3>{" "}
+        <ul>
+          {" "}
+          <li>
+            Once an order is placed, you will receive an email/SMS confirmation.
+            Please review the order details carefully and notify us of any
+            errors immediately.
+          </li>{" "}
+          <li>
+            Custom orders are made specifically to your requirements and cannot
+            be cancelled, returned, or exchanged once confirmed.
+          </li>{" "}
+          <li>
+            Any changes requested to a custom order after production has begun
+            may incur additional charges and may affect delivery timelines.
+          </li>{" "}
+        </ul>{" "}
+        <h3>5. Shipping & Delivery</h3>{" "}
+        <ul>
+          {" "}
+          <li>
+            We deliver across India through reliable logistics partners.
+            Shipping timelines are typically 7–20 working days but may vary
+            based on product type, location, or unforeseen circumstances.
+          </li>{" "}
+          <li>
+            We ensure proper packaging to minimize transit damage. In rare cases
+            of major damage during shipping, please contact us within 48 hours
+            of delivery with photos and order details.
+          </li>{" "}
+          <li>
+            Delays due to natural disasters, strikes, pandemics, or logistical
+            issues are beyond our control, and Urbanfry Homes shall not be held
+            liable for such delays.
+          </li>{" "}
+        </ul>{" "}
+        <h3>6. Installation</h3>{" "}
+        <ul>
+          {" "}
+          <li>
+            Most of our furniture requires minimal installation (such as
+            attaching legs or shelves). Professional installation, if required,
+            is not included in the product price and must be arranged by the
+            customer.
+          </li>{" "}
+          <li>
+            Clear assembly instructions (if applicable) will be provided with
+            the product.
+          </li>{" "}
+        </ul>{" "}
+        <h3>7. Returns, Replacements & Cancellations</h3>{" "}
+        <ul>
+          {" "}
+          <li>
+            Returns: Due to the nature of handcrafted furniture, we do not
+            accept returns unless there is a major manufacturing defect or
+            significant transit damage reported within 48 hours of delivery.
+          </li>{" "}
+          <li>
+            Replacements: In the event of a verified defect or damage, we will
+            arrange for a replacement or repair as appropriate.
+          </li>{" "}
+          <li>
+            Cancellations: Orders can be cancelled within 24 hours of placement.
+            After this period, cancellations will not be accepted, especially
+            for made-to-order or custom products.
+          </li>{" "}
+          <li>
+            Minor issues such as small cracks, dents, or chip-offs during
+            transport are not considered defects but can be addressed by our
+            support team locally.
+          </li>{" "}
+        </ul>{" "}
+        <h3>8. Warranty</h3>{" "}
+        <ul>
+          {" "}
+          <li>
+            Most products come with a 12-month limited warranty against
+            manufacturing defects.
+          </li>{" "}
+          <li>
+            The warranty does not cover natural wear and tear, misuse, exposure
+            to moisture, or improper handling.
+          </li>{" "}
+        </ul>{" "}
+        <h3>9. Intellectual Property</h3>{" "}
+        <ul>
+          {" "}
+          <li>
+            All content on this Website, including text, images, designs, logos,
+            and trademarks, is the intellectual property of Urbanfry Homes and
+            protected under applicable laws.
+          </li>{" "}
+          <li>
+            No part of this Website may be reproduced, distributed, or used for
+            commercial purposes without prior written consent.
+          </li>{" "}
+        </ul>{" "}
+        <h3>10. Limitation of Liability</h3>{" "}
+        <ul>
+          {" "}
+          <li>
+            Urbanfry Homes will not be liable for any indirect, incidental, or
+            consequential damages arising from the use of our Website or
+            products.
+          </li>{" "}
+          <li>
+            Our maximum liability shall not exceed the total amount paid by you
+            for the product in question.
+          </li>{" "}
+        </ul>{" "}
+        <h3>11. Privacy</h3>{" "}
+        <p>
+          {" "}
+          Your personal information is collected and used in accordance with our
+          Privacy Policy. By using our Website, you consent to such collection
+          and use.{" "}
+        </p>{" "}
+        <h3>12. Governing Law</h3>{" "}
+        <p>
+          {" "}
+          These Terms & Conditions are governed by and construed in accordance
+          with the laws of India. Any disputes shall be subject to the exclusive
+          jurisdiction of the courts in Gurugram, Haryana.{" "}
+        </p>{" "}
+        <h3>13. Contact Us</h3>{" "}
+        <p>
+          {" "}
+          For any questions, complaints, or claims related to these Terms or our
+          products, please contact us at:{" "}
+        </p>{" "}
+        <p>
+          {" "}
+          Urbanfry Homes <br /> Email: support@urbanfryhomes.com <br /> Phone:{" "}
+          {mobile} <br /> Address: Sector 59, Gurugram, Haryana, India{" "}
+        </p>{" "}
+      </div>
     ),
   },
 };

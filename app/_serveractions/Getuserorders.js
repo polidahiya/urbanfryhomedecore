@@ -12,7 +12,7 @@ export default async function Getuserorders() {
     const { orderscollection } = await getcollection();
     const orders = await orderscollection
       .find({
-        $or: [{ paymentMethod: "cod" }, { payment: "successful" }],
+        $or: [{ paymentMethod: "cod" }, { paymentStatus: "success" }],
         [`userdata.email`]: res.email,
       })
       .sort({ createdAt: -1 })

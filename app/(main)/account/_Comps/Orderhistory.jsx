@@ -6,6 +6,7 @@ import Nextimage from "@/app/_globalcomps/Nextimage";
 import { Statuslists } from "@/app/commondata";
 import formatDate from "@/app/_globalcomps/_helperfunctions/formateddate";
 import Couponedprice from "@/app/_globalcomps/_helperfunctions/Couponedprice";
+import { CiDeliveryTruck } from "react-icons/ci";
 
 function Orderhistory({ orders }) {
   return (
@@ -51,7 +52,7 @@ const Orders = ({ order }) => {
           <Nextimage
             src={product?.image}
             alt={product?.name}
-            className="w-24 h-w-24 aspect-square object-cover"
+            className="w-24 h-w-24 aspect-square object-contain"
             height={100}
             width={100}
             loading="lazy"
@@ -60,6 +61,36 @@ const Orders = ({ order }) => {
             <p className="line-clamp-2">{product?.name}</p>
             <p className="mt-1 text-theme text-sm">
               Quantity : {product?.quantity}
+            </p>
+            <p className="mt-1 text-theme text-sm">
+              {product?.moreoptions?.map((opti, i) => (
+                <React.Fragment key={i}>
+                  <span>
+                    {opti?.name} :{" "}
+                    {opti?.options[product?.selecteddata[opti?.name]]?.name}
+                  </span>
+                  <span className="last:hidden"> | </span>
+                </React.Fragment>
+              ))}
+            </p>
+            <p className="mt-1 text-theme text-sm">
+              Order Number : {order?.orderNumber}
+            </p>
+            <p className="mt-1 text-theme text-sm">
+              Payment:{" "}
+              <span
+                className={`flex-1 text-sm ${
+                  order?.paymentStatus == "success"
+                    ? "text-green-500"
+                    : order?.paymentMethod == "cod"
+                    ? "text-yellow-500"
+                    : "text-red-500"
+                }`}
+              >
+                {order?.paymentMethod == "online"
+                  ? order?.paymentStatus
+                  : "Cod"}
+              </span>
             </p>
           </div>
         </div>
@@ -78,8 +109,9 @@ const Orders = ({ order }) => {
           )}{" "}
         </p>
       </div>
+
       {order?.status < orderstatuslimit && (
-        <div className="flex items-center justify-evenly my-2">
+        <div className=" my-2">
           <div className="flex items-center justify-between w-full max-w-xl mx-auto mt-8">
             {Statuslists.slice(0, orderstatuslimit).map((status, index) => (
               <div key={index} className="flex flex-col items-center">
@@ -104,6 +136,12 @@ const Orders = ({ order }) => {
               </div>
             ))}
           </div>
+          {order?.status < 3 && (
+            <p className="text-xs text-cyan-500 mt-5 text-center">
+              <CiDeliveryTruck className="text-xl inline" /> Delivery in 8-20
+              working Days.
+            </p>
+          )}
         </div>
       )}
     </div>

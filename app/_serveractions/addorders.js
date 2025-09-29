@@ -8,7 +8,7 @@ import Getcart from "./Getcart";
 import { v4 as uuidv4 } from "uuid";
 import { getYYMMDD } from "../_globalcomps/_helperfunctions/Yymmdd";
 
-async function addorder(paymentMethod, pincode = "") {
+async function addorder(paymentMethod, pincode = "", shippingdetails) {
   try {
     const res = await Verification("public");
     if (!res?.verified) {
@@ -42,10 +42,11 @@ async function addorder(paymentMethod, pincode = "") {
 
       let order = {
         paymentGroupId,
-        orderNumber: `Alt${getYYMMDD()}-${updatedsitedata?.orderNumber}`,
+        orderNumber: `Urbanfry${getYYMMDD()}-${updatedsitedata?.orderNumber}`,
         paymentMethod,
         status: 0,
         userdata,
+        shippingdetails,
         product: finalproductdata,
         totalPrice,
         note: "",

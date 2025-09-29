@@ -1,15 +1,17 @@
 "use client";
 import { useEffect } from "react";
-import { Usecartcontext } from "../Cartcontext";
 import { AppContextfn } from "@/app/Context";
 
-const PaymentMethod = ({ totalPrice, maxcashpaymentavailable }) => {
+const PaymentMethod = ({
+  totalPrice,
+  maxcashpaymentavailable,
+  paymentMethod,
+  setPaymentMethod,
+}) => {
   const { pincode } = AppContextfn();
-  const { paymentMethod, setPaymentMethod } = Usecartcontext();
 
   // ✅ COD limit check (depends on NCR or not)
-  const codDisabled =
-    !pincode?.isNcr && totalPrice >= maxcashpaymentavailable;
+  const codDisabled = !pincode?.isNcr && totalPrice >= maxcashpaymentavailable;
 
   const handleToggle = (method) => {
     if (method === "cod" && codDisabled) return;
@@ -23,7 +25,7 @@ const PaymentMethod = ({ totalPrice, maxcashpaymentavailable }) => {
   }, [totalPrice, codDisabled]);
 
   return (
-    <div className="w-full md:w-96 flex flex-col gap-4">
+    <div className="w-full md:max-w-96 flex flex-col gap-4">
       <span className="font-semibold">Payment Method</span>
       <div className="w-full flex flex-col gap-2 text-sm">
         {/* Online Payment Option */}
