@@ -25,7 +25,7 @@ function Accountbutton({ token, userdata }) {
         <div className="flex flex-col gap-3 p-5 border border-slate-300 bg-white">
           {token ? (
             <>
-              <p>{userdata?.username}</p>
+              <p>{userdata?.name}</p>
               <hr />
               <Underlineffect
                 Comp={({ innercomp }) => (

@@ -7,7 +7,9 @@ const Orderminicard = ({ order, setshowfullorder }) => {
       className="flex py-5 border-y cursor-pointer"
       onClick={() => setshowfullorder({ show: true, data: order })}
     >
-      <p className="flex-1 text-center text-sm">{order?.userdata?.username}</p>
+      <p className="flex-1 text-center text-sm">
+        {order?.userdata?.name || order?.userdata?.username}
+      </p>
       <p className="flex-1 text-center text-sm">{order?.userdata?.email}</p>
       <p
         className={`flex-1 text-center text-sm ${

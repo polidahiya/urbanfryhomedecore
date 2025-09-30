@@ -102,12 +102,12 @@ export async function Send_mail_to_payment_group_id(paymentGroupId) {
       const mailtemplate = order_confiramtion_mail_template(
         products,
         firstorder?.totalPrice,
-        firstorder?.userdata?.username
+        firstorder?.userdata?.name
       );
 
       sendEmail(
         "Order confirmation",
-        ["polidahiya830@gmail.com", firstorder?.userdata?.email],
+        ["urbanfryhome@gmail.com", firstorder?.userdata?.email],
         mailtemplate
       );
     }

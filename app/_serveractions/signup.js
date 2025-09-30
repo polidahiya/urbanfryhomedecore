@@ -60,7 +60,7 @@ export const login = async (userdata) => {
     }
 
     await generateToken({
-      username: user?.name || "",
+      name: user?.name || "",
       email: user?.email,
       usertype: user?.usertype || "user",
       address: user?.address || "",
@@ -94,7 +94,7 @@ export const signup = async (userdata) => {
     }
 
     await generateToken({
-      username: userdata?.name || "",
+      name: userdata?.name || "",
       email: userdata?.email,
       usertype: userdata?.usertype,
       address: userdata?.address || "",

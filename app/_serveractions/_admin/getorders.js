@@ -20,7 +20,7 @@ export const Getorders = async (
       all: {},
       search: {
         $or: [
-          { [`userdata.username`]: { $regex: new RegExp(search, "i") } },
+          { [`userdata.name`]: { $regex: new RegExp(search, "i") } },
           { [`userdata.email`]: { $regex: new RegExp(search, "i") } },
           { createdAt: { $regex: new RegExp(search, "i") } },
         ],

@@ -110,7 +110,7 @@ const Sidemenu = ({ sidemenutoggle, setsidemenutoggle, token, userdata }) => {
         {token ? (
           <div className="flex flex-col gap-5 px-3">
             <div className="flex justify-between">
-              <p>User - {userdata?.username}</p>
+              <p>User - {userdata?.name}</p>
               <button className="underline" onClick={logoutfn}>
                 Log Out
               </button>

@@ -66,7 +66,7 @@ function Clientpage({
     if (
       !userdata?.phonenum?.trim() ||
       !userdata?.address?.trim() ||
-      !userdata?.username?.trim()
+      !userdata?.name?.trim()
     ) {
       setmessagefn("Update your details");
       router.push("/account?redirect=/cart");
@@ -136,10 +136,10 @@ function Clientpage({
         }
       },
       prefill: {
-        name: userdata?.username,
+        name: userdata?.name,
         email: userdata?.email,
-        // contact: userdata?.phonenum,
-        contact: "",
+        contact: userdata?.phonenum,
+        // contact: "",
       },
       theme: {
         color: "#8e766e",

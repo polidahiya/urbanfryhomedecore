@@ -1,6 +1,6 @@
 import { Socialaccounts } from "../commondata";
 
-const order_confiramtion_mail_template = (products, totalPrice, username) => {
+const order_confiramtion_mail_template = (products, totalPrice, name) => {
   const productRows = products
     .map((product) => {
       return `
@@ -100,7 +100,7 @@ const order_confiramtion_mail_template = (products, totalPrice, username) => {
                     <img
                       src="https://altorganisers.com/uiimages/logo.png"
                       alt="logo"
-                      width="120"
+                      width="40"
                       height="40"
                     />
                   </div>
@@ -124,10 +124,10 @@ const order_confiramtion_mail_template = (products, totalPrice, username) => {
                       margin-bottom: 20px;
                     "
                   >
-                    Thankyou for your order, ${username}!
+                    Thankyou for your order, ${name}!
                   </h1>
                   <p style="font-size: 16px; color: #555; margin-bottom: 20px">
-                    Hi ${username},
+                    Hi ${name},
                   </p>
                   <p style="font-size: 16px; color: #555; margin-bottom: 30px">
                     We’re excited to let you know that we’ve received your order!

@@ -8,11 +8,12 @@ function Userdetails({ userdata, redirecturl }) {
   const router = useRouter();
   const { setmessagefn } = AppContextfn();
   const initialformvalues = {
-    name: userdata?.username || "",
+    name: userdata?.name || "",
     address: userdata?.address || "",
     phonenum: userdata?.phonenum || "",
   };
   const [formData, setFormData] = useState(initialformvalues);
+  const [loading, setloading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,7 +25,9 @@ function Userdetails({ userdata, redirecturl }) {
 
   const submitform = async (e) => {
     e.preventDefault();
+    setloading(true);
     const res = await Updateuserdetails(formData);
+    setloading(false);
     setmessagefn(res?.message);
     if (res?.status == 200) {
       router.push(redirecturl);
@@ -93,7 +96,10 @@ function Userdetails({ userdata, redirecturl }) {
           </label>
         </div>
         <div className="flex gap-5 mt-3">
-          <button className="px-10 py-3 w-fit mt-auto bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 duration-300">
+          <button className="flex items-center gap-2 justify-center px-10 py-3 w-fit mt-auto bg-theme text-white bg-opacity-70 lg:hover:bg-opacity-100 duration-300">
+            {loading && (
+              <span className="w-6 aspect-square rounded-full border-t-2 border-b-2 border-white animate-spin"></span>
+            )}
             Update Details
           </button>
         </div>
