@@ -7,6 +7,7 @@ import { staticdata } from "@/app/commondata";
 import Searchedproductcard from "./Searchedproductcard";
 import Searchedproductsfn from "../../_helperfunctions/Searchedproductsfn";
 import { fbq } from "@/app/_connections/Fbpixel";
+import { event } from "nextjs-google-analytics";
 
 const Searchbox = ({ autoFocus = false }) => {
   const router = useRouter();
@@ -26,6 +27,10 @@ const Searchbox = ({ autoFocus = false }) => {
       fbq("track", "Search", {
         search_string: searchtext,
         content_category: "Furniture",
+      });
+      event("search", {
+        search_term: searchtext,
+        items: [],
       });
 
       const searched = await Searchedproductsfn(searchtext);

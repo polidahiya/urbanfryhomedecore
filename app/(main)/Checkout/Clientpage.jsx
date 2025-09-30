@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import Razorpayidcreate from "@/app/_serveractions/_razorpay/Razorpayidcreate";
 import Verifyrazorpay from "@/app/_serveractions/_razorpay/Verifyrazorpay";
 import { fbq } from "@/app/_connections/Fbpixel";
+import { event } from "nextjs-google-analytics";
 import Addressbar from "./_comps/Addressbar";
 import Couponcomp from "./_comps/Couponcomp";
 import PaymentMethod from "./_comps/Paymentmethod";
@@ -47,12 +48,25 @@ function Clientpage({
   });
   const shippingformref = React.useRef(null);
 
-  const Ordersuccessmeasure = () => {
+  const Ordersuccessmeasure = ({ ids, totalPrice }) => {
     if (process.env.NODE_ENV === "development") return;
+
+    // ✅ Facebook Pixel Purchase
     fbq("track", "Purchase", {
       content_ids: ids,
       value: totalPrice,
       currency: "INR",
+    });
+
+    // ✅ GA4 Purchase
+    event("purchase", {
+      transaction_id: crypto.randomUUID(), // generate or pass actual order ID
+      value: totalPrice,
+      currency: "INR",
+      items: ids?.map((id) => ({
+        item_id: id,
+        quantity: 1, // replace with actual quantities if you have them
+      })),
     });
   };
 

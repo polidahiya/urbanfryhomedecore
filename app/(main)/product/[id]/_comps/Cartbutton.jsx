@@ -4,6 +4,7 @@ import { AppContextfn } from "@/app/Context";
 import { useRouter } from "next/navigation";
 import { PiSmileySad } from "react-icons/pi";
 import { fbq } from "@/app/_connections/Fbpixel";
+import { event } from "nextjs-google-analytics";
 
 function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
   const router = useRouter();
@@ -79,6 +80,20 @@ function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
       content_type: "product",
       value: finalprice,
       currency: "INR",
+    });
+
+    const quantity = cart[cartproductname]?.quantity || 1;
+    event("add_to_cart", {
+      currency: "INR",
+      value: finalprice,
+      items: [
+        {
+          item_id: product?._id,
+          item_name: product?.productName,
+          price: finalprice,
+          quantity: quantity,
+        },
+      ],
     });
   };
 
