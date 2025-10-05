@@ -43,7 +43,7 @@ function Productcard({ product }) {
         {/* tags */}
         <div className="absolute top-2 left-2 flex flex-col gap-2 text-[10px] z-10">
           {product?.tags && product?.tags?.includes("Best Seller") && (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 bg-white/75 py-0.5 px-1 w-fit">
               <FaStar className="w-3 h-3" />
               <span className="font-medium">Best Seller</span>
             </div>
@@ -51,7 +51,7 @@ function Productcard({ product }) {
 
           {/* Last Chance */}
           {product?.stocks == 1 && (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 bg-white/75 py-0.5 px-1 w-fit">
               <FaHourglassHalf className="w-3 h-3" />
               <span className="font-medium">Last Chance</span>
             </div>
@@ -59,7 +59,7 @@ function Productcard({ product }) {
 
           {/* On Sale */}
           {product?.tags && product?.tags?.includes("Sale") && (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 bg-white/75 py-0.5 px-1 w-fit">
               <FaTags className="w-3 h-3" />
               <span className="font-medium">On Sale</span>
             </div>
