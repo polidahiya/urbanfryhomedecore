@@ -68,16 +68,16 @@ const Emptycart = () => {
       <p className="mt-5 text-center text-xl">
         You haven’t added <br /> anything to cart.
       </p>
-      <div className="flex items-center gap-2 text-center">
+      <div className="flex flex-col md:flex-row items-center gap-2 text-center mt-5">
         <Link
           href="/collections/all"
-          className="w-full min-w-48 py-3 px-10 mt-5 bg-theme text-white lg:hover:opacity-75"
+          className="w-full min-w-48 py-3 px-10  bg-theme text-white lg:hover:opacity-75"
         >
           Explore
         </Link>
         <Link
           href="/account"
-          className="w-full min-w-48 py-3 px-10 mt-5 bg-theme text-white lg:hover:opacity-75"
+          className="w-full min-w-48 py-3 px-10  bg-theme text-white lg:hover:opacity-75"
         >
           Order History
         </Link>

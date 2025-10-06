@@ -20,6 +20,7 @@ function Page() {
     usageLimit: 1,
     usageLimitperuser: 1,
     minAmount: 0,
+    maxAmount: 100000,
     isActive: true,
   };
   const [data, setdata] = useState(initialstate);
@@ -115,6 +116,7 @@ function Page() {
           {coupons?.map((coupon, i) => (
             <Couponminicard
               key={i}
+              initialstate={initialstate}
               coupon={coupon}
               setdata={setdata}
               setshowform={setshowform}

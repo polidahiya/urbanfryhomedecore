@@ -12,10 +12,11 @@ export const metadata = {
   title: "Urbanfry Homes",
   description:
     "At Urbanfry Homes, we believe furniture is more than function—it’s a story of style, craft, and the warmth of a home well-lived. Born from a passion to bring timeless design and everyday utility together, we specialize in premium solid wood furniture that celebrates both durability and beauty.",
-  manifest: "/manifest.json",
   openGraph: {
     images: `https://urbanfryhomes.com/uiimages/logo.png`,
   },
+  manifest: "/manifest.json",
+  robots: "index, follow",
 };
 
 export default async function RootLayout({ children }) {

@@ -2,8 +2,7 @@
 import { getcollection } from "@/app/_connections/Mongodb";
 import crypto from "crypto";
 import { Updatecouponusage } from "../addorders";
-import { Send_mail_to_payment_group_id } from "../addorders";
-import { Clear_cart_coupon_cookies } from "../addorders";
+import { Moreupdate } from "../addorders";
 
 async function Verifyrazorpay(razorpaydata, paymentGroupId) {
   try {
@@ -32,10 +31,8 @@ async function Verifyrazorpay(razorpaydata, paymentGroupId) {
           orderdata?.coupondata?.code
         );
 
-      // Send mail
-      await Send_mail_to_payment_group_id(paymentGroupId);
-      // clear cart cookies
-      await Clear_cart_coupon_cookies();
+      // Send mail and stocks update
+      await Moreupdate(paymentGroupId);
 
       return { status: 200, message: "Payment verified successfully" };
     } else {
@@ -44,7 +41,6 @@ async function Verifyrazorpay(razorpaydata, paymentGroupId) {
   } catch (error) {
     console.log(error);
     return { status: 500, message: "Server error" };
-    
   }
 }
 

@@ -90,6 +90,11 @@ export async function Applycoupon(coupon, totalPrice) {
       return { status: 400, message: "Coupon is not active" };
     else if (!Checkcoupondate(coupondata.validFrom, coupondata.validTo))
       return { status: 400, message: "Coupon is expired" };
+    else if (coupondata.maxAmount && coupondata.maxAmount < totalPrice)
+      return {
+        status: 400,
+        message: `Order amount Exceed - Rs ${coupondata.maxAmount}`,
+      };
     else if (coupondata.minAmount > totalPrice)
       return {
         status: 400,

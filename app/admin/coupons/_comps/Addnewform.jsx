@@ -67,6 +67,24 @@ function Addnewform({ data, setdata, setshowform, resetState, setrefresher }) {
           }
           clear={() => setdata((pre) => ({ ...pre, discountValue: "" }))}
         />
+        <Standardinputfield
+          titlename="Maximum Applicable Amount"
+          value={data.maxAmount}
+          type="number"
+          onchange={(e) =>
+            setdata((pre) => ({ ...pre, maxAmount: e.target.value }))
+          }
+          clear={() => setdata((pre) => ({ ...pre, maxAmount: "" }))}
+        />
+        <Standardinputfield
+          titlename="Minimum Applicable Amount"
+          value={data.minAmount}
+          type="number"
+          onchange={(e) =>
+            setdata((pre) => ({ ...pre, minAmount: e.target.value }))
+          }
+          clear={() => setdata((pre) => ({ ...pre, minAmount: "" }))}
+        />
         {/* valid from */}
         <div className="flex flex-col md:flex-row gap-4">
           <Dateselector

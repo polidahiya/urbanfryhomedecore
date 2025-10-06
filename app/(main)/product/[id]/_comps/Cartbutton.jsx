@@ -12,6 +12,7 @@ function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
     AppContextfn();
   const MAX_QUANTITY = Number(product?.stocks) || 10; // Define the maximum quantity
 
+  const outofstock = !product?.available || product?.stocks < 1;
   const handleIncrement = () => {
     if (cart[cartproductname]?.quantity < MAX_QUANTITY)
       setcart((pre) => {
@@ -39,7 +40,11 @@ function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
   // add to cart button
   const handleAddToCart = () => {
     if (!product?.available) {
-      setmessagefn("This product is currently unavailable");
+      setmessagefn("Product is currently unavailable");
+      return;
+    }
+    if (product.stocks < 1) {
+      setmessagefn("Product is currently out of stock");
       return;
     }
     // check pincode
@@ -147,7 +152,7 @@ function Cartbutton({ product, cartproductname, finalprice, finalmrp }) {
           cart[cartproductname]?.added ? (
             "VIEW CART"
           ) : (
-            "ADD TO CART"
+            `ADD TO CART ${outofstock ? "(Currently Unavailable)" : ""}`
           )
         ) : (
           <span className="flex items-center justify-center gap-3">

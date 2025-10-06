@@ -1,0 +1,20 @@
+User-agent: Googlebot
+Disallow:
+
+User-agent: Bingbot
+Disallow:
+
+User-agent: AhrefsBot
+User-agent: SEMrushBot
+User-agent: Moz
+User-agent: Majestic
+User-agent: Screaming Frog SEO Spider
+User-agent: Baiduspider
+User-agent: Yandex
+User-agent: ia_archiver
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: *
+
+Sitemap: https://urbanfryhomes.com/api/Sitemap

@@ -1,12 +1,12 @@
 import formatDate from "@/app/_globalcomps/_helperfunctions/formateddate";
-const Couponminicard = ({ coupon, setdata, setshowform }) => {
+const Couponminicard = ({ initialstate, coupon, setdata, setshowform }) => {
   return (
     <div
       className={`flex py-5 border-y cursor-pointer ${
         !coupon?.isActive && "bg-red-50"
       }`}
       onClick={() => {
-        setdata(coupon);
+        setdata({ ...initialstate, ...coupon });
         setshowform(true);
       }}
     >

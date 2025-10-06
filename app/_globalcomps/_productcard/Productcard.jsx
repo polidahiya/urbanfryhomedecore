@@ -56,6 +56,11 @@ function Productcard({ product }) {
               <span className="font-medium">Last Chance</span>
             </div>
           )}
+          {product?.stocks < 1 && (
+            <div className="flex items-center gap-1 bg-white/75 py-0.5 px-1 w-fit text-red-500">
+              <span className="font-medium">SOLD OUT!</span>
+            </div>
+          )}
 
           {/* On Sale */}
           {product?.tags && product?.tags?.includes("Sale") && (

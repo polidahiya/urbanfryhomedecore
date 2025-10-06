@@ -75,6 +75,7 @@ function Clientpage({ productdata }) {
       setloading(false);
       setdeletedimages([]);
       setnewadded([]);
+      router.replace("/admin/products/add");
     } catch (error) {
       setdata(initialState);
       setloading(false);

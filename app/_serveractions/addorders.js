@@ -3,10 +3,10 @@ import { getcollection } from "../_connections/Mongodb";
 import Verification from "../_connections/Verifytoken";
 import order_confiramtion_mail_template from "../_mailtemplate/orderconfirmationmail";
 import sendEmail from "../_connections/Sendmail";
-import { cookies } from "next/headers";
 import Getcart from "./Getcart";
 import { v4 as uuidv4 } from "uuid";
 import { getYYMMDD } from "../_globalcomps/_helperfunctions/Yymmdd";
+import { refreshproductsnow } from "../_connections/Getcachedata";
 
 async function addorder(paymentMethod, pincode = "", shippingdetails) {
   try {
@@ -72,10 +72,8 @@ async function addorder(paymentMethod, pincode = "", shippingdetails) {
       // update coupon usage
       if (coupondata)
         await Updatecouponusage(userdata?.email, coupondata?.code);
-      // send mail
-      await Send_mail_to_payment_group_id(paymentGroupId);
-      // clear cart cookies
-      await Clear_cart_coupon_cookies();
+      // send mail and stoks update
+      await Moreupdate(paymentGroupId);
     }
 
     return {
@@ -89,37 +87,55 @@ async function addorder(paymentMethod, pincode = "", shippingdetails) {
   }
 }
 
-export async function Send_mail_to_payment_group_id(paymentGroupId) {
+export async function Moreupdate(paymentGroupId) {
   try {
     if (!paymentGroupId) return;
-    const { orderscollection } = await getcollection();
+    const { orderscollection, Productscollection, ObjectId } =
+      await getcollection();
     const res = await orderscollection.find({ paymentGroupId }).toArray();
 
-    if (res?.length > 0) {
-      const firstorder = res[0];
-      const products = res.map((order) => order.product);
+    if (res?.length < 0) return;
 
-      const mailtemplate = order_confiramtion_mail_template(
-        products,
-        firstorder?.totalPrice,
-        firstorder?.userdata?.name
-      );
+    // update stocks
+    res.forEach(async (order) => {
+      const { pid, quantity } = order.product;
 
-      sendEmail(
-        "Order confirmation",
-        ["urbanfryhome@gmail.com", firstorder?.userdata?.email],
-        mailtemplate
+      const product = await Productscollection.findOne({
+        _id: new ObjectId(pid),
+      });
+
+      if (!product) return;
+
+      const currentStock = parseInt(product.stocks || "0", 10);
+      const newStock = Math.max(currentStock - quantity, 0);
+
+      await Productscollection.updateOne(
+        { _id: new ObjectId(pid) },
+        { $set: { stocks: newStock.toString() } } // keep as string
       );
-    }
+    });
+
+    // send mail
+    const firstorder = res[0];
+    const products = res.map((order) => order.product);
+
+    const mailtemplate = order_confiramtion_mail_template(
+      products,
+      firstorder?.totalPrice,
+      firstorder?.userdata?.name
+    );
+
+    sendEmail(
+      "Order confirmation",
+      ["urbanfryhome@gmail.com", firstorder?.userdata?.email],
+      mailtemplate
+    );
+
+    // refresh products now
+    await refreshproductsnow();
   } catch (error) {
     console.log(error);
   }
-}
-
-export async function Clear_cart_coupon_cookies() {
-  const allcookies = await cookies();
-  allcookies.set("cart", JSON.stringify({}));
-  allcookies.delete("altcoupon");
 }
 
 export async function Updatecouponusage(email, couponCode) {

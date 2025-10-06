@@ -48,8 +48,15 @@ function Clientpage({
   });
   const shippingformref = React.useRef(null);
 
-  const Ordersuccessmeasure = ({ ids, totalPrice }) => {
-    if (process.env.NODE_ENV === "development") return;
+  const Ordersuccess = () => {
+    setmessagefn("Order Placed Successfully");
+    setcart({});
+    Cookies.set("cart", JSON.stringify({}), { expires: 1 });
+    Cookies.remove("altcoupon");
+    if (process.env.NODE_ENV === "development") {
+      router.push("/");
+      return;
+    }
 
     // ✅ Facebook Pixel Purchase
     fbq("track", "Purchase", {
@@ -68,6 +75,7 @@ function Clientpage({
         quantity: 1, // replace with actual quantities if you have them
       })),
     });
+    router.push("/");
   };
 
   const Order = async () => {
@@ -118,9 +126,7 @@ function Clientpage({
       if (paymentMethod == "online") {
         loadRazorpay(res?.paymentGroupId);
       } else {
-        Ordersuccessmeasure();
-        setcart({});
-        Cookies.remove("altcoupon");
+        Ordersuccess();
       }
     }
   };
@@ -144,9 +150,7 @@ function Clientpage({
         const res = await Verifyrazorpay(response, paymentGroupId);
         setmessagefn(res?.message);
         if (res.status == 200) {
-          Ordersuccessmeasure();
-          setcart({});
-          Cookies.remove("altcoupon");
+          Ordersuccess();
         }
       },
       prefill: {
