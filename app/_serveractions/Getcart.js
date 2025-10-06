@@ -85,7 +85,7 @@ export default async function Getcart() {
       filteredcart,
       valuebeforecoupon,
       coupondata,
-      totalPrice,
+      totalPrice: Math.floor(totalPrice),
     };
   } catch (error) {
     console.log(error);

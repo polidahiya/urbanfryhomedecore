@@ -1,6 +1,5 @@
-"use server";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
-import { staticdata, cities } from "@/app/commondata";
+import { staticdata } from "@/app/commondata";
 const domain = "https://urbanfryhomes.com";
 
 // Utility functions
