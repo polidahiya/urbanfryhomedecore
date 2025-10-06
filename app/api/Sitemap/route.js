@@ -1,8 +1,7 @@
 "use server";
-
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 import { staticdata, cities } from "@/app/commondata";
-const domain = "https://altorganisers.com";
+const domain = "https://urbanfryhomes.com";
 
 // Utility functions
 const xmlEscape = (str) =>
@@ -22,34 +21,26 @@ const baseurl = {
   priority: "1.0",
 };
 
-// Generate city-specific URLs
-const generateCityUrls = () =>
-  cities.map((city) => ({
-    loc: `${domain}?location=${urlEncode(city)}`,
-    lastmod: new Date().toISOString(),
-    changefreq: "weekly",
-    priority: "1.0",
-  }));
-
 // Generate category and subcategory URLs
 const generateCategoryUrls = () => {
   const urls = [];
-  cities.forEach((city) => {
-    Object.keys(staticdata.categories).forEach((item) => {
-      // Add category URL
-      urls.push({
-        loc: `${domain}/${urlEncode(item)}?location=${urlEncode(city)}`,
-        lastmod: new Date().toISOString(),
-        changefreq: "weekly",
-        priority: "0.8",
-      });
+  Object.entries(staticdata).forEach(([key, value]) => {
+    // Add category URL
+    urls.push({
+      loc: `${domain}/${urlEncode(key)}`,
+      lastmod: new Date().toISOString(),
+      changefreq: "weekly",
+      image: domain + value?.img,
+      name: key,
+      priority: "0.8",
     });
-    Object.keys(staticdata.rooms).forEach((item) => {
-      // Add category URL
+    Object.entries(value?.subcat).forEach(([subcatkey, subcatvalue]) => {
       urls.push({
-        loc: `${domain}/${urlEncode(item)}?location=${urlEncode(city)}`,
+        loc: `${domain}/${urlEncode(key)}/${urlEncode(subcatkey)}`,
         lastmod: new Date().toISOString(),
         changefreq: "weekly",
+        image: domain + subcatvalue?.img,
+        name: subcatkey,
         priority: "0.8",
       });
     });
@@ -61,9 +52,9 @@ const generateCategoryUrls = () => {
 const generateProductUrls = (products, today) =>
   products.flatMap((product) =>
     product?.variants?.map((variant, index) => ({
-      loc: `${domain}/${urlEncode(product.categories)}/${
-        product?._id
-      }/${index}`,
+      loc: `${domain}/product/${product?._id}${
+        index != 0 ? "/?vcolor=" + index : ""
+      }`,
       lastmod: today.toISOString(),
       changefreq: "weekly",
       priority: "0.8",
@@ -78,16 +69,15 @@ export async function GET() {
     const today = new Date();
 
     // Generate all URLs
-    const cityUrls = generateCityUrls();
     const categoryUrls = generateCategoryUrls();
     const productUrls = generateProductUrls(allproducts, today);
 
-    const allUrls = [baseurl, ...cityUrls, ...categoryUrls, ...productUrls];
+    const allUrls = [baseurl, ...categoryUrls, ...productUrls];
 
     // Generate sitemap XML
     const sitemap = `<?xml version="1.0" encoding="UTF-8" ?>
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   ${allUrls
     .map(
       (url) => `
@@ -99,16 +89,15 @@ export async function GET() {
       ${
         url.image
           ? `
-      <Nextimage:image>
-        <Nextimage:loc>${xmlEscape(url.image)}</image:loc>
-        <Nextimage:caption>${xmlEscape(url.name)}</image:caption>
-        <Nextimage:title>${xmlEscape(url.name)}</image:title>
+      <image:image>
+        <image:loc>${xmlEscape(url.image)}</image:loc>
+        <image:caption>${xmlEscape(url.name)}</image:caption>
+        <image:title>${xmlEscape(url.name)}</image:title>
       </image:image>
       `
           : ""
       }
-    </url>
-  `
+    </url>`
     )
     .join("")}
 </urlset>`;
