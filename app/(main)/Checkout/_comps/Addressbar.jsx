@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Pincodecomp from "../../product/[id]/_comps/Pincodecomp";
 import Link from "next/link";
 
-const indianStatesAndUTs = [
+export const indianStatesAndUTs = [
   "Andhra Pradesh",
   "Arunachal Pradesh",
   "Andaman and Nicobar Islands",

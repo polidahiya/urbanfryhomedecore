@@ -40,10 +40,33 @@ function Productcard({ product }) {
             </p>
           </div>
         )}
+      </div>
+      {/* details */}
+      <div className="px-0 pt-3">
+        <p className="text-sm text-theme mt-[6px] hidden lg:block">
+          {product?.theme}
+        </p>
+        <div className="mt-[6px]">
+          <p className="line-clamp-2 text-sm md:text-base">
+            {product?.productName}
+          </p>
+          <p className="mt-3">
+            {product?.mrp != product?.sellingprice && (
+              <span className="text-red-500 mr-4 line-through">
+                ₹{parseInt(product?.mrp, 10).toLocaleString("en-IN")}
+              </span>
+            )}
+            {product?.mrp == product?.sellingprice && <span>From - </span>}
+            <span className="text-theme">
+              ₹{parseInt(product?.sellingprice, 10).toLocaleString("en-IN")}
+              &#47;&#45;
+            </span>
+          </p>
+        </div>
         {/* tags */}
-        <div className="absolute top-2 left-2 flex flex-col gap-2 text-[10px] z-10">
+        <div className="flex gap-2 flex-wrap text-[10px] mt-2 font-thin tracking-widest">
           {product?.tags && product?.tags?.includes("Best Seller") && (
-            <div className="flex items-center gap-1 bg-white/75 py-0.5 px-1 w-fit">
+            <div className="flex items-center gap-1 bg-gray-200/50 py-0.5 px-1 w-fit">
               <FaStar className="w-3 h-3" />
               <span className="font-medium">Best Seller</span>
             </div>
@@ -51,41 +74,25 @@ function Productcard({ product }) {
 
           {/* Last Chance */}
           {product?.stocks == 1 && (
-            <div className="flex items-center gap-1 bg-white/75 py-0.5 px-1 w-fit">
+            <div className="flex items-center gap-1 bg-gray-200/50 py-0.5 px-1 w-fit">
               <FaHourglassHalf className="w-3 h-3" />
               <span className="font-medium">Last Chance</span>
             </div>
           )}
           {product?.stocks < 1 && (
-            <div className="flex items-center gap-1 bg-white/75 py-0.5 px-1 w-fit text-red-500">
+            <div className="flex items-center gap-1 bg-gray-200/50 py-0.5 px-1 w-fit text-red-500">
               <span className="font-medium">SOLD OUT!</span>
             </div>
           )}
 
           {/* On Sale */}
           {product?.tags && product?.tags?.includes("Sale") && (
-            <div className="flex items-center gap-1 bg-white/75 py-0.5 px-1 w-fit">
+            <div className="flex items-center gap-1 bg-gray-200/50 py-0.5 px-1 w-fit text-green-600">
               <FaTags className="w-3 h-3" />
               <span className="font-medium">On Sale</span>
             </div>
           )}
         </div>
-      </div>
-      {/* details */}
-      <div className="px-0 pt-4">
-        <p className="text-sm text-theme mt-[6px] hidden lg:block">
-          {product?.theme}
-        </p>
-        <p className="flex items-center justify-between flex-wrap mt-[6px]">
-          <span className="line-clamp-2">{product?.productName}</span>
-          <span className="">
-            From{" "}
-            <span className="text-theme">
-              ₹{parseInt(product?.sellingprice, 10).toLocaleString("en-IN")}
-              &#47;&#45;
-            </span>
-          </span>
-        </p>
       </div>
     </div>
   );

@@ -37,7 +37,7 @@ const initialState = {
   moreoptions: [
     // {
     //   name: "test",
-    //   options: [{ name: "", image: "[], imageindex: 0, price: "", mrp: "" }],
+    //   options: [{ name: "", image: [], imageindex: 0, price: "", mrp: "" }],
     // },
   ],
   seotitle: "",
