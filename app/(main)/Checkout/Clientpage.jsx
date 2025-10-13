@@ -48,15 +48,15 @@ function Clientpage({
   });
   const shippingformref = React.useRef(null);
 
-  const Ordersuccess = () => {
+  const Ordersuccess = (paymentGroupId) => {
     setmessagefn("Order Placed Successfully");
     setcart({});
     Cookies.set("cart", JSON.stringify({}), { expires: 1 });
     Cookies.remove("altcoupon");
-    if (process.env.NODE_ENV === "development") {
-      router.push("/");
-      return;
-    }
+    // if (process.env.NODE_ENV === "development") {
+    //   router.push("/");
+    //   return;
+    // }
 
     // ✅ Facebook Pixel Purchase
     fbq("track", "Purchase", {
@@ -67,12 +67,17 @@ function Clientpage({
 
     // ✅ GA4 Purchase
     event("purchase", {
-      transaction_id: crypto.randomUUID(), // generate or pass actual order ID
+      transaction_id: paymentGroupId, // generate or pass actual order ID
+      affiliation: "Online Store",
       value: totalPrice,
       currency: "INR",
-      items: ids?.map((id) => ({
-        item_id: id,
-        quantity: 1, // replace with actual quantities if you have them
+      tax: 0,
+      shipping: 0,
+      items: cartitems.map(([key, item]) => ({
+        item_id: key,
+        item_name: item?.productName,
+        quantity: item?.quantity,
+        price: item?.rawprice,
       })),
     });
     router.push("/");
@@ -126,7 +131,7 @@ function Clientpage({
       if (paymentMethod == "online") {
         loadRazorpay(res?.paymentGroupId);
       } else {
-        Ordersuccess();
+        Ordersuccess(res?.paymentGroupId);
       }
     }
   };
@@ -150,7 +155,7 @@ function Clientpage({
         const res = await Verifyrazorpay(response, paymentGroupId);
         setmessagefn(res?.message);
         if (res.status == 200) {
-          Ordersuccess();
+          Ordersuccess(paymentGroupId);
         }
       },
       prefill: {
