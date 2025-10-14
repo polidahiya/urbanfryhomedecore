@@ -35,7 +35,7 @@ const generateCategoryUrls = () => {
     });
     Object.entries(value?.subcat).forEach(([subcatkey, subcatvalue]) => {
       urls.push({
-        loc: `${domain}/${urlEncode(key)}/${urlEncode(subcatkey)}`,
+        loc: `${domain}/collections/${urlEncode(key)}/${urlEncode(subcatkey)}`,
         lastmod: new Date().toISOString(),
         changefreq: "weekly",
         image: domain + subcatvalue?.img,

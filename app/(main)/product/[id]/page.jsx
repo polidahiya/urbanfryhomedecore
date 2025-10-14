@@ -61,6 +61,50 @@ async function page({ params, searchParams }) {
   //
   const filteredreviews = await Cachedreviews(productid);
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.productName,
+    image: product.variants[color || 0].images,
+
+    description: product.descriptions.join("____") || "",
+
+    sku: product?.sku,
+    productID: product?._id,
+    category: product?.category,
+
+    brand: {
+      "@type": "Brand",
+      name: "Urbanfry Homes",
+    },
+
+    offers: {
+      "@type": "Offer",
+      url: `https://urbanfryhomes.com/product/${product?._id}?vcolor=${color}`,
+      priceCurrency: "INR",
+      price: parseInt(rawprice, 10),
+      availability:
+        product.available && (Number(product?.stocks) || 0) > 0
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: {
+        "@type": "Organization",
+        name: "Urbanfry Homes",
+      },
+    },
+
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue:
+        filteredreviews.reduce((total, review) => total + review.star, 0) /
+        filteredreviews.length,
+      reviewCount: filteredreviews.length,
+      bestRating: "5",
+      worstRating: "1",
+    },
+  };
+
   return (
     <Productctxwrapper>
       <div className="min-h-screen">
@@ -152,6 +196,13 @@ async function page({ params, searchParams }) {
             </Link>
           )}
       </div>
+      {/* ld json */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema),
+        }}
+      />
     </Productctxwrapper>
   );
 }
