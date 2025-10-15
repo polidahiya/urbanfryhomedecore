@@ -7,6 +7,7 @@ import Googleanayltics from "./_connections/Googleanalytics";
 import Confirmdialogbox from "./admin/_comps/Confirmdialogbox";
 import Metapixels from "./_connections/Metapixels";
 import Tawk from "./_globalcomps/Tawk";
+import Ordersshow from "./_globalcomps/Ordersshow/Ordersshow";
 
 export const metadata = {
   title: "Urbanfry Homes",
@@ -40,6 +41,7 @@ export default async function RootLayout({ children }) {
         >
           <Message />
           <Quickview />
+          <Ordersshow />
           {children}
           <Confirmdialogbox />
         </body>

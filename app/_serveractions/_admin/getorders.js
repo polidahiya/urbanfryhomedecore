@@ -1,6 +1,7 @@
 "use server";
 import { getcollection } from "@/app/_connections/Mongodb";
 import Verification from "@/app/_connections/Verifytoken";
+import { revalidateTag } from "next/cache";
 
 export const Getorders = async (
   ordertype = "all",
@@ -77,6 +78,7 @@ export const Deleteorder = async (id) => {
 
     await orderscollection.deleteOne({ _id: new ObjectId(id) });
 
+    revalidateTag("recent-orders");
     return { status: 200, message: "Deleted successfully" };
   } catch (error) {
     return { status: 500, message: "Server error" };
@@ -96,6 +98,8 @@ export const updateordernote = async (id, value) => {
       { _id: new ObjectId(id) },
       { $set: { note: value } }
     );
+
+    revalidateTag("recent-orders");
     return { status: 200, message: "Update successful" };
   } catch (error) {
     return { status: 500, message: "Server error" };

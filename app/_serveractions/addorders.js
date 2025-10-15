@@ -7,6 +7,7 @@ import Getcart from "./Getcart";
 import { v4 as uuidv4 } from "uuid";
 import { getYYMMDD } from "../_globalcomps/_helperfunctions/Yymmdd";
 import { refreshproductsnow } from "../_connections/Getcachedata";
+import { revalidateTag } from "next/cache";
 
 async function addorder(paymentMethod, pincode = "", shippingdetails) {
   try {
@@ -75,7 +76,7 @@ async function addorder(paymentMethod, pincode = "", shippingdetails) {
       // send mail and stoks update
       await Moreupdate(paymentGroupId);
     }
-
+    revalidateTag("recent-orders");
     return {
       status: 200,
       message: "Order Placed Successfully",
