@@ -20,18 +20,18 @@ function Clientcomp({ orders }) {
     return () => clearInterval(interval);
   }, [orders?.length]);
 
-  const order = orders?.[currentIndex];
-  if (!order) return null;
-
-  const product = order.product;
-  const user = order.userdata;
-
   useEffect(() => {
     const isadmin = path.includes("/admin");
     setshow(!isadmin);
   }, [path]);
 
   useEffect(() => setIsMounted(true), []);
+
+  const order = orders?.[currentIndex];
+  if (!order) return null;
+
+  const product = order.product;
+  const user = order.userdata;
 
   if (!isMounted) return null;
 
