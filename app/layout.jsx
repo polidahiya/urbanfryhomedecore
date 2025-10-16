@@ -8,6 +8,7 @@ import Confirmdialogbox from "./admin/_comps/Confirmdialogbox";
 import Metapixels from "./_connections/Metapixels";
 import Tawk from "./_globalcomps/Tawk";
 import Ordersshow from "./_globalcomps/Ordersshow/Ordersshow";
+import Msclarity from "./_connections/Msclarity";
 
 export const metadata = {
   title: "Urbanfry Homes",
@@ -34,6 +35,7 @@ export default async function RootLayout({ children }) {
         <Googleanayltics />
         <Metapixels />
         <Tawk />
+        <Msclarity />
       </head>
       <Appwrapper token={token} userdata={userdata} parsedCart={parsedCart}>
         <body
