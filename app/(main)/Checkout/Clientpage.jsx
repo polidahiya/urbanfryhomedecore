@@ -12,6 +12,7 @@ import Addressbar from "./_comps/Addressbar";
 import Couponcomp from "./_comps/Couponcomp";
 import PaymentMethod from "./_comps/Paymentmethod";
 import Orderbutton from "./_comps/Orderbutton";
+import Ordersuccessmenu from "./_comps/Ordersuccess";
 
 function Clientpage({
   ids,
@@ -47,9 +48,9 @@ function Clientpage({
     termsAccepted: false,
   });
   const shippingformref = React.useRef(null);
+  const [showordersuccessmenu, setshowordersuccessmenu] = useState(false);
 
   const Ordersuccess = (paymentGroupId) => {
-    setmessagefn("Order Placed Successfully");
     setcart({});
     Cookies.set("cart", JSON.stringify({}), { expires: 1 });
     Cookies.remove("altcoupon");
@@ -80,7 +81,7 @@ function Clientpage({
         price: item?.rawprice,
       })),
     });
-    router.push("/");
+    setshowordersuccessmenu(true);
   };
 
   const Order = async () => {
@@ -185,41 +186,44 @@ function Clientpage({
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row  gap-5 mt-14 md:mt-20 mb-5">
-      {/* address */}
-      <Addressbar
-        verified={verified}
-        shippingdetails={shippingdetails}
-        setshippingdetails={setshippingdetails}
-        shippingformref={shippingformref}
-      />
-      {/* checkout */}
-      <div className="md:sticky top-24 w-full md:w-1/2 h-fit flex flex-col items-start justify-evenly gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10">
-        <Couponcomp
-          cartitems={cartitems}
-          totalPrice={totalPrice}
-          couponcode={coupondata?.code}
+    <>
+      {showordersuccessmenu && <Ordersuccessmenu />}
+      <div className="flex flex-col md:flex-row  gap-5 mt-14 md:mt-20 mb-5">
+        {/* address */}
+        <Addressbar
+          verified={verified}
+          shippingdetails={shippingdetails}
+          setshippingdetails={setshippingdetails}
+          shippingformref={shippingformref}
         />
-        <PaymentMethod
-          totalPrice={totalPrice}
-          maxcashpaymentavailable={maxcashpaymentavailable}
-          paymentMethod={paymentMethod}
-          setPaymentMethod={setPaymentMethod}
-        />
-        <div className="w-full md:w-fit flex flex-col gap-4">
-          <div className="font-semibold">
-            Total :{" "}
-            {valuebeforecoupon && (
-              <span className="text-gray-400 line-through mr-3">
-                ₹{valuebeforecoupon.toLocaleString("en-IN")}
-              </span>
-            )}
-            <span>₹{totalPrice.toLocaleString("en-IN")}/-</span>
+        {/* checkout */}
+        <div className="md:sticky top-24 w-full md:w-1/2 h-fit flex flex-col items-start justify-evenly gap-5 bg-footercolor bg-opacity-50 p-5 md:p-10">
+          <Couponcomp
+            cartitems={cartitems}
+            totalPrice={totalPrice}
+            couponcode={coupondata?.code}
+          />
+          <PaymentMethod
+            totalPrice={totalPrice}
+            maxcashpaymentavailable={maxcashpaymentavailable}
+            paymentMethod={paymentMethod}
+            setPaymentMethod={setPaymentMethod}
+          />
+          <div className="w-full md:w-fit flex flex-col gap-4">
+            <div className="font-semibold">
+              Total :{" "}
+              {valuebeforecoupon && (
+                <span className="text-gray-400 line-through mr-3">
+                  ₹{valuebeforecoupon.toLocaleString("en-IN")}
+                </span>
+              )}
+              <span>₹{totalPrice.toLocaleString("en-IN")}/-</span>
+            </div>
+            <Orderbutton Order={Order} paymentMethod={paymentMethod} />
           </div>
-          <Orderbutton Order={Order} paymentMethod={paymentMethod} />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

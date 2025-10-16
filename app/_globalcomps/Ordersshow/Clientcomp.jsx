@@ -22,7 +22,9 @@ function Clientcomp({ orders }) {
 
   useEffect(() => {
     const isadmin = path.includes("/admin");
-    setshow(!isadmin);
+    if (show) {
+      setshow(!isadmin);
+    }
   }, [path]);
 
   useEffect(() => setIsMounted(true), []);
@@ -30,8 +32,8 @@ function Clientcomp({ orders }) {
   const order = orders?.[currentIndex];
   if (!order) return null;
 
-  const product = order.product;
-  const user = order.userdata;
+  const product = order?.product;
+  const shippingdetails = order?.shippingdetails;
 
   if (!isMounted) return null;
 
@@ -69,10 +71,15 @@ function Clientcomp({ orders }) {
                 {/* Content */}
                 <div className="w-full h-full pl-2">
                   <p className="font-medium line-clamp-2 text-gray-700">
-                    🛍️ {user?.username} from{" "}
-                    <span className="text-theme font-semibold">
-                      {user?.address}
-                    </span>
+                    🛍️ {shippingdetails?.fullName}{" "}
+                    {shippingdetails?.shipping?.city && (
+                      <>
+                        from{" "}
+                        <span className="text-theme font-semibold">
+                          {shippingdetails?.shipping?.city}
+                        </span>
+                      </>
+                    )}
                   </p>
 
                   <p className="text-gray-900 font-semibold mt-1 line-clamp-2">

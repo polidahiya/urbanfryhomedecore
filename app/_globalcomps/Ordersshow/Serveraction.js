@@ -9,15 +9,21 @@ const getRecentOrdersCached = unstable_cache(
 
     // Fetch 10 most recent orders
     const orders = await orderscollection
-      .find({})
+      .find(
+        {},
+        {
+          projection: {
+            createdAt: 1,
+            product: 1,
+            "shippingdetails.shipping.city": 1,
+            "shippingdetails.fullName": 1,
+            _id: 0,
+          },
+        }
+      )
       .sort({ createdAt: -1 })
       .limit(10)
       .toArray();
-
-    // Convert Mongo ObjectIds to strings
-    orders.forEach((order) => {
-      order._id = order._id.toString();
-    });
 
     return orders;
   },
