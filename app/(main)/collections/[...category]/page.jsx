@@ -20,6 +20,8 @@ import Seoeditbutton from "./_comps/Seoeditbutton";
 import { getseodata } from "@/app/_serveractions/Seodata";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import PixelCategoryView from "./_comps/Viewcontenttrack";
+import Sortablegrid from "./_comps/Sortablegrid/Sortablegrid";
+import Productgrid from "./_comps/Productgrid";
 
 const imageDimensions = {
   mobile: { width: 390, height: 844 },
@@ -49,7 +51,9 @@ const metadata = (category, subcat) => {
 };
 
 async function page({ params, searchParams }) {
-  const tokenres = await Verification("Seo_permission");
+  const seopermission = await Verification("Seo_permission");
+  const Productspermission = await Verification("Products_permission");
+
   const device = await DeviceDetector();
 
   const [category, subcat] = (await params).category;
@@ -60,8 +64,9 @@ async function page({ params, searchParams }) {
 
   const metadatares = metadata(category, subcat);
   const { title, img } = metadatares;
+  const sortkey = getseokey(category, subcat).replace(/-/g, "");
 
-  const getCachedSortedProducts = (category, subcat, sort, min, max) =>
+  const getCachedSortedProducts = (category, subcat, sort, min, max, sortkey) =>
     unstable_cache(
       async () => {
         const products = await Cachedproducts();
@@ -72,11 +77,15 @@ async function page({ params, searchParams }) {
           min,
           max
         );
-        const sortedproducts = getSortedProducts(filteredproducts, sort);
+        const sortedproducts = getSortedProducts(
+          filteredproducts,
+          sort,
+          sortkey
+        );
         return sortedproducts;
       },
       [
-        `sorted-products-${category || "all"}-${subcat || "all"}-${
+        `sorted-products2-${category || "all"}-${subcat || "all"}-${
           sort || "default"
         }-pricerange-${min}-${max}`,
       ],
@@ -91,7 +100,8 @@ async function page({ params, searchParams }) {
     subcat,
     sort,
     min,
-    max
+    max,
+    sortkey
   );
 
   const seokey = getseokey(category, subcat);
@@ -150,7 +160,7 @@ async function page({ params, searchParams }) {
           className="block absolute top-0 left-0 w-full h-full brightness-[0.35] object-cover -z-10"
         />
         {/* seo edit button */}
-        {tokenres?.verified && (
+        {seopermission?.verified && (
           <Seoeditbutton editdata={seodata} seokey={seokey} />
         )}
       </div>
@@ -181,12 +191,13 @@ async function page({ params, searchParams }) {
             ></Nextimage>
             <h3 className="text-2xl">No products found</h3>
           </div>
+        ) : Productspermission?.verified ? (
+          <Sortablegrid
+            initialProducts={cachedfilteredproducts}
+            sortkey={sortkey}
+          />
         ) : (
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] place-items-center gap-x-2 gap-y-16 my-10">
-            {cachedfilteredproducts.map((product, i) => (
-              <Productcard key={i} product={product} />
-            ))}
-          </div>
+          <Productgrid products={cachedfilteredproducts} />
         )}
         {/* description */}
         <div dangerouslySetInnerHTML={{ __html: html }} className="mt-10" />
@@ -227,8 +238,9 @@ function filterProducts(products, category, subcat, min, max) {
   return filtered;
 }
 
-function getSortedProducts(products, sort) {
+function getSortedProducts(products, sort = 0, sortkey) {
   const sortFunctions = {
+    0: (a, b) => a[sortkey] - b[sortkey],
     1: (a, b) => b.lastupdated - a.lastupdated,
     2: (a, b) => a.lastupdated - b.lastupdated,
     3: (a, b) => a.sellingprice - b.sellingprice,
@@ -237,7 +249,7 @@ function getSortedProducts(products, sort) {
     6: (a, b) => b.weight - a.weight,
   };
 
-  return sortFunctions[sort] ? products.sort(sortFunctions[sort]) : products;
+  return products.sort(sortFunctions[sort]);
 }
 
 export const generateMetadata = async ({ params }) => {
