@@ -34,9 +34,8 @@ function Showproducts({ setshowimportmenu }) {
       setmessagefn(res?.message);
     }
   };
-  useEffect(() => {
-    console.log(Object.keys(staticdata[filterdata.categories]?.subcat)[0]);
 
+  useEffect(() => {
     setfilterdata((pre) => ({
       ...pre,
       subcat: Object.keys(staticdata[filterdata.categories]?.subcat)[0],
@@ -52,6 +51,12 @@ function Showproducts({ setshowimportmenu }) {
           className="px-5 py-2 rounded-md bg-theme text-white ml-auto"
         >
           + <span className="hidden md:inline">Add New</span>
+        </Link>
+        <Link
+          href={"/admin/products/bulk"}
+          className="px-5 py-2 rounded-md bg-theme text-white"
+        >
+          <span className="hidden md:inline">Bulk update</span>
         </Link>
         <button
           className="px-5 py-2 rounded-md bg-theme text-white hidden"

@@ -6,15 +6,19 @@ function Standardinputfield({
   value,
   isRequired = true,
   type = "text",
-  onchange,
-  clear,
+  onchange = () => {},
+  clear = () => {},
   placeholder = "",
+  clearbutton = true,
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-600">
-        {titlename}
-      </label>
+      {titlename && (
+        <label className="block text-sm font-medium text-gray-600">
+          {titlename}
+        </label>
+      )}
+
       <div className="flex items-stretch gap-2 mt-1">
         <input
           type={type}
@@ -24,13 +28,15 @@ function Standardinputfield({
           className="w-full h-full p-2 border rounded-md outline-none"
           placeholder={placeholder}
         />
-        <button
-          type="button"
-          className="px-4 py-2 border rounded-md "
-          onClick={clear}
-        >
-          <RiDeleteBackFill className="h-full w-full" />
-        </button>
+        {clearbutton && (
+          <button
+            type="button"
+            className="px-4 py-2 border rounded-md bg-white"
+            onClick={clear}
+          >
+            <RiDeleteBackFill className="h-full w-full" />
+          </button>
+        )}
       </div>
     </div>
   );
