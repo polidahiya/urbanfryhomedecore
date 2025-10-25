@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Underlineffect from "@/app/_globalcomps/Underlineffect";
-import Productcard from "@/app/_globalcomps/_productcard/Productcard";
 import SortSelector from "./_comps/Sorting";
 import { Cachedproducts } from "@/app/_connections/Getcachedata";
 import Nextimage from "@/app/_globalcomps/Nextimage";
@@ -191,7 +190,7 @@ async function page({ params, searchParams }) {
             ></Nextimage>
             <h3 className="text-2xl">No products found</h3>
           </div>
-        ) : Productspermission?.verified ? (
+        ) : Productspermission?.verified && device === "desktop" ? (
           <Sortablegrid
             initialProducts={cachedfilteredproducts}
             sortkey={sortkey}

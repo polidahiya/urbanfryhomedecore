@@ -9,8 +9,8 @@ import "swiper/css";
 
 const slides = [
   {
-    heading: "Urbanfry Homes Debut: The Organised Home Sale",
-    para: "We’re live and celebrating with exclusive launch offers on all our Furniture Range.",
+    heading: "The Clearance Edit: Last of the Best",
+    para: "Your favorite furniture, straight from our warehouse — up to 60% off + extra launch discounts. Limited stock, no restocks.",
     image: "/heroimages/2.png",
     link: "/collections/Last-Chance",
   },

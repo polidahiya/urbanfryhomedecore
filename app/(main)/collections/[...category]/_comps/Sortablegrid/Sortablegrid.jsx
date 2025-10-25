@@ -154,7 +154,7 @@ export default function Sortablegrid({ initialProducts, sortkey }) {
 const Sortbutton = ({ sortproducts, setsortproducts }) => {
   return (
     <button
-      className="fixed top-24 right-16 bg-theme text-white border border-white rounded-full w-10 aspect-square flex items-center justify-center z-20"
+      className="fixed top-24 right-16 bg-theme text-white border border-white rounded-full w-10 aspect-square hidden lg:flex items-center justify-center z-20"
       onClick={() => setsortproducts((pre) => !pre)}
     >
       {sortproducts ? <span>X</span> : <BiSortAlt2 />}
