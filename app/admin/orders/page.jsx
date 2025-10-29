@@ -6,6 +6,7 @@ import { AppContextfn } from "@/app/Context";
 import { BiRefresh } from "react-icons/bi";
 import Orderminicard from "./_comps/Orderminicard";
 import Showfullorder from "./_comps/Showfullorder";
+import Link from "next/link";
 
 function Page() {
   const { setmessagefn } = AppContextfn();
@@ -53,6 +54,12 @@ function Page() {
         <div className="py-10  flex items-center">
           <p className="font-semibold text-2xl">Orders</p>
           <div className="flex gap-1 ml-auto">
+            <Link
+              href="/admin/orders/Add"
+              className={`border rounded-md px-5 py-1 bg-theme text-white`}
+            >
+              + Add
+            </Link>
             <button
               className={`border rounded-md px-5 py-1 ${
                 ordertype == "all" && "bg-theme text-white"

@@ -10,6 +10,7 @@ import { useState } from "react";
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import formatDate from "@/app/_globalcomps/_helperfunctions/formateddate";
 import Couponedprice from "@/app/_globalcomps/_helperfunctions/Couponedprice";
+import Link from "next/link";
 
 const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
   const orderData = showfullorder.data;
@@ -217,26 +218,35 @@ const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
             Update
           </button>
         </div>
-        <button
-          className="border border-red-500 px-5 py-2 rounded-md text-red-500"
-          onClick={() =>
-            setshowdialog({
-              show: true,
-              title: "Delete Order?",
-              continue: async () => {
-                const res = await Deleteorder(orderData._id);
-                setmessagefn(res?.message);
-                if (res.status == 200) {
-                  setshowfullorder({ show: false, data: {} });
-                  setrefresher((pre) => !pre);
-                }
-              },
-              type: false,
-            })
-          }
-        >
-          Delete
-        </button>
+        <div className="flex gap-2">
+          <Link
+            href={`/admin/orders/Add?edit=${orderData.paymentGroupId}`}
+            className="border border-theme px-5 py-2 rounded-md text-theme"
+          >
+            Edit
+          </Link>
+          <button
+            className="border border-red-500 px-5 py-2 rounded-md text-red-500"
+            onClick={() =>
+              setshowdialog({
+                show: true,
+                title: "Delete Order?",
+                continue: async () => {
+                  const res = await Deleteorder(orderData._id);
+                  setmessagefn(res?.message);
+                  if (res.status == 200) {
+                    setshowfullorder({ show: false, data: {} });
+                    setrefresher((pre) => !pre);
+                  }
+                },
+                type: false,
+              })
+            }
+          >
+            Delete
+          </button>
+        </div>
+
         {/* cancel button */}
         <button
           className="absolute top-2 right-2 bg-gray-200 text-gray-700 rounded-full h-10 aspect-square hover:bg-gray-300"

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AppContextfn } from "@/app/Context";
 import { Productctxfn } from "../Productcontext";
+import Nextimage from "@/app/_globalcomps/Nextimage";
 
 function Options({ moreoptions, allsearchparams, productid, quickview }) {
   const { setSelectedImageIndex } = Productctxfn();
@@ -35,10 +36,10 @@ function Options({ moreoptions, allsearchparams, productid, quickview }) {
                 href={getLink({ [moreoption?.name]: j })}
                 key={j}
                 className={`flex items-center gap-2 flex-shrink-0 rounded-full  border whitespace-nowrap cursor-pointer ${
-                  option?.image[0] ? "py-2 pl-[10px] pr-6" : "py-4 px-10"
+                  option?.image[0] ? "py-2 pl-[10px] pr-6" : "py-2 px-10"
                 } ${
                   (allsearchparams?.[moreoption?.name] || 0) == j &&
-                  "bg-gray-100"
+                  " border-theme text-theme"
                 }`}
                 scroll={false}
                 onClick={() => {
@@ -47,9 +48,12 @@ function Options({ moreoptions, allsearchparams, productid, quickview }) {
                 }}
               >
                 {option?.image[0] && (
-                  <img
+                  <Nextimage
                     src={option?.image[0]}
-                    alt=""
+                    alt={option?.name}
+                    height={40}
+                    width={40}
+                    loading="lazy"
                     className="w-10 aspect-square rounded-full"
                   />
                 )}

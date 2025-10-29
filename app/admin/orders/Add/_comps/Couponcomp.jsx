@@ -33,7 +33,7 @@ function Couponcomp({ data, setdata, applycoupon }) {
                 ...pre,
                 coupondata: {
                   ...pre.coupondata,
-                  discountValue: value,
+                  discountType: value,
                 },
               }));
             }}

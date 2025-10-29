@@ -7,38 +7,37 @@ function Togglebuttons({
   negative,
   positiveText,
   negativeText,
+  colors = { positive: "text-green-500", negative: "text-red-500" },
 }) {
+  const handleToggle = () => {
+    value ? negative() : positive();
+  };
+
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-sm font-medium text-gray-700 mb-2">
         {titlename}
-        <span className={`ml-3 ${value ? "text-green-500" : "text-red-500"}`}>
+        <span className={`ml-3 ${value ? colors?.positive : colors?.negative}`}>
           {value ? positiveText : negativeText}
         </span>
       </label>
-      <div className="w-full md:max-w-72 mt-2 flex items-center gap-2">
-        <button
-          type="button"
-          onClick={positive}
-          className={`flex-1 px-4 py-2 text-sm font-medium rounded ${
-            value
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+
+      {/* Toggle Slider */}
+      <div
+        onClick={handleToggle}
+        className={`w-14 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+          value ? "bg-blue-600" : "bg-gray-400"
+        }`}
+        role="switch"
+        aria-checked={value}
+        aria-label="Toggle Switch"
+        title="Toggle Switch"
+      >
+        <div
+          className={`bg-white w-6 h-6 rounded-full shadow-md transform duration-300 ease-in-out ${
+            value ? "translate-x-6" : "translate-x-0"
           }`}
-        >
-          {positiveText}
-        </button>
-        <button
-          type="button"
-          onClick={negative}
-          className={`flex-1 px-4 py-2 text-sm font-medium rounded ${
-            !value
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
-        >
-          {negativeText}
-        </button>
+        />
       </div>
     </div>
   );

@@ -102,6 +102,7 @@ function Shippingdetailscomp({ data, setdata }) {
         <Standardinputfield
           titlename="Address2"
           value={data.shippingdetails.shipping.address2}
+          isRequired={false}
           type="text"
           onchange={(e) =>
             setdata((pre) => ({
@@ -158,7 +159,7 @@ function Shippingdetailscomp({ data, setdata }) {
           }}
         />
         <Dropdownmenu
-          title="Payment Method"
+          title="State"
           state={data.shippingdetails.shipping.state}
           onchange={(value) => {
             setdata((pre) => ({
@@ -233,6 +234,7 @@ function Shippingdetailscomp({ data, setdata }) {
           <Standardinputfield
             titlename="Address2"
             value={data.shippingdetails.billing.address2}
+            isRequired={false}
             type="text"
             onchange={(e) =>
               setdata((pre) => ({
@@ -289,7 +291,7 @@ function Shippingdetailscomp({ data, setdata }) {
             }}
           />
           <Dropdownmenu
-            title="Payment Method"
+            title="State"
             state={data.shippingdetails.billing.state}
             onchange={(value) => {
               setdata((pre) => ({
@@ -312,6 +314,7 @@ function Shippingdetailscomp({ data, setdata }) {
       <Standardinputfield
         titlename="User Order Note"
         value={data.shippingdetails.orderNotes}
+        isRequired={false}
         type="text"
         onchange={(e) =>
           setdata((pre) => ({

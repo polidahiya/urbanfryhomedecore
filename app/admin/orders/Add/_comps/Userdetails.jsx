@@ -74,7 +74,7 @@ export default function Userdetailscomp({data, setdata}) {
         }}
       />
       <Standardinputfield
-        titlename="User Phone Number"
+        titlename="Pincode"
         value={data.userdata.pincode}
         type="number"
         onchange={(e) =>

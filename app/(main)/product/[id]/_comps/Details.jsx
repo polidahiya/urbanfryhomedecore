@@ -94,7 +94,7 @@ function Details({
       <Coloroptions
         variants={product?.variants}
         color={color}
-        name={product?.name}
+        name={product?.productName}
         productid={productid}
       />
 

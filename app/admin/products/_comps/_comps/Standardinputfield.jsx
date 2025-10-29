@@ -10,6 +10,8 @@ function Standardinputfield({
   clear = () => {},
   placeholder = "",
   clearbutton = true,
+  disabled = false,
+  ...props
 }) {
   return (
     <div>
@@ -27,11 +29,14 @@ function Standardinputfield({
           required={isRequired}
           className="w-full h-full p-2 border rounded-md outline-none"
           placeholder={placeholder}
+          disabled={disabled}
+          {...props}
         />
         {clearbutton && (
           <button
             type="button"
             className="px-4 py-2 border rounded-md bg-white"
+            disabled={disabled}
             onClick={clear}
           >
             <RiDeleteBackFill className="h-full w-full" />
