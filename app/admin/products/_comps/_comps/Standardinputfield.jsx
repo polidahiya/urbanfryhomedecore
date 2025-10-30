@@ -11,7 +11,6 @@ function Standardinputfield({
   placeholder = "",
   clearbutton = true,
   disabled = false,
-  ...props
 }) {
   return (
     <div>
@@ -30,7 +29,6 @@ function Standardinputfield({
           className="w-full h-full p-2 border rounded-md outline-none"
           placeholder={placeholder}
           disabled={disabled}
-          {...props}
         />
         {clearbutton && (
           <button

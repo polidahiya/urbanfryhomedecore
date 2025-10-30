@@ -20,13 +20,14 @@ export async function bulkproductsupdate(products) {
             sellingprice: product.sellingprice || 0,
             stocks: product.stocks || 0,
             available: product.available || true,
+            tags: product.tags || [],
           },
         },
       },
     }));
 
     await Productscollection.bulkWrite(operations);
-    
+
     revalidateTag("products");
 
     return { status: 200, message: "Updated successfully" };

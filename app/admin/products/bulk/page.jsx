@@ -7,6 +7,8 @@ import { Roomsearchproducts } from "@/app/_serveractions/_admin/Getliveproducts"
 import Nextimage from "@/app/_globalcomps/Nextimage";
 import Standardinputfield from "../_comps/_comps/Standardinputfield";
 import { bulkproductsupdate } from "./bulkproductsupdate";
+import { tagslist } from "../add/Clientpage";
+import Link from "next/link";
 
 function Page() {
   const { setmessagefn } = AppContextfn();
@@ -15,7 +17,12 @@ function Page() {
     subcat: Object.keys(Object.values(staticdata)[0]?.subcat)[0],
   });
   const [products, setproducts] = useState([]);
+  const [activeindex, setactiveindex] = useState([0, 0]);
   const [loading, setloading] = useState(false);
+  const [tagsmenu, settagsmenu] = useState({
+    show: false,
+    index: 0,
+  });
   const handlesearch = async (ordertype, search) => {
     setloading(true);
     const res = await Roomsearchproducts(ordertype, search);
@@ -31,8 +38,6 @@ function Page() {
   };
 
   useEffect(() => {
-    console.log(Object.keys(staticdata[filterdata.categories]?.subcat)[0]);
-
     setfilterdata((pre) => ({
       ...pre,
       subcat: Object.keys(staticdata[filterdata.categories]?.subcat)[0],
@@ -102,7 +107,9 @@ function Page() {
                 <th className="border border-gray-300 px-4">Price(MRP)</th>
                 <th className="border border-gray-300 px-4">Price(SP)</th>
                 <th className="border border-gray-300 px-4">Stocks</th>
+                <th className="border border-gray-300 px-4">Tags</th>
                 <th className="border border-gray-300 px-4">Available</th>
+                <th className="border border-gray-300 px-4"></th>
               </tr>
             </thead>
             <tbody className="text-sm">
@@ -121,52 +128,120 @@ function Page() {
                     ></Nextimage>
                   </td>
                   <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
-                    <Standardinputfield
-                      titlename=""
-                      value={product?.productName}
-                      isRequired={true}
-                      type="text"
-                      onchange={(e) =>
-                        handlechange(e.target.value, index, "productName")
-                      }
-                      clearbutton={false}
-                    />
+                    {activeindex[0] == index && activeindex[1] == 0 ? (
+                      <Standardinputfield
+                        titlename=""
+                        value={product?.productName}
+                        isRequired={true}
+                        type="text"
+                        onchange={(e) =>
+                          handlechange(e.target.value, index, "productName")
+                        }
+                        clearbutton={false}
+                      />
+                    ) : (
+                      <span
+                        className="flex items-center justify-start w-full min-w-28 min-h-8"
+                        onClick={() => {
+                          setactiveindex([index, 0]);
+                        }}
+                      >
+                        {product?.productName}
+                      </span>
+                    )}
                   </td>
                   <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
-                    <Standardinputfield
-                      titlename=""
-                      value={product?.mrp}
-                      isRequired={true}
-                      type="number"
-                      onchange={(e) =>
-                        handlechange(e.target.value, index, "mrp")
-                      }
-                      clearbutton={false}
-                    />
+                    {activeindex[0] == index && activeindex[1] == 1 ? (
+                      <Standardinputfield
+                        titlename=""
+                        value={product?.mrp}
+                        isRequired={true}
+                        type="number"
+                        onchange={(e) =>
+                          handlechange(e.target.value, index, "mrp")
+                        }
+                        clearbutton={false}
+                      />
+                    ) : (
+                      <span
+                        className="flex items-center justify-start w-full min-w-28 min-h-8"
+                        onClick={() => {
+                          setactiveindex([index, 1]);
+                        }}
+                      >
+                        {product?.mrp}
+                      </span>
+                    )}
                   </td>
                   <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
-                    <Standardinputfield
-                      titlename=""
-                      value={product?.sellingprice}
-                      isRequired={true}
-                      type="number"
-                      onchange={(e) =>
-                        handlechange(e.target.value, index, "sellingprice")
-                      }
-                      clearbutton={false}
-                    />
+                    {activeindex[0] == index && activeindex[1] == 2 ? (
+                      <Standardinputfield
+                        titlename=""
+                        value={product?.sellingprice}
+                        isRequired={true}
+                        type="number"
+                        onchange={(e) =>
+                          handlechange(e.target.value, index, "sellingprice")
+                        }
+                        clearbutton={false}
+                      />
+                    ) : (
+                      <span
+                        className="flex items-center justify-start w-full min-w-28 min-h-8"
+                        onClick={() => {
+                          setactiveindex([index, 2]);
+                        }}
+                      >
+                        {product?.sellingprice}
+                      </span>
+                    )}
                   </td>
                   <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
-                    <Standardinputfield
-                      titlename=""
-                      value={product?.stocks}
-                      isRequired={true}
-                      type="number"
-                      onchange={(e) =>
-                        handlechange(e.target.value, index, "stocks")
-                      }
-                      clearbutton={false}
-                    />
+                    {activeindex[0] == index && activeindex[1] == 3 ? (
+                      <Standardinputfield
+                        titlename=""
+                        value={product?.stocks}
+                        isRequired={true}
+                        type="number"
+                        onchange={(e) =>
+                          handlechange(e.target.value, index, "stocks")
+                        }
+                        clearbutton={false}
+                      />
+                    ) : (
+                      <span
+                        className="flex items-center justify-start w-full min-w-28 min-h-8"
+                        onClick={() => {
+                          setactiveindex([index, 3]);
+                        }}
+                      >
+                        {product?.stocks}
+                      </span>
+                    )}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate min-w-72 ">
+                    <div className="flex items-center gap-1 my-2 flex-wrap">
+                      <button
+                        onClick={() => {
+                          settagsmenu((pre) => ({
+                            ...pre,
+                            show: true,
+                            index: index,
+                          }));
+                        }}
+                        className="bg-blue-600 text-white h-8 aspect-square rounded-md"
+                      >
+                        +
+                      </button>
+                      {product?.tags?.map((item, i) => (
+                        <div
+                          key={i}
+                          className="flex items-center gap-2 text-sm bg-slate-100 h-10 p-1 px-5 rounded-md border-2 border-white"
+                        >
+                          {item}
+                        </div>
+                      ))}
+                    </div>
                   </td>
                   <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
                     <button
@@ -178,12 +253,21 @@ function Page() {
                       {product?.available ? "TRUE" : "FALSE"}
                     </button>
                   </td>
+                  <td className="border border-gray-300 px-4 py-2 whitespace-nowrap max-w-xl truncate">
+                    <Link
+                      href={`/admin/products/add?edit=${product?._id}`}
+                      className="text-xs bg-green-500 text-white rounded-full px-5 py-2"
+                    >
+                      Edit
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          {/* tags menu */}
 
-          <div className="mt-6 sticky bottom-3 flex items-center justify-center">
+          <div className="mt-6 sticky left-0 bottom-3 flex items-center justify-center">
             <button
               onClick={handlesubmit}
               className="bg-theme text-white px-6 py-2 flex items-center justify-center gap-2"
@@ -196,8 +280,70 @@ function Page() {
           </div>
         </div>
       )}
+      {tagsmenu.show && (
+        <Tagmenucomp
+          settagsmenu={settagsmenu}
+          selectedtags={products[tagsmenu.index]?.tags || []}
+          onsave={(tags) => {
+            handlechange(tags, tagsmenu.index, "tags");
+            settagsmenu({ show: false, index: null });
+          }}
+        />
+      )}
     </div>
   );
 }
+
+const Tagmenucomp = ({ settagsmenu, onsave = () => {}, selectedtags }) => {
+  const [tags, settags] = useState(selectedtags);
+  return (
+    <div className="fixed top-0 left-0 h-screen w-full flex items-center justify-center bg-black/20 z-20">
+      <div className="relative bg-white p-6 w-full max-w-xs">
+        <div className="flex justify-between items-center">
+          <p>Select Tags</p>
+          <button
+            type="button"
+            onClick={() => settagsmenu({ show: false, index: null })}
+            className="flex items-center justify-center w-8 aspect-square bg-gray-200"
+          >
+            x
+          </button>
+        </div>
+        <div className="flex flex-col gap-2 mt-5">
+          {tagslist.map((item, i) => (
+            <button
+              type="button"
+              key={i}
+              onClick={() => {
+                if (!tags.includes(item)) {
+                  settags((pre) => [...pre, item]);
+                } else {
+                  settags((pre) => pre.filter((tag) => tag !== item));
+                }
+              }}
+              className="flex items-center gap-2 text-sm border border-slate-200 h-10 py-1 px-5 rounded-md"
+            >
+              <span
+                className={`w-3 aspect-square ${
+                  tags.includes(item) && "bg-theme"
+                }`}
+              ></span>
+              {item}
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center justify-center mt-5">
+          <button
+            type="button"
+            className="bg-theme text-white px-6 py-2 flex items-center justify-center gap-2"
+            onClick={() => onsave(tags)}
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Page;

@@ -46,6 +46,8 @@ const initialState = {
   available: true,
 };
 
+export const tagslist = ["Best Seller", "Sale", "Last-chance"];
+
 function Clientpage({ productdata }) {
   const router = useRouter();
 
@@ -57,13 +59,6 @@ function Clientpage({ productdata }) {
   const [deletedimages, setdeletedimages] = useState([]);
   const [newadded, setnewadded] = useState([]);
   const [loading, setloading] = useState(false);
-
-  useEffect(() => {
-    setdata((pre) => ({
-      ...pre,
-      subcat: Object.keys(staticdata[data.category]?.subcat)[0],
-    }));
-  }, [data.category]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,7 +91,7 @@ function Clientpage({ productdata }) {
           }
           router.push("/admin/products");
         }}
-        className="fixed top-1 right-1 md:top-5 md:right-5 flex items-center justify-center w-10 aspect-square bg-slate-300 z-10"
+        className="fixed top-1 right-1 md:top-5 md:right-5 flex items-center justify-center w-10 aspect-square bg-gray-200 z-10"
       >
         x
       </Link>
@@ -122,7 +117,13 @@ function Clientpage({ productdata }) {
         <Dropdownmenu
           title={"Category"}
           state={data?.category}
-          onchange={(value) => setdata((pre) => ({ ...pre, category: value }))}
+          onchange={(value) =>
+            setdata((pre) => ({
+              ...pre,
+              category: value,
+              subcat: Object.keys(staticdata[value]?.subcat)[0],
+            }))
+          }
           options={Object.keys(staticdata)}
         />
         {/* subcat*/}
@@ -238,7 +239,7 @@ function Clientpage({ productdata }) {
           statename="tags"
           setState={setdata}
           title={"Tags"}
-          options={["Best Seller", "Sale"]}
+          options={tagslist}
         />
         {/* mrp */}
         <Standardinputfield

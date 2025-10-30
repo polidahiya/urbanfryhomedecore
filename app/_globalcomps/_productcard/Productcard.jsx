@@ -73,7 +73,7 @@ function Productcard({ product }) {
           )}
 
           {/* Last Chance */}
-          {product?.stocks == 1 && (
+          {(product?.stocks == 1 || product?.tags?.includes("Last-chance")) && (
             <div className="flex items-center gap-1 bg-gray-200/50 py-0.5 px-1 w-fit">
               <FaHourglassHalf className="w-3 h-3" />
               <span className="font-medium">Last Chance</span>

@@ -65,41 +65,40 @@ async function page({ params, searchParams }) {
   const { title, img } = metadatares;
   const sortkey = getseokey(category, subcat).replace(/-/g, "");
 
-  const getCachedSortedProducts = (category, subcat, sort, min, max, sortkey) =>
-    unstable_cache(
-      async () => {
-        const products = await Cachedproducts();
-        const filteredproducts = filterProducts(
-          products,
-          category,
-          subcat,
-          min,
-          max
-        );
-        const sortedproducts = getSortedProducts(
-          filteredproducts,
-          sort,
-          sortkey
-        );
-        return sortedproducts;
-      },
-      [
-        `sorted-products2-${category || "all"}-${subcat || "all"}-${
-          sort || "default"
-        }-pricerange-${min}-${max}`,
-      ],
-      {
-        revalidate: CACHE_TIME,
-        tags: ["products"],
-      }
-    )();
+  // const getCachedSortedProducts = (category, subcat, sort, min, max, sortkey) =>
+  //   unstable_cache(
+  //     async () => {
+  //       const products = await Cachedproducts();
+  //       const filteredproducts = filterProducts(
+  //         products,
+  //         category,
+  //         subcat,
+  //         min,
+  //         max
+  //       );
+  //       const sortedproducts = getSortedProducts(
+  //         filteredproducts,
+  //         sort,
+  //         sortkey
+  //       );
+  //       return sortedproducts;
+  //     },
+  //     [
+  //       `sorted-products2-${category || "all"}-${subcat || "all"}-${
+  //         sort || "default"
+  //       }-pricerange-${min}-${max}`,
+  //     ],
+  //     {
+  //       revalidate: CACHE_TIME,
+  //       tags: ["products"],
+  //     }
+  //   )();
 
-  const cachedfilteredproducts = await getCachedSortedProducts(
-    category,
-    subcat,
+  const products = await Cachedproducts();
+  const filteredproducts = filterProducts(products, category, subcat, min, max);
+  const cachedfilteredproducts = getSortedProducts(
+    filteredproducts,
     sort,
-    min,
-    max,
     sortkey
   );
 
@@ -215,7 +214,9 @@ function filterProducts(products, category, subcat, min, max) {
 
   if (category == "Last-Chance") {
     filtered = products.filter(
-      (product) => product?.stocks == 1 && inPriceRange(product)
+      (product) =>
+        (product?.stocks == 1 || product?.tags?.includes("Last-chance")) &&
+        inPriceRange(product)
     );
   } else if (category === "all") {
     filtered = products.filter(inPriceRange);
