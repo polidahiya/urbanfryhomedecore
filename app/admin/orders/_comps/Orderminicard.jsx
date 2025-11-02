@@ -3,16 +3,18 @@ import formatDate from "@/app/_globalcomps/_helperfunctions/formateddate";
 
 const Orderminicard = ({ order, setshowfullorder }) => {
   return (
-    <div
-      className="flex py-5 border-y cursor-pointer"
+    <tr
+      className="group relative hover:bg-gray-100"
       onClick={() => setshowfullorder({ show: true, data: order })}
     >
-      <p className="flex-1 text-center text-sm">
+      <td className="border border-gray-300 px-4 py-2">
         {order?.userdata?.name || order?.userdata?.username}
-      </p>
-      <p className="flex-1 text-center text-sm">{order?.userdata?.email}</p>
-      <p
-        className={`flex-1 text-center text-sm ${
+      </td>
+      <td className="border border-gray-300 px-4 py-2">
+        {order?.userdata?.email}
+      </td>
+      <td
+        className={`border border-gray-300 px-4 py-2 ${
           order?.paymentStatus == "success"
             ? "text-green-500"
             : order?.paymentMethod == "cod"
@@ -21,12 +23,14 @@ const Orderminicard = ({ order, setshowfullorder }) => {
         }`}
       >
         {order?.paymentMethod == "online" ? order?.paymentMethod : "Cod"}
-      </p>
-      <p className="flex-1 text-center text-sm">{Statuslists[order?.status]}</p>
-      <p className="flex-1 text-center text-sm">
+      </td>
+      <td className="border border-gray-300 px-4 py-2">
+        {Statuslists[order?.status]}
+      </td>
+      <td className="border border-gray-300 px-4 py-2">
         {formatDate(order?.createdAt)}
-      </p>
-    </div>
+      </td>
+    </tr>
   );
 };
 

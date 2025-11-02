@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { getYYMMDD } from "../_globalcomps/_helperfunctions/Yymmdd";
 import { refreshproductsnow } from "../_connections/Getcachedata";
 import { revalidateTag } from "next/cache";
+import { Deletecart } from "./Servercart";
 
 async function addorder(paymentMethod, pincode = "", shippingdetails) {
   try {
@@ -131,6 +132,8 @@ export async function Moreupdate(paymentGroupId) {
       ["urbanfryhome@gmail.com", firstorder?.userdata?.email],
       mailtemplate
     );
+    // remove server cart
+    await Deletecart(firstorder?.userdata?.email);
 
     // refresh products now
     await refreshproductsnow();

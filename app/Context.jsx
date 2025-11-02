@@ -1,5 +1,6 @@
 "use client";
 import Cookies from "js-cookie";
+import { Savecart } from "./_serveractions/Servercart";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 const AppContext = createContext({});
 
@@ -58,6 +59,11 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
   useEffect(() => {
     if (cart && Object.keys(cart).length > 0) {
       Cookies.set("cart", JSON.stringify(cart), { expires: 1 });
+      if (token) {
+        (async () => {
+          await Savecart(cart);
+        })();
+      }
     }
   }, [cart]);
 

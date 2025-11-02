@@ -49,72 +49,89 @@ function Page() {
   ).fill(null);
 
   return (
-    <div className="px-5 md:px-10 min-w-[700px]">
-      <div className="sticky top-0 bg-white">
-        <div className="py-10  flex items-center">
-          <p className="font-semibold text-2xl">Orders</p>
-          <div className="flex gap-1 ml-auto">
+    <div className="px-5 md:px-10 w-full flex flex-col h-screen flex-1">
+      <div className="sticky top-0 bg-white border-b border-gray-200 z-20">
+        <div className="flex items-center flex-wrap gap-3 py-6">
+          <p className="font-semibold text-2xl text-gray-800">Orders</p>
+
+          <div className="flex items-center gap-2 ml-auto">
             <Link
               href="/admin/orders/Add"
-              className={`border rounded-md px-5 py-1 bg-theme text-white`}
+              className="rounded-lg bg-theme text-white px-5 py-2 font-medium shadow-sm hover:opacity-90 active:scale-[0.98] transition-all duration-150"
             >
-              + Add
+              + <span className="hidden md:inline-block">Add</span>
             </Link>
+
             <button
-              className={`border rounded-md px-5 py-1 ${
-                ordertype == "all" && "bg-theme text-white"
+              className={`rounded-lg border px-5 py-2 font-medium transition-all duration-150 ${
+                ordertype === "all"
+                  ? "bg-theme text-white border-theme"
+                  : "hover:bg-gray-100 text-gray-700 border-gray-300"
               }`}
               onClick={() => setordertype("all")}
             >
               All
             </button>
+
             <button
-              className={`border rounded-md px-5 py-1`}
+              className="rounded-lg border border-gray-300 px-4 py-2 text-gray-600 hover:bg-gray-100 active:scale-[0.96] transition-all duration-150 flex items-center justify-center"
               onClick={() => {
                 setrefresher((pre) => !pre);
                 setmessagefn("Refresh successful");
               }}
+              title="Refresh"
             >
-              <BiRefresh />
+              <BiRefresh className="text-lg" />
             </button>
           </div>
         </div>
-        <Adminsearchbar
-          search={search}
-          setsearch={setsearch}
-          onsubmit={() => handlesearch(search)}
-        />
-        <div className="flex items-center mt-5 bg-adminbg font-semibold">
-          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            Name
-          </p>
-          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            Email
-          </p>
-          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            Payment Status
-          </p>
-          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            Order Status
-          </p>
-          <p className="flex-1 border border-slate-300 text-center py-1 font-tenor">
-            Date
-          </p>
+
+        <div className="pb-4">
+          <Adminsearchbar
+            search={search}
+            setsearch={setsearch}
+            onsubmit={() => handlesearch(search)}
+          />
         </div>
       </div>
+
       {!loading ? (
-        <div>
-          {orders?.map((order, i) => (
-            <Orderminicard
-              key={i}
-              order={order}
-              setshowfullorder={setshowfullorder}
-            />
-          ))}
+        <div className="relative mt-5 overflow-x-scroll h-full max-w-full  max-h-screen overflow-y-scroll">
+          <table className="border-collapse border border-gray-300 w-full max-w-full">
+            <thead>
+              <tr className="bg-gray-200 sticky top-0 z-20">
+                <th className="border border-gray-300 px-4 whitespace-nowrap">
+                  Name
+                </th>
+                <th className="border border-gray-300 px-4 whitespace-nowrap">
+                  Email
+                </th>
+                <th className="border border-gray-300 px-4 whitespace-nowrap">
+                  Payment Status
+                </th>
+                <th className="border border-gray-300 px-4 whitespace-nowrap">
+                  Order Status
+                </th>
+                <th className="border border-gray-300 px-4 whitespace-nowrap">
+                  Date
+                </th>
+              </tr>
+            </thead>
+            <tbody className="text-sm">
+              {orders?.map((order, i) => (
+                <Orderminicard
+                  key={i}
+                  order={order}
+                  setshowfullorder={setshowfullorder}
+                />
+              ))}
+            </tbody>
+          </table>
         </div>
       ) : (
         <Loading />
       )}
+      {/* pagenation */}
       <div
         className={`flex items-center justify-center gap-1 my-5 ${
           pagenation.length == 1 && "hidden"

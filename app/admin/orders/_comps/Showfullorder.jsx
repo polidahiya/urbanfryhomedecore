@@ -45,7 +45,7 @@ const Showfullorder = ({ showfullorder, setshowfullorder, setrefresher }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/25 z-10">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/25 z-20">
       <div className="relative bg-white p-6 max-w-2xl w-full h-full overflow-y-scroll">
         <h1 className="text-xl font-semibold mb-4">Order Details</h1>
         <div className="space-y-2">

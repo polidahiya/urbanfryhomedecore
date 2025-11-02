@@ -16,7 +16,7 @@ export default async function RootLayout({ children }) {
   return (
     <div className="flex">
       <Adminnav userdata={tokenres} />
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 w-[calc(100%-56px)] md:w-[calc(100%-256px)]">{children}</div>
     </div>
   );
 }

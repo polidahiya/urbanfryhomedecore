@@ -32,10 +32,14 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <Googleanayltics />
-        <Metapixels />
-        <Tawk />
-        <Msclarity />
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <Googleanayltics />
+            <Metapixels />
+            <Tawk />
+            <Msclarity />
+          </>
+        )}
       </head>
       <Appwrapper token={token} userdata={userdata} parsedCart={parsedCart}>
         <body

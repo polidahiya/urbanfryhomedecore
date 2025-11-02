@@ -2,30 +2,30 @@
 import React from "react";
 import Link from "next/link";
 import Nextimage from "@/app/_globalcomps/Nextimage";
-import { FaDollyFlatbed } from "react-icons/fa";
-import { IoBagAdd } from "react-icons/io5";
-import { AiFillMessage } from "react-icons/ai";
-import { IoSettingsSharp } from "react-icons/io5";
-import { IoHome } from "react-icons/io5";
-import { IoLogOut } from "react-icons/io5";
+import {
+  FaDollyFlatbed,
+  FaUsers,
+} from "react-icons/fa";
+import {
+  IoBagAdd,
+  IoCart,
+  IoSettingsSharp,
+  IoHome,
+  IoLogOut,
+} from "react-icons/io5";
+import { RiCoupon2Fill } from "react-icons/ri";
+import { MdRateReview } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import { logout } from "@/app/_serveractions/signup";
 import { AppContextfn } from "@/app/Context";
-import { RiCoupon2Fill } from "react-icons/ri";
-import { FaUsers } from "react-icons/fa";
-import { MdRateReview } from "react-icons/md";
 
 function Adminnav({ userdata }) {
   const { setmessagefn } = AppContextfn();
   const pathname = usePathname();
   const userpermissions = userdata?.permission;
+
   const navLinks = [
-    {
-      href: "/admin",
-      label: "Home",
-      logo: <IoHome />,
-      isaccessible: true,
-    },
+    { href: "/admin", label: "Home", logo: <IoHome />, isaccessible: true },
     {
       href: "/admin/orders",
       label: "Orders",
@@ -43,6 +43,15 @@ function Adminnav({ userdata }) {
         userdata?.usertype == "admin"
           ? true
           : userpermissions?.includes("Coupons_permission"),
+    },
+    {
+      href: "/admin/abandonedcart",
+      label: "Cart Data",
+      logo: <IoCart />,
+      isaccessible:
+        userdata?.usertype == "admin"
+          ? true
+          : userpermissions?.includes("Seo_permission"),
     },
     {
       href: "/admin/products",
@@ -79,47 +88,58 @@ function Adminnav({ userdata }) {
   const Logoutfn = async () => {
     const res = await logout();
     setmessagefn(res?.message);
-    if (res?.status == 200) {
-      window.location.href = "/";
-    }
+    if (res?.status == 200) window.location.href = "/";
   };
+
   return (
-    <nav className="sticky top-0 w-fit flex flex-col h-screen px-1 py-5 md:p-5  md:w-64 bg-adminbg">
-      <Link href="/" className="md:px-5 flex items-center justify-center">
+    <nav className="sticky top-0 flex flex-col h-screen w-16 md:w-64 md:min-w-64 border-r border-gray-200 transition-all">
+      {/* Logo */}
+      <Link
+        href="/"
+        className="w-full flex items-center justify-center md:justify-center md:px-5 py-4 border-b border-gray-200"
+      >
         <Nextimage
           src="/uiimages/logo.png"
           alt="logo"
-          className="w-16 aspect-square mr-2"
-          width={200}
-          height={200}
+          className="w-10 md:w-16 aspect-square object-contain"
+          width={100}
+          height={100}
           quality={100}
         />
       </Link>
-      <div className="flex flex-col flex-1 w-full pt-5">
-        {navLinks.map(({ href, label, logo, isaccessible }, index) => (
-          <Link
-            key={index}
-            className={`relative w-full flex items-center gap-2 px-5 py-3 lg:hover:bg-slate-200 rounded-md ${
-              index === navLinks.length - 1 && "mt-auto"
-            } ${pathname == href && "bg-slate-200"}
-            ${isaccessible ? "" : "hidden"}`}
-            href={href}
-          >
-            {logo}
-            <span className="hidden md:block">{label}</span>
-            {pathname == href && (
-              <span className="absolute top-1/2 left-0 h-1/2 w-1 -translate-y-1/2 rounded-r-full bg-theme"></span>
-            )}
-          </Link>
-        ))}
-        <button
-          className={`relative w-full flex items-center gap-2 px-5 py-3 lg:hover:bg-slate-200 rounded-md`}
-          onClick={Logoutfn}
-        >
-          <IoLogOut />
-          <span className="hidden md:block">Logout</span>
-        </button>
+
+      {/* Nav Links */}
+      <div className="flex flex-col flex-1 overflow-y-auto py-5 px-1 md:px-3 space-y-1">
+        {navLinks.map(({ href, label, logo, isaccessible }, index) =>
+          isaccessible ? (
+            <Link
+              key={index}
+              href={href}
+              className={`group relative flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium overflow-hidden transition-all duration-200
+                ${
+                  pathname === href
+                    ? "bg-gray-100 text-theme"
+                    : "hover:bg-gray-100"
+                }`}
+            >
+              <span className="text-lg">{logo}</span>
+              <span className="hidden md:block">{label}</span>
+              {pathname === href && (
+                <span className="absolute left-0 h-2/3 w-1 bg-theme rounded-r-lg"></span>
+              )}
+            </Link>
+          ) : null
+        )}
       </div>
+
+      {/* Logout */}
+      <button
+        onClick={Logoutfn}
+        className="flex items-center gap-3 px-4 py-3 mx-2 mb-3 rounded-xl font-medium text-gray-700 hover:text-white hover:bg-theme transition-all duration-200"
+      >
+        <IoLogOut className="text-lg" />
+        <span className="hidden md:block">Logout</span>
+      </button>
     </nav>
   );
 }

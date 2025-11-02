@@ -23,6 +23,7 @@ async function connectToDatabase() {
       inhomecollection: db.collection("inhomecollection"),
       blogscollection: db.collection("blogscollection"),
       seodata: db.collection("seodata"),
+      servercart: db.collection("servercart"),
     };
 
     // Create unique index on email for newsletter collection
