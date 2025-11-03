@@ -83,7 +83,7 @@ const order_confiramtion_mail_template = (products, totalPrice, name) => {
               <tr>
                 <td style="position: relative">
                   <img
-                    src="https://altorganisers.com/mailimages/imagetapimage.jpg"
+                    src="https://urbanfryhomes.com/mailimages/imagetapimage.jpg"
                     alt="Order Confirmation"
                     width="600"
                     height="200"
@@ -98,7 +98,7 @@ const order_confiramtion_mail_template = (products, totalPrice, name) => {
                     style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
                   >
                     <img
-                      src="https://altorganisers.com/uiimages/logo.png"
+                      src="https://urbanfryhomes.com/uiimages/logo.png"
                       alt="logo"
                       width="40"
                       height="40"
@@ -182,7 +182,7 @@ const order_confiramtion_mail_template = (products, totalPrice, name) => {
                   <p style="font-size: 14px; color: #777; margin-bottom: 30px">
                     Track your order here.
                     <a
-                      href="https://altorganisers.com/account"
+                      href="https://urbanfryhomes.com/account"
                       style="color: #007bff; text-decoration: none"
                       >Visit</a
                     >

@@ -60,10 +60,10 @@ function passwordreset(link) {
   </head>
   <body>
     <div class="container">
-      <h1>AltOrganisers</h1>
+      <h1>Urbanfry Homes</h1>
       <h2>Reset Your Password</h2>
       <p>
-        We received a request to reset your password for your <strong>AltOrganisers</strong> account.
+        We received a request to reset your password for your <strong>Urbanfry Homes</strong> account.
         Click the button below to proceed. If you didn't request this, please ignore this email.
       </p>
       <a href="${link}" class="btn">Reset Your Password</a>
@@ -75,7 +75,7 @@ function passwordreset(link) {
       <hr />
       <p class="footer">
         Need help? Contact us at
-        <a href="mailto:altorganisers@gmail.com">altorganisers@gmail.com</a>
+        <a href="mailto:urbanfryhomes@gmail.com">urbanfryhomes@gmail.com</a>
       </p>
     </div>
   </body>

@@ -16,7 +16,7 @@ export async function sendforgotmail(email) {
     });
 
     const emailtemplate = passwordreset(
-      `https://altorganisers.com/account/forgotpassword?user=${token}`
+      `https://urbanfryhomes.com/account/forgotpassword?user=${token}`
     );
     await sendEmail("Password Reset", email, emailtemplate);
 
