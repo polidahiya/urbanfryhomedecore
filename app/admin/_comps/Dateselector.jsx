@@ -5,6 +5,7 @@ export default function Dateselector({
   label = "Delivered Date",
   state,
   setstate,
+  display = true,
 }) {
   const [dateValue, setDateValue] = useState("");
 
@@ -44,9 +45,11 @@ export default function Dateselector({
         onChange={handleChange}
         className="border rounded p-2"
       />
-      <span className="text-sm text-gray-600">
-        Display: {formattedDisplayDate}
-      </span>
+      {display && (
+        <span className="text-sm text-gray-600">
+          Display: {formattedDisplayDate}
+        </span>
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@
 import { getcollection } from "../_connections/Mongodb";
 import Verification from "../_connections/Verifytoken";
 
-export async function Savecart(cart) {
+export async function Savecart(cart, userdata) {
   try {
     const res = await Verification("public");
     if (!res?.verified) {
@@ -17,6 +17,7 @@ export async function Savecart(cart) {
         $set: {
           email: res.email,
           cartItems: cart,
+          userdata,
           updatedAt: new Date(),
           status: "active",
         },

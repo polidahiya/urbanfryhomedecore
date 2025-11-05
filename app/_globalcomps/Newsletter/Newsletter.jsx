@@ -21,19 +21,24 @@ function Newsletter() {
     }));
   };
 
+  const hidepopup = () => {
+    localStorage.setItem("isSubscribed", "true");
+    setshownewsletter(false); // hide popup
+  };
+
   const submitform = async (e) => {
     e.preventDefault();
     const alreadySubscribed = localStorage.getItem("isSubscribed");
     if (alreadySubscribed) {
       setmessagefn("You are already subscribed");
+      hidepopup();
       return;
     }
     //
     const res = await Adduser(formData);
     setmessagefn(res?.message);
     if (res?.status === 200 || res?.status === 409) {
-      localStorage.setItem("isSubscribed", "true");
-      setshownewsletter(false); // hide popup
+      hidepopup();
     }
   };
 

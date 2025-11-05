@@ -3,11 +3,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { LuExternalLink } from "react-icons/lu";
 import Reminderbutton from "./Reminderbutton";
-import { Getcartuserdata } from "../Serveraction";
 
 function Cartcard({ cart }) {
   const [showdata, setshowdata] = useState(false);
-  const [userdata, setuserdata] = useState(null);
 
   const parseKey = (key) => {
     const parts = key.split("|").filter(Boolean);
@@ -20,19 +18,7 @@ function Cartcard({ cart }) {
   };
 
   const handleViewDetails = async () => {
-    // toggle expanded view
-    const newState = !showdata;
-    setshowdata(newState);
-
-    // only fetch user data when opening (not closing)
-    if (!newState) return;
-
-    const res = await Getcartuserdata(cart.email);
-    if (res?.status === 200) {
-      setuserdata(res.userdata);
-    } else {
-      setuserdata(null);
-    }
+    setshowdata(!showdata);
   };
 
   return (
@@ -60,18 +46,19 @@ function Cartcard({ cart }) {
       </div>
 
       {/* User Data Section */}
-      {showdata && userdata && (
+      {showdata && (
         <div className="mt-4 border-b pb-3 text-sm text-gray-700">
           <p>
-            <span className="font-medium">Name:</span> {userdata.name || "—"}
+            <span className="font-medium">Name:</span>{" "}
+            {cart?.userdata?.name || "—"}
           </p>
           <p>
             <span className="font-medium">Phone:</span>{" "}
-            {userdata.phonenum || "—"}
+            {cart?.userdata?.phonenum || "—"}
           </p>
           <p>
             <span className="font-medium">Address:</span>{" "}
-            {userdata.address || "—"}
+            {cart?.userdata?.address || "—"}
           </p>
         </div>
       )}

@@ -16,7 +16,7 @@ function Clientcomp({ orders }) {
     if (!orders?.length) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % orders.length);
-    }, 5000);
+    }, 10000);
     return () => clearInterval(interval);
   }, [orders?.length]);
 

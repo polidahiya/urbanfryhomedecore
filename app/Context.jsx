@@ -61,11 +61,11 @@ export function Appwrapper({ children, token, userdata, parsedCart }) {
       Cookies.set("cart", JSON.stringify(cart), { expires: 1 });
       if (token) {
         (async () => {
-          await Savecart(cart);
+          await Savecart(cart, userdata);
         })();
       }
     }
-  }, [cart]);
+  }, [cart, userdata]);
 
   return (
     <AppContext.Provider

@@ -4,7 +4,7 @@ import Verification from "@/app/_connections/Verifytoken";
 import abandoned_cart_mail_template from "@/app/_mailtemplate/abandonedcartmail";
 import sendEmail from "@/app/_connections/Sendmail";
 
-export async function Getservercart() {
+export async function Getservercart(type, from, to) {
   try {
     const res = await Verification("Seo_permission");
     if (!res?.verified) {
@@ -13,11 +13,28 @@ export async function Getservercart() {
 
     const { servercart } = await getcollection();
 
-    const cart = await servercart
-      .find
-      // { status: "abandoned" }
-      ()
-      .toArray();
+    // Base query
+    const query = {};
+
+    // Filter by type (status)
+    if (type && type !== "all") {
+      query.status = type; // assuming `status` field holds "abandoned" or "active"
+    }
+
+    // Handle date filters
+     const today = new Date();
+    const defaultFrom = new Date();
+    defaultFrom.setMonth(today.getMonth() - 1); // one month ago
+
+    const fromDate = from ? new Date(from) : defaultFrom;
+    const toDate = to ? new Date(to) : today;
+
+    // normalize toDate to end of day
+    toDate.setHours(23, 59, 59, 999);
+
+    query.updatedAt = { $gte: fromDate, $lte: toDate };
+
+    const cart = await servercart.find(query).toArray();
 
     cart.forEach((element) => {
       element._id = element._id.toString();
@@ -30,34 +47,6 @@ export async function Getservercart() {
   }
 }
 
-export async function Getcartuserdata(email) {
-  try {
-    const res = await Verification("Seo_permission");
-    if (!res?.verified) {
-      return { status: 400, message: "Invalid User" };
-    }
-
-    const { userscollection } = await getcollection();
-
-    const userdata = await userscollection.findOne(
-      { email: email }, // filter
-      {
-        projection: {
-          name: 1,
-          address: 1,
-          phonenum: 1,
-          email: 1,
-          _id: 0,
-        },
-      }
-    );
-
-    return { status: 200, userdata };
-  } catch (error) {
-    console.error("Error getting server cart", error);
-    return { status: 500, message: "Failed to Get cart data" };
-  }
-}
 
 export async function Reminduser(data) {
   try {
