@@ -1,6 +1,6 @@
 import { Socialaccounts } from "../commondata";
 
-const abandoned_cart_mail_template = (cartLink) => {
+const abandoned_cart_mail_template = (username) => {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -52,7 +52,7 @@ const abandoned_cart_mail_template = (cartLink) => {
               <tr>
                 <td style="padding: 30px; text-align: center;">
                   <h1 style="font-size: 26px; font-weight: bold; color: #333; margin-bottom: 15px;">
-                    Hey there!, your cart misses you! 🛒
+                    Hey ${username}, your cart misses you! 🛒
                   </h1>
 
                   <p style="font-size: 16px; color: #555; margin-bottom: 25px; line-height: 1.6;">
@@ -61,7 +61,7 @@ const abandoned_cart_mail_template = (cartLink) => {
                   </p>
 
                   <a
-                    href="${cartLink}"
+                    href="https://urbanfryhomes.com/cart"
                     style="
                       background-color: #007bff;
                       color: #fff;

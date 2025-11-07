@@ -22,7 +22,7 @@ export async function Getservercart(type, from, to) {
     }
 
     // Handle date filters
-     const today = new Date();
+    const today = new Date();
     const defaultFrom = new Date();
     defaultFrom.setMonth(today.getMonth() - 1); // one month ago
 
@@ -46,7 +46,6 @@ export async function Getservercart(type, from, to) {
     return { status: 500, message: "Failed to Get cart data" };
   }
 }
-
 
 export async function Reminduser(data) {
   try {
@@ -72,7 +71,7 @@ export async function Reminduser(data) {
 
       if (user?.lastreminded) {
         const diffHours =
-          (date - new Date(lastCart.lastreminded)) / (1000 * 60 * 60);
+          (date - new Date(user.lastreminded)) / (1000 * 60 * 60);
 
         if (diffHours < 24) {
           if (data.length == 1) {
@@ -86,7 +85,9 @@ export async function Reminduser(data) {
       await sendEmail(
         "Your Cart is Waiting 🛒",
         user.email,
-        abandoned_cart_mail_template("https://urbanfryhomes.com/cart")
+        abandoned_cart_mail_template(
+          user?.userdata?.name
+        )
       );
 
       await servercart.updateOne(

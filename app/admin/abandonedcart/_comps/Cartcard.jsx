@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { LuExternalLink } from "react-icons/lu";
 import Reminderbutton from "./Reminderbutton";
+import formatDate from "@/app/_globalcomps/_helperfunctions/formateddate";
 
 function Cartcard({ cart }) {
   const [showdata, setshowdata] = useState(false);
@@ -29,7 +30,7 @@ function Cartcard({ cart }) {
           <p className="font-semibold text-lg text-gray-800">{cart.email}</p>
           {showdata && (
             <p className="text-sm text-gray-500">
-              last updated: {new Date(cart.updatedAt).toLocaleString()}
+              last updated: {formatDate(cart.updatedAt, true)}
             </p>
           )}
         </div>
