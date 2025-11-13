@@ -11,7 +11,6 @@ import {
   CACHE_TIME,
 } from "@/app/commondata";
 import DeviceDetector from "@/app/_globalcomps/_helperfunctions/Devicedetector";
-import { unstable_cache } from "next/cache";
 import Filtercomp from "./_comps/Filtercomp";
 import { notFound } from "next/navigation";
 import Verification from "@/app/_connections/Verifytoken";
@@ -21,6 +20,7 @@ import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import PixelCategoryView from "./_comps/Viewcontenttrack";
 import Sortablegrid from "./_comps/Sortablegrid/Sortablegrid";
 import Productgrid from "./_comps/Productgrid";
+import Staticgooglereview from "../../product/[id]/_comps/Googlereviews/Staticgooglereview";
 
 const imageDimensions = {
   mobile: { width: 390, height: 844 },
@@ -197,6 +197,7 @@ async function page({ params, searchParams }) {
         ) : (
           <Productgrid products={cachedfilteredproducts} />
         )}
+        <Staticgooglereview />
         {/* description */}
         <div dangerouslySetInnerHTML={{ __html: html }} className="mt-10" />
       </div>

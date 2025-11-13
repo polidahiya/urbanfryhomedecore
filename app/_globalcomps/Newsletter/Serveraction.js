@@ -3,7 +3,7 @@ import { getcollection } from "@/app/_connections/Mongodb";
 // import Verification from "@/app/_connections/Verifytoken";
 
 export async function Adduser(data) {
-  const { name = "", email = "" } = data;
+  const { name = "", email = "", phone = "" } = data;
   // const res = await Verification("public");
   // if (!res?.verified) {
   //   return { status: 400, message: "Invalid User" };
@@ -21,6 +21,7 @@ export async function Adduser(data) {
     await Newslettersubscriberscollection.insertOne({
       name: name.trim(),
       email: normalizedEmail,
+      phone: phone,
       rawEmail: email.trim(),
       subscribedAt: new Date(),
     });

@@ -26,11 +26,14 @@ export default function Fixedbuttons() {
   };
 
   const phoneNumber = mobile;
-  const message = "Hello, I'm interested in your services!";
-  const url = `https://wa.me/${phoneNumber.replace(
-    / /g,
-    ""
-  )}?text=${encodeURIComponent(message)}`;
+  const message = `Hey there! 
+I’m browsing through Urbanfry Homes and had a quick question about a product.
+`;
+
+  const phoneNumberClean = phoneNumber.replace(/\s+/g, ""); // remove spaces
+  const url = `https://wa.me/${phoneNumberClean}?text=${encodeURIComponent(
+    message
+  )}`;
 
   return (
     <div

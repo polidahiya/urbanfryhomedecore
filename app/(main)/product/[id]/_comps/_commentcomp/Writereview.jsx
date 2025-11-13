@@ -5,9 +5,12 @@ import addreview from "@/app/_serveractions/addreview";
 
 const WriteReview = ({ setshowwritereview, productid, userdata }) => {
   const { setmessagefn } = AppContextfn();
+  const isadmin =
+    userdata?.usertype == "admin" ||
+    userdata?.permission.includes("Reviews_permission");
   const [data, setData] = useState({
     name: "",
-    email: userdata?.email,
+    email: isadmin ? "" : userdata?.email || "",
     comment: "",
     star: 0,
     productid,
@@ -50,7 +53,7 @@ const WriteReview = ({ setshowwritereview, productid, userdata }) => {
             setData((prev) => ({ ...prev, name: e.target.value }))
           }
           className="w-full p-2 outline outline-1 outline-slate-300 focus:outline-slate-600 mt-5"
-          placeholder="Enter Your Name"
+          placeholder={isadmin ? "Enter name of user" : "Enter Your Name"}
           required
         />
 
@@ -63,8 +66,8 @@ const WriteReview = ({ setshowwritereview, productid, userdata }) => {
             setData((prev) => ({ ...prev, email: e.target.value }))
           }
           className="w-full p-2 outline outline-1 outline-slate-300 focus:outline-slate-600 mt-5"
-          placeholder="Enter Your Email"
-          disabled
+          placeholder={isadmin ? "Enter user's Email (optional)" : "Enter Your Email"}
+          disabled={!isadmin}
         />
 
         {/* Comment Textarea */}
@@ -75,7 +78,9 @@ const WriteReview = ({ setshowwritereview, productid, userdata }) => {
             setData((prev) => ({ ...prev, comment: e.target.value }))
           }
           className="w-full p-2 min-h-56 outline outline-1 outline-slate-300 focus:outline-slate-600 mt-5"
-          placeholder="Write your comments here"
+          placeholder={
+            isadmin ? "Write comment here" : "Write your comments here"
+          }
           required
         ></textarea>
 

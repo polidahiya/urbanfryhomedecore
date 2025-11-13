@@ -5,7 +5,7 @@ import Noreviews from "./Noreviews";
 import Writereview from "./Writereview";
 import Reviews from "./Reviews";
 
-function Commentcomp({ productid, Comments, token, userdata }) {
+function Clientcomp({ productid, Comments, token, userdata }) {
   const [showwritereview, setshowwritereview] = useState(false);
 
   return (
@@ -48,4 +48,4 @@ function Commentcomp({ productid, Comments, token, userdata }) {
   );
 }
 
-export default Commentcomp;
+export default Clientcomp;

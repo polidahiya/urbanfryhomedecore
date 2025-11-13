@@ -17,7 +17,7 @@ const itemlist = [
   { productid: "68d5135437e5648bc97235f7", pos: "top-[35%] left-[40%]" },
   { productid: "67ac9fefb04e50a1ab0b7da8", pos: "top-[25%] left-[60%]" },
   { productid: "6890bae074146d81a3740ca8", pos: "top-1/2 left-[5%]" },
-  { productid: "68d517c0945f4f04d00f7cf2", pos: "top-1/2 left-[30%]" },
+  { productid: "68d517c0945f4f04d00f7cf2", pos: "top-[55%] left-[30%]" },
   { productid: "68d521f073e8db9ae70293fd", pos: "top-[70%] left-[50%]" },
 ];
 
@@ -59,11 +59,13 @@ async function Imagetapcomp() {
           <div key={i} className={`absolute w-28 aspect-square ${item?.pos}`}>
             <Link
               href={`/product/${item?.productid}`}
-              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-14 aspect-square rounded-full bg-white z-10`}
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-8 aspect-square rounded-full bg-white z-10`}
             >
-              {i + 1}
+              {/* {i + 1} */}+
             </Link>
-            <span className="blinkingdot block absolute top-1/2 left-1/2 w-14 aspect-square rounded-full bg-white bg-opacity-25"></span>
+            <span
+              className="blinkingdot block absolute top-1/2 left-1/2 w-14 aspect-square rounded-full bg-white bg-opacity-25"
+            ></span>
           </div>
         ))}
       </div>

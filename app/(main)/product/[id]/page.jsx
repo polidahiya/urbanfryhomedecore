@@ -14,6 +14,8 @@ import { Productctxwrapper } from "./Productcontext";
 import dynamic from "next/dynamic";
 const Commentcomp = dynamic(() => import("./_comps/_commentcomp/Commentcomp"));
 const Newarrivals = dynamic(() => import("../../../_comps/Newarrivals"));
+import Googlereviews from "./_comps/Googlereviews/Googlereviews";
+import Staticgooglereview from "./_comps/Googlereviews/Staticgooglereview";
 
 async function page({ params, searchParams }) {
   const allcookies = await cookies();
@@ -171,6 +173,7 @@ async function page({ params, searchParams }) {
             userdata={userdata}
           />
         </div>
+
         {/* similar products */}
         <div>
           {similarproducts.length != 0 && (
@@ -179,6 +182,9 @@ async function page({ params, searchParams }) {
               data={similarproducts}
             />
           )}
+        </div>
+        <div className="mt-10">
+          <Staticgooglereview />
         </div>
         {/* faq */}
         <div>

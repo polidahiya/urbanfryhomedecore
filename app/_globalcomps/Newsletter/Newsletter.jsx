@@ -10,15 +10,19 @@ function Newsletter() {
   const { setmessagefn, shownewsletter, setshownewsletter } = AppContextfn();
   const [formData, setFormData] = useState({
     name: "",
+    phone: "",
     email: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    if (name === "phone") {
+      // allow only digits
+      const digitsOnly = value.replace(/\D/g, "");
+      setFormData({ ...formData, [name]: digitsOnly });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const hidepopup = () => {
@@ -109,6 +113,26 @@ function Newsletter() {
                   className="absolute top-0 left-0 py-4 flex items-center px-4 text-sm duration-300 text-theme pointer-events-none"
                 >
                   E-mail <span className="text-red-500">*</span>
+                </label>
+              </div>
+              <div className=" relative border border-theme">
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="forminput w-full py-4 px-4 text-gray-700 outline-none"
+                  maxLength="12"
+                  inputMode="numeric"
+                  required
+                />
+
+                <label
+                  htmlFor="email"
+                  className="absolute top-0 left-0 py-4 flex items-center px-4 text-sm duration-300 text-theme pointer-events-none"
+                >
+                  Phone Number <span className="text-red-500">*</span>
                 </label>
               </div>
 
