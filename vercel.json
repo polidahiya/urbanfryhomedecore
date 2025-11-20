@@ -4,5 +4,6 @@
       "path": "/api/Crons/Abandoncart",
       "schedule": "0 0 * * *"
     }
-  ]
+  ],
+  "regions": ["bom1"]
 }

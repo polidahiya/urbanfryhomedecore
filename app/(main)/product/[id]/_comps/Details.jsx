@@ -65,6 +65,7 @@ function Details({
         image={product?.variants[color].images[0]}
       />
       <Pricedisplay finalprice={finalprice} finalmrp={finalmrp} />
+      <p className="text-gray-500 text-sm">Inclusive of all taxes</p>
       <hr className="my-5" />
 
       <ProductDetailsTable
